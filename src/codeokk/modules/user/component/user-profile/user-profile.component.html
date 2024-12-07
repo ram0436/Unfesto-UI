@@ -1,0 +1,229 @@
+<div class="layout-container">
+  <div class="sidebar">
+    <div class="user-info">
+      <img
+        src="https://via.placeholder.com/50"
+        alt="User Avatar"
+        class="user-avatar"
+      />
+      <h3 class="user-name">Ram Achal</h3>
+      <p class="user-email">ram.0436&#64;gmail.com</p>
+      <div class="progress-bar">
+        <div class="progress" style="width: 67%"></div>
+      </div>
+    </div>
+    <ul class="menu">
+      <li>
+        <span class="material-symbols-outlined">assignment</span>
+        Registrations/Applications
+      </li>
+      <li>
+        <span class="material-symbols-outlined">group</span>
+        Referrals
+      </li>
+      <li>
+        <span class="material-symbols-outlined">how_to_reg</span>
+        My Rounds <span class="new-badge">New</span>
+      </li>
+      <li>
+        <span class="material-symbols-outlined">emoji_events</span>
+        Unstop Awards Nominations
+      </li>
+      <li>
+        <span class="material-symbols-outlined">favorite</span>
+        Watchlist
+      </li>
+      <li>
+        <span class="material-symbols-outlined">history</span>
+        Recently Viewed
+      </li>
+      <li>
+        <span class="material-symbols-outlined">support_agent</span>
+        Mentor Sessions
+      </li>
+      <li>
+        <span class="material-symbols-outlined">school</span>
+        Courses
+      </li>
+      <li>
+        <span class="material-symbols-outlined">route</span>
+        My Learning Path <span class="new-badge">New</span>
+      </li>
+      <li>
+        <span class="material-symbols-outlined">verified</span>
+        Certificates
+      </li>
+      <li>
+        <span class="material-symbols-outlined">store</span>
+        Merchandise Store
+      </li>
+      <li>
+        <span class="material-symbols-outlined">settings</span>
+        Settings
+      </li>
+    </ul>
+  </div>
+  <div class="main-content">
+    <!-- Profile Header -->
+    <div class="profile-header">
+      <!-- Circular Progress and Avatar -->
+      <div class="profile-image">
+        <div class="progress-circle">
+          <img
+            src="https://via.placeholder.com/60"
+            alt="Avatar"
+            class="avatar"
+          />
+        </div>
+      </div>
+
+      <!-- Profile Information -->
+      <div class="profile-details">
+        <h2>Ram Achal</h2>
+        <p>ramach3820</p>
+        <div class="profile-icons">
+          <span class="material-symbols-outlined">school</span>
+          <strong>IIT</strong>
+        </div>
+        <div class="profile-icons">
+          <span class="material-symbols-outlined">work</span>
+          E-commerce Specialist
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="profile-actions">
+        <div class="top-btns">
+          <button class="action-btn">
+            <span class="material-symbols-outlined">share</span>
+          </button>
+          <button class="action-btn">
+            <span class="material-symbols-outlined">visibility</span>
+          </button>
+        </div>
+        <button class="edit-btn" (click)="toggleSidebar()">
+          <span class="material-symbols-outlined">edit</span>
+          Edit Profile
+        </button>
+      </div>
+    </div>
+
+    <div class="d-flex">
+      <div class="left">
+        <div class="top-content white-box">
+          <div class="profile-strength">
+            <div class="strength-text">
+              <div><strong>Profile strength:</strong> Beginner</div>
+              <div>
+                Adding your resume and other professional details will give your
+                profile the edge it needs in front of dream recruiters!
+              </div>
+            </div>
+          </div>
+
+          <!-- Steps to Complete Profile -->
+          <div class="steps-card">
+            <div class="profile-steps">
+              <div class="step-card">
+                <div class="step-card-title">Add Education</div>
+                <div class="step-card-desc">
+                  Spill the details on your education and give recruiters a
+                  detailed understanding of your background!
+                </div>
+                <button class="step-card-btn">Add Education</button>
+              </div>
+              <div class="step-card">
+                <div class="step-card-title">Add Work Experience</div>
+                <div class="step-card-desc">
+                  If you’ve impacted any organization, share it below!
+                </div>
+                <button class="step-card-btn">Add Work Experience</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="right">
+        <div class="rankings white-box">
+          <div class="box-title">Rankings</div>
+          <div>
+            <div>Total Points: <strong>0</strong></div>
+            <div>Total Badges: <strong>3</strong></div>
+          </div>
+        </div>
+
+        <!-- Unstop Coins Section -->
+        <div class="unstop-coins white-box">
+          <div class="box-title">Unstop Coins</div>
+          <div>169 Coins</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" *ngIf="isEditSidebarOpen" (click)="toggleSidebar()"></div>
+
+<div class="sidebar-popup" [style.right]="isEditSidebarOpen ? '0' : '-320px'">
+  <div class="sidebar-header">
+    <div class="profile-container">
+      <img src="https://via.placeholder.com/50" class="profile-pic" />
+      <div class="profile-info">
+        <h4>Ram Achal</h4>
+        <p>ram.0436&#64;gmail.com</p>
+        <a [routerLink]="'/user/my-profile'" class="view-profile"
+          >View Profile &gt;</a
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar-section">
+    <h5>For Organizers</h5>
+    <ul>
+      <li>
+        <span class="material-symbols-outlined link-icon">home_work</span>
+        Manage Listings
+      </li>
+      <li>
+        <span class="material-symbols-outlined link-icon">event</span> My
+        Festivals
+      </li>
+      <li>
+        <span class="material-symbols-outlined link-icon"
+          >account_balance_wallet</span
+        >
+        Plans & Billing
+      </li>
+    </ul>
+  </div>
+
+  <div class="sidebar-section">
+    <h5>For Users</h5>
+    <ul>
+      <li>
+        <span class="material-symbols-outlined link-icon">assignment</span>
+        Registrations/Applications
+      </li>
+      <li>
+        <span class="material-symbols-outlined link-icon"
+          >supervisor_account</span
+        >
+        Referrals
+      </li>
+      <li>
+        <span class="material-symbols-outlined link-icon">checklist</span> My
+        Rounds
+      </li>
+      <li>
+        <span class="material-symbols-outlined link-icon">emoji_events</span>
+        Unstop Awards Nominations
+      </li>
+      <li>
+        <span class="material-symbols-outlined link-icon">favorite</span>
+        Watchlist
+      </li>
+    </ul>
+  </div>
+</div>

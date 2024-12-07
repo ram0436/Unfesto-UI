@@ -1,0 +1,433 @@
+.layout-container {
+  display: flex;
+  margin-top: 75px;
+  min-height: calc(100vh - 75px);
+  padding: 0px;
+}
+
+/* Sidebar styles */
+.sidebar {
+  width: 15%;
+  padding: 20px;
+  border-right: 1px solid #ccc;
+  overflow-y: auto;
+  position: fixed;
+  top: 75px;
+  /* padding: 20px; */
+  bottom: 0;
+}
+
+/* Hide scrollbar for Chrome, Safari, and newer versions of Edge */
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.sidebar {
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Main content area */
+.main-content {
+  margin-left: 15%;
+  width: 85%;
+  padding: 20px;
+  background-color: #fafafa;
+}
+
+.full-content {
+  margin-left: 0% !important;
+  width: 100%;
+  padding: 0px !important;
+}
+
+.user-info {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.user-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.user-name {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.user-email {
+  font-size: 14px;
+  color: gray;
+  margin: 0;
+}
+
+.progress-bar {
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  height: 8px;
+  margin-top: 10px;
+}
+
+.progress {
+  background-color: #4caf50;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.menu li {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+}
+
+.menu li span.material-symbols-outlined {
+  font-size: 24px; /* Adjust size of icons */
+  margin-right: 10px;
+  color: #666;
+}
+
+.menu li .new-badge {
+  background-color: #ff5722;
+  color: #fff;
+  font-size: 10px;
+  padding: 2px 6px;
+  margin-left: auto;
+  border-radius: 12px;
+}
+
+.menu li:hover {
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  padding-left: 10px;
+}
+
+.main-content {
+  margin-left: 15%;
+  width: 85%;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+/* Main container */
+.profile-header {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+/* Circular progress and avatar */
+.profile-image {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #d9f7d6;
+}
+
+.progress-text {
+  position: absolute;
+  font-size: 12px;
+  font-weight: bold;
+  color: #4caf50;
+}
+
+/* Profile details */
+.profile-details {
+  flex: 1;
+}
+
+.profile-details h2 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.profile-details p {
+  margin: 5px 0;
+  color: #777;
+}
+
+.profile-icons {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.profile-icons span {
+  font-size: 20px;
+  margin-right: 5px;
+  color: #666;
+}
+
+.profile-icons strong {
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+/* Buttons */
+.profile-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.top-btns {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.action-btn {
+  border: none;
+  background: #fff;
+  margin-right: 10px;
+  font-size: 20px;
+  color: #666;
+  cursor: pointer;
+}
+
+.action-btn:hover {
+  color: #333;
+}
+
+.edit-btn {
+  display: flex;
+  align-items: center;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit-btn span {
+  margin-right: 5px;
+}
+
+.edit-btn:hover {
+  background: #0056b3;
+}
+
+.d-flex {
+  display: flex;
+  gap: 20px;
+}
+
+.left {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.right {
+  width: 19%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.white-box {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 15px 20px;
+}
+
+.profile-steps {
+  display: flex;
+  gap: 20px;
+}
+
+.step-card {
+  width: 50%;
+  background-color: aliceblue;
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.step-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.step-card-desc {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.step-card-btn {
+  background-color: #009afe;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+}
+
+.box-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.strength-text {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Sidebar styles */
+.sidebar-popup {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 300px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+  transition: right 0.3s ease;
+  z-index: 1000;
+}
+
+.sidebar-content {
+  padding: 20px;
+}
+
+.sidebar-popup.show {
+  right: 0;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Blackish color with opacity */
+  z-index: 1000; /* Ensure it's below the sidebar */
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Sidebar Header */
+.sidebar-header {
+  padding: 16px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.profile-container {
+  display: flex;
+  align-items: center;
+}
+
+.profile-pic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.profile-info {
+  margin-left: 10px;
+}
+
+.profile-info h4 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.profile-info p {
+  margin: 2px 0;
+  color: gray;
+  font-size: 14px;
+}
+
+.view-profile {
+  font-size: 14px;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.view-profile:hover {
+  text-decoration: underline;
+}
+
+/* Sidebar Progress */
+.profile-progress {
+  margin-top: 10px;
+}
+
+.progress-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+/* Sidebar Section */
+.sidebar-section {
+  padding: 16px;
+}
+
+.sidebar-section h5 {
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #555;
+}
+
+.sidebar-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-section ul li {
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+}
+
+.sidebar-section ul li:hover {
+  color: #007bff;
+}
+
+.sidebar-section ul li .link-icon {
+  font-size: 18px;
+  margin-right: 10px;
+}

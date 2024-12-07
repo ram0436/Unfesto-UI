@@ -1,0 +1,107 @@
+<div class="workshops-container">
+  <div class="nav-container">
+    <div class="back-btn nav-btn">
+      <span class="material-symbols-outlined"> arrow_back_ios </span>
+      <span class="btn-txt">Back</span>
+    </div>
+    <div class="section-btn nav-btn active">
+      <span class="count"> 1 </span>
+      <span class="btn-txt"> Basic Details </span>
+    </div>
+    <div class="section-btn nav-btn">
+      <span class="count"> 2 </span>
+      <span class="btn-txt"> Registeration Details </span>
+    </div>
+  </div>
+  <div class="basic-details-container">
+    <div class="details-title">Basic Details</div>
+
+    <!-- Opportunity Logo Section -->
+    <div class="opportunity-logo">
+      <div class="logo-upload">
+        <div class="upload-title">Oportunity Logo</div>
+        <button mat-raised-button color="primary" class="upload-btn">
+          <span class="material-symbols-outlined">cloud_upload</span>
+          <span>Click here to upload</span>
+        </button>
+        <p>Max size of image cannot exceed 1 MB!</p>
+      </div>
+    </div>
+
+    <!-- Opportunity Type -->
+    <div class="form-field">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Opportunity Type</mat-label>
+        <mat-select>
+          <mat-option value="workshops">Workshops & Webinar</mat-option>
+          <mat-option value="competitions">Competitions</mat-option>
+          <mat-option value="other">Other</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Visibility -->
+    <div class="visibility-container">
+      <label class="section-label">Visibility *</label>
+      <mat-radio-group class="visibility-options" aria-label="Visibility">
+        <!-- Option 1 -->
+        <mat-radio-button value="public" class="option-card">
+          <div class="icon-text-container">
+            <span class="material-symbols-outlined">public</span>
+            <div>
+              <p class="title">Open publicly on Unstop</p>
+              <p class="description">Will be visible to all Unstop users.</p>
+            </div>
+          </div>
+        </mat-radio-button>
+        <!-- Option 2 -->
+        <mat-radio-button value="invite-only" class="option-card">
+          <div class="icon-text-container">
+            <span class="material-symbols-outlined">lock</span>
+            <div>
+              <p class="title">Invite Only</p>
+              <p class="description">Will be accessible only via link.</p>
+            </div>
+          </div>
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <!-- Opportunity Title -->
+    <div class="form-field">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Opportunity Title</mat-label>
+        <input matInput maxlength="190" placeholder="Enter Opportunity Title" />
+        <mat-hint align="end">Max 190 characters</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div class="form-field">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Organization Name</mat-label>
+        <input matInput maxlength="190" placeholder="Enter Your Organization" />
+        <mat-hint align="end">Max 190 characters</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div class="form-field">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Website Link</mat-label>
+        <input matInput maxlength="190" placeholder="Enter Your Website Link" />
+        <mat-hint align="end">Max 190 characters</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <!-- About Opportunity -->
+    <div class="form-field">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>About Opportunity</mat-label>
+        <textarea
+          matInput
+          rows="5"
+          placeholder="Enter details about the opportunity"
+        ></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+</div>

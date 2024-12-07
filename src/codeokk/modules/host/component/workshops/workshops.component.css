@@ -1,0 +1,219 @@
+.workshops-container {
+  padding: 40px 80px;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+.nav-container .nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  background-color: #ecf7ff;
+  color: #000;
+  border-radius: 12px;
+  border: 1px solid #000;
+}
+
+.nav-btn .count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 9px;
+  font-size: 12px;
+  background-color: #fff;
+  color: #000;
+  border-radius: 50%;
+  border: 1px solid #535353;
+}
+
+.nav-btn.active {
+  background-color: #009afe !important;
+  border: none !important;
+}
+
+.basic-details-container {
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+  font-family: Arial, sans-serif;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.opportunity-logo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo-upload {
+  display: inline-block;
+  display: inline-block;
+  padding: 30px 40px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.upload-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.upload-btn .material-symbols-outlined {
+  font-size: 24px;
+}
+
+.logo-upload p {
+  font-size: 12px;
+  margin-top: 8px;
+  color: gray;
+}
+
+.form-field {
+  margin-bottom: 20px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.visibility-section {
+  margin-bottom: 20px;
+}
+
+mat-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+mat-radio-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.radio-label .material-symbols-outlined {
+  font-size: 20px;
+}
+
+mat-radio-button p {
+  margin: 0;
+  font-size: 12px;
+  color: gray;
+}
+
+.upload-btn {
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+::ng-deep .upload-btn .mdc-button__label {
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.details-title {
+  margin: 20px 0 30px 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #141414;
+}
+
+.upload-title {
+  margin-bottom: 15px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+/* General container styling */
+.visibility-container {
+  margin: 20px 0;
+}
+
+.section-label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* Radio Group Styling */
+.visibility-options {
+  display: flex;
+  flex-direction: row;
+  gap: 1%;
+}
+
+.option-card {
+  width: 49%;
+  max-width: 300px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #fff;
+}
+
+.option-card .icon-text-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.option-card .material-symbols-outlined {
+  font-size: 24px;
+  color: #007bff;
+}
+
+.option-card .title {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.option-card .description {
+  font-size: 12px;
+  margin: 0;
+  color: gray;
+}
+
+/* Selected Radio Button Styling */
+mat-radio-button.mat-radio-checked.option-card {
+  border-color: #007bff;
+  background-color: #eaf4ff;
+}
+
+mat-radio-button.mat-radio-checked .material-symbols-outlined {
+  color: #007bff;
+}
+
+/* Hover effect */
+.option-card:hover {
+  border-color: #007bff;
+}

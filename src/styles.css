@@ -1,0 +1,63 @@
+:root {
+  --primary-app-color: #0099fe;
+  --secondary-app-color: #ebf3fb;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: "Montserrat", serif;
+}
+
+html {
+  --mdc-checkbox-disabled-selected-icon-color: rgba(0, 0, 0, 0.38);
+  --mdc-checkbox-disabled-unselected-icon-color: rgba(0, 0, 0, 0.38);
+  --mdc-checkbox-selected-checkmark-color: white;
+  --mdc-checkbox-selected-focus-icon-color: var(--primary-app-color) !important;
+  --mdc-checkbox-selected-hover-icon-color: var(--primary-app-color) !important;
+  --mdc-checkbox-selected-icon-color: var(--primary-app-color) !important;
+  --mdc-checkbox-selected-pressed-icon-color: var(
+    --primary-app-color
+  ) !important;
+  --mdc-checkbox-unselected-focus-icon-color: #212121;
+  --mdc-checkbox-unselected-hover-icon-color: #212121;
+  --mdc-checkbox-unselected-icon-color: rgba(0, 0, 0, 0.54);
+  --mdc-checkbox-selected-focus-state-layer-color: var(
+    --primary-app-color
+  ) !important;
+  --mdc-checkbox-selected-hover-state-layer-color: var(
+    --primary-app-color
+  ) !important;
+  --mdc-checkbox-selected-pressed-state-layer-color: var(
+    --primary-app-color
+  ) !important;
+  --mdc-checkbox-unselected-focus-state-layer-color: black;
+  --mdc-checkbox-unselected-hover-state-layer-color: black;
+  --mdc-checkbox-unselected-pressed-state-layer-color: black;
+  --mat-checkbox-disabled-label-color: rgba(0, 0, 0, 0.38);
+  --mat-checkbox-label-text-color: rgba(0, 0, 0, 0.87);
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+.mat-mdc-radio-button.mat-accent {
+  --mdc-radio-disabled-selected-icon-color: black;
+  --mdc-radio-disabled-unselected-icon-color: black;
+  --mdc-radio-unselected-hover-icon-color: #212121;
+  --mdc-radio-unselected-focus-icon-color: #212121;
+  --mdc-radio-unselected-icon-color: rgba(0, 0, 0, 0.54);
+  --mdc-radio-unselected-pressed-icon-color: rgba(0, 0, 0, 0.54);
+  --mdc-radio-selected-focus-icon-color: var(--primary-app-color) !important;
+  --mdc-radio-selected-hover-icon-color: var(--primary-app-color) !important;
+  --mdc-radio-selected-icon-color: var(--primary-app-color) !important;
+  --mdc-radio-selected-pressed-icon-color: var(--primary-app-color) !important;
+  --mat-radio-ripple-color: black;
+  --mat-radio-checked-ripple-color: var(--primary-app-color) !important;
+}
+
+.mat-mdc-form-field-subscript-wrapper {
+  display: none !important;
+}
