@@ -15,4 +15,26 @@ export class MasterService {
   constructor(private http: HttpClient) {}
 
   private baseUrl = environment.baseUrl;
+
+  getCollege() {
+    return this.http.get(`${this.baseUrl}Master/GetCollege`);
+  }
+
+  getCourse() {
+    return this.http.get(`${this.baseUrl}Master/GetCourse`);
+  }
+
+  getPurpose() {
+    return this.http.get(`${this.baseUrl}Master/GetPurpose`);
+  }
+
+  getUserType() {
+    return this.http.get(`${this.baseUrl}Master/GetUserType`);
+  }
+
+  // getSectionByClassId(classId: number) {
+  //   return this.http.get(
+  //     `${this.baseUrl}Master/GetSectionByClassId?classId=${classId}`
+  //   );
+  // }
 }

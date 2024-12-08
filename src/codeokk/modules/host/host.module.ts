@@ -16,6 +16,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { HostRoutingModule } from "./host-routing.module";
 import { QuizzesComponent } from "./component/quizzes/quizzes.component";
 import { WorkshopsComponent } from "./component/workshops/workshops.component";
+import { MatRadioModule } from "@angular/material/radio";
 
 @NgModule({
   declarations: [QuizzesComponent, WorkshopsComponent],
@@ -46,6 +47,7 @@ import { WorkshopsComponent } from "./component/workshops/workshops.component";
     MatSelectModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
+    MatRadioModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

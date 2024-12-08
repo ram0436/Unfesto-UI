@@ -18,6 +18,12 @@ import { MatSelectModule } from "@angular/material/select";
 import { SharedModule } from "../../shared/shared.module";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { UserProfileComponent } from "./component/user-profile/user-profile.component";
+import {
+  MatRadioButton,
+  MatRadioChange,
+  MatRadioGroup,
+  MatRadioModule,
+} from "@angular/material/radio";
 
 @NgModule({
   declarations: [
@@ -53,6 +59,9 @@ import { UserProfileComponent } from "./component/user-profile/user-profile.comp
     MatSelectModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
+    MatRadioModule,
+    MatRadioButton,
+    MatRadioGroup,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
