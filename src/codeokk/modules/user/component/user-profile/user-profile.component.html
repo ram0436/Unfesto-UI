@@ -163,67 +163,270 @@
   </div>
 </div>
 
-<div class="overlay" *ngIf="isEditSidebarOpen" (click)="toggleSidebar()"></div>
+<div class="overlay" *ngIf="isSidebarVisible" (click)="toggleSidebar()"></div>
 
-<div class="sidebar-popup" [style.right]="isEditSidebarOpen ? '0' : '-320px'">
+<div class="sidebar-popup" [ngClass]="{ show: isSidebarVisible }">
   <div class="sidebar-header">
-    <div class="profile-container">
-      <img src="https://via.placeholder.com/50" class="profile-pic" />
-      <div class="profile-info">
-        <h4>Ram Achal</h4>
-        <p>ram.0436&#64;gmail.com</p>
-        <a [routerLink]="'/user/my-profile'" class="view-profile"
-          >View Profile &gt;</a
-        >
+    <span
+      class="material-symbols-outlined back-icon"
+      (click)="toggleSidebar()"
+      style="cursor: pointer"
+    >
+      arrow_back
+    </span>
+    <span class="header-txt">Edit Profile</span>
+  </div>
+
+  <div class="sidebar-popup-container">
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Complete Your Profile</div>
+      <ul class="nav-items">
+        <li class="active">
+          <span class="material-symbols-outlined link-icon"
+            >history_toggle_off</span
+          >
+          Basic Details
+        </li>
+        <li>
+          <span class="material-symbols-outlined link-icon"
+            >history_toggle_off</span
+          >
+          My Resume
+        </li>
+        <li>
+          <span class="material-symbols-outlined link-icon"
+            >history_toggle_off</span
+          >
+          About
+        </li>
+        <li>
+          <span class="material-symbols-outlined link-icon"
+            >history_toggle_off</span
+          >
+          Skills
+        </li>
+        <li>
+          <span class="material-symbols-outlined link-icon"
+            >history_toggle_off</span
+          >
+          Education
+        </li>
+      </ul>
+    </div>
+    <div class="sidebar-content">
+      <div class="content-section-title">Basic Details</div>
+      <div class="content top-content">
+        <div class="user-image">
+          <ul class="image-upload">
+            <div class="upload-title">Profile Picture</div>
+            <div
+              class="upload-card"
+              *ngFor="let item of userImage; let i = index"
+            >
+              <div
+                class="upload-card-brd"
+                (click)="selectFile()"
+                id="{{ i }}"
+                *ngIf="item == ''"
+              >
+                <input
+                  type="file"
+                  id="eventFileUpload"
+                  name="eventFileUpload"
+                  (change)="selectImage($event)"
+                  style="display: none"
+                  multiple
+                />
+                <div>
+                  <button mat-raised-button color="primary" class="upload-btn">
+                    <span class="material-symbols-outlined">cloud_upload</span>
+                    <span>Click here to upload</span>
+                  </button>
+                </div>
+              </div>
+              <div class="upload-card-brd" *ngIf="item != ''">
+                <div class="preview">
+                  <button
+                    class="delete-button"
+                    (click)="deleteBackgroundImage(i)"
+                  >
+                    <span class="delete-icon">&#10006;</span>
+                  </button>
+                  <img [src]="item" height="80px" width="80px" alt="" />
+                </div>
+              </div>
+            </div>
+            <p>Max size of image cannot exceed 1 MB!</p>
+          </ul>
+        </div>
+      </div>
+      <div class="content fields-content">
+        <div class="name-fields">
+          <div class="form-field">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>First Name</mat-label>
+              <input
+                matInput
+                maxlength="190"
+                placeholder="Enter First Name"
+                [(ngModel)]="userPayload.firstName"
+                name="firstName"
+              />
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Last Name</mat-label>
+              <input
+                matInput
+                maxlength="190"
+                placeholder="Enter Last Name"
+                [(ngModel)]="userPayload.lastName"
+                name="lastName"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="form-field">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>User Name</mat-label>
+            <input
+              matInput
+              maxlength="190"
+              placeholder="Enter User Name"
+              [(ngModel)]="userPayload.userId"
+              name="userName"
+            />
+          </mat-form-field>
+        </div>
+        <div class="form-field">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              maxlength="190"
+              placeholder="Enter Email"
+              [(ngModel)]="userPayload.email"
+              name="email"
+            />
+          </mat-form-field>
+        </div>
+        <div class="form-field">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Mobile No</mat-label>
+            <input
+              matInput
+              maxlength="190"
+              placeholder="Enter Mobile No"
+              [(ngModel)]="userPayload.mobileNo"
+              name="mobileNo"
+            />
+          </mat-form-field>
+        </div>
+        <div class="input-field">
+          <div class="input-field-title">Gender*</div>
+          <mat-radio-group class="d-flex" [(ngModel)]="userPayload.gender">
+            <mat-radio-button value="male">Male</mat-radio-button>
+            <mat-radio-button value="female">Female</mat-radio-button>
+            <mat-radio-button value="other">Other</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="form-field">
+          <label class="section-label">User Type *</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>User Type</mat-label>
+            <mat-select [(ngModel)]="userPayload.userTypeId">
+              <mat-option *ngFor="let type of userTypes" [value]="type.id">
+                {{ type.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-field">
+          <label class="section-label">Course *</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Course</mat-label>
+            <mat-select [(ngModel)]="userPayload.courseId">
+              <mat-option *ngFor="let course of courses" [value]="course.id">
+                {{ course.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-field">
+          <label class="section-label">College *</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>College</mat-label>
+            <mat-select [(ngModel)]="userPayload.collegeId">
+              <mat-option *ngFor="let college of colleges" [value]="college.id">
+                {{ college.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-field">
+          <label class="section-label">Purpose *</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Purpose</mat-label>
+            <mat-select [(ngModel)]="userPayload.purposeId">
+              <mat-option *ngFor="let purpose of purposes" [value]="purpose.id">
+                {{ purpose.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-field">
+          <label class="section-label">Location Details *</label>
+          <div class="location-fields">
+            <div class="form-field">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Pincode</mat-label>
+                <input
+                  matInput
+                  maxlength="190"
+                  placeholder="Enter Pincode"
+                  [(ngModel)]="userPayload.pincode"
+                  name="pincode"
+                />
+              </mat-form-field>
+            </div>
+            <div class="form-field">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>City</mat-label>
+                <input
+                  matInput
+                  maxlength="190"
+                  placeholder="Enter City"
+                  [(ngModel)]="userPayload.city"
+                  name="city"
+                />
+              </mat-form-field>
+            </div>
+            <div class="form-field">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>State</mat-label>
+                <input
+                  matInput
+                  maxlength="190"
+                  placeholder="Enter State"
+                  [(ngModel)]="userPayload.state"
+                  name="state"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="form-field">
+          <button
+            mat-raised-button
+            color="primary"
+            class="add-user-btn"
+            (click)="addUser()"
+          >
+            Add User
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-
-  <div class="sidebar-section">
-    <h5>For Organizers</h5>
-    <ul>
-      <li>
-        <span class="material-symbols-outlined link-icon">home_work</span>
-        Manage Listings
-      </li>
-      <li>
-        <span class="material-symbols-outlined link-icon">event</span> My
-        Festivals
-      </li>
-      <li>
-        <span class="material-symbols-outlined link-icon"
-          >account_balance_wallet</span
-        >
-        Plans & Billing
-      </li>
-    </ul>
-  </div>
-
-  <div class="sidebar-section">
-    <h5>For Users</h5>
-    <ul>
-      <li>
-        <span class="material-symbols-outlined link-icon">assignment</span>
-        Registrations/Applications
-      </li>
-      <li>
-        <span class="material-symbols-outlined link-icon"
-          >supervisor_account</span
-        >
-        Referrals
-      </li>
-      <li>
-        <span class="material-symbols-outlined link-icon">checklist</span> My
-        Rounds
-      </li>
-      <li>
-        <span class="material-symbols-outlined link-icon">emoji_events</span>
-        Unstop Awards Nominations
-      </li>
-      <li>
-        <span class="material-symbols-outlined link-icon">favorite</span>
-        Watchlist
-      </li>
-    </ul>
   </div>
 </div>
