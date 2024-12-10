@@ -1,0 +1,323 @@
+/* Full-page background with low opacity */
+.login-page {
+  /* background: url("../../../../../assets/login-bg.webp") no-repeat center center
+        fixed;
+      background-size: cover; */
+  /* position: fixed;
+      top: 0;
+      left: 0; */
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background-color: #c8c8c880; */
+  z-index: 1;
+}
+
+/* Centered container for the form */
+.login-container {
+  background: #ffffff;
+  padding: 10px 20px;
+  width: 35%;
+  border-radius: 8px;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  position: relative;
+  z-index: 2;
+  margin: 20px 0;
+}
+
+.login-content {
+  width: 100%;
+  overflow-y: auto;
+}
+
+/* Hide scrollbar for Chrome, Safari, and newer versions of Edge */
+.login-content::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.login-content {
+  scrollbar-width: none; /* Firefox */
+}
+
+.login-section-title {
+  font-size: 17px;
+  font-weight: 500;
+  padding: 20px 0px;
+  /* border-bottom: 1px solid #ddd; */
+  margin-bottom: 10px;
+}
+
+ul.nav-items li {
+  padding: 20px 15px !important;
+  border-bottom: 3px solid #ddd;
+  font-size: 16px;
+}
+
+li.active {
+  color: #009afe !important;
+}
+
+.user-image {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.image-upload {
+  display: inline-block;
+  display: inline-block;
+  padding: 30px 40px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  margin: 20px 0;
+  width: 100%;
+}
+
+.upload-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.upload-btn .material-symbols-outlined {
+  font-size: 24px;
+}
+
+.image-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo-upload p {
+  font-size: 12px;
+  margin-top: 8px;
+  color: gray;
+}
+
+.upload-card-brd {
+  /* border: 1px solid; */
+  cursor: pointer;
+  cursor: pointer;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.upload-card {
+  border: 2px solid var(--blackOpaque);
+  box-sizing: border-box;
+  display: inline-block;
+  /* height: 104px; */
+  vertical-align: top;
+  /* margin: 0 6px 6px 0; */
+  /* width: 104px; */
+}
+
+/* .camera {
+      margin: 20px;
+      margin-left: 35px;
+      border: none;
+      background-color: #ffff;
+      font-weight: 700;
+      font-size: 16px;
+      padding: 0;
+      width: 30px;
+    } */
+
+.camera {
+  padding: 7px 14px;
+  background-color: var(--primary-app-color);
+  color: #fff;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+.add-photo {
+  text-align: center;
+  width: 100% !important;
+  display: block;
+}
+
+.preview {
+  position: relative;
+  margin-top: 10px;
+}
+
+.preview.guardian {
+  margin-top: 0px !important;
+}
+
+.delete-btn {
+  width: 40px;
+  height: 37px;
+  padding: 8px;
+  margin: 0;
+}
+
+.delete-button {
+  top: 0px;
+  right: 0px;
+  background: red;
+  border: red;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  float: right;
+  position: absolute;
+  margin: 4px;
+}
+
+.delete-icon {
+  color: white;
+  font-size: 12px;
+}
+
+.first-image {
+  position: relative;
+}
+
+.cover-tag {
+  position: absolute;
+  top: 78px;
+  width: 89%;
+  background-color: #009afe;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 6px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+::ng-deep .upload-btn .mdc-button__label {
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-field {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.visibility-section {
+  margin-bottom: 20px;
+}
+
+mat-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+mat-radio-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.radio-label .material-symbols-outlined {
+  font-size: 20px;
+}
+
+mat-radio-button p {
+  margin: 0;
+  font-size: 12px;
+  color: gray;
+}
+
+.name-fields {
+  display: flex;
+  align-items: center;
+  gap: 2%;
+}
+
+.name-fields .form-field {
+  width: 49%;
+}
+
+.location-fields {
+  display: flex;
+  align-items: center;
+  gap: 2%;
+}
+
+.location-fields .form-field {
+  width: 32%;
+}
+
+.d-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 10px;
+}
+
+.section-label {
+  font-size: 14px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.add-user-btn {
+  width: 100%;
+}
+
+.nav-link {
+  font-size: 16px;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.nav-link .login-link {
+  color: #009afe;
+  cursor: pointer;
+}

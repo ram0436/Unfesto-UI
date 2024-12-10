@@ -17,6 +17,7 @@ import { HostRoutingModule } from "./host-routing.module";
 import { QuizzesComponent } from "./component/quizzes/quizzes.component";
 import { WorkshopsComponent } from "./component/workshops/workshops.component";
 import { MatRadioModule } from "@angular/material/radio";
+import { MatDatepickerModule } from "@angular/material/datepicker";
 
 @NgModule({
   declarations: [QuizzesComponent, WorkshopsComponent],
@@ -48,6 +49,7 @@ import { MatRadioModule } from "@angular/material/radio";
     ReactiveFormsModule,
     MatProgressSpinnerModule,
     MatRadioModule,
+    MatDatepickerModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

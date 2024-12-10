@@ -62,7 +62,7 @@
     </div>
   </div>
 
-  <div class="sidebar-section">
+  <div class="sidebar-section" *ngIf="userRole === 'Organizer'">
     <h5>For Organizers</h5>
     <ul>
       <li>
@@ -82,7 +82,7 @@
     </ul>
   </div>
 
-  <div class="sidebar-section">
+  <div class="sidebar-section" *ngIf="userRole === 'Participant'">
     <h5>For Users</h5>
     <ul>
       <li>

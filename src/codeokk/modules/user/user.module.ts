@@ -1,8 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
-import { LoginComponent } from "./component/login/login.component";
-import { SignupComponent } from "./component/signup/signup.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
@@ -26,12 +24,7 @@ import {
 } from "@angular/material/radio";
 
 @NgModule({
-  declarations: [
-    LoginComponent,
-    SignupComponent,
-    AccountComponent,
-    UserProfileComponent,
-  ],
+  declarations: [AccountComponent, UserProfileComponent],
   imports: [
     SharedModule,
     CommonModule,

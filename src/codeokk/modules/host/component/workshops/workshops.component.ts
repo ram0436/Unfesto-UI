@@ -11,6 +11,7 @@ import { EventPayload } from "../../../../shared/model/event.payload";
 @Component({
   selector: "app-workshops",
   templateUrl: "./workshops.component.html",
+  providers: [provideNativeDateAdapter()],
   styleUrl: "./workshops.component.css",
 })
 export class WorkshopsComponent implements OnInit {
@@ -18,11 +19,14 @@ export class WorkshopsComponent implements OnInit {
 
   isLoading: boolean = true;
 
+  currentStep: number = 1; // 1 for Basic Details, 2 for Registration Details
+
   eventImage: any[] = [""];
 
   categories: any[] = [];
   eventModes: any[] = [];
   eventTypes: any[] = [];
+  users: any[] = [];
   organisations: any[] = [];
   participationTypes: any[] = [];
   skills: any[] = [];
@@ -34,6 +38,10 @@ export class WorkshopsComponent implements OnInit {
 
   selectedCategories: any[] = [];
   selectedSkills: any[] = [];
+  selectedCollaborators: any[] = [];
+
+  registerationStartDate: Date | null = null;
+  registerationEndDate: Date | null = null;
 
   private subscriptions: Subscription = new Subscription();
 
@@ -55,6 +63,7 @@ export class WorkshopsComponent implements OnInit {
       this.eventService.getParticipationType(),
       this.eventService.getSkill(),
       this.eventService.getVisibility(),
+      this.userService.getAllUserId(),
     ]).subscribe(
       ([
         categories,
@@ -64,6 +73,7 @@ export class WorkshopsComponent implements OnInit {
         participationTypes,
         skills,
         visibilities,
+        users,
       ]: any) => {
         // Assign received data to respective properties
         this.categories = categories;
@@ -73,7 +83,7 @@ export class WorkshopsComponent implements OnInit {
         this.participationTypes = participationTypes;
         this.skills = skills;
         this.visibilities = visibilities;
-
+        this.users = users;
         this.isLoading = false;
       },
       (error: any) => {
@@ -84,6 +94,20 @@ export class WorkshopsComponent implements OnInit {
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
+  }
+
+  onRegisterationStartDateChange() {
+    if (this.registerationStartDate) {
+      this.eventPayload.eventRegistrationList[0].registartionStartDateTime =
+        this.registerationStartDate.toISOString();
+    }
+  }
+
+  onRegisterationEndDateChange() {
+    if (this.registerationEndDate) {
+      this.eventPayload.eventRegistrationList[0].registartionEndDateTime =
+        this.registerationEndDate.toISOString();
+    }
   }
 
   getAllCategories() {
@@ -126,6 +150,12 @@ export class WorkshopsComponent implements OnInit {
   getAllVisibilities() {
     this.eventService.getVisibility().subscribe((data: any) => {
       this.visibilities = data;
+    });
+  }
+
+  getAllUsers() {
+    this.userService.getAllUserId().subscribe((data: any) => {
+      this.users = data;
     });
   }
 
@@ -172,6 +202,51 @@ export class WorkshopsComponent implements OnInit {
     this.eventImage[this.eventImage.length - 1] = "";
   }
 
+  nextStep() {
+    if (this.currentStep === 1 && this.validateBasicDetails()) {
+      this.currentStep = 2;
+    }
+  }
+
+  goToStep(step: number) {
+    if (this.currentStep === 1 && step === 2 && !this.validateBasicDetails()) {
+      return;
+    }
+    this.currentStep = step;
+  }
+
+  // Handle back button click
+  onBackButtonClick() {
+    if (this.currentStep === 2) {
+      this.currentStep = 1; // Go back to Basic Details
+    }
+  }
+
+  validateBasicDetails(): boolean {
+    if (
+      !this.eventPayload.title ||
+      !this.eventPayload.eventTypeId ||
+      !this.eventPayload.visibilityId
+    ) {
+      this.showNotification(
+        "Please fill all mandatory fields in Basic Details."
+      );
+      return false;
+    }
+    return true;
+  }
+
+  validateRegistrationDetails(): boolean {
+    if (
+      !this.eventPayload.eventRegistrationList[0].registartionStartDateTime ||
+      !this.eventPayload.eventRegistrationList[0].registartionEndDateTime
+    ) {
+      this.showNotification("Please complete the Registration Details.");
+      return false;
+    }
+    return true;
+  }
+
   addEvent(): void {
     // Map selected categories and skills
     this.eventPayload.categoryList = this.selectedCategories.map(
@@ -185,6 +260,20 @@ export class WorkshopsComponent implements OnInit {
       id: 0,
       name: skill.name,
     }));
+
+    // Map selected collaborators
+    this.eventPayload.eventCollaboratorList = this.selectedCollaborators.map(
+      (collaborator: any) => ({
+        createdBy: 0,
+        createdOn: new Date().toISOString(),
+        modifiedBy: 0,
+        modifiedOn: new Date().toISOString(),
+        id: 0,
+        userId: collaborator.userId,
+      })
+    );
+
+    console.log(JSON.stringify(this.eventPayload, null, 2));
 
     this.eventService.addEvent(this.eventPayload).subscribe((response) => {
       this.showNotification("Event Added Succesfully");

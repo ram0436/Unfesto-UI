@@ -1,0 +1,200 @@
+<div class="login-page">
+  <div class="login-container">
+    <div class="login-content">
+      <div class="login-section-title">
+        Enter your details to register yourself
+      </div>
+      <div class="content top-content">
+        <div class="content fields-content">
+          <div class="name-fields">
+            <div class="form-field">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>First Name</mat-label>
+                <input
+                  matInput
+                  maxlength="190"
+                  placeholder="Enter First Name"
+                  [(ngModel)]="userPayload.firstName"
+                  name="firstName"
+                />
+              </mat-form-field>
+            </div>
+            <div class="form-field">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Last Name</mat-label>
+                <input
+                  matInput
+                  maxlength="190"
+                  placeholder="Enter Last Name"
+                  [(ngModel)]="userPayload.lastName"
+                  name="lastName"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-field">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>User Name</mat-label>
+              <input
+                matInput
+                maxlength="190"
+                placeholder="Enter User Name"
+                [(ngModel)]="userPayload.userId"
+                name="userName"
+              />
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Password</mat-label>
+              <input
+                matInput
+                maxlength="190"
+                placeholder="Enter Password"
+                [(ngModel)]="userPayload.password"
+                name="password"
+              />
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Email</mat-label>
+              <input
+                matInput
+                maxlength="190"
+                placeholder="Enter Email"
+                [(ngModel)]="userPayload.email"
+                name="email"
+              />
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Mobile No</mat-label>
+              <input
+                matInput
+                maxlength="190"
+                placeholder="Enter Mobile No"
+                [(ngModel)]="userPayload.mobileNo"
+                name="mobileNo"
+              />
+            </mat-form-field>
+          </div>
+          <div class="input-field">
+            <div class="input-field-title">Gender*</div>
+            <mat-radio-group class="d-flex" [(ngModel)]="userPayload.gender">
+              <mat-radio-button value="male">Male</mat-radio-button>
+              <mat-radio-button value="female">Female</mat-radio-button>
+              <mat-radio-button value="other">Other</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div class="form-field">
+            <label class="section-label">User Type *</label>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>User Type</mat-label>
+              <mat-select [(ngModel)]="userPayload.userTypeId">
+                <mat-option *ngFor="let type of userTypes" [value]="type.id">
+                  {{ type.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <label class="section-label">Course *</label>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Course</mat-label>
+              <mat-select [(ngModel)]="userPayload.courseId">
+                <mat-option *ngFor="let course of courses" [value]="course.id">
+                  {{ course.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <label class="section-label">College *</label>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>College</mat-label>
+              <mat-select [(ngModel)]="userPayload.collegeId">
+                <mat-option
+                  *ngFor="let college of colleges"
+                  [value]="college.id"
+                >
+                  {{ college.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <label class="section-label">Purpose *</label>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Purpose</mat-label>
+              <mat-select [(ngModel)]="userPayload.purposeId">
+                <mat-option
+                  *ngFor="let purpose of purposes"
+                  [value]="purpose.id"
+                >
+                  {{ purpose.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <label class="section-label">Location Details *</label>
+            <div class="location-fields">
+              <div class="form-field">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Pincode</mat-label>
+                  <input
+                    matInput
+                    maxlength="190"
+                    placeholder="Enter Pincode"
+                    [(ngModel)]="userPayload.pincode"
+                    name="pincode"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="form-field">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>City</mat-label>
+                  <input
+                    matInput
+                    maxlength="190"
+                    placeholder="Enter City"
+                    [(ngModel)]="userPayload.city"
+                    name="city"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="form-field">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>State</mat-label>
+                  <input
+                    matInput
+                    maxlength="190"
+                    placeholder="Enter State"
+                    [(ngModel)]="userPayload.state"
+                    name="state"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="form-field">
+            <button
+              mat-raised-button
+              color="primary"
+              class="add-user-btn"
+              (click)="addUser()"
+            >
+              Register Now
+            </button>
+          </div>
+          <div class="nav-link">
+            Already have an account?
+            <span class="login-link" [routerLink]="'/login'">Login Now</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

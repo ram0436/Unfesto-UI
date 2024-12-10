@@ -13,13 +13,17 @@ export class HeaderComponent implements OnInit {
 
   isSidebarOpen = false;
 
+  userRole: string | null = null;
+
   constructor(
     private router: Router,
     private dialog: MatDialog,
     private snackBar: MatSnackBar
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.userRole = localStorage.getItem("role");
+  }
 
   // Listener for clicks anywhere on the document
   @HostListener("document:click", ["$event"])

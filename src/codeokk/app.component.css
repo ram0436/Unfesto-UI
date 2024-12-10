@@ -4,6 +4,11 @@
   padding: 0px;
 }
 
+.layout-container.full-height {
+  margin-top: 0px;
+  min-height: 100vh;
+}
+
 /* Sidebar styles */
 .sidebar {
   width: 15%;

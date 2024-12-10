@@ -15,43 +15,29 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | UrlTree {
-    const userRole = localStorage.getItem("role");
+    const authToken = localStorage.getItem("authToken");
     const allowedAdminRoutes = ["admin", "admin/dashboard"];
     const allowedUserRoutes = [""];
     const commonRoutes = [
       "user",
       "user/login",
+      "host",
+      "host/workshops",
+      "dashboard",
       "account",
       "account/personal",
       "account/security",
     ];
     const requestedRoute = route.routeConfig?.path || "";
-    if (userRole == "Admin") {
-      if (allowedAdminRoutes.includes(requestedRoute)) {
+    if (authToken) {
+      if (commonRoutes.includes(requestedRoute)) {
         return true;
-      } else if (commonRoutes.includes(requestedRoute)) return true;
-      else {
-        this.router.navigate(["/login"]);
-        return false;
-      }
-    } else if (userRole == "User") {
-      if (allowedUserRoutes.includes(requestedRoute)) {
-        return true;
-      } else if (commonRoutes.includes(requestedRoute)) return true;
-      else {
-        this.router.navigate(["/login"]);
-        return false;
-      }
-    } else if (userRole == "AppSupport") {
-      if (allowedUserRoutes.includes(requestedRoute)) {
-        return true;
-      } else if (commonRoutes.includes(requestedRoute)) return true;
-      else {
-        this.router.navigate(["/login"]);
+      } else {
+        this.router.navigate(["/dashboard"]);
         return false;
       }
     } else {
-      this.router.navigate(["/login"]);
+      this.router.navigate(["/login"]); // Redirect to login if not authenticated
       return false;
     }
   }
