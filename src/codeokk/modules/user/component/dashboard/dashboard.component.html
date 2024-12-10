@@ -1,0 +1,95 @@
+<div class="layout-container">
+  <div class="sidebar">
+    <div class="user-info">
+      <img
+        src="https://via.placeholder.com/50"
+        alt="User Avatar"
+        class="user-avatar"
+      />
+      <h3 class="user-name">Ram Achal</h3>
+      <p class="user-email">ram.0436&#64;gmail.com</p>
+      <div class="progress-bar">
+        <div class="progress" style="width: 67%"></div>
+      </div>
+    </div>
+    <div *ngIf="userRole === 'Participant'">
+      <div class="menu-heading">For Users</div>
+      <ul class="menu">
+        <li>
+          <span class="material-symbols-outlined">assignment</span>
+          Registrations/Applications
+        </li>
+        <li>
+          <span class="material-symbols-outlined">group</span>
+          Referrals
+        </li>
+        <li>
+          <span class="material-symbols-outlined">how_to_reg</span>
+          My Rounds <span class="new-badge">New</span>
+        </li>
+        <li>
+          <span class="material-symbols-outlined">emoji_events</span>
+          Unstop Awards Nominations
+        </li>
+        <li>
+          <span class="material-symbols-outlined">favorite</span>
+          Watchlist
+        </li>
+        <li>
+          <span class="material-symbols-outlined">history</span>
+          Recently Viewed
+        </li>
+        <li>
+          <span class="material-symbols-outlined">support_agent</span>
+          Mentor Sessions
+        </li>
+        <li>
+          <span class="material-symbols-outlined">school</span>
+          Courses
+        </li>
+        <li>
+          <span class="material-symbols-outlined">route</span>
+          My Learning Path <span class="new-badge">New</span>
+        </li>
+        <li>
+          <span class="material-symbols-outlined">verified</span>
+          Certificates
+        </li>
+        <li>
+          <span class="material-symbols-outlined">store</span>
+          Merchandise Store
+        </li>
+        <li routerLink="account">
+          <span class="material-symbols-outlined">settings</span>
+          Settings
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="userRole === 'Organizer'">
+      <div class="menu-heading">For Organizers</div>
+      <ul>
+        <li routerLink="my-profile" routerLinkActive="active">
+          <span class="material-symbols-outlined link-icon">home_work</span>
+          Manage Listings
+        </li>
+        <li>
+          <span class="material-symbols-outlined link-icon">event</span> My
+          Festivals
+        </li>
+        <li>
+          <span class="material-symbols-outlined link-icon"
+            >account_balance_wallet</span
+          >
+          Plans & Billing
+        </li>
+        <li>
+          <span class="material-symbols-outlined">settings</span>
+          Settings
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="main-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

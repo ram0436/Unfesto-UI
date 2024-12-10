@@ -22,9 +22,10 @@ import {
   MatRadioGroup,
   MatRadioModule,
 } from "@angular/material/radio";
+import { DashboardComponent } from "./component/dashboard/dashboard.component";
 
 @NgModule({
-  declarations: [AccountComponent, UserProfileComponent],
+  declarations: [AccountComponent, UserProfileComponent, DashboardComponent],
   imports: [
     SharedModule,
     CommonModule,

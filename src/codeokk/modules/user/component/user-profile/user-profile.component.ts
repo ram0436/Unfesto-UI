@@ -20,6 +20,7 @@ export class UserProfileComponent {
   isSidebarVisible: boolean = false;
 
   userImage: any[] = [""];
+  userRole: String | null = null;
 
   colleges: any[] = [];
   courses: any[] = [];
@@ -40,6 +41,7 @@ export class UserProfileComponent {
     this.getAllCourses();
     this.getAllPurposes();
     this.getAllUserTypes();
+    this.userRole = localStorage.getItem("role");
   }
 
   getAllColleges() {
