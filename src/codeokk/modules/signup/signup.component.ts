@@ -2,17 +2,17 @@ import { Component, HostListener, Inject } from "@angular/core";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
-import { MasterService } from "../../../service/master.service";
-import { UserService } from "../../service/user.service";
-import { UserPayload } from "../../../../shared/model/user.payload";
+import { MasterService } from "../service/master.service";
+import { UserService } from "../user/service/user.service";
+import { UserPayload } from "../../shared/model/user.payload";
 import { DOCUMENT } from "@angular/common";
 
 @Component({
-  selector: "app-user-profile",
-  templateUrl: "./user-profile.component.html",
-  styleUrl: "./user-profile.component.css",
+  selector: "app-signup",
+  templateUrl: "./signup.component.html",
+  styleUrl: "./signup.component.css",
 })
-export class UserProfileComponent {
+export class SignupComponent {
   userPayload: UserPayload = new UserPayload();
 
   dialogRef: MatDialogRef<any> | null = null;
@@ -20,7 +20,6 @@ export class UserProfileComponent {
   isSidebarVisible: boolean = false;
 
   userImage: any[] = [""];
-  userRole: String | null = null;
 
   colleges: any[] = [];
   courses: any[] = [];
@@ -41,7 +40,6 @@ export class UserProfileComponent {
     this.getAllCourses();
     this.getAllPurposes();
     this.getAllUserTypes();
-    this.userRole = localStorage.getItem("role");
   }
 
   getAllColleges() {
@@ -114,10 +112,46 @@ export class UserProfileComponent {
   }
 
   addUser(): void {
-    console.log(this.userPayload);
-    this.userService.addUser(this.userPayload).subscribe((response) => {
-      this.showNotification("User Added Succesfully");
-    });
+    if (this.isFormValid()) {
+      this.userService.addUser(this.userPayload).subscribe(
+        (response) => {
+          this.showNotification("User Added Successfully");
+        },
+        (error) => {
+          this.showNotification("An error occurred while adding the user");
+        }
+      );
+    } else {
+      this.showNotification("Please fill all required fields");
+    }
+  }
+
+  isFormValid(): boolean {
+    // Validate all mandatory fields
+    const requiredFields = [
+      this.userPayload.firstName,
+      this.userPayload.lastName,
+      this.userPayload.userId,
+      this.userPayload.password,
+      this.userPayload.email,
+      this.userPayload.mobileNo,
+      this.userPayload.gender,
+      this.userPayload.userTypeId,
+      this.userPayload.courseId,
+      this.userPayload.collegeId,
+      this.userPayload.purposeId,
+      this.userPayload.pincode,
+      this.userPayload.city,
+      this.userPayload.state,
+    ];
+
+    // Return false if any field is empty or null
+    return requiredFields.every(
+      (field) =>
+        field !== null &&
+        field !== undefined &&
+        (typeof field === "string" ? field.trim() !== "" : true)
+    );
   }
 
   showNotification(message: string): void {

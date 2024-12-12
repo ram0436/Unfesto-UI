@@ -1,0 +1,51 @@
+<div class="login-page">
+  <div class="login-container">
+    <div class="login-content">
+      <div class="login-section-title">Welcome Back!</div>
+      <div class="content top-content">
+        <div class="content fields-content">
+          <div class="form-field">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>User Name</mat-label>
+              <input
+                matInput
+                maxlength="190"
+                placeholder="Enter User Name"
+                [(ngModel)]="username"
+                name="userName"
+              />
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Password</mat-label>
+              <input
+                matInput
+                maxlength="190"
+                placeholder="Enter Password"
+                [(ngModel)]="password"
+                name="password"
+              />
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <button
+              mat-raised-button
+              color="primary"
+              class="add-user-btn"
+              (click)="login()"
+            >
+              Login
+            </button>
+          </div>
+          <div class="nav-link">
+            Don't have an account?
+            <span class="login-link" [routerLink]="'/signup'"
+              >Register Now</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

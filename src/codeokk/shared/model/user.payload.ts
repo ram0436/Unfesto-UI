@@ -11,6 +11,7 @@ export class UserPayload {
   lastName: string = "";
   profilePicURL: string = "";
   userId: string = "";
+  password: string = "";
   email: string = "";
   mobileNo: string = "";
   gender: string = "";

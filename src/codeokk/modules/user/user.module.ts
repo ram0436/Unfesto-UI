@@ -1,8 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
-import { LoginComponent } from "./component/login/login.component";
-import { SignupComponent } from "./component/signup/signup.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
@@ -24,13 +22,15 @@ import {
   MatRadioGroup,
   MatRadioModule,
 } from "@angular/material/radio";
+import { DashboardComponent } from "./component/dashboard/dashboard.component";
+import { ManageListingsComponent } from "./component/manage-listings/manage-listings.component";
 
 @NgModule({
   declarations: [
-    LoginComponent,
-    SignupComponent,
     AccountComponent,
     UserProfileComponent,
+    DashboardComponent,
+    ManageListingsComponent,
   ],
   imports: [
     SharedModule,

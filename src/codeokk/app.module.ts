@@ -1,6 +1,6 @@
 import { HashLocationStrategy, LocationStrategy } from "@angular/common";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
-import { NgModule } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -28,9 +28,12 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatMenuModule } from "@angular/material/menu";
 import { JwtInterceptor } from "./modules/auth/interceptor/JwtInterceptor";
+import { LoginComponent } from "./modules/login/login.component";
+import { SignupComponent } from "./modules/signup/signup.component";
+import { MatRadioButton, MatRadioModule } from "@angular/material/radio";
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, SignupComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -60,7 +63,10 @@ import { JwtInterceptor } from "./modules/auth/interceptor/JwtInterceptor";
     MatSnackBarModule,
     MatMenuModule,
     MatProgressBarModule,
+    MatRadioModule,
+    MatRadioButton,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: LocationStrategy, useClass: HashLocationStrategy },

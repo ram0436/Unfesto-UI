@@ -17,9 +17,11 @@ import { HostRoutingModule } from "./host-routing.module";
 import { QuizzesComponent } from "./component/quizzes/quizzes.component";
 import { WorkshopsComponent } from "./component/workshops/workshops.component";
 import { MatRadioModule } from "@angular/material/radio";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { EventDetailsComponent } from "./component/event-details/event-details.component";
 
 @NgModule({
-  declarations: [QuizzesComponent, WorkshopsComponent],
+  declarations: [QuizzesComponent, WorkshopsComponent, EventDetailsComponent],
   imports: [
     SharedModule,
     CommonModule,
@@ -48,6 +50,7 @@ import { MatRadioModule } from "@angular/material/radio";
     ReactiveFormsModule,
     MatProgressSpinnerModule,
     MatRadioModule,
+    MatDatepickerModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

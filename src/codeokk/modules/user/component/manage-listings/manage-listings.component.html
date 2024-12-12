@@ -1,0 +1,104 @@
+<div class="main-container">
+  <div *ngIf="isLoading" class="loading-spinner">
+    <!-- Loading Spinner or Text -->
+    <mat-spinner></mat-spinner>
+  </div>
+  <!-- Profile Header -->
+  <div class="listing-container" *ngIf="!isLoading">
+    <div class="listing-head">Listing</div>
+    <div class="listing-sections">
+      <div class="listings">
+        <div class="listing-link active">All</div>
+        <div class="listing-link">Workshops</div>
+      </div>
+      <div class="listing-stats">
+        <div class="stats-heading">All Competition Stats</div>
+        <div class="stat-boxes">
+          <div class="stat-box" style="background-color: #ebe8fd">
+            <span class="material-symbols-outlined stat-icon"> bar_chart </span>
+            <div class="stat-name">Total Competitions</div>
+            <div class="stat-number">0</div>
+          </div>
+          <div class="stat-box" style="background-color: #e5f1fc">
+            <span class="material-symbols-outlined stat-icon">
+              visibility
+            </span>
+            <div class="stat-name">Total Impressions</div>
+            <div class="stat-number">0</div>
+          </div>
+          <div class="stat-box" style="background-color: #fcf1e8">
+            <span class="material-symbols-outlined stat-icon">
+              assignment_turned_in
+            </span>
+            <div class="stat-name">Total Registerations</div>
+            <div class="stat-number">0</div>
+          </div>
+        </div>
+      </div>
+      <div class="listing-filters">
+        <div class="search-listing">
+          <span class="material-symbols-outlined search-icon"> search </span>
+          <input type="text" placeholder="Search your listings" />
+        </div>
+      </div>
+      <div class="listings-table">
+        <div *ngIf="events.length === 0" class="no-events">
+          No events found.
+        </div>
+        <div *ngFor="let event of events">
+          <div
+            [routerLink]="['/host/details', event.tabRefGuid]"
+            class="listing"
+          >
+            <div class="left-content">
+              <div class="listing-image">
+                <img
+                  [src]="event.eventLogoURL || 'https://via.placeholder.com/60'"
+                  alt="Event Logo"
+                />
+              </div>
+              <div class="listing-info">
+                <div class="listing-title">{{ event.title || "-" }}</div>
+                <div class="listing-count">
+                  Participant Count -
+                  {{ event.eventRegistrationList?.[0]?.registrationCountLimit || '-' }}
+                </div>
+                <div class="listing-date">
+                  <span class="material-symbols-outlined date-icon"
+                    >calendar_month</span
+                  >
+                  <span class="date-txt">
+                    {{ event.eventRegistrationList?.[0]?.registartionStartDateTime | date: 'dd MMM yyyy' || '-' }}
+                  </span>
+                </div>
+              </div>
+              <div class="listing-collaborators">
+                <div class="collaborator-heading">Collaborators:</div>
+                <div
+                  *ngFor="let collaborator of event.eventCollaboratorList"
+                  class="collaborator"
+                >
+                  {{ collaborator.userId || "-" }}
+                </div>
+                <div
+                  *ngIf="
+                    !event.eventCollaboratorList ||
+                    event.eventCollaboratorList.length === 0
+                  "
+                >
+                  -
+                </div>
+              </div>
+            </div>
+            <div class="right-content">
+              <span class="material-symbols-outlined edit-icon"> edit </span>
+              <span class="material-symbols-outlined delete-icon">
+                delete
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

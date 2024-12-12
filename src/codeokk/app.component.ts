@@ -11,6 +11,7 @@ import { filter } from "rxjs/operators";
 })
 export class AppComponent {
   showSidebar = true;
+  showHeader: boolean = true;
   title = "UnStop-UI";
   constructor(
     private matIconReg: MatIconRegistry,
@@ -26,7 +27,8 @@ export class AppComponent {
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
         const url = event.urlAfterRedirects;
-        this.showSidebar = !(url.includes("/user") || url.includes("/admin"));
+        // Hide header for specific routes
+        this.showHeader = !(url.includes("/login") || url.includes("/signup"));
       });
   }
 

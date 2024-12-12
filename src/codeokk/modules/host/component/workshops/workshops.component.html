@@ -5,20 +5,28 @@
   </div>
   <div *ngIf="!isLoading" class="workshops-content">
     <div class="nav-container">
-      <div class="back-btn nav-btn">
+      <div class="back-btn nav-btn" (click)="onBackButtonClick()">
         <span class="material-symbols-outlined"> arrow_back_ios </span>
         <span class="btn-txt">Back</span>
       </div>
-      <div class="section-btn nav-btn active">
+      <div
+        class="section-btn nav-btn"
+        [class.active]="currentStep === 1"
+        (click)="goToStep(1)"
+      >
         <span class="count"> 1 </span>
         <span class="btn-txt"> Basic Details </span>
       </div>
-      <div class="section-btn nav-btn">
+      <div
+        class="section-btn nav-btn"
+        [class.active]="currentStep === 2"
+        (click)="goToStep(2)"
+      >
         <span class="count"> 2 </span>
         <span class="btn-txt"> Registeration Details </span>
       </div>
     </div>
-    <div class="basic-details-container">
+    <div class="basic-details-container" *ngIf="currentStep === 1">
       <div class="details-title">Basic Details</div>
 
       <div class="opportunity-logo">
@@ -194,6 +202,19 @@
         </mat-form-field>
       </div>
 
+      <!-- Collaborators -->
+      <div class="form-field">
+        <label class="section-label">Collaborators *</label>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Add Collaborators</mat-label>
+          <mat-select [(ngModel)]="selectedCollaborators" multiple>
+            <mat-option *ngFor="let user of users" [value]="user">
+              {{ user.userName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
       <!-- About Opportunity -->
       <div class="form-field">
         <label class="section-label">About Opportunity *</label>
@@ -206,6 +227,100 @@
             [(ngModel)]="eventPayload.description"
             name="aboutEvent"
           ></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="form-field">
+        <button
+          mat-raised-button
+          color="primary"
+          class="add-event-btn"
+          (click)="nextStep()"
+        >
+          Next
+        </button>
+      </div>
+    </div>
+    <div class="basic-details-container" *ngIf="currentStep === 2">
+      <div class="details-title">Registeration Details</div>
+
+      <!-- Visibility -->
+      <div class="visibility-container">
+        <label class="section-label">Participation Type *</label>
+        <mat-radio-group
+          [(ngModel)]="
+            eventPayload.eventRegistrationList[0].participationTypeId
+          "
+          aria-label="Visibility"
+          class="visibility-options"
+        >
+          <mat-radio-button
+            *ngFor="let type of participationTypes"
+            [value]="type.id"
+            class="option-card"
+          >
+            <div class="icon-text-container">
+              <div>
+                <p class="title">{{ type.name }}</p>
+              </div>
+            </div>
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <!-- Opportunity Title -->
+      <div class="form-field">
+        <label class="section-label">No. of Registerations Allowed *</label>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Participants Count</mat-label>
+          <input
+            matInput
+            maxlength="190"
+            placeholder="Enter Participants Count"
+            [(ngModel)]="
+              eventPayload.eventRegistrationList[0].registrationCountLimit
+            "
+            name="registrationCount"
+          />
+          <mat-hint align="end">Max 190 characters</mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div class="form-field">
+        <label class="section-label">Registeration Start Date *</label>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Registeration Start Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="startDatePicker"
+            [(ngModel)]="registerationStartDate"
+            (ngModelChange)="onRegisterationStartDateChange()"
+            name="startDate"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="startDatePicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #startDatePicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="form-field">
+        <label class="section-label">Registeration End Date *</label>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Registeration End Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="endDatePicker"
+            [(ngModel)]="registerationEndDate"
+            (ngModelChange)="onRegisterationEndDateChange()"
+            name="endDate"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="endDatePicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #endDatePicker></mat-datepicker>
         </mat-form-field>
       </div>
 
