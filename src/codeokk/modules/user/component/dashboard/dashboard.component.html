@@ -15,6 +15,10 @@
     <div *ngIf="userRole === 'Participant'">
       <div class="menu-heading">For Users</div>
       <ul class="menu">
+        <li routerLink="manage-listings" routerLinkActive="active">
+          <span class="material-symbols-outlined link-icon">home_work</span>
+          Manage Listings
+        </li>
         <li>
           <span class="material-symbols-outlined">assignment</span>
           Registrations/Applications

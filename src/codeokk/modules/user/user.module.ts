@@ -23,9 +23,15 @@ import {
   MatRadioModule,
 } from "@angular/material/radio";
 import { DashboardComponent } from "./component/dashboard/dashboard.component";
+import { ManageListingsComponent } from "./component/manage-listings/manage-listings.component";
 
 @NgModule({
-  declarations: [AccountComponent, UserProfileComponent, DashboardComponent],
+  declarations: [
+    AccountComponent,
+    UserProfileComponent,
+    DashboardComponent,
+    ManageListingsComponent,
+  ],
   imports: [
     SharedModule,
     CommonModule,

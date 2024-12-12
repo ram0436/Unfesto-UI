@@ -42,4 +42,14 @@ export class HeaderComponent implements OnInit {
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
+
+  logout() {
+    // Remove the relevant items from localStorage
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("user_Id");
+    localStorage.removeItem("role");
+
+    // Navigate to the home page
+    this.router.navigate(["/"]).then(() => {});
+  }
 }

@@ -44,6 +44,7 @@ export class LoginComponent {
         console.log(data);
         localStorage.setItem("role", data.role);
         localStorage.setItem("authToken", data.authToken);
+        localStorage.setItem("user_Id", data.user_Id);
         // this.userService.setData("login");
         this.router.navigate(["dashboard"]);
         this.showNotification("Logged in successfully");

@@ -273,7 +273,7 @@ export class WorkshopsComponent implements OnInit {
       })
     );
 
-    console.log(JSON.stringify(this.eventPayload, null, 2));
+    // console.log(JSON.stringify(this.eventPayload, null, 2));
 
     this.eventService.addEvent(this.eventPayload).subscribe((response) => {
       this.showNotification("Event Added Succesfully");

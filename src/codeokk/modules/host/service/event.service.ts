@@ -48,9 +48,15 @@ export class EventService {
     return this.http.post(`${this.baseUrl}Event/AddEvent`, payload);
   }
 
-  getSectionByClassId(classId: number) {
+  getEventByUserId(userId: number) {
     return this.http.get(
-      `${this.baseUrl}Master/GetSectionByClassId?classId=${classId}`
+      `${this.baseUrl}Event/GetEventByUserId?userId=${userId}`
+    );
+  }
+
+  getEventDetail(tabRefGuid: String) {
+    return this.http.get(
+      `${this.baseUrl}Event/GetEventDetail?TabRefGuid=${tabRefGuid}`
     );
   }
 }

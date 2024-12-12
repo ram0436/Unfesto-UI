@@ -1,0 +1,113 @@
+<div class="details-container">
+  <div *ngIf="isLoading" class="loading-spinner">
+    <!-- Loading Spinner or Text -->
+    <mat-spinner></mat-spinner>
+  </div>
+  <div class="details-content" *ngIf="!isLoading">
+    <div class="left-content">
+      <div class="top-container">
+        <div class="top">
+          <!-- Event Logo -->
+          <div class="event-image">
+            <img
+              [src]="
+                eventDetails[0].eventLogoURL ||
+                'https://via.placeholder.com/150'
+              "
+              alt="Event Logo"
+            />
+          </div>
+          <!-- Event Title -->
+          <div class="event-title">{{ eventDetails[0].title || "-" }}</div>
+          <!-- Event Mode -->
+          <div class="event-mode">
+            <span class="material-symbols-outlined icon"> location_on </span>
+            <span class="mode">{{ eventDetails[0].eventMode || "-" }}</span>
+          </div>
+          <!-- Event Registration Start Date -->
+          <div class="event-date">
+            <span class="material-symbols-outlined icon">calendar_month</span>
+            <span class="date-txt">
+              {{
+                eventDetails[0].eventRegistrationList[0]
+                  ?.registartionStartDateTime | date : "dd MMM yyyy" || "-"
+              }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="bottom">
+        <div class="bottom-title">More Details</div>
+        <!-- Event Type -->
+        <div class="event-type detail">
+          <span>Event Type:</span> {{ eventDetails[0].eventType || "-" }}
+        </div>
+        <!-- Organisation -->
+        <div class="event-organization detail">
+          <span>Organization Name:</span>
+          {{ eventDetails[0].organisation || "-" }}
+        </div>
+        <!-- Website -->
+        <div class="event-url detail">
+          <span>Website:</span>
+          <a [href]="eventDetails[0].websiteURL || '#'" target="_blank">
+            {{ eventDetails[0].websiteURL || "-" }}
+          </a>
+        </div>
+        <!-- Collaborators -->
+        <div class="event-collaborators-title">Collaborators:</div>
+        <div class="event-collaborators">
+          <div
+            class="event-collaborator"
+            *ngFor="let collaborator of eventDetails[0].eventCollaboratorList"
+          >
+            {{ collaborator.userId || "-" }}
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="event-description">
+          <div class="description-title">Description *</div>
+          <div class="description">
+            {{ eventDetails[0].description || "-" }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="right-content">
+      <div class="detail-box">
+        <div class="box-top">
+          <div class="box-title">Free</div>
+          <div class="share-details">
+            <span class="material-symbols-outlined share-icon"> favorite </span>
+            <span class="material-symbols-outlined share-icon"> share </span>
+          </div>
+        </div>
+        <div class="register-btn">Register</div>
+        <div class="event-register-details">
+          <div class="register-detail">
+            <span class="material-symbols-outlined icon"> groups </span>
+            <div class="register-detail-content">
+              <div class="register-title">Registered</div>
+              <span class="register-count">10</span>
+            </div>
+          </div>
+          <div class="register-detail">
+            <span class="material-symbols-outlined icon"> person </span>
+            <div class="register-detail-content">
+              <div class="register-title">Team Size</div>
+              <span class="register-count">10</span>
+            </div>
+          </div>
+          <div class="register-detail">
+            <span class="material-symbols-outlined icon"> flash_on </span>
+            <div class="register-detail-content">
+              <div class="register-title">Impressions</div>
+              <span class="register-count">10</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
