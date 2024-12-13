@@ -1,4 +1,11 @@
-import { Component, Inject, OnInit } from "@angular/core";
+import {
+  Component,
+  ElementRef,
+  Inject,
+  NgZone,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
 import { DOCUMENT } from "@angular/common";
 import { MasterService } from "../../../service/master.service";
 import { provideNativeDateAdapter } from "@angular/material/core";
@@ -16,6 +23,7 @@ import { EventPayload } from "../../../../shared/model/event.payload";
 })
 export class WorkshopsComponent implements OnInit {
   eventPayload: EventPayload = new EventPayload();
+  @ViewChild("editor") editorRef!: ElementRef;
 
   isLoading: boolean = true;
 
@@ -43,6 +51,15 @@ export class WorkshopsComponent implements OnInit {
   registerationStartDate: Date | null = null;
   registerationEndDate: Date | null = null;
 
+  editorModules = {
+    toolbar: [
+      ["bold", "italic", "underline"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      ["link", "blockquote"],
+      [{ align: "" }, { align: "center" }],
+    ],
+  };
+
   private subscriptions: Subscription = new Subscription();
 
   constructor(
@@ -50,8 +67,14 @@ export class WorkshopsComponent implements OnInit {
     private eventService: EventService,
     private masterService: MasterService,
     private userService: UserService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private ngZone: NgZone
   ) {}
+
+  onContentChange(content: string) {
+    this.eventPayload.description = content;
+    console.log("Updated Description:", this.eventPayload.description);
+  }
 
   ngOnInit() {
     // Combine all subscriptions into a single observable

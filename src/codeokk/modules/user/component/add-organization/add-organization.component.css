@@ -1,0 +1,97 @@
+/* Main content area */
+.main-container {
+  width: 100%;
+  padding: 10px;
+  background-color: #fafafa;
+}
+
+.full-content {
+  margin-left: 0% !important;
+  width: 100%;
+  padding: 0px !important;
+}
+
+/* Main container */
+.organization-container {
+  /* padding: 20px; */
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.organization-heading {
+  margin-bottom: 10px;
+}
+
+.organization-head {
+  padding: 15px 20px;
+  border-bottom: 1px solid #ddd;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.organization-sections {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-container,
+.right-container {
+  width: 50%;
+}
+
+.left-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.add-description {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 0px;
+}
+
+.add-organization-btn {
+  width: 30%;
+}
+
+.right-container .table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 0px 5px;
+}
+
+.table-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.table-count {
+  color: #009afe;
+}
+
+.mat-elevation-z8 {
+  box-shadow: none !important;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+th {
+  background-color: aliceblue !important;
+}
+
+.action-column {
+  width: 120px; /* Adjust this value as needed */
+  text-align: center;
+}

@@ -68,9 +68,10 @@
         <!-- Description -->
         <div class="event-description">
           <div class="description-title">Description *</div>
-          <div class="description">
+          <!-- <div class="description">
             {{ eventDetails[0].description || "-" }}
-          </div>
+          </div> -->
+          <div class="description" [innerHTML]="descriptionHtml"></div>
         </div>
       </div>
     </div>

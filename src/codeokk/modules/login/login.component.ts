@@ -45,6 +45,9 @@ export class LoginComponent {
         localStorage.setItem("role", data.role);
         localStorage.setItem("authToken", data.authToken);
         localStorage.setItem("user_Id", data.user_Id);
+        localStorage.setItem("firstName", data.firstName);
+        localStorage.setItem("mobileNo", data.mobileNo);
+        localStorage.setItem("email", data.email);
         // this.userService.setData("login");
         this.router.navigate(["dashboard"]);
         this.showNotification("Logged in successfully");

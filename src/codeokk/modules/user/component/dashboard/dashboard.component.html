@@ -6,87 +6,110 @@
         alt="User Avatar"
         class="user-avatar"
       />
-      <h3 class="user-name">Ram Achal</h3>
-      <p class="user-email">ram.0436&#64;gmail.com</p>
+      <h3 class="user-name">{{ firstName }}</h3>
+      <p class="user-email">{{ email }}</p>
       <div class="progress-bar">
         <div class="progress" style="width: 67%"></div>
       </div>
     </div>
-    <div *ngIf="userRole === 'Participant'">
-      <div class="menu-heading">For Users</div>
+    <div *ngIf="userRole === 'SuperAdmin'">
+      <div class="menu-heading">For Admin</div>
       <ul class="menu">
-        <li routerLink="manage-listings" routerLinkActive="active">
-          <span class="material-symbols-outlined link-icon">home_work</span>
-          Manage Listings
+        <li
+          [routerLink]="'/user/dashboard/admin-panel'"
+          [ngClass]="{ active: activeMenuItem === 'admin-panel' }"
+          (click)="setActiveMenuItem('admin-panel')"
+        >
+          <span class="material-symbols-outlined link-icon">shield_person</span>
+          Admin Panel
         </li>
-        <li>
-          <span class="material-symbols-outlined">assignment</span>
-          Registrations/Applications
+        <li
+          [routerLink]="'/user/dashboard/add-skill'"
+          [ngClass]="{ active: activeMenuItem === 'add-skill' }"
+          (click)="setActiveMenuItem('add-skill')"
+        >
+          <span class="material-symbols-outlined link-icon">workspaces</span>
+          Add Skill
         </li>
-        <li>
-          <span class="material-symbols-outlined">group</span>
-          Referrals
+        <li
+          [routerLink]="'/user/dashboard/add-category'"
+          [ngClass]="{ active: activeMenuItem === 'add-category' }"
+          (click)="setActiveMenuItem('add-category')"
+        >
+          <span class="material-symbols-outlined link-icon">category</span>
+          Add Category
         </li>
-        <li>
-          <span class="material-symbols-outlined">how_to_reg</span>
-          My Rounds <span class="new-badge">New</span>
+        <li
+          [routerLink]="'/user/dashboard/add-organization'"
+          [ngClass]="{ active: activeMenuItem === 'add-organization' }"
+          (click)="setActiveMenuItem('add-organization')"
+        >
+          <span class="material-symbols-outlined link-icon">domain_add</span>
+          Add Organization
         </li>
-        <li>
-          <span class="material-symbols-outlined">emoji_events</span>
-          Unstop Awards Nominations
+        <li
+          [routerLink]="'/user/dashboard/settings'"
+          [ngClass]="{ active: activeMenuItem === 'settings' }"
+          (click)="setActiveMenuItem('settings')"
+        >
+          <span class="material-symbols-outlined link-icon">settings</span>
+          Settings
         </li>
-        <li>
-          <span class="material-symbols-outlined">favorite</span>
-          Watchlist
+      </ul>
+    </div>
+    <div *ngIf="userRole === 'Participant'">
+      <div class="menu-heading">For Participants</div>
+      <ul class="menu">
+        <li
+          [routerLink]="'/user/dashboard/my-registerations'"
+          (click)="setActiveMenuItem('my-registeraions')"
+          [ngClass]="{ active: activeMenuItem === 'my-registerations' }"
+        >
+          <span class="material-symbols-outlined link-icon">assignment</span>
+          My Registrations
         </li>
-        <li>
-          <span class="material-symbols-outlined">history</span>
-          Recently Viewed
-        </li>
-        <li>
-          <span class="material-symbols-outlined">support_agent</span>
-          Mentor Sessions
-        </li>
-        <li>
-          <span class="material-symbols-outlined">school</span>
-          Courses
-        </li>
-        <li>
-          <span class="material-symbols-outlined">route</span>
-          My Learning Path <span class="new-badge">New</span>
-        </li>
-        <li>
-          <span class="material-symbols-outlined">verified</span>
+        <li
+          [routerLink]="'/user/dashboard/certificates'"
+          (click)="setActiveMenuItem('certificates')"
+          [ngClass]="{ active: activeMenuItem === 'certificates' }"
+        >
+          <span class="material-symbols-outlined link-icon">verified</span>
           Certificates
         </li>
-        <li>
-          <span class="material-symbols-outlined">store</span>
-          Merchandise Store
+        <li
+          [routerLink]="'/user/dashboard/wishlist'"
+          (click)="setActiveMenuItem('wishlist')"
+          [ngClass]="{ active: activeMenuItem === 'wishlist' }"
+        >
+          <span class="material-symbols-outlined link-icon">favorite</span>
+          Wishlist
         </li>
-        <li routerLink="account">
-          <span class="material-symbols-outlined">settings</span>
+        <li
+          [routerLink]="'/user/dashboard/settings'"
+          (click)="setActiveMenuItem('settings')"
+          [ngClass]="{ active: activeMenuItem === 'settings' }"
+        >
+          <span class="material-symbols-outlined link-icon">settings</span>
           Settings
         </li>
       </ul>
     </div>
     <div *ngIf="userRole === 'Organizer'">
       <div class="menu-heading">For Organizers</div>
-      <ul>
-        <li routerLink="my-profile" routerLinkActive="active">
+      <ul class="menu">
+        <li
+          [routerLink]="'/user/dashboard/manage-listings'"
+          (click)="setActiveMenuItem('manage-listings')"
+          [ngClass]="{ active: activeMenuItem === 'manage-listings' }"
+        >
           <span class="material-symbols-outlined link-icon">home_work</span>
           Manage Listings
         </li>
-        <li>
-          <span class="material-symbols-outlined link-icon">event</span> My
-          Festivals
-        </li>
-        <li>
-          <span class="material-symbols-outlined link-icon"
-            >account_balance_wallet</span
-          >
-          Plans & Billing
-        </li>
-        <li>
+        <li
+          [routerLink]="'/user/dashboard/settings'"
+          (click)="setActiveMenuItem('settings')"
+          [ngClass]="{ active: activeMenuItem === 'settings' }"
+        >
           <span class="material-symbols-outlined">settings</span>
           Settings
         </li>

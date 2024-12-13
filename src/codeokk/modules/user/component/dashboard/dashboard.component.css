@@ -112,6 +112,24 @@
   padding-left: 10px;
 }
 
+.menu li.active {
+  background-color: #009afe;
+  color: #fff;
+  border-radius: 5px;
+  padding-left: 10px;
+  margin: 10px 0;
+}
+
+.menu li.active .material-symbols-outlined {
+  color: #fff;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 .main-content {
   margin-left: 15%;
   width: 85%;

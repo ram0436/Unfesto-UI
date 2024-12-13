@@ -19,6 +19,7 @@ import { WorkshopsComponent } from "./component/workshops/workshops.component";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { EventDetailsComponent } from "./component/event-details/event-details.component";
+import { QuillModule } from "ngx-quill";
 
 @NgModule({
   declarations: [QuizzesComponent, WorkshopsComponent, EventDetailsComponent],
@@ -51,6 +52,7 @@ import { EventDetailsComponent } from "./component/event-details/event-details.c
     MatProgressSpinnerModule,
     MatRadioModule,
     MatDatepickerModule,
+    QuillModule.forRoot(),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

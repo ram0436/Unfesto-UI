@@ -53,8 +53,8 @@
     <div class="profile-container">
       <img src="https://via.placeholder.com/50" class="profile-pic" />
       <div class="profile-info">
-        <h4>Ram Achal</h4>
-        <p>ram.0436&#64;gmail.com</p>
+        <h4>{{ firstName }}</h4>
+        <p>{{ email }}</p>
         <a [routerLink]="'/user/dashboard/my-profile'" class="view-profile"
           >View Profile &gt;</a
         >
@@ -65,47 +65,60 @@
   <div class="sidebar-section" *ngIf="userRole === 'Organizer'">
     <h5>For Organizers</h5>
     <ul>
-      <li>
+      <li [routerLink]="'/user/dashboard/manage-listings'">
         <span class="material-symbols-outlined link-icon">home_work</span>
         Manage Listings
       </li>
-      <li>
-        <span class="material-symbols-outlined link-icon">event</span> My
-        Festivals
-      </li>
-      <li>
-        <span class="material-symbols-outlined link-icon"
-          >account_balance_wallet</span
-        >
-        Plans & Billing
+      <li [routerLink]="'/user/dashboard/settings'">
+        <span class="material-symbols-outlined link-icon">settings</span>
+        Settings
       </li>
     </ul>
   </div>
 
   <div class="sidebar-section" *ngIf="userRole === 'Participant'">
-    <h5>For Users</h5>
+    <h5>For Participants</h5>
     <ul>
-      <li>
+      <li [routerLink]="'/user/dashboard/my-registerations'">
         <span class="material-symbols-outlined link-icon">assignment</span>
-        Registrations/Applications
+        My Registrations
       </li>
-      <li>
-        <span class="material-symbols-outlined link-icon"
-          >supervisor_account</span
-        >
-        Referrals
+      <li [routerLink]="'/user/dashboard/certificates'">
+        <span class="material-symbols-outlined link-icon">verified</span>
+        Certificates
       </li>
-      <li>
-        <span class="material-symbols-outlined link-icon">checklist</span> My
-        Rounds
-      </li>
-      <li>
-        <span class="material-symbols-outlined link-icon">emoji_events</span>
-        Unstop Awards Nominations
-      </li>
-      <li>
+      <li [routerLink]="'/user/dashboard/wishlist'">
         <span class="material-symbols-outlined link-icon">favorite</span>
-        Watchlist
+        Wishlist
+      </li>
+      <li [routerLink]="'/user/dashboard/settings'">
+        <span class="material-symbols-outlined link-icon">settings</span>
+        Settings
+      </li>
+    </ul>
+  </div>
+  <div class="sidebar-section" *ngIf="userRole === 'SuperAdmin'">
+    <h5>For Admin</h5>
+    <ul>
+      <li [routerLink]="'/user/dashboard/admin-panel'">
+        <span class="material-symbols-outlined link-icon">shield_person</span>
+        Admin Panel
+      </li>
+      <li [routerLink]="'/user/dashboard/add-skill'">
+        <span class="material-symbols-outlined link-icon">workspaces</span>
+        Add Skill
+      </li>
+      <li [routerLink]="'/user/dashboard/add-category'">
+        <span class="material-symbols-outlined link-icon">category</span>
+        Add Category
+      </li>
+      <li [routerLink]="'/user/dashboard/add-organization'">
+        <span class="material-symbols-outlined link-icon">domain_add</span>
+        Add Organization
+      </li>
+      <li [routerLink]="'/user/dashboard/settings'">
+        <span class="material-symbols-outlined link-icon">settings</span>
+        Settings
       </li>
     </ul>
   </div>

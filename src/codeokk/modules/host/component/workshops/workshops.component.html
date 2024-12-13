@@ -218,16 +218,13 @@
       <!-- About Opportunity -->
       <div class="form-field">
         <label class="section-label">About Opportunity *</label>
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>About Opportunity</mat-label>
-          <textarea
-            matInput
-            rows="5"
-            placeholder="Enter details about the opportunity"
-            [(ngModel)]="eventPayload.description"
-            name="aboutEvent"
-          ></textarea>
-        </mat-form-field>
+
+        <quill-editor
+          [modules]="editorModules"
+          [(ngModel)]="eventPayload.description"
+          (ngModelChange)="onContentChange($event)"
+          class="quill-editor"
+        ></quill-editor>
       </div>
 
       <div class="form-field">

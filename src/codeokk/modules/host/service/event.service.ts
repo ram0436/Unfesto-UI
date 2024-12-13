@@ -44,6 +44,10 @@ export class EventService {
     return this.http.get(`${this.baseUrl}Event/GetVisibility`);
   }
 
+  getAllEvent() {
+    return this.http.get(`${this.baseUrl}Event/GetAllEvent`);
+  }
+
   addEvent(payload: any): Observable<any> {
     return this.http.post(`${this.baseUrl}Event/AddEvent`, payload);
   }

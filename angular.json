@@ -27,7 +27,8 @@
             "styles": [
               "src/styles.css",
               "node_modules/material-symbols/index.css",
-              "@angular/material/prebuilt-themes/indigo-pink.css"
+              "@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/quill/dist/quill.snow.css"
             ],
             "scripts": []
           },

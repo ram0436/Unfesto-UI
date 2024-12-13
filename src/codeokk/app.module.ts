@@ -31,6 +31,7 @@ import { JwtInterceptor } from "./modules/auth/interceptor/JwtInterceptor";
 import { LoginComponent } from "./modules/login/login.component";
 import { SignupComponent } from "./modules/signup/signup.component";
 import { MatRadioButton, MatRadioModule } from "@angular/material/radio";
+import { QuillModule } from "ngx-quill";
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, LoginComponent, SignupComponent],
@@ -65,6 +66,7 @@ import { MatRadioButton, MatRadioModule } from "@angular/material/radio";
     MatProgressBarModule,
     MatRadioModule,
     MatRadioButton,
+    QuillModule.forRoot(),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

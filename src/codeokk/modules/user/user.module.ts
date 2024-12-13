@@ -24,6 +24,11 @@ import {
 } from "@angular/material/radio";
 import { DashboardComponent } from "./component/dashboard/dashboard.component";
 import { ManageListingsComponent } from "./component/manage-listings/manage-listings.component";
+import { AddCategoryComponent } from "./component/add-category/add-category.component";
+import { AddSkillComponent } from "./component/add-skill/add-skill.component";
+import { AddOrganizationComponent } from "./component/add-organization/add-organization.component";
+import { AdminDashboardComponent } from "./component/admin-dashboard/admin-dashboard.component";
+import { MatTableModule } from "@angular/material/table";
 
 @NgModule({
   declarations: [
@@ -31,6 +36,10 @@ import { ManageListingsComponent } from "./component/manage-listings/manage-list
     UserProfileComponent,
     DashboardComponent,
     ManageListingsComponent,
+    AddCategoryComponent,
+    AddSkillComponent,
+    AddOrganizationComponent,
+    AdminDashboardComponent,
   ],
   imports: [
     SharedModule,
@@ -62,6 +71,7 @@ import { ManageListingsComponent } from "./component/manage-listings/manage-list
     MatRadioModule,
     MatRadioButton,
     MatRadioGroup,
+    MatTableModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
