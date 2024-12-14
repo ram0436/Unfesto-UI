@@ -1,0 +1,91 @@
+<div class="main-container">
+  <div *ngIf="isLoading" class="loading-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <!-- Category Section -->
+  <div class="category-container" *ngIf="!isLoading">
+    <div class="category-head">Add Category</div>
+    <div class="category-sections">
+      <!-- Left Container -->
+      <div class="left-container">
+        <div class="add-description">Enter category name below to add it</div>
+        <mat-form-field appearance="outline" style="width: 80%">
+          <mat-label>Category Name</mat-label>
+          <input
+            matInput
+            [(ngModel)]="categoryPayload.name"
+            placeholder="Enter category name"
+          />
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="addCategory()"
+          class="add-category-btn"
+        >
+          Add Category
+        </button>
+      </div>
+
+      <!-- Right Container -->
+      <div class="right-container">
+        <div class="table-header">
+          <div class="table-title">Categories</div>
+          <div class="table-count">
+            Total Categories: {{ categories.length }}
+          </div>
+        </div>
+
+        <table
+          mat-table
+          [dataSource]="categories"
+          class="mat-elevation-z8"
+          style="width: 100%"
+          *ngIf="categories.length > 0"
+        >
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>ID</th>
+            <td mat-cell *matCellDef="let category">
+              {{ category.id }}
+            </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let category">
+              {{ category.name }}
+            </td>
+          </ng-container>
+
+          <!-- Action Column -->
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef class="action-column">
+              Action
+            </th>
+            <td mat-cell *matCellDef="let Category" class="action-column">
+              <button mat-button color="warn">Delete</button>
+            </td>
+          </ng-container>
+
+          <!-- Table Header and Rows -->
+          <tr mat-header-row *matHeaderRowDef="['id', 'name', 'action']"></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: ['id', 'name', 'action']"
+          ></tr>
+        </table>
+
+        <!-- No Skills Message -->
+        <div
+          *ngIf="categories.length === 0"
+          style="text-align: center; margin-top: 20px"
+        >
+          No categories available
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

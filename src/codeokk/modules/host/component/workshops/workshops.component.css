@@ -339,3 +339,29 @@ mat-radio-button.mat-radio-checked .material-symbols-outlined {
 .add-event-btn {
   width: 100%;
 }
+
+.editable-div {
+  border: 1px solid #9e9e9e;
+  padding: 10px;
+  min-height: 100px;
+  border-radius: 5px;
+  font-size: 14px;
+  outline: none;
+  direction: ltr;
+  /* overflow-y: auto; */
+}
+.toolbar {
+  display: flex;
+  gap: 8px;
+  /* margin-bottom: 8px; */
+  padding: 5px 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border: 1px solid #9e9e9e;
+}
+
+.quill-editor {
+  font-size: 16px;
+  width: 100%;
+  background: #fff;
+}

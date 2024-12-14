@@ -1,0 +1,85 @@
+<div class="main-container">
+  <div *ngIf="isLoading" class="loading-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <!-- Skills Section -->
+  <div class="skills-container" *ngIf="!isLoading">
+    <div class="skill-head">Add Skill</div>
+    <div class="skills-sections">
+      <!-- Left Container -->
+      <div class="left-container">
+        <div class="add-description">Enter skill name below to add it</div>
+        <mat-form-field appearance="outline" style="width: 80%">
+          <mat-label>Skill Name</mat-label>
+          <input
+            matInput
+            [(ngModel)]="skillPayload.name"
+            placeholder="Enter skill name"
+          />
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="addSkill()"
+          class="add-skill-btn"
+        >
+          Add Skill
+        </button>
+      </div>
+
+      <!-- Right Container -->
+      <div class="right-container">
+        <div class="table-header">
+          <div class="table-title">Skills</div>
+          <div class="table-count">Total Skills: {{ skills.length }}</div>
+        </div>
+
+        <table
+          mat-table
+          [dataSource]="skills"
+          class="mat-elevation-z8"
+          style="width: 100%"
+          *ngIf="skills.length > 0"
+        >
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>ID</th>
+            <td mat-cell *matCellDef="let skill">{{ skill.id }}</td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let skill">{{ skill.name }}</td>
+          </ng-container>
+
+          <!-- Action Column -->
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef class="action-column">
+              Action
+            </th>
+            <td mat-cell *matCellDef="let skill" class="action-column">
+              <button mat-button color="warn">Delete</button>
+            </td>
+          </ng-container>
+
+          <!-- Table Header and Rows -->
+          <tr mat-header-row *matHeaderRowDef="['id', 'name', 'action']"></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: ['id', 'name', 'action']"
+          ></tr>
+        </table>
+
+        <!-- No Skills Message -->
+        <div
+          *ngIf="skills.length === 0"
+          style="text-align: center; margin-top: 20px"
+        >
+          No skills available
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -7,6 +7,7 @@ import { UserService } from "../../../user/service/user.service";
 import { DOCUMENT } from "@angular/common";
 import { EventService } from "../../../host/service/event.service";
 import { Subscription } from "rxjs";
+import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 
 @Component({
   selector: "app-event-details",
@@ -22,6 +23,8 @@ export class EventDetailsComponent {
 
   targetRoute: any;
 
+  descriptionHtml: SafeHtml = "";
+
   private subscriptions = new Subscription();
 
   constructor(
@@ -32,7 +35,8 @@ export class EventDetailsComponent {
     private masterService: MasterService,
     private eventService: EventService,
     private userService: UserService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit() {
@@ -50,8 +54,10 @@ export class EventDetailsComponent {
   getEventDetails(guid: any) {
     this.eventService.getEventDetail(guid).subscribe((data: any) => {
       this.eventDetails = data;
-      console.log(this.eventDetails);
       this.isLoading = false;
+      this.descriptionHtml = this.sanitizer.bypassSecurityTrustHtml(
+        this.eventDetails[0]?.description || "-"
+      );
     });
   }
 

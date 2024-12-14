@@ -32,6 +32,18 @@ export class MasterService {
     return this.http.get(`${this.baseUrl}Master/GetUserType`);
   }
 
+  addCategory(payload: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}Master/AddCategory`, payload);
+  }
+
+  addOrganization(payload: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}Master/AddOrganisation`, payload);
+  }
+
+  addSkill(payload: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}Master/AddSkill`, payload);
+  }
+
   // getSectionByClassId(classId: number) {
   //   return this.http.get(
   //     `${this.baseUrl}Master/GetSectionByClassId?classId=${classId}`

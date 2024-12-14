@@ -1,7 +1,7 @@
 import { Component, HostListener, Inject } from "@angular/core";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { Router } from "@angular/router";
+import { NavigationEnd, Router } from "@angular/router";
 import { MasterService } from "../../../service/master.service";
 import { UserService } from "../../service/user.service";
 import { UserPayload } from "../../../../shared/model/user.payload";
@@ -19,6 +19,11 @@ export class DashboardComponent {
 
   userRole: String | null = null;
 
+  firstName: string = "";
+  email: string = "";
+
+  activeMenuItem: string = "";
+
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private router: Router,
@@ -30,6 +35,29 @@ export class DashboardComponent {
 
   ngOnInit() {
     this.userRole = localStorage.getItem("role");
+    this.firstName = localStorage.getItem("firstName") || "User";
+    this.email = localStorage.getItem("email") || "Email";
+
+    // Subscribe to router events
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.setActiveMenuItemFromRoute(event.urlAfterRedirects);
+      }
+    });
+
+    // Initialize active menu item based on current route
+    this.setActiveMenuItemFromRoute(this.router.url);
+  }
+
+  // Set active menu item based on the route
+  private setActiveMenuItemFromRoute(url: string): void {
+    const routeFragment = url.split("/").pop() || "";
+    this.activeMenuItem = routeFragment;
+  }
+
+  // Method to set the active menu item
+  setActiveMenuItem(item: string): void {
+    this.activeMenuItem = item;
   }
 
   showNotification(message: string): void {

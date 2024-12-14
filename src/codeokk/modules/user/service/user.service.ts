@@ -35,6 +35,10 @@ export class UserService {
     return this.http.get(`${this.baseUrl}User/GetAllUserId`);
   }
 
+  getAllUser() {
+    return this.http.get(`${this.baseUrl}User/GetAllUser`);
+  }
+
   // New method for login
   login(userId: string, password: string): Observable<any> {
     const url = `${this.baseUrl}Auth/Login`;

@@ -15,6 +15,9 @@ export class HeaderComponent implements OnInit {
 
   userRole: string | null = null;
 
+  firstName: string = "";
+  email: string = "";
+
   constructor(
     private router: Router,
     private dialog: MatDialog,
@@ -23,6 +26,8 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.userRole = localStorage.getItem("role");
+    this.firstName = localStorage.getItem("firstName") || "User";
+    this.email = localStorage.getItem("email") || "Email";
   }
 
   // Listener for clicks anywhere on the document

@@ -1,0 +1,93 @@
+<div class="main-container">
+  <div *ngIf="isLoading" class="loading-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <!-- Organization Section -->
+  <div class="organization-container" *ngIf="!isLoading">
+    <div class="organization-head">Add Organization</div>
+    <div class="organization-sections">
+      <!-- Left Container -->
+      <div class="left-container">
+        <div class="add-description">
+          Enter organization name below to add it
+        </div>
+        <mat-form-field appearance="outline" style="width: 80%">
+          <mat-label>Organization Name</mat-label>
+          <input
+            matInput
+            [(ngModel)]="organizationPayload.name"
+            placeholder="Enter Organization name"
+          />
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="addOrganization()"
+          class="add-organization-btn"
+        >
+          Add Orgainzation
+        </button>
+      </div>
+
+      <!-- Right Container -->
+      <div class="right-container">
+        <div class="table-header">
+          <div class="table-title">Organizations</div>
+          <div class="table-count">
+            Total Organizations: {{ organizations.length }}
+          </div>
+        </div>
+
+        <table
+          mat-table
+          [dataSource]="organizations"
+          class="mat-elevation-z8"
+          style="width: 100%"
+          *ngIf="organizations.length > 0"
+        >
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>ID</th>
+            <td mat-cell *matCellDef="let organization">
+              {{ organization.id }}
+            </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let organization">
+              {{ organization.name }}
+            </td>
+          </ng-container>
+
+          <!-- Action Column -->
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef class="action-column">
+              Action
+            </th>
+            <td mat-cell *matCellDef="let organization" class="action-column">
+              <button mat-button color="warn">Delete</button>
+            </td>
+          </ng-container>
+
+          <!-- Table Header and Rows -->
+          <tr mat-header-row *matHeaderRowDef="['id', 'name', 'action']"></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: ['id', 'name', 'action']"
+          ></tr>
+        </table>
+
+        <!-- No Skills Message -->
+        <div
+          *ngIf="organizations.length === 0"
+          style="text-align: center; margin-top: 20px"
+        >
+          No Organizations available
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

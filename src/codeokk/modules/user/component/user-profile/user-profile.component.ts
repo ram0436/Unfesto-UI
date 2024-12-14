@@ -27,6 +27,9 @@ export class UserProfileComponent {
   purposes: any[] = [];
   userTypes: any[] = [];
 
+  firstName: string | null = "";
+  email: string | null = "";
+
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private router: Router,
@@ -42,6 +45,8 @@ export class UserProfileComponent {
     this.getAllPurposes();
     this.getAllUserTypes();
     this.userRole = localStorage.getItem("role");
+    this.firstName = localStorage.getItem("firstName");
+    this.email = localStorage.getItem("email");
   }
 
   getAllColleges() {
