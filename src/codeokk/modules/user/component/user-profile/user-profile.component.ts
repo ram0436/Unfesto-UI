@@ -119,7 +119,6 @@ export class UserProfileComponent {
   }
 
   addUser(): void {
-    console.log(this.userPayload);
     this.userService.addUser(this.userPayload).subscribe((response) => {
       this.showNotification("User Added Succesfully");
     });

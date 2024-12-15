@@ -41,7 +41,6 @@ export class LoginComponent {
     this.userService
       .login(this.username, this.password)
       .subscribe((data: any) => {
-        console.log(data);
         localStorage.setItem("role", data.role);
         localStorage.setItem("authToken", data.authToken);
         localStorage.setItem("user_Id", data.user_Id);

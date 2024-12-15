@@ -50,7 +50,7 @@ export class AuthGuard implements CanActivate {
     ];
 
     // Add dynamic routes using regex
-    const dynamicRoutes = [/^\/event\/details\/\d+$/];
+    const dynamicRoutes = [/^\/event\/details\/[a-f0-9-]+$/i];
 
     const requestedRoute = state.url;
 
