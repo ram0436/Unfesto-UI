@@ -54,7 +54,6 @@ export class EventDetailsComponent {
   getEventDetails(guid: any) {
     this.eventService.getEventDetail(guid).subscribe((data: any) => {
       this.eventDetails = data;
-      console.log(this.eventDetails);
       this.isLoading = false;
       this.descriptionHtml = this.sanitizer.bypassSecurityTrustHtml(
         this.eventDetails[0]?.description || "-"
