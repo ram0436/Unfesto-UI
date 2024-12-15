@@ -29,6 +29,7 @@ import { AddSkillComponent } from "./component/add-skill/add-skill.component";
 import { AddOrganizationComponent } from "./component/add-organization/add-organization.component";
 import { AdminDashboardComponent } from "./component/admin-dashboard/admin-dashboard.component";
 import { MatTableModule } from "@angular/material/table";
+import { MyRegisterationsComponent } from "./component/my-registerations/my-registerations.component";
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { MatTableModule } from "@angular/material/table";
     AddSkillComponent,
     AddOrganizationComponent,
     AdminDashboardComponent,
+    MyRegisterationsComponent,
   ],
   imports: [
     SharedModule,

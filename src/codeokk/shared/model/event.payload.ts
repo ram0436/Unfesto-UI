@@ -1,8 +1,8 @@
 export class EventPayload {
   // Metadata
-  createdBy: number = 1;
+  createdBy: number = 0;
   createdOn: string = new Date().toISOString();
-  modifiedBy: number = 1;
+  modifiedBy: number = 0;
   modifiedOn: string = new Date().toISOString();
   id: number = 0;
 

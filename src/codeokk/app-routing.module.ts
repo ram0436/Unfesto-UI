@@ -7,11 +7,10 @@ import { SignupComponent } from "./modules/signup/signup.component";
 
 const routes: Routes = [
   {
-    path: "dashboard",
+    path: "",
     component: HomeComponent,
-    canActivate: [AuthGuard],
   },
-  { path: "", redirectTo: "/dashboard", pathMatch: "full" },
+  // { path: "", redirectTo: "/dashboard", pathMatch: "full" },
   {
     path: "login",
     component: LoginComponent,
@@ -28,9 +27,9 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: "host",
+    path: "event",
     loadChildren: () =>
-      import("./modules/host/host.module").then((m) => m.HostModule),
+      import("./modules/event/event.module").then((m) => m.EventModule),
     canActivate: [AuthGuard],
   },
 ];

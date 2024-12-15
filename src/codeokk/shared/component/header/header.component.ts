@@ -17,6 +17,8 @@ export class HeaderComponent implements OnInit {
 
   firstName: string = "";
   email: string = "";
+  currentActiveItem = "";
+  isLoggedIn = false;
 
   constructor(
     private router: Router,
@@ -25,9 +27,26 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userRole = localStorage.getItem("role");
+    this.userRole = localStorage.getItem("role") || "User";
     this.firstName = localStorage.getItem("firstName") || "User";
     this.email = localStorage.getItem("email") || "Email";
+    this.checkAuthToken();
+  }
+
+  checkAuthToken() {
+    this.isLoggedIn = !!localStorage.getItem("authToken");
+  }
+
+  authAction() {
+    if (this.isLoggedIn) {
+      this.logout();
+    } else {
+      this.login();
+    }
+  }
+
+  setActiveItem(item: string) {
+    this.currentActiveItem = item;
   }
 
   // Listener for clicks anywhere on the document
@@ -56,5 +75,9 @@ export class HeaderComponent implements OnInit {
 
     // Navigate to the home page
     this.router.navigate(["/"]).then(() => {});
+  }
+
+  login() {
+    this.router.navigate(["/login"]);
   }
 }

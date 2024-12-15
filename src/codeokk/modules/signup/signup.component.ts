@@ -6,6 +6,8 @@ import { MasterService } from "../service/master.service";
 import { UserService } from "../user/service/user.service";
 import { UserPayload } from "../../shared/model/user.payload";
 import { DOCUMENT } from "@angular/common";
+import { map, Observable, startWith } from "rxjs";
+import { FormControl } from "@angular/forms";
 
 @Component({
   selector: "app-signup",
@@ -26,6 +28,13 @@ export class SignupComponent {
   purposes: any[] = [];
   userTypes: any[] = [];
 
+  courseId: any;
+  courseControl = new FormControl({});
+  filteredCourses!: Observable<{ id: number; name: string }[]>;
+
+  collegeControl = new FormControl();
+  filteredColleges!: Observable<{ id: number; name: string }[]>;
+
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private router: Router,
@@ -42,16 +51,69 @@ export class SignupComponent {
     this.getAllUserTypes();
   }
 
-  getAllColleges() {
-    this.masterService.getCollege().subscribe((data: any) => {
-      this.colleges = data;
-    });
+  handleCourse(course: any) {
+    this.userPayload.courseId = course.id;
+    this.courseControl.setValue(course);
+  }
+
+  displayCourse(course: any): string {
+    return course ? course.name : "";
+  }
+
+  filterCourses(value: any): { id: number; name: string }[] {
+    const filterValue =
+      typeof value === "string"
+        ? value.toLowerCase()
+        : value?.name?.toLowerCase();
+    return this.courses.filter((course) =>
+      course.name.toLowerCase().includes(filterValue)
+    );
+  }
+
+  getFilteredCourses() {
+    this.filteredCourses = this.courseControl.valueChanges.pipe(
+      startWith(""),
+      map((value) => this.filterCourses(value || ""))
+    );
   }
 
   getAllCourses() {
     this.masterService.getCourse().subscribe((data: any) => {
       this.courses = data;
+      this.filteredCourses = this.courseControl.valueChanges.pipe(
+        startWith(""),
+        map((value) => this.filterCourses(value || ""))
+      );
     });
+  }
+
+  getAllColleges() {
+    this.masterService.getCollege().subscribe((data: any) => {
+      this.colleges = data;
+      this.filteredColleges = this.collegeControl.valueChanges.pipe(
+        startWith(""),
+        map((value) => this.filterColleges(value || ""))
+      );
+    });
+  }
+
+  filterColleges(value: any): { id: number; name: string }[] {
+    const filterValue =
+      typeof value === "string"
+        ? value.toLowerCase()
+        : value?.name?.toLowerCase();
+    return this.colleges.filter((college) =>
+      college.name.toLowerCase().includes(filterValue)
+    );
+  }
+
+  handleCollege(selectedCollege: any): void {
+    this.userPayload.collegeId = selectedCollege.id;
+    this.collegeControl.setValue(selectedCollege);
+  }
+
+  displayCollege(college: any): string {
+    return college ? college.name : "";
   }
 
   getAllPurposes() {
@@ -139,10 +201,6 @@ export class SignupComponent {
       this.userPayload.userTypeId,
       this.userPayload.courseId,
       this.userPayload.collegeId,
-      this.userPayload.purposeId,
-      this.userPayload.pincode,
-      this.userPayload.city,
-      this.userPayload.state,
     ];
 
     // Return false if any field is empty or null

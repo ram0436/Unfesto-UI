@@ -1,0 +1,124 @@
+.compete-container {
+  margin: 120px 0px;
+}
+
+.host-container {
+  margin: 0px 50px;
+  padding: 50px 100px;
+  background-color: #fdf9f5;
+  border-radius: 20px;
+}
+
+.events-container {
+  padding: 50px 100px;
+  min-height: 50vh;
+}
+
+.container-title {
+  color: #009afe;
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 56px;
+  margin-bottom: 25px;
+  margin-top: 50px;
+}
+
+.container-description {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.see-events-btn {
+  margin-top: 30px;
+  background-color: #009afe;
+  color: #fff;
+  padding: 15px 25px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.section-title .emoji {
+  font-size: 24px;
+}
+
+.section-subtitle {
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.highlight {
+  color: #f15a24;
+  font-weight: bold;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.card-link {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.info-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: center;
+  color: #000000;
+  cursor: pointer;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #000;
+  font-weight: bold;
+}
+
+.card-icon {
+  font-size: 34px; /* Adjust icon size */
+  color: #f15a24; /* Adjust icon color */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 12px;
+  background-color: #e3f0fe;
+  border-radius: 8px;
+}

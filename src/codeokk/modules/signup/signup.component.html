@@ -80,14 +80,18 @@
               />
             </mat-form-field>
           </div>
-          <div class="input-field">
-            <div class="input-field-title">Gender*</div>
-            <mat-radio-group class="d-flex" [(ngModel)]="userPayload.gender">
-              <mat-radio-button value="male">Male</mat-radio-button>
-              <mat-radio-button value="female">Female</mat-radio-button>
-              <mat-radio-button value="other">Other</mat-radio-button>
-            </mat-radio-group>
+          <div class="form-field">
+            <label class="section-label">Gender *</label>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Gender</mat-label>
+              <mat-select [(ngModel)]="userPayload.gender">
+                <mat-option value="male">Male</mat-option>
+                <mat-option value="female">Female</mat-option>
+                <mat-option value="other">Other</mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
+
           <div class="form-field">
             <label class="section-label">User Type *</label>
             <mat-form-field appearance="outline" class="full-width">
@@ -103,28 +107,55 @@
             <label class="section-label">Course *</label>
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>Course</mat-label>
-              <mat-select [(ngModel)]="userPayload.courseId">
-                <mat-option *ngFor="let course of courses" [value]="course.id">
+              <input
+                type="text"
+                placeholder="Select your course"
+                aria-label="Number"
+                matInput
+                [formControl]="courseControl"
+                [matAutocomplete]="auto"
+              />
+              <mat-autocomplete
+                autoActiveFirstOption
+                #auto="matAutocomplete"
+                (optionSelected)="handleCourse($event.option.value)"
+                [displayWith]="displayCourse"
+              >
+                <mat-option
+                  *ngFor="let course of filteredCourses | async"
+                  [value]="course"
+                >
                   {{ course.name }}
                 </mat-option>
-              </mat-select>
+              </mat-autocomplete>
             </mat-form-field>
           </div>
           <div class="form-field">
             <label class="section-label">College *</label>
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>College</mat-label>
-              <mat-select [(ngModel)]="userPayload.collegeId">
+              <input
+                matInput
+                [formControl]="collegeControl"
+                [matAutocomplete]="collegeAuto"
+                placeholder="Type to filter colleges"
+              />
+              <mat-autocomplete
+                #collegeAuto="matAutocomplete"
+                (optionSelected)="handleCollege($event.option.value)"
+                [displayWith]="displayCollege"
+              >
                 <mat-option
-                  *ngFor="let college of colleges"
-                  [value]="college.id"
+                  *ngFor="let college of filteredColleges | async"
+                  [value]="college"
                 >
                   {{ college.name }}
                 </mat-option>
-              </mat-select>
+              </mat-autocomplete>
             </mat-form-field>
           </div>
-          <div class="form-field">
+
+          <!-- <div class="form-field">
             <label class="section-label">Purpose *</label>
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>Purpose</mat-label>
@@ -137,8 +168,8 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
-          </div>
-          <div class="form-field">
+          </div> -->
+          <!-- <div class="form-field">
             <label class="section-label">Location Details *</label>
             <div class="location-fields">
               <div class="form-field">
@@ -178,7 +209,7 @@
                 </mat-form-field>
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="form-field">
             <button
               mat-raised-button

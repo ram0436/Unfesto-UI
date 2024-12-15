@@ -8,6 +8,7 @@ import { AddSkillComponent } from "./component/add-skill/add-skill.component";
 import { AddCategoryComponent } from "./component/add-category/add-category.component";
 import { AddOrganizationComponent } from "./component/add-organization/add-organization.component";
 import { AdminDashboardComponent } from "./component/admin-dashboard/admin-dashboard.component";
+import { MyRegisterationsComponent } from "./component/my-registerations/my-registerations.component";
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
       { path: "add-category", component: AddCategoryComponent },
       { path: "add-organization", component: AddOrganizationComponent },
       { path: "admin-panel", component: AdminDashboardComponent },
+      { path: "my-registerations", component: MyRegisterationsComponent },
       { path: "", redirectTo: "my-profile", pathMatch: "full" },
     ],
   },

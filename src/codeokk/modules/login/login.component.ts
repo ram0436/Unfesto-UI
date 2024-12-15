@@ -49,7 +49,7 @@ export class LoginComponent {
         localStorage.setItem("mobileNo", data.mobileNo);
         localStorage.setItem("email", data.email);
         // this.userService.setData("login");
-        this.router.navigate(["dashboard"]);
+        this.router.navigate([""]);
         this.showNotification("Logged in successfully");
       });
   }

@@ -52,6 +52,19 @@ export class EventService {
     return this.http.post(`${this.baseUrl}Event/AddEvent`, payload);
   }
 
+  addEventUserRegisteration(payload: any): Observable<any> {
+    return this.http.post(
+      `${this.baseUrl}Event/AddEventUserRegistration`,
+      payload
+    );
+  }
+
+  getMyEventRegisteration(userId: number) {
+    return this.http.get(
+      `${this.baseUrl}Event/GetMyEventRegistration?userId=${userId}`
+    );
+  }
+
   getEventByUserId(userId: number) {
     return this.http.get(
       `${this.baseUrl}Event/GetEventByUserId?userId=${userId}`

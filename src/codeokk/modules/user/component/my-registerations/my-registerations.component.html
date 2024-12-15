@@ -5,25 +5,9 @@
   </div>
   <!-- Profile Header -->
   <div class="listing-container" *ngIf="!isLoading">
-    <div class="listing-head">Manage App</div>
+    <div class="listing-head">My Registerations</div>
     <div class="listing-sections">
-      <div class="listings">
-        <div
-          class="listing-link"
-          [class.active]="selectedTab === 'events'"
-          (click)="selectTab('events')"
-        >
-          All Events
-        </div>
-        <div
-          class="listing-link"
-          [class.active]="selectedTab === 'users'"
-          (click)="selectTab('users')"
-        >
-          All Users
-        </div>
-      </div>
-      <div class="events-container" *ngIf="selectedTab === 'events'">
+      <div class="events-container">
         <div class="listing-stats">
           <div class="stats-heading">All Competition Stats</div>
           <div class="stat-boxes">
@@ -83,28 +67,19 @@
                   </div>
                   <div class="listing-date">
                     <span class="material-symbols-outlined date-icon"
-                      >calendar_month</span
+                      >domain</span
                     >
                     <span class="date-txt">
-                      {{ event.eventRegistrationList?.[0]?.registartionStartDateTime | date: 'dd MMM yyyy' || '-' }}
+                      {{ event.organisation || "-" }}
                     </span>
                   </div>
-                </div>
-                <div class="listing-collaborators">
-                  <div class="collaborator-heading">Collaborators:</div>
-                  <div
-                    *ngFor="let collaborator of event.eventCollaboratorList"
-                    class="collaborator"
-                  >
-                    {{ collaborator.userId || "-" }}
-                  </div>
-                  <div
-                    *ngIf="
-                      !event.eventCollaboratorList ||
-                      event.eventCollaboratorList.length === 0
-                    "
-                  >
-                    -
+                  <div class="listing-date">
+                    <span class="material-symbols-outlined date-icon"
+                      >language</span
+                    >
+                    <span class="date-txt">
+                      {{ event.websiteURL || "-" }}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -115,48 +90,6 @@
                 </span>
               </div>
             </a>
-          </div>
-        </div>
-      </div>
-      <div class="users-container" *ngIf="selectedTab === 'users'">
-        <div class="listing-filters">
-          <div class="search-listing">
-            <span class="material-symbols-outlined search-icon"> search </span>
-            <input type="text" placeholder="Search for users" />
-          </div>
-        </div>
-        <div class="listings-table">
-          <div *ngIf="users.length === 0" class="no-events">
-            No users found.
-          </div>
-          <div *ngFor="let user of users">
-            <div class="listing">
-              <div class="left-content">
-                <div class="listing-image">
-                  <img
-                    [src]="
-                      user.profilePicURL || 'https://via.placeholder.com/60'
-                    "
-                    alt="User Image"
-                  />
-                </div>
-                <div class="listing-info">
-                  <div class="listing-title">{{ user.name || "-" }}</div>
-                  <div class="listing-count">
-                    {{ user.email || "-" }}
-                  </div>
-                  <div class="listing-count">
-                    {{ user.mobileNo || "-" }}
-                  </div>
-                </div>
-              </div>
-              <div class="right-content">
-                <span class="material-symbols-outlined edit-icon"> edit </span>
-                <span class="material-symbols-outlined delete-icon">
-                  delete
-                </span>
-              </div>
-            </div>
           </div>
         </div>
       </div>

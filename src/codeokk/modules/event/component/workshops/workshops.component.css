@@ -365,3 +365,7 @@ mat-radio-button.mat-radio-checked .material-symbols-outlined {
   width: 100%;
   background: #fff;
 }
+
+.selected-skills {
+  margin-bottom: 10px;
+}

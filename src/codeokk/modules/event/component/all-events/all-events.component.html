@@ -1,0 +1,106 @@
+<div class="main-container">
+  <div *ngIf="isLoading" class="loading-spinner">
+    <!-- Loading Spinner or Text -->
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div class="listing-container" *ngIf="!isLoading">
+    <!-- Event List -->
+
+    <div class="events-lists">
+      <div
+        *ngFor="let event of events"
+        class="event"
+        [ngClass]="{ active: selectedEventGuid === event.tabRefGuid }"
+        (click)="selectEvent(event.tabRefGuid)"
+      >
+        <div class="event-logo">
+          <img [src]="event.eventLogoURL" alt="Event Logo" />
+        </div>
+        <div class="event-list-detail">
+          <div class="event-title">{{ event.title }}</div>
+          <div class="event-count">
+            Registration Count:
+            {{ event.eventRegistrationList[0]?.registrationCountLimit || 0 }}
+          </div>
+          <div class="event-list-date">
+            <span class="material-symbols-outlined date-icon"
+              >calendar_month</span
+            >
+            <span class="date-txt">
+              {{
+                event.eventRegistrationList[0]?.registartionStartDateTime
+                  | date : "mediumDate"
+              }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Event Details -->
+    <div class="event-details" *ngIf="eventDetails">
+      <div class="event-main-details">
+        <div class="main-top">
+          <div class="event-logo">
+            <img [src]="eventDetails.eventLogoURL" alt="Event Logo" />
+          </div>
+          <div class="event-names">
+            <a
+              [routerLink]="['/event/details', eventDetails.tabRefGuid]"
+              class="listing"
+              target="_blank"
+            >
+              <div class="event-title">{{ eventDetails.title }}</div>
+            </a>
+            <div class="event-organizer">{{ eventDetails.organisation }}</div>
+          </div>
+        </div>
+        <div class="main-bottom">
+          <div class="main-detail">
+            <span class="material-symbols-outlined detail-icon">language</span>
+            <span class="detail-name">
+              <a [href]="eventDetails.websiteURL" target="_blank">{{
+                eventDetails.websiteURL
+              }}</a>
+            </span>
+          </div>
+          <div class="main-detail">
+            <span class="material-symbols-outlined detail-icon"
+              >emoji_events</span
+            >
+            <span class="detail-name">{{ eventDetails.eventType }}</span>
+          </div>
+          <div class="main-detail">
+            <span class="material-symbols-outlined detail-icon">asterisk</span>
+            <span class="detail-name">{{ eventDetails.eventMode }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="event-register-details">
+        <div class="other-details">
+          <span class="material-symbols-outlined detail-icon">
+            calendar_month
+          </span>
+          <span class="material-symbols-outlined detail-icon"> favorite </span>
+        </div>
+        <div class="register-btn">
+          <button
+            mat-raised-button
+            color="primary"
+            class="user-register-btn"
+            (click)="addEventRegisteration()"
+          >
+            Register
+          </button>
+        </div>
+      </div>
+      <div class="event-description-details">
+        <div class="description-title">Description</div>
+        <div class="description">
+          <span [innerHTML]="eventDetails.description"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

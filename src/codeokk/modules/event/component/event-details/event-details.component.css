@@ -1,5 +1,5 @@
 .details-container {
-  padding: 40px 160px;
+  padding: 40px 0px;
   background-color: #f6f6f6;
   min-height: calc(100vh - 75px);
 }
@@ -8,6 +8,8 @@
   display: flex;
   gap: 20px;
   width: 100%;
+  margin: 0 auto;
+  max-width: 1200px;
 }
 
 .left-content {
@@ -127,12 +129,14 @@
 }
 
 .description {
-  font-size: 16px;
+  font-size: 15px;
   width: 100%;
   padding: 15px;
   border-radius: 5px;
   border: 1px solid #ddd;
   min-height: 200px;
+  word-wrap: break-word;
+  white-space: normal;
 }
 
 .right-content {
@@ -179,6 +183,7 @@
   margin-bottom: 20px;
   text-align: center;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .event-register-details {

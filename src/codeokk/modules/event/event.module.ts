@@ -13,16 +13,27 @@ import { MatChipsModule } from "@angular/material/chips";
 import { MatSelectModule } from "@angular/material/select";
 import { SharedModule } from "../../shared/shared.module";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-import { HostRoutingModule } from "./host-routing.module";
+import { EventRoutingModule } from "./event-routing.module";
 import { QuizzesComponent } from "./component/quizzes/quizzes.component";
 import { WorkshopsComponent } from "./component/workshops/workshops.component";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { EventDetailsComponent } from "./component/event-details/event-details.component";
 import { QuillModule } from "ngx-quill";
+import { AllEventsComponent } from "./component/all-events/all-events.component";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { CompeteComponent } from "./component/compete/compete.component";
+import { HostPageComponent } from "./component/host-page/host-page.component";
 
 @NgModule({
-  declarations: [QuizzesComponent, WorkshopsComponent, EventDetailsComponent],
+  declarations: [
+    QuizzesComponent,
+    WorkshopsComponent,
+    EventDetailsComponent,
+    AllEventsComponent,
+    CompeteComponent,
+    HostPageComponent,
+  ],
   imports: [
     SharedModule,
     CommonModule,
@@ -34,7 +45,7 @@ import { QuillModule } from "ngx-quill";
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    HostRoutingModule,
+    EventRoutingModule,
     MatOptionModule,
     MatChipsModule,
     CommonModule,
@@ -52,8 +63,9 @@ import { QuillModule } from "ngx-quill";
     MatProgressSpinnerModule,
     MatRadioModule,
     MatDatepickerModule,
+    MatAutocompleteModule,
     QuillModule.forRoot(),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class HostModule {}
+export class EventModule {}

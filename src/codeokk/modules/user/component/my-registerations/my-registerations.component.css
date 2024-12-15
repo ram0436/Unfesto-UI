@@ -129,7 +129,7 @@
 }
 
 .left-content .listing-image {
-  width: 100px;
+  width: 100px !important;
   height: 100px;
 }
 

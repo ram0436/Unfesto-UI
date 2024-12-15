@@ -19,59 +19,68 @@ export class AuthGuard implements CanActivate {
     const role = localStorage.getItem("role");
 
     const allowedAdminRoutes = [
-      "user/dashboard/add-skill",
-      "user/dashboard/admin",
-      "user/dashboard/add-category",
-      "user/dashboard/add-organization",
+      "/user/dashboard/add-skill",
+      "/user/dashboard/admin-panel",
+      "/user/dashboard/add-category",
+      "/user/dashboard/add-organization",
+      "/event/add-workshops",
+      "/event/host",
     ];
     const allowedParticipantRoutes = [
-      "user/dashboard/my-registerations",
-      "user/dashboard/certificates",
-      "user/dashboard/wishlist",
-      "user/dashboard/settings",
+      "/user/dashboard/my-registerations",
+      "/user/dashboard/certificates",
+      "/user/dashboard/wishlist",
     ];
-    const allowedOrganizerRoutes = ["user/dashboard/manage-listings"];
+    const allowedOrganizerRoutes = [
+      "/user/dashboard/manage-listings",
+      "/event/host",
+      "/event/add-workshops",
+    ];
     const commonRoutes = [
-      "user",
-      "login",
-      "host",
-      "host/workshops",
-      "dashboard",
-      "user/dashboard/settings",
-      "user/dashboard/my-profile",
+      "/user",
+      "/login",
+      "/signup",
+      "/event",
+      "/event/details/:id",
+      "/event/compete",
+      "/event/all-events",
+      "/dashboard",
+      "/user/dashboard/settings",
+      "/user/dashboard/my-profile",
     ];
 
-    const requestedRoute = route.routeConfig?.path || "";
+    // Add dynamic routes using regex
+    const dynamicRoutes = [/^\/event\/details\/\d+$/];
+
+    const requestedRoute = state.url;
 
     if (authToken) {
+      // Common routes accessible to all roles
       if (commonRoutes.includes(requestedRoute)) {
         return true;
       }
 
+      // Check dynamic routes
+      if (dynamicRoutes.some((pattern) => pattern.test(requestedRoute))) {
+        return true;
+      }
+
+      // Role-specific routing
       switch (role) {
         case "SuperAdmin":
-          if (
-            allowedAdminRoutes.includes(requestedRoute) ||
-            commonRoutes.includes(requestedRoute)
-          ) {
+          if (allowedAdminRoutes.includes(requestedRoute)) {
             return true;
           }
           break;
 
         case "Participant":
-          if (
-            allowedParticipantRoutes.includes(requestedRoute) ||
-            commonRoutes.includes(requestedRoute)
-          ) {
+          if (allowedParticipantRoutes.includes(requestedRoute)) {
             return true;
           }
           break;
 
         case "Organizer":
-          if (
-            allowedOrganizerRoutes.includes(requestedRoute) ||
-            commonRoutes.includes(requestedRoute)
-          ) {
+          if (allowedOrganizerRoutes.includes(requestedRoute)) {
             return true;
           }
           break;
@@ -80,10 +89,12 @@ export class AuthGuard implements CanActivate {
           break;
       }
 
-      this.router.navigate(["/dashboard"]); // Redirect to dashboard for unauthorized access
+      // If route is not accessible, redirect based on role
+      this.router.navigate(["/dashboard"]);
       return false;
     } else {
-      this.router.navigate(["/login"]); // Redirect to login if not authenticated
+      // Redirect to login if no auth token
+      this.router.navigate(["/login"]);
       return false;
     }
   }

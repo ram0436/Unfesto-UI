@@ -6,7 +6,7 @@ import { MasterService } from "../../../service/master.service";
 import { UserService } from "../../service/user.service";
 import { UserPayload } from "../../../../shared/model/user.payload";
 import { DOCUMENT } from "@angular/common";
-import { EventService } from "../../../host/service/event.service";
+import { EventService } from "../../../event/service/event.service";
 
 @Component({
   selector: "app-manage-listings",
