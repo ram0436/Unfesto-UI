@@ -190,7 +190,7 @@
       </div>
 
       <!-- Skills -->
-      <div class="form-field">
+      <!-- <div class="form-field">
         <label class="section-label">Skills *</label>
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Skills</mat-label>
@@ -199,6 +199,44 @@
               {{ skill.name }}
             </mat-option>
           </mat-select>
+        </mat-form-field>
+      </div> -->
+
+      <div class="form-field">
+        <label class="section-label">Skills *</label>
+        <div class="selected-skills">
+          <mat-chip-list #chipList style="display: flex; gap: 10px">
+            <mat-chip
+              *ngFor="let skill of selectedSkills"
+              [removable]="true"
+              (removed)="removeSkill(skill)"
+            >
+              {{ skill.name }}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Skills</mat-label>
+
+          <input
+            matInput
+            [formControl]="skillControl"
+            [matAutocomplete]="skillAuto"
+            placeholder="Enter Skill Name"
+          />
+          <mat-autocomplete
+            #skillAuto="matAutocomplete"
+            (optionSelected)="handleSkill($event.option.value)"
+            [displayWith]="displaySkill"
+          >
+            <mat-option
+              *ngFor="let skill of filteredSkills | async"
+              [value]="skill"
+            >
+              {{ skill.name }}
+            </mat-option>
+          </mat-autocomplete>
         </mat-form-field>
       </div>
 

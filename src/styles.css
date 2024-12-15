@@ -4,10 +4,19 @@
 }
 
 * {
-  /* margin: 0px;
-  padding: 0px; */
+  margin: 0px;
+  padding: 0px;
   box-sizing: border-box;
   font-family: "Montserrat", serif;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
 }
 
 html {

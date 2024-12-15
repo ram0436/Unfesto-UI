@@ -46,9 +46,10 @@
           No events found.
         </div>
         <div *ngFor="let event of events">
-          <div
-            [routerLink]="['/host/details', event.tabRefGuid]"
+          <a
+            [routerLink]="['/event/details', event.tabRefGuid]"
             class="listing"
+            target="_blank"
           >
             <div class="left-content">
               <div class="listing-image">
@@ -96,7 +97,7 @@
                 delete
               </span>
             </div>
-          </div>
+          </a>
         </div>
       </div>
     </div>

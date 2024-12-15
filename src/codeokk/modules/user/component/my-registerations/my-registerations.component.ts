@@ -9,11 +9,11 @@ import { DOCUMENT } from "@angular/common";
 import { EventService } from "../../../event/service/event.service";
 
 @Component({
-  selector: "app-admin-dashboard",
-  templateUrl: "./admin-dashboard.component.html",
-  styleUrl: "./admin-dashboard.component.css",
+  selector: "app-my-registerations",
+  templateUrl: "./my-registerations.component.html",
+  styleUrl: "./my-registerations.component.css",
 })
-export class AdminDashboardComponent {
+export class MyRegisterationsComponent {
   dialogRef: MatDialogRef<any> | null = null;
 
   events: any[] = [];
@@ -34,35 +34,17 @@ export class AdminDashboardComponent {
   ) {}
 
   ngOnInit() {
+    this.getUserRegisterations();
+  }
+
+  getUserRegisterations() {
     const userId = localStorage.getItem("user_Id");
-    this.getAllEvents();
-    this.getAllUsers();
-  }
-
-  openInNewTab(tabRefGuid: string): void {
-    const url = this.router.serializeUrl(
-      this.router.createUrlTree(["/event/details", tabRefGuid])
-    );
-    const fullUrl = `${window.location.origin}${url}`;
-    window.open(fullUrl, "_blank");
-  }
-
-  selectTab(tab: string): void {
-    this.selectedTab = tab;
-  }
-
-  getAllEvents() {
-    this.eventService.getAllEvent().subscribe((data: any) => {
-      this.events = data;
-      this.isLoading = false;
-    });
-  }
-
-  getAllUsers() {
-    this.userService.getAllUser().subscribe((data: any) => {
-      this.users = data;
-      this.isLoading = false;
-    });
+    this.eventService
+      .getMyEventRegisteration(Number(userId))
+      .subscribe((data: any) => {
+        this.events = data;
+        this.isLoading = false;
+      });
   }
 
   showNotification(message: string): void {

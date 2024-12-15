@@ -10,10 +10,11 @@ import { DOCUMENT } from "@angular/common";
 import { MasterService } from "../../../service/master.service";
 import { provideNativeDateAdapter } from "@angular/material/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { forkJoin, Subscription } from "rxjs";
+import { forkJoin, map, Observable, startWith, Subscription } from "rxjs";
 import { EventService } from "../../service/event.service";
 import { UserService } from "../../../user/service/user.service";
 import { EventPayload } from "../../../../shared/model/event.payload";
+import { FormControl } from "@angular/forms";
 
 @Component({
   selector: "app-workshops",
@@ -51,6 +52,9 @@ export class WorkshopsComponent implements OnInit {
   registerationStartDate: Date | null = null;
   registerationEndDate: Date | null = null;
 
+  skillControl = new FormControl();
+  filteredSkills!: Observable<any[]>;
+
   editorModules = {
     toolbar: [
       ["bold", "italic", "underline"],
@@ -59,6 +63,9 @@ export class WorkshopsComponent implements OnInit {
       [{ align: "" }, { align: "center" }],
     ],
   };
+
+  categorySearch: string = "";
+  filteredCategories: any[] = [...this.categories];
 
   private subscriptions: Subscription = new Subscription();
 
@@ -73,20 +80,19 @@ export class WorkshopsComponent implements OnInit {
 
   onContentChange(content: string) {
     this.eventPayload.description = content;
-    console.log("Updated Description:", this.eventPayload.description);
   }
 
   ngOnInit() {
     // Combine all subscriptions into a single observable
     forkJoin([
-      this.eventService.getCategory(),
-      this.eventService.getEventMode(),
-      this.eventService.getEventType(),
-      this.eventService.getOrganisation(),
-      this.eventService.getParticipationType(),
-      this.eventService.getSkill(),
-      this.eventService.getVisibility(),
-      this.userService.getAllUserId(),
+      this.getAllCategories(),
+      this.getAllEventModes(),
+      this.getAllEventTypes(),
+      this.getAllOrganisations(),
+      this.getAllParticipationTypes(),
+      this.getAllSkills(),
+      this.getAllVisibilities(),
+      this.getAllUsers(),
     ]).subscribe(
       ([
         categories,
@@ -142,7 +148,6 @@ export class WorkshopsComponent implements OnInit {
   getAllEventModes() {
     this.eventService.getEventMode().subscribe((data: any) => {
       this.eventModes = data;
-      console.log(this.eventModes);
     });
   }
 
@@ -167,7 +172,42 @@ export class WorkshopsComponent implements OnInit {
   getAllSkills() {
     this.eventService.getSkill().subscribe((data: any) => {
       this.skills = data;
+      this.filteredSkills = this.skillControl.valueChanges.pipe(
+        startWith(""),
+        map((value) => this.filterSkills(value || ""))
+      );
     });
+  }
+
+  filterSkills(value: any): { id: number; name: string }[] {
+    const filterValue =
+      typeof value === "string"
+        ? value.toLowerCase()
+        : value?.name?.toLowerCase();
+    return this.skills.filter((skill) =>
+      skill.name.toLowerCase().includes(filterValue)
+    );
+  }
+
+  // Handle selected skill
+  handleSkill(skill: any) {
+    if (!this.selectedSkills.includes(skill)) {
+      this.selectedSkills.push(skill);
+    }
+    this.skillControl.setValue("");
+  }
+
+  // Display function for autocomplete
+  displaySkill(skill: any): string {
+    return skill ? skill.name : "";
+  }
+
+  // Remove a skill from the selected list
+  removeSkill(skill: any) {
+    const index = this.selectedSkills.indexOf(skill);
+    if (index >= 0) {
+      this.selectedSkills.splice(index, 1);
+    }
   }
 
   getAllVisibilities() {
@@ -271,6 +311,9 @@ export class WorkshopsComponent implements OnInit {
   }
 
   addEvent(): void {
+    // Retrieve userId from localStorage
+    const userId = parseInt(localStorage.getItem("user_Id") || "0", 10);
+
     // Map selected categories and skills
     this.eventPayload.categoryList = this.selectedCategories.map(
       (cat: any) => ({
@@ -287,19 +330,23 @@ export class WorkshopsComponent implements OnInit {
     // Map selected collaborators
     this.eventPayload.eventCollaboratorList = this.selectedCollaborators.map(
       (collaborator: any) => ({
-        createdBy: 0,
+        createdBy: userId,
         createdOn: new Date().toISOString(),
-        modifiedBy: 0,
+        modifiedBy: userId,
         modifiedOn: new Date().toISOString(),
         id: 0,
         userId: collaborator.userId,
       })
     );
 
-    // console.log(JSON.stringify(this.eventPayload, null, 2));
+    // Set createdBy and modifiedBy in main EventPayload
+    this.eventPayload.createdBy = userId;
+    this.eventPayload.modifiedBy = userId;
+    this.eventPayload.createdOn = new Date().toISOString();
+    this.eventPayload.modifiedOn = new Date().toISOString();
 
     this.eventService.addEvent(this.eventPayload).subscribe((response) => {
-      this.showNotification("Event Added Succesfully");
+      this.showNotification("Event Added Successfully");
     });
   }
 

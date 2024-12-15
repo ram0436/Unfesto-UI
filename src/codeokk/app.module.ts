@@ -66,6 +66,7 @@ import { QuillModule } from "ngx-quill";
     MatProgressBarModule,
     MatRadioModule,
     MatRadioButton,
+    MatAutocompleteModule,
     QuillModule.forRoot(),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

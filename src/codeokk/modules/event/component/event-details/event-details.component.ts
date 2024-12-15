@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { MasterService } from "../../../service/master.service";
 import { UserService } from "../../../user/service/user.service";
 import { DOCUMENT } from "@angular/common";
-import { EventService } from "../../../host/service/event.service";
+import { EventService } from "../../service/event.service";
 import { Subscription } from "rxjs";
 import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 
@@ -54,10 +54,40 @@ export class EventDetailsComponent {
   getEventDetails(guid: any) {
     this.eventService.getEventDetail(guid).subscribe((data: any) => {
       this.eventDetails = data;
+      console.log(this.eventDetails);
       this.isLoading = false;
       this.descriptionHtml = this.sanitizer.bypassSecurityTrustHtml(
         this.eventDetails[0]?.description || "-"
       );
+    });
+  }
+
+  addEventRegisteration() {
+    // Fetch the userId from localStorage
+    const userId = localStorage.getItem("user_Id");
+
+    if (!this.eventDetails[0]?.eventId) {
+      this.showNotification("Cannot register event at the moment");
+      return;
+    }
+
+    const payload = {
+      createdBy: Number(userId),
+      createdOn: new Date().toISOString(),
+      modifiedBy: Number(userId),
+      modifiedOn: new Date().toISOString(),
+      id: 0,
+      eventId: this.eventDetails[0]?.eventId,
+      userId: Number(userId),
+    };
+
+    this.eventService.addEventUserRegisteration(payload).subscribe({
+      next: (response) => {
+        this.showNotification("Event Registered Successfully");
+      },
+      error: (err) => {
+        // console.error(err);
+      },
     });
   }
 
