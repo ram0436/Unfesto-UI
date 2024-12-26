@@ -506,7 +506,7 @@ export class WorkshopsComponent implements OnInit {
     this.eventPayload.createdOn = new Date().toISOString();
     this.eventPayload.modifiedOn = new Date().toISOString();
 
-    console.log(JSON.stringify(this.eventPayload, null, 2));
+    // console.log(JSON.stringify(this.eventPayload, null, 2));
 
     this.eventService.addEvent(this.eventPayload).subscribe((response) => {
       this.showNotification("Event Added Successfully");
