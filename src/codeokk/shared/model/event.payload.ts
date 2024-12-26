@@ -7,7 +7,9 @@ export class EventPayload {
   id: number = 0;
 
   // Event Details
+  tabRefGuid: string = "";
   eventLogoURL: string = "";
+  eventBannerURL: string = "";
   eventTypeId: number = 0;
   visibilityId: number = 0;
   title: string = "";
@@ -41,16 +43,17 @@ export class EventPayload {
   ];
 
   // Categories and Skills
-  categoryList: { id: number; name: string }[] = [{ id: 0, name: "" }];
-  skillList: { id: number; name: string }[] = [{ id: 0, name: "" }];
+  eventCategoryList: { id: number; name: string }[] = [{ id: 0, name: "" }];
+  eventSkillList: { id: number; name: string }[] = [{ id: 0, name: "" }];
 
+  // Collaborators
   eventCollaboratorList: {
     createdBy: number;
     createdOn: string;
     modifiedBy: number;
     modifiedOn: string;
     id: number;
-    userId: number;
+    userId: string;
   }[] = [
     {
       createdBy: 0,
@@ -58,7 +61,106 @@ export class EventPayload {
       modifiedBy: 0,
       modifiedOn: new Date().toISOString(),
       id: 0,
-      userId: 0,
+      userId: "",
+    },
+  ];
+
+  // Rounds
+  eventRoundList: {
+    id: number;
+    title: string;
+    description: string;
+    startDate: string;
+    endDate: string;
+  }[] = [
+    {
+      id: 0,
+      title: "",
+      description: "",
+      startDate: new Date().toISOString(),
+      endDate: new Date().toISOString(),
+    },
+  ];
+
+  // Contacts
+  eventContactList: {
+    id: number;
+    name: string;
+    email: string;
+    contactNo: string;
+  }[] = [
+    {
+      id: 0,
+      name: "",
+      email: "",
+      contactNo: "",
+    },
+  ];
+
+  // Prizes
+  eventPrizeList: {
+    id: number;
+    title: string;
+    isParticipationCertificateProvided: boolean;
+    prizeList: {
+      rank: string;
+      cash: number;
+      perks: string;
+      otherDetails: string;
+    }[];
+  }[] = [
+    {
+      id: 0,
+      title: "",
+      isParticipationCertificateProvided: true,
+      prizeList: [
+        {
+          rank: "",
+          cash: 0,
+          perks: "",
+          otherDetails: "",
+        },
+      ],
+    },
+  ];
+
+  // Participant Eligibility
+  eventParticipantEligibilityList: {
+    id: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    mobile: string;
+    gender: string;
+    organizationId: string;
+    userTypeId: number;
+    courseId: number;
+    experience: number;
+  }[] = [
+    {
+      id: 0,
+      firstName: "",
+      lastName: "",
+      email: "",
+      mobile: "",
+      gender: "",
+      organizationId: "",
+      userTypeId: 0,
+      courseId: 0,
+      experience: 0,
+    },
+  ];
+
+  // Gallery
+  eventGalleryList: {
+    id: number;
+    imageURL: string;
+    description: string;
+  }[] = [
+    {
+      id: 0,
+      imageURL: "",
+      description: "",
     },
   ];
 }

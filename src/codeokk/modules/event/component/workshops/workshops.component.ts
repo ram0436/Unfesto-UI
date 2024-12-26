@@ -28,9 +28,9 @@ export class WorkshopsComponent implements OnInit {
 
   isLoading: boolean = true;
 
-  currentStep: number = 1; // 1 for Basic Details, 2 for Registration Details
-
   eventImage: any[] = [""];
+  galleryImage: any[] = [""];
+  bannerImage: any[] = [""];
 
   categories: any[] = [];
   eventModes: any[] = [];
@@ -52,6 +52,9 @@ export class WorkshopsComponent implements OnInit {
   registerationStartDate: Date | null = null;
   registerationEndDate: Date | null = null;
 
+  roundStartDate: Date | null = null;
+  roundEndDate: Date | null = null;
+
   skillControl = new FormControl();
   filteredSkills!: Observable<any[]>;
 
@@ -63,6 +66,20 @@ export class WorkshopsComponent implements OnInit {
       [{ align: "" }, { align: "center" }],
     ],
   };
+
+  tabs = [
+    { id: 1, title: "Basic Details" },
+    { id: 2, title: "Registration Details" },
+    { id: 3, title: "About Event" },
+    // { id: 4, title: "Banner & Theme" },
+    { id: 4, title: "Compete Round" },
+    { id: 5, title: "Prizes" },
+    { id: 6, title: "Organizer Contact" },
+    { id: 7, title: "Gallery" },
+    { id: 8, title: "Banner" },
+  ];
+
+  currentStep: number = 1;
 
   categorySearch: string = "";
   filteredCategories: any[] = [...this.categories];
@@ -83,6 +100,16 @@ export class WorkshopsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.eventPayload.description = `
+        <p>Enter details about the opportunity here...</p>
+    
+        <div><strong>Basic Rules for the Events:</strong></div>
+        <ul>
+          <li>Rule 1: Ensure all participants are registered.</li>
+          <li>Rule 2: Submit entries before the deadline.</li>
+          <li>Rule 3: Follow all safety guidelines.</li>
+        </ul>
+      `;
     // Combine all subscriptions into a single observable
     forkJoin([
       this.getAllCategories(),
@@ -125,6 +152,20 @@ export class WorkshopsComponent implements OnInit {
     this.subscriptions.unsubscribe();
   }
 
+  deletePrize(index: number) {
+    this.eventPayload.eventPrizeList[0].prizeList.splice(index, 1);
+  }
+
+  addPrize() {
+    const newPrize = {
+      rank: "",
+      cash: 0,
+      perks: "",
+      otherDetails: "",
+    };
+    this.eventPayload.eventPrizeList[0].prizeList.push(newPrize);
+  }
+
   onRegisterationStartDateChange() {
     if (this.registerationStartDate) {
       this.eventPayload.eventRegistrationList[0].registartionStartDateTime =
@@ -136,6 +177,20 @@ export class WorkshopsComponent implements OnInit {
     if (this.registerationEndDate) {
       this.eventPayload.eventRegistrationList[0].registartionEndDateTime =
         this.registerationEndDate.toISOString();
+    }
+  }
+
+  onRoundStartDateChange() {
+    if (this.roundStartDate) {
+      this.eventPayload.eventRoundList[0].startDate =
+        this.roundStartDate.toISOString();
+    }
+  }
+
+  onRoundEndDateChange() {
+    if (this.roundEndDate) {
+      this.eventPayload.eventRoundList[0].endDate =
+        this.roundEndDate.toISOString();
     }
   }
 
@@ -265,9 +320,116 @@ export class WorkshopsComponent implements OnInit {
     this.eventImage[this.eventImage.length - 1] = "";
   }
 
+  selectGalleryFile() {
+    if (this.document) {
+      const uploadElement = this.document.getElementById("galleryFileUpload");
+      if (uploadElement) {
+        uploadElement.click();
+      }
+    }
+  }
+
+  selectGalleryImage(event: any): void {
+    var files = event.target.files;
+    const formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      formData.append("files", files[i]);
+    }
+    this.userService.uploadImages(formData).subscribe((data: any) => {
+      let imagesLength = data.length;
+      let dataIndex = 0;
+
+      for (
+        let j = 0;
+        j < this.galleryImage.length && dataIndex < data.length;
+        j++
+      ) {
+        this.eventPayload.eventGalleryList[0].imageURL = data[0];
+        if (this.galleryImage[j] === "") {
+          this.galleryImage[j] = data[dataIndex];
+          dataIndex++;
+          imagesLength--;
+        }
+      }
+    });
+  }
+
+  deleteBannerImage(index: any): void {
+    for (let i = index; i < this.bannerImage.length - 1; i++) {
+      this.bannerImage[i] = this.bannerImage[i + 1];
+    }
+    this.bannerImage[this.bannerImage.length - 1] = "";
+  }
+
+  deleteGalleryImage(index: any): void {
+    for (let i = index; i < this.galleryImage.length - 1; i++) {
+      this.galleryImage[i] = this.galleryImage[i + 1];
+    }
+    this.galleryImage[this.galleryImage.length - 1] = "";
+  }
+
+  selectBannerFile() {
+    if (this.document) {
+      const uploadElement = this.document.getElementById("bannerFileUpload");
+      if (uploadElement) {
+        uploadElement.click();
+      }
+    }
+  }
+
+  selectBannerImage(event: any): void {
+    var files = event.target.files;
+    const formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      formData.append("files", files[i]);
+    }
+    this.userService.uploadImages(formData).subscribe((data: any) => {
+      let imagesLength = data.length;
+      let dataIndex = 0;
+
+      for (
+        let j = 0;
+        j < this.bannerImage.length && dataIndex < data.length;
+        j++
+      ) {
+        this.eventPayload.eventBannerURL = data[0];
+        if (this.bannerImage[j] === "") {
+          this.bannerImage[j] = data[dataIndex];
+          dataIndex++;
+          imagesLength--;
+        }
+      }
+    });
+  }
+
   nextStep() {
-    if (this.currentStep === 1 && this.validateBasicDetails()) {
-      this.currentStep = 2;
+    const currentTab = this.tabs.find((tab) => tab.id === this.currentStep);
+
+    if (!currentTab) {
+      return;
+    }
+
+    // Add validation logic for each step
+    let isValid = true;
+
+    switch (currentTab.id) {
+      // case 1:
+      //   isValid = this.validateBasicDetails();
+      //   break;
+      // case 2:
+      //   isValid = this.validateRegistrationDetails();
+      //   break;
+      default:
+        isValid = true; // If no validation is needed for a step
+        break;
+    }
+
+    if (isValid) {
+      const nextTabIndex =
+        this.tabs.findIndex((tab) => tab.id === this.currentStep) + 1;
+      if (nextTabIndex < this.tabs.length) {
+        this.currentStep = this.tabs[nextTabIndex].id;
+      }
     }
   }
 
@@ -278,10 +440,9 @@ export class WorkshopsComponent implements OnInit {
     this.currentStep = step;
   }
 
-  // Handle back button click
   onBackButtonClick() {
-    if (this.currentStep === 2) {
-      this.currentStep = 1; // Go back to Basic Details
+    if (this.currentStep > 1) {
+      this.currentStep--; // Move to the previous step
     }
   }
 
@@ -291,9 +452,7 @@ export class WorkshopsComponent implements OnInit {
       !this.eventPayload.eventTypeId ||
       !this.eventPayload.visibilityId
     ) {
-      this.showNotification(
-        "Please fill all mandatory fields in Basic Details."
-      );
+      this.showNotification("Please fill all fields first");
       return false;
     }
     return true;
@@ -315,17 +474,19 @@ export class WorkshopsComponent implements OnInit {
     const userId = parseInt(localStorage.getItem("user_Id") || "0", 10);
 
     // Map selected categories and skills
-    this.eventPayload.categoryList = this.selectedCategories.map(
+    this.eventPayload.eventCategoryList = this.selectedCategories.map(
       (cat: any) => ({
         id: 0,
         name: cat.name,
       })
     );
 
-    this.eventPayload.skillList = this.selectedSkills.map((skill: any) => ({
-      id: 0,
-      name: skill.name,
-    }));
+    this.eventPayload.eventSkillList = this.selectedSkills.map(
+      (skill: any) => ({
+        id: 0,
+        name: skill.name,
+      })
+    );
 
     // Map selected collaborators
     this.eventPayload.eventCollaboratorList = this.selectedCollaborators.map(
@@ -344,6 +505,8 @@ export class WorkshopsComponent implements OnInit {
     this.eventPayload.modifiedBy = userId;
     this.eventPayload.createdOn = new Date().toISOString();
     this.eventPayload.modifiedOn = new Date().toISOString();
+
+    // console.log(JSON.stringify(this.eventPayload, null, 2));
 
     this.eventService.addEvent(this.eventPayload).subscribe((response) => {
       this.showNotification("Event Added Successfully");

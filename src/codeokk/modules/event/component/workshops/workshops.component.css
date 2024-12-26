@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 40px;
+  gap: 20px;
   margin-bottom: 30px;
 }
 
@@ -14,7 +14,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 15px;
+  padding: 8px 12px;
   background-color: #ecf7ff;
   color: #000;
   border-radius: 12px;
@@ -26,8 +26,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2px 9px;
-  font-size: 12px;
+  padding: 1px 7px;
+  font-size: 10px;
   background-color: #fff;
   color: #000;
   border-radius: 50%;
@@ -39,6 +39,11 @@
   border: none !important;
 }
 
+.nav-btn .btn-txt {
+  font-size: 12px;
+  line-height: 16px;
+}
+
 .basic-details-container {
   padding: 20px;
   max-width: 600px;
@@ -46,9 +51,43 @@
   font-family: Arial, sans-serif;
 }
 
+.mb-20 {
+  margin-bottom: 20px;
+}
+
 h2 {
   font-size: 24px;
   margin-bottom: 20px;
+}
+
+.prizes-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.prizes-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.remove-prize-icon {
+  font-size: 24px;
+  color: red;
+  cursor: pointer;
+}
+
+.add-prize-btn {
+  margin-bottom: 20px;
+}
+
+.prize-group {
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .opportunity-logo {
