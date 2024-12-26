@@ -30,6 +30,7 @@ export class WorkshopsComponent implements OnInit {
 
   eventImage: any[] = [""];
   galleryImage: any[] = [""];
+  bannerImage: any[] = [""];
 
   categories: any[] = [];
   eventModes: any[] = [];
@@ -75,6 +76,7 @@ export class WorkshopsComponent implements OnInit {
     { id: 5, title: "Prizes" },
     { id: 6, title: "Organizer Contact" },
     { id: 7, title: "Gallery" },
+    { id: 8, title: "Banner" },
   ];
 
   currentStep: number = 1;
@@ -352,11 +354,52 @@ export class WorkshopsComponent implements OnInit {
     });
   }
 
+  deleteBannerImage(index: any): void {
+    for (let i = index; i < this.bannerImage.length - 1; i++) {
+      this.bannerImage[i] = this.bannerImage[i + 1];
+    }
+    this.bannerImage[this.bannerImage.length - 1] = "";
+  }
+
   deleteGalleryImage(index: any): void {
     for (let i = index; i < this.galleryImage.length - 1; i++) {
       this.galleryImage[i] = this.galleryImage[i + 1];
     }
     this.galleryImage[this.galleryImage.length - 1] = "";
+  }
+
+  selectBannerFile() {
+    if (this.document) {
+      const uploadElement = this.document.getElementById("bannerFileUpload");
+      if (uploadElement) {
+        uploadElement.click();
+      }
+    }
+  }
+
+  selectBannerImage(event: any): void {
+    var files = event.target.files;
+    const formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      formData.append("files", files[i]);
+    }
+    this.userService.uploadImages(formData).subscribe((data: any) => {
+      let imagesLength = data.length;
+      let dataIndex = 0;
+
+      for (
+        let j = 0;
+        j < this.bannerImage.length && dataIndex < data.length;
+        j++
+      ) {
+        this.eventPayload.eventBannerURL = data[0];
+        if (this.bannerImage[j] === "") {
+          this.bannerImage[j] = data[dataIndex];
+          dataIndex++;
+          imagesLength--;
+        }
+      }
+    });
   }
 
   nextStep() {
