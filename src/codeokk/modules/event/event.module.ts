@@ -24,6 +24,8 @@ import { AllEventsComponent } from "./component/all-events/all-events.component"
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { CompeteComponent } from "./component/compete/compete.component";
 import { HostPageComponent } from "./component/host-page/host-page.component";
+import { EditEventComponent } from "./component/edit-event/edit-event.component";
+import { RegisterEventComponent } from "./component/register-event/register-event.component";
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { HostPageComponent } from "./component/host-page/host-page.component";
     AllEventsComponent,
     CompeteComponent,
     HostPageComponent,
+    EditEventComponent,
+    RegisterEventComponent,
   ],
   imports: [
     SharedModule,

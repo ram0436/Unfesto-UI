@@ -52,6 +52,10 @@ export class EventService {
     return this.http.post(`${this.baseUrl}Event/AddEvent`, payload);
   }
 
+  updateEvent(eventId: any, payLoad: any) {
+    return this.http.put(`${this.baseUrl}Event/` + eventId, payLoad);
+  }
+
   addEventUserRegisteration(payload: any): Observable<any> {
     return this.http.post(
       `${this.baseUrl}Event/AddEventUserRegistration`,
@@ -73,7 +77,13 @@ export class EventService {
 
   getEventDetail(tabRefGuid: String) {
     return this.http.get(
-      `${this.baseUrl}Event/GetEventDetail?TabRefGuid=${tabRefGuid}`
+      `${this.baseUrl}Event/GetEventDetailByTabRefGuiD?TabRefGuid=${tabRefGuid}`
+    );
+  }
+
+  getEventDetailById(eventId: String) {
+    return this.http.get(
+      `${this.baseUrl}Event/GetEventDetailById?eventId=${eventId}`
     );
   }
 }

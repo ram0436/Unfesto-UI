@@ -46,11 +46,7 @@
           No events found.
         </div>
         <div *ngFor="let event of events">
-          <a
-            [routerLink]="['/event/details', event.tabRefGuid]"
-            class="listing"
-            target="_blank"
-          >
+          <a class="listing">
             <div class="left-content">
               <div class="listing-image">
                 <img
@@ -59,7 +55,15 @@
                 />
               </div>
               <div class="listing-info">
-                <div class="listing-title">{{ event.title || "-" }}</div>
+                <div class="listing-title">
+                  <a
+                    target="_blank"
+                    [routerLink]="['/event/details', event.tabRefGuid]"
+                    class="listing-title"
+                  >
+                    {{ event.title || "-" }}
+                  </a>
+                </div>
                 <div class="listing-count">
                   Participant Count -
                   {{ event.eventRegistrationList?.[0]?.registrationCountLimit || '-' }}
@@ -92,7 +96,9 @@
               </div>
             </div>
             <div class="right-content">
-              <span class="material-symbols-outlined edit-icon"> edit </span>
+              <a target="_blank" [routerLink]="['/event/edit', event.eventId]">
+                <span class="material-symbols-outlined edit-icon"> edit </span>
+              </a>
               <span class="material-symbols-outlined delete-icon">
                 delete
               </span>

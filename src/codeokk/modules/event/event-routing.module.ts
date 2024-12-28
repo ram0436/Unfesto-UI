@@ -6,6 +6,8 @@ import { EventDetailsComponent } from "./component/event-details/event-details.c
 import { AllEventsComponent } from "./component/all-events/all-events.component";
 import { CompeteComponent } from "./component/compete/compete.component";
 import { HostPageComponent } from "./component/host-page/host-page.component";
+import { EditEventComponent } from "./component/edit-event/edit-event.component";
+import { RegisterEventComponent } from "./component/register-event/register-event.component";
 
 const routes: Routes = [
   { path: "add-workshops", component: WorkshopsComponent },
@@ -14,6 +16,8 @@ const routes: Routes = [
   { path: "all-events", component: AllEventsComponent },
   { path: "compete", component: CompeteComponent },
   { path: "host", component: HostPageComponent },
+  { path: "edit/:id", component: EditEventComponent },
+  { path: "register-event/:id", component: RegisterEventComponent },
 ];
 
 @NgModule({

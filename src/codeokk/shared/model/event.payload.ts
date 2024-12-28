@@ -132,7 +132,7 @@ export class EventPayload {
     email: string;
     mobile: string;
     gender: string;
-    organizationId: string;
+    organizationId: number;
     userTypeId: number;
     courseId: number;
     experience: number;
@@ -144,7 +144,7 @@ export class EventPayload {
       email: "",
       mobile: "",
       gender: "",
-      organizationId: "",
+      organizationId: 0,
       userTypeId: 0,
       courseId: 0,
       experience: 0,
