@@ -123,9 +123,24 @@
   gap: 5px;
 }
 
-.description-title {
+.description-title,
+.organizer-title {
   font-size: 16px;
   font-weight: 600;
+}
+
+.event-organizer-details {
+  margin-top: 20px;
+}
+
+.organizer-title {
+  margin-bottom: 10px;
+}
+
+.organizer-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .description {

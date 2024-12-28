@@ -1,0 +1,1013 @@
+<div class="main-container">
+  <div *ngIf="isLoading" class="loading-spinner">
+    <!-- Loading Spinner or Text -->
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div class="listing-container" *ngIf="!isLoading">
+    <!-- Event List -->
+
+    <div class="edit-lists">
+      <div class="edit-lists-title">Customize Features</div>
+      <div class="lists">
+        <div class="edit-list" *ngFor="let item of editItems; let i = index">
+          <div class="list-top">
+            <span class="material-symbols-outlined list-icon">
+              {{ item.icon }}
+            </span>
+            <span class="list-title">{{ item.title }}</span>
+          </div>
+          <div class="list-bottom">
+            <div class="list-description">{{ item.description }}</div>
+            <div
+              class="list-edit-btn"
+              (click)="toggleEditSidebar('sidebar-' + i)"
+            >
+              Edit
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Event Details -->
+    <div class="event-details">
+      <div class="details banner-details">
+        <div class="banner-image">
+          <img
+            [src]="
+              eventPayload.eventBannerURL || 'https://via.placeholder.com/150'
+            "
+            alt=""
+          />
+        </div>
+      </div>
+      <div class="details logo-details">
+        <div class="top-container">
+          <div class="logo-img">
+            <img
+              [src]="
+                eventPayload.eventLogoURL || 'https://via.placeholder.com/150'
+              "
+              alt=""
+            />
+          </div>
+          <div class="title-container">
+            <div class="event-title">{{ eventPayload.title }}</div>
+            <div class="event-organisation">
+              {{ getNameFromId(eventPayload.organisationId, organisations) }}
+            </div>
+          </div>
+        </div>
+        <div class="bottom-container">
+          <div class="event-mode">
+            <span class="material-symbols-outlined mode-icon">
+              motion_mode
+            </span>
+            <span class="mode">{{
+              getNameFromId(eventPayload.eventModeId, eventModes)
+            }}</span>
+          </div>
+          <div class="event-mode">
+            <span class="material-symbols-outlined mode-icon">
+              ink_marker
+            </span>
+            <span class="mode">{{
+              getNameFromId(eventPayload.eventTypeId, eventTypes)
+            }}</span>
+          </div>
+          <div class="event-mode">
+            <span class="material-symbols-outlined mode-icon"> language </span>
+            <span class="mode">{{ eventPayload.websiteURL }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="details register-details">
+        <div class="register-container">
+          <div class="left">
+            <div class="box-title">Free</div>
+            <div class="share-details">
+              <span class="material-symbols-outlined share-icon">
+                favorite
+              </span>
+              <span class="material-symbols-outlined share-icon"> share </span>
+            </div>
+          </div>
+          <a
+            target="_blank"
+            [routerLink]="['/event/register-event', eventPayload.id]"
+          >
+            <div class="register-btn">Register</div>
+          </a>
+        </div>
+      </div>
+      <div class="details team-details">
+        <div class="event-register-details">
+          <div class="register-detail">
+            <span class="material-symbols-outlined team-icon">
+              calendar_month
+            </span>
+            <div class="register-detail-content">
+              <div class="register-title">Registration Deadline</div>
+              <span class="register-count">{{
+                eventPayload.eventRegistrationList[0].registartionEndDateTime
+                  | date : "MMM d, y, h:mm a"
+              }}</span>
+            </div>
+          </div>
+          <div class="register-detail">
+            <span class="material-symbols-outlined team-icon"> person </span>
+            <div class="register-detail-content">
+              <div class="register-title">Team Size</div>
+              <span class="register-count">{{
+                eventPayload.eventRegistrationList[0].registrationCountLimit
+              }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="details round-details">
+        <div class="round-container">
+          <div class="round-container-title">What's the Schedule?</div>
+          <div class="rounds">
+            <div class="round">
+              <div class="round-title">
+                {{ eventPayload.eventRoundList[0].title }}
+              </div>
+              <div class="round-description">
+                {{ eventPayload.eventRoundList[0].description }}
+              </div>
+              <div class="round-dates">
+                <div class="start-date date">
+                  <span class="material-symbols-outlined date-icon">
+                    date_range
+                  </span>
+                  <div class="date-txt">
+                    <span>Start Date</span>
+                    <span>{{
+                      eventPayload.eventRoundList[0].startDate
+                        | date : "MMM d, y, h:mm a"
+                    }}</span>
+                  </div>
+                </div>
+                <div class="start-date date">
+                  <span class="material-symbols-outlined date-icon">
+                    date_range
+                  </span>
+                  <div class="date-txt">
+                    <span>End Date</span>
+                    <span>{{
+                      eventPayload.eventRoundList[0].endDate
+                        | date : "MMM d, y, h:mm a"
+                    }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="details description-details">
+        <div class="event-description">
+          <div class="description-title">Description *</div>
+          <div class="description" [innerHTML]="descriptionHtml"></div>
+        </div>
+      </div>
+
+      <div class="details organizer-details">
+        <div class="organizer-container">
+          <div class="organizer-container-title">Contact the Organizer</div>
+        </div>
+
+        <div class="organizers">
+          <div
+            class="organizer"
+            *ngFor="let contact of eventPayload.eventContactList"
+          >
+            <div class="organizer-profile">
+              {{ contact.name | slice : 0 : 2 }}
+            </div>
+            <div class="organizer-names">
+              <div class="organizer-name">
+                {{ contact.name }}
+              </div>
+              <div class="organizer-name">
+                {{ contact.email }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="details prize-details">
+        <div class="prize-container">
+          <div class="prize-container-title">
+            What's at Stake - Rewards and Prizes
+          </div>
+        </div>
+
+        <div class="prizes">
+          <!-- Loop over eventPrizeList -->
+          <div class="prize" *ngFor="let prize of eventPayload.eventPrizeList">
+            <div class="prize-title">
+              {{ prize.title }}
+            </div>
+            <div class="prize-cert-txt">
+              Will Certificate Provided-
+              {{ prize.isParticipationCertificateProvided ? "Yes" : "No" }}
+            </div>
+
+            <!-- Check if prizeList exists and loop through it -->
+            <div
+              class="prize-list"
+              *ngIf="prize.prizeList && prize.prizeList.length > 0"
+            >
+              <div class="prize-item" *ngFor="let prizeItem of prize.prizeList">
+                <div>Rank: {{ prizeItem.rank }}</div>
+                <div>Cash: {{ prizeItem.cash }}</div>
+                <div>Perks: {{ prizeItem.perks }}</div>
+                <div>Other Details: {{ prizeItem.otherDetails }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="publish-button-container">
+        <button class="publish-button" (click)="updateEvent()">
+          Publish Now
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="overlay"
+  *ngIf="isEditSidebarOpen"
+  (click)="toggleEditSidebar('')"
+></div>
+
+<div class="edit-sidebar" [ngClass]="{ 'show-sidebar': isEditSidebarOpen }">
+  <ng-container [ngSwitch]="activeEditSidebar">
+    <div *ngSwitchCase="'sidebar-0'">
+      <div class="upload-banner-container">
+        <div class="content" style="width: 80%">
+          <div class="upload-banner-title">Upload Banner</div>
+          <div class="upload-banner-description">
+            You can upload custom banners for the opportunity. We recommend
+            uploading both mobile and desktop banners.
+          </div>
+          <div class="opportunity-logo">
+            <ul class="logo-upload">
+              <div class="upload-title">Banner Image</div>
+              <div
+                class="upload-card"
+                *ngFor="let item of bannerImage; let i = index"
+              >
+                <div
+                  class="upload-card-brd"
+                  (click)="selectBannerFile()"
+                  id="{{ i }}"
+                  *ngIf="item == ''"
+                >
+                  <input
+                    type="file"
+                    id="bannerFileUpload"
+                    name="bannerFileUpload"
+                    (change)="selectBannerImage($event)"
+                    style="display: none"
+                    multiple
+                  />
+                  <div>
+                    <button
+                      mat-raised-button
+                      color="primary"
+                      class="upload-btn"
+                    >
+                      <span class="material-symbols-outlined"
+                        >cloud_upload</span
+                      >
+                      <span>Click here to upload</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="upload-card-brd" *ngIf="item != ''">
+                  <div class="preview">
+                    <button
+                      class="delete-button"
+                      (click)="deleteBannerImage(i)"
+                    >
+                      <span class="delete-icon">&#10006;</span>
+                    </button>
+                    <img [src]="item" height="200px" width="400px" alt="" />
+                  </div>
+                </div>
+              </div>
+            </ul>
+          </div>
+
+          <div class="form-field">
+            <!-- <button mat-raised-button color="primary" class="add-btn">
+              Add Banner
+            </button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngSwitchCase="'sidebar-1'">
+      <div class="upload-banner-container">
+        <div class="content" style="width: 80%">
+          <div class="upload-banner-title">Basic Details & Registeration</div>
+          <div class="upload-banner-description">
+            You can add basic details for the opportunity.
+          </div>
+          <div class="opportunity-logo">
+            <ul class="logo-upload">
+              <div class="upload-title">Oportunity Logo</div>
+              <div
+                class="upload-card"
+                *ngFor="let item of eventImage; let i = index"
+              >
+                <div
+                  class="upload-card-brd"
+                  (click)="selectFile()"
+                  id="{{ i }}"
+                  *ngIf="item == ''"
+                >
+                  <input
+                    type="file"
+                    id="eventFileUpload"
+                    name="eventFileUpload"
+                    (change)="selectImage($event)"
+                    style="display: none"
+                    multiple
+                  />
+                  <div>
+                    <button
+                      mat-raised-button
+                      color="primary"
+                      class="upload-btn"
+                    >
+                      <span class="material-symbols-outlined"
+                        >cloud_upload</span
+                      >
+                      <span>Click here to upload</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="upload-card-brd" *ngIf="item != ''">
+                  <div class="preview">
+                    <button
+                      class="delete-button"
+                      (click)="deleteBackgroundImage(i)"
+                    >
+                      <span class="delete-icon">&#10006;</span>
+                    </button>
+                    <img [src]="item" height="80px" width="80px" alt="" />
+                  </div>
+                </div>
+              </div>
+              <p>Max size of image cannot exceed 1 MB!</p>
+            </ul>
+          </div>
+
+          <!-- Opportunity Type -->
+          <div class="form-field">
+            <label class="section-label">Opportunity Type *</label>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Opportunity Type</mat-label>
+              <mat-select [(ngModel)]="eventPayload.eventTypeId">
+                <mat-option
+                  *ngFor="let eventType of eventTypes"
+                  [value]="eventType.id"
+                >
+                  {{ eventType.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <!-- Visibility -->
+          <div class="visibility-container">
+            <label class="section-label">Visibility *</label>
+            <mat-radio-group
+              [(ngModel)]="eventPayload.visibilityId"
+              aria-label="Visibility"
+              class="visibility-options"
+            >
+              <mat-radio-button
+                *ngFor="let visibility of visibilities"
+                [value]="visibility.id"
+                class="option-card"
+              >
+                <div class="icon-text-container">
+                  <div>
+                    <p class="title">{{ visibility.name }}</p>
+                  </div>
+                </div>
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+
+          <!-- Opportunity Title -->
+          <div class="form-field">
+            <label class="section-label">Opportunity Title *</label>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Opportunity Title</mat-label>
+              <input
+                matInput
+                maxlength="190"
+                placeholder="Enter Opportunity Title"
+                [(ngModel)]="eventPayload.title"
+                name="eventTitle"
+              />
+              <mat-hint align="end">Max 190 characters</mat-hint>
+            </mat-form-field>
+          </div>
+
+          <div class="form-field">
+            <label class="section-label">Organization Name *</label>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Organization Name</mat-label>
+              <mat-select [(ngModel)]="eventPayload.organisationId">
+                <mat-option *ngFor="let org of organisations" [value]="org.id">
+                  {{ org.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <!-- Website Link -->
+          <div class="form-field">
+            <label class="section-label">Website URL *</label>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Website URL</mat-label>
+              <input
+                matInput
+                maxlength="190"
+                placeholder="Enter Your Website Link"
+                [(ngModel)]="eventPayload.websiteURL"
+                name="websiteURL"
+              />
+              <mat-hint align="end">Max 190 characters</mat-hint>
+            </mat-form-field>
+          </div>
+
+          <div class="visibility-container">
+            <label class="section-label">Mode of Event *</label>
+            <mat-radio-group
+              [(ngModel)]="eventPayload.eventModeId"
+              aria-label="EventMode"
+              class="visibility-options"
+            >
+              <mat-radio-button
+                *ngFor="let eventMode of eventModes"
+                [value]="eventMode.id"
+                class="option-card"
+              >
+                <div class="icon-text-container">
+                  <div>
+                    <p class="title">{{ eventMode.name }}</p>
+                  </div>
+                </div>
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+
+          <!-- Categories -->
+          <div class="form-field">
+            <label class="section-label">Category *</label>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Categories</mat-label>
+              <mat-select [(ngModel)]="selectedCategories" multiple>
+                <mat-option
+                  *ngFor="let category of categories"
+                  [value]="category"
+                >
+                  {{ category.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="form-field">
+            <label class="section-label">Skills *</label>
+            <div class="selected-skills">
+              <mat-chip-list #chipList style="display: flex; gap: 10px">
+                <mat-chip
+                  *ngFor="let skill of selectedSkills"
+                  [removable]="true"
+                  (removed)="removeSkill(skill)"
+                >
+                  {{ skill.name }}
+                  <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+              </mat-chip-list>
+            </div>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Skills</mat-label>
+
+              <input
+                matInput
+                [formControl]="skillControl"
+                [matAutocomplete]="skillAuto"
+                placeholder="Enter Skill Name"
+              />
+              <mat-autocomplete
+                #skillAuto="matAutocomplete"
+                (optionSelected)="handleSkill($event.option.value)"
+                [displayWith]="displaySkill"
+              >
+                <mat-option
+                  *ngFor="let skill of filteredSkills | async"
+                  [value]="skill"
+                >
+                  {{ skill.name }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+
+          <!-- Collaborators -->
+          <div class="form-field">
+            <label class="section-label">Collaborators *</label>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Add Collaborators</mat-label>
+              <mat-select [(ngModel)]="selectedCollaborators" multiple>
+                <mat-option *ngFor="let user of users" [value]="user">
+                  {{ user.userName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="details-title register-details-title">
+            Registeration Details
+          </div>
+
+          <!-- Visibility -->
+          <div class="visibility-container">
+            <label class="section-label">Participation Type *</label>
+            <mat-radio-group
+              [(ngModel)]="
+                eventPayload.eventRegistrationList[0].participationTypeId
+              "
+              aria-label="Visibility"
+              class="visibility-options"
+            >
+              <mat-radio-button
+                *ngFor="let type of participationTypes"
+                [value]="type.id"
+                class="option-card"
+              >
+                <div class="icon-text-container">
+                  <div>
+                    <p class="title">{{ type.name }}</p>
+                  </div>
+                </div>
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+
+          <!-- Opportunity Title -->
+          <div class="form-field">
+            <label class="section-label">No. of Registerations Allowed *</label>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Participants Count</mat-label>
+              <input
+                matInput
+                maxlength="190"
+                placeholder="Enter Participants Count"
+                [(ngModel)]="
+                  eventPayload.eventRegistrationList[0].registrationCountLimit
+                "
+                name="registrationCount"
+              />
+              <mat-hint align="end">Max 190 characters</mat-hint>
+            </mat-form-field>
+          </div>
+
+          <div class="form-field">
+            <label class="section-label">Registeration Start Date *</label>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Registeration Start Date</mat-label>
+              <input
+                matInput
+                [matDatepicker]="startDatePicker"
+                [(ngModel)]="registerationStartDate"
+                (ngModelChange)="onRegisterationStartDateChange()"
+                name="startDate"
+              />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="startDatePicker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #startDatePicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="form-field">
+            <label class="section-label">Registeration End Date *</label>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Registeration End Date</mat-label>
+              <input
+                matInput
+                [matDatepicker]="endDatePicker"
+                [(ngModel)]="registerationEndDate"
+                (ngModelChange)="onRegisterationEndDateChange()"
+                name="endDate"
+              />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="endDatePicker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #endDatePicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngSwitchCase="'sidebar-2'">
+      <div class="upload-banner-container">
+        <div class="content">
+          <div class="upload-banner-title">Add Round</div>
+          <div class="upload-banner-description">
+            You can add rounds for the opportunity. We recommend adding all the
+            rounds.
+          </div>
+
+          <div
+            *ngFor="let round of eventPayload.eventRoundList; let i = index"
+            class="round-section"
+          >
+            <div class="details-title">Round {{ i + 1 }} Details</div>
+
+            <!-- Round Title -->
+            <div class="form-field">
+              <label class="section-label">Round Title *</label>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Title</mat-label>
+                <input
+                  matInput
+                  maxlength="190"
+                  placeholder="Enter Round Title"
+                  [(ngModel)]="eventPayload.eventRoundList[i].title"
+                  name="roundTitle{{ i }}"
+                />
+                <mat-hint align="end">Max 190 characters</mat-hint>
+              </mat-form-field>
+            </div>
+
+            <!-- Round Description -->
+            <div class="form-field">
+              <label class="section-label">Round Description *</label>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Description</mat-label>
+                <textarea
+                  matInput
+                  maxlength="190"
+                  placeholder="Enter Round Description"
+                  [(ngModel)]="eventPayload.eventRoundList[i].description"
+                  name="roundDescription{{ i }}"
+                ></textarea>
+                <mat-hint align="end">Max 190 characters</mat-hint>
+              </mat-form-field>
+            </div>
+
+            <!-- Start Date -->
+            <div class="form-field">
+              <label class="section-label">Start Date *</label>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Start Date</mat-label>
+                <input
+                  matInput
+                  type="date"
+                  [(ngModel)]="eventPayload.eventRoundList[i].startDate"
+                  name="roundStartDate{{ i }}"
+                />
+              </mat-form-field>
+            </div>
+
+            <!-- End Date -->
+            <div class="form-field">
+              <label class="section-label">End Date *</label>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>End Date</mat-label>
+                <input
+                  matInput
+                  type="date"
+                  [(ngModel)]="eventPayload.eventRoundList[i].endDate"
+                  name="roundEndDate{{ i }}"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Add More Round Button -->
+          <div class="form-field">
+            <button
+              mat-raised-button
+              color="primary"
+              class="add-btn"
+              (click)="addNewRound()"
+            >
+              Add More Round
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngSwitchCase="'sidebar-3'">
+      <div class="upload-banner-container">
+        <div class="content">
+          <div class="upload-banner-title">About Opportunity</div>
+          <div class="upload-banner-description">
+            You can add description for the opportunity. We recommend adding
+            complete description.
+          </div>
+          <!-- About Opportunity -->
+          <div class="form-field">
+            <quill-editor
+              [modules]="editorModules"
+              [(ngModel)]="eventPayload.description"
+              (ngModelChange)="onContentChange($event)"
+              class="quill-editor"
+            ></quill-editor>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngSwitchCase="'sidebar-4'">
+      <div class="upload-banner-container">
+        <div class="content" style="width: 80%">
+          <div class="upload-banner-title">Prizes & Rewards</div>
+          <div class="upload-banner-description">
+            You can add prizes for the opportunity.
+          </div>
+          <div class="form-field">
+            <label class="section-label">Prize Title *</label>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Title</mat-label>
+              <input
+                matInput
+                maxlength="190"
+                placeholder="Enter Prize Title"
+                [(ngModel)]="eventPayload.eventPrizeList[0].title"
+                name="prizeTitle"
+              />
+              <mat-hint align="end">Max 190 characters</mat-hint>
+            </mat-form-field>
+          </div>
+          <!-- Visibility -->
+          <div class="visibility-container">
+            <label class="section-label">Is Certificate Provided *</label>
+
+            <mat-radio-group
+              [(ngModel)]="
+                eventPayload.eventPrizeList[0]
+                  .isParticipationCertificateProvided
+              "
+              aria-label="Participation Certificate Provided"
+              class="visibility-options mb-20"
+            >
+              <mat-radio-button [value]="true" class="option-card">
+                <div class="icon-text-container">
+                  <div>
+                    <p class="title">Yes</p>
+                  </div>
+                </div>
+              </mat-radio-button>
+
+              <mat-radio-button [value]="false" class="option-card">
+                <div class="icon-text-container">
+                  <div>
+                    <p class="title">No</p>
+                  </div>
+                </div>
+              </mat-radio-button>
+            </mat-radio-group>
+
+            <div class="prizes-container">
+              <div
+                *ngFor="
+                  let prize of eventPayload.eventPrizeList[0].prizeList;
+                  let i = index
+                "
+                class="prize-group"
+              >
+                <div class="prizes-top">
+                  <div class="prizes-title">Prize</div>
+                  <span
+                    class="remove-prize-icon material-symbols-outlined"
+                    (click)="deletePrize(i)"
+                    >delete</span
+                  >
+                </div>
+                <div class="form-field">
+                  <label class="section-label">Rank *</label>
+                  <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Rank</mat-label>
+                    <input
+                      matInput
+                      placeholder="Enter Rank"
+                      [(ngModel)]="prize.rank"
+                      name="rank-{{ i }}"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="form-field">
+                  <label class="section-label">Cash *</label>
+                  <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Cash Amount</mat-label>
+                    <input
+                      matInput
+                      placeholder="Enter Cash Amount"
+                      [(ngModel)]="prize.cash"
+                      name="cash-{{ i }}"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="form-field">
+                  <label class="section-label">Perks *</label>
+                  <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Perks</mat-label>
+                    <input
+                      matInput
+                      placeholder="Enter Perks"
+                      [(ngModel)]="prize.perks"
+                      name="perks-{{ i }}"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="form-field">
+                  <label class="section-label">Other Details *</label>
+                  <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Other Details</mat-label>
+                    <textarea
+                      matInput
+                      placeholder="Enter Other Details"
+                      [(ngModel)]="prize.otherDetails"
+                      name="otherDetails-{{ i }}"
+                    ></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+              <button
+                mat-raised-button
+                color="primary"
+                (click)="addPrize()"
+                class="add-prize-btn"
+              >
+                Add Prize
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngSwitchCase="'sidebar-5'">
+      <div class="upload-banner-container">
+        <div class="content" style="width: 80%">
+          <div class="upload-banner-title">Contact</div>
+          <div class="upload-banner-description">
+            You can add organizer contacts for the opportunity.
+          </div>
+
+          <!-- Contacts List -->
+          <div
+            *ngFor="let contact of eventPayload.eventContactList; let i = index"
+            class="contact-section"
+          >
+            <div class="details-title">Contact {{ i + 1 }}</div>
+
+            <!-- Contact Name -->
+            <div class="form-field">
+              <label class="section-label">Name *</label>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Name</mat-label>
+                <input
+                  matInput
+                  maxlength="190"
+                  placeholder="Enter Organizer Name"
+                  [(ngModel)]="eventPayload.eventContactList[i].name"
+                  name="organizerName{{ i }}"
+                />
+                <mat-hint align="end">Max 190 characters</mat-hint>
+              </mat-form-field>
+            </div>
+
+            <!-- Contact Email -->
+            <div class="form-field">
+              <label class="section-label">Email *</label>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Email</mat-label>
+                <input
+                  matInput
+                  maxlength="190"
+                  placeholder="Enter Organizer Email"
+                  [(ngModel)]="eventPayload.eventContactList[i].email"
+                  name="organizerEmail{{ i }}"
+                />
+                <mat-hint align="end">Max 190 characters</mat-hint>
+              </mat-form-field>
+            </div>
+
+            <!-- Contact Number -->
+            <div class="form-field">
+              <label class="section-label">Contact No *</label>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Contact No</mat-label>
+                <input
+                  matInput
+                  maxlength="190"
+                  placeholder="Enter Organizer Contact No"
+                  [(ngModel)]="eventPayload.eventContactList[i].contactNo"
+                  name="organizerContact{{ i }}"
+                />
+                <mat-hint align="end">Max 190 characters</mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Add More Contact Button -->
+          <div class="form-field">
+            <button
+              mat-raised-button
+              color="primary"
+              class="add-btn"
+              (click)="addNewContact()"
+            >
+              Add More Contact
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngSwitchCase="'sidebar-6'">
+      <div class="upload-banner-container">
+        <div class="content" style="width: 80%">
+          <div class="upload-banner-title">Upload Gallery</div>
+          <div class="upload-banner-description">
+            You can upload custom gallery for the opportunity.
+          </div>
+          <div class="opportunity-logo">
+            <ul class="logo-upload">
+              <div class="upload-title">Gallery Image</div>
+              <div
+                class="upload-card"
+                *ngFor="let item of galleryImage; let i = index"
+              >
+                <div
+                  class="upload-card-brd"
+                  (click)="selectGalleryFile()"
+                  id="{{ i }}"
+                  *ngIf="item == ''"
+                >
+                  <input
+                    type="file"
+                    id="galleryFileUpload"
+                    name="galleryFileUpload"
+                    (change)="selectGalleryImage($event)"
+                    style="display: none"
+                    multiple
+                  />
+                  <div>
+                    <button
+                      mat-raised-button
+                      color="primary"
+                      class="upload-btn"
+                    >
+                      <span class="material-symbols-outlined"
+                        >cloud_upload</span
+                      >
+                      <span>Click here to upload</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="upload-card-brd" *ngIf="item != ''">
+                  <div class="preview">
+                    <button
+                      class="delete-button"
+                      (click)="deleteGalleryImage(i)"
+                    >
+                      <span class="delete-icon">&#10006;</span>
+                    </button>
+                    <img [src]="item" height="200px" width="200px" alt="" />
+                  </div>
+                </div>
+              </div>
+            </ul>
+          </div>
+
+          <div class="form-field">
+            <button mat-raised-button color="primary" class="add-btn">
+              Add Gallery
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

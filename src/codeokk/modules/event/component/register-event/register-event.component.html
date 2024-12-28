@@ -1,0 +1,153 @@
+<div class="main-container">
+  <div *ngIf="isLoading" class="loading-spinner">
+    <!-- Loading Spinner or Text -->
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div class="listing-container" *ngIf="!isLoading">
+    <!-- Register Event Details -->
+    <div class="register-event-details">
+      <div class="details">
+        <div class="register-details-title">Enter Registeration Details</div>
+        <div class="form-field">
+          <label class="section-label">First Name *</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>First Name</mat-label>
+            <input
+              matInput
+              maxlength="190"
+              placeholder="Enter First Name"
+              [(ngModel)]="participant.firstName"
+              name="firstName"
+            />
+          </mat-form-field>
+        </div>
+        <div class="form-field">
+          <label class="section-label">Last Name *</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Last Name</mat-label>
+            <input
+              matInput
+              maxlength="190"
+              placeholder="Enter Last Name"
+              [(ngModel)]="participant.lastName"
+              name="lastName"
+            />
+          </mat-form-field>
+        </div>
+        <div class="form-field">
+          <label class="section-label">Email *</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              maxlength="190"
+              placeholder="Enter Email"
+              [(ngModel)]="participant.email"
+              name="email"
+            />
+          </mat-form-field>
+        </div>
+        <div class="form-field">
+          <label class="section-label">Mobile No *</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Mobile No</mat-label>
+            <input
+              matInput
+              maxlength="190"
+              placeholder="Enter Mobile No"
+              [(ngModel)]="participant.mobileNo"
+              name="mobileNo"
+            />
+          </mat-form-field>
+        </div>
+        <div class="form-field">
+          <label class="section-label">Gender *</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Gender</mat-label>
+            <mat-select [(ngModel)]="participant.gender">
+              <mat-option value="male">Male</mat-option>
+              <mat-option value="female">Female</mat-option>
+              <mat-option value="other">Other</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="form-field">
+          <label class="section-label">User Type *</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>User Type</mat-label>
+            <mat-select [(ngModel)]="participant.userTypeId">
+              <mat-option *ngFor="let type of userTypes" [value]="type.id">
+                {{ type.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="form-field">
+          <label class="section-label">Organization Name *</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Organization Name</mat-label>
+            <mat-select [(ngModel)]="participant.organizationId">
+              <mat-option *ngFor="let org of organisations" [value]="org.id">
+                {{ org.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="form-field">
+          <label class="section-label">Course *</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Course</mat-label>
+            <input
+              type="text"
+              placeholder="Select your course"
+              aria-label="Number"
+              matInput
+              [formControl]="courseControl"
+              [matAutocomplete]="auto"
+            />
+            <mat-autocomplete
+              autoActiveFirstOption
+              #auto="matAutocomplete"
+              (optionSelected)="handleCourse($event.option.value)"
+              [displayWith]="displayCourse"
+            >
+              <mat-option
+                *ngFor="let course of filteredCourses | async"
+                [value]="course"
+              >
+                {{ course.name }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+        <div class="form-field">
+          <label class="section-label">Years of Experience *</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Years of Experience</mat-label>
+            <input
+              matInput
+              maxlength="190"
+              placeholder="Enter experience in years"
+              [(ngModel)]="participant.experience"
+              name="experience"
+            />
+          </mat-form-field>
+        </div>
+        <div class="form-field">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="registerParticipant()"
+            class="register-event-btn"
+          >
+            Register Event
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

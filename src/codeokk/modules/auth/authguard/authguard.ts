@@ -35,6 +35,8 @@ export class AuthGuard implements CanActivate {
       "/user/dashboard/manage-listings",
       "/event/host",
       "/event/add-workshops",
+      "/event/edit",
+      "/event/edit/:id",
     ];
     const commonRoutes = [
       "/user",
@@ -52,6 +54,10 @@ export class AuthGuard implements CanActivate {
     // Add dynamic routes using regex
     const dynamicRoutes = [/^\/event\/details\/[a-f0-9-]+$/i];
 
+    const editEventRoute = [/^\/event\/edit\/[a-f0-9-]+$/i];
+
+    const registerEventRoute = [/^\/event\/register-event\/[a-f0-9-]+$/i];
+
     const requestedRoute = state.url;
 
     if (authToken) {
@@ -60,8 +66,18 @@ export class AuthGuard implements CanActivate {
         return true;
       }
 
-      // Check dynamic routes
-      if (dynamicRoutes.some((pattern) => pattern.test(requestedRoute))) {
+      if (
+        dynamicRoutes.some((pattern) => pattern.test(requestedRoute)) ||
+        registerEventRoute.some((pattern) => pattern.test(requestedRoute))
+      ) {
+        return true;
+      }
+
+      // Check if role is Organizer and route matches /event/edit/:id
+      if (
+        role === "Organizer" &&
+        editEventRoute.some((pattern) => pattern.test(requestedRoute))
+      ) {
         return true;
       }
 
@@ -89,8 +105,7 @@ export class AuthGuard implements CanActivate {
           break;
       }
 
-      // If route is not accessible, redirect based on role
-      this.router.navigate(["/dashboard"]);
+      this.router.navigate(["/"]);
       return false;
     } else {
       // Redirect to login if no auth token

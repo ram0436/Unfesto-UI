@@ -73,6 +73,23 @@
           </div> -->
           <div class="description" [innerHTML]="descriptionHtml"></div>
         </div>
+        <div class="event-organizer-details">
+          <div class="organizer-title">Event Organizer</div>
+          <div class="organizer-details">
+            <div>
+              <strong>Name: </strong
+              >{{ eventDetails[0].eventContactList[0].name }}
+            </div>
+            <div>
+              <strong>Email: </strong
+              >{{ eventDetails[0].eventContactList[0].email }}
+            </div>
+            <div>
+              <strong>Contact No: </strong
+              >{{ eventDetails[0].eventContactList[0].contactNo }}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="right-content">
@@ -84,9 +101,12 @@
             <span class="material-symbols-outlined share-icon"> share </span>
           </div>
         </div>
-        <div class="register-btn" (click)="addEventRegisteration()">
-          Register
-        </div>
+        <a
+          target="_blank"
+          [routerLink]="['/event/register-event', eventDetails[0].eventId]"
+        >
+          <div class="register-btn">Register</div>
+        </a>
         <div class="event-register-details">
           <div class="register-detail">
             <span class="material-symbols-outlined icon"> groups </span>
