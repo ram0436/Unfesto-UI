@@ -446,6 +446,10 @@ export class WorkshopsComponent implements OnInit {
     }
   }
 
+  toNumber(value: any): number {
+    return Number(value);
+  }
+
   validateBasicDetails(): boolean {
     if (
       !this.eventPayload.title ||
@@ -505,8 +509,6 @@ export class WorkshopsComponent implements OnInit {
     this.eventPayload.modifiedBy = userId;
     this.eventPayload.createdOn = new Date().toISOString();
     this.eventPayload.modifiedOn = new Date().toISOString();
-
-    // console.log(JSON.stringify(this.eventPayload, null, 2));
 
     this.eventService.addEvent(this.eventPayload).subscribe((response) => {
       this.showNotification("Event Added Successfully");

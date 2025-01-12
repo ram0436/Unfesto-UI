@@ -526,6 +526,7 @@
                   matInput
                   placeholder="Enter Cash Amount"
                   [(ngModel)]="prize.cash"
+                  (ngModelChange)="prize.cash = toNumber($event)"
                   name="cash-{{ i }}"
                 />
               </mat-form-field>

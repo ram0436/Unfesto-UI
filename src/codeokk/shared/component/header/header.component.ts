@@ -74,7 +74,10 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem("role");
 
     // Navigate to the home page
-    this.router.navigate(["/"]).then(() => {});
+    this.router.navigate(["/"]).then(() => {
+      window.location.reload();
+      console.log("Window reloaded");
+    });
   }
 
   login() {
