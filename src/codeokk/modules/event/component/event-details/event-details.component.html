@@ -3,130 +3,244 @@
     <!-- Loading Spinner or Text -->
     <mat-spinner></mat-spinner>
   </div>
-  <div class="details-content" *ngIf="!isLoading">
-    <div class="left-content">
-      <div class="top-container">
-        <div class="top">
-          <!-- Event Logo -->
-          <div class="event-image">
-            <img
-              [src]="
-                eventDetails[0].eventLogoURL ||
-                'https://via.placeholder.com/150'
-              "
-              alt="Event Logo"
-            />
-          </div>
-          <!-- Event Title -->
-          <div class="event-title">{{ eventDetails[0].title || "-" }}</div>
-          <!-- Event Mode -->
-          <div class="event-mode">
-            <span class="material-symbols-outlined icon"> location_on </span>
-            <span class="mode">{{ eventDetails[0].eventMode || "-" }}</span>
-          </div>
-          <!-- Event Registration Start Date -->
-          <div class="event-date">
-            <span class="material-symbols-outlined icon">calendar_month</span>
-            <span class="date-txt">
-              {{
-                eventDetails[0].eventRegistrationList[0]
-                  ?.registartionStartDateTime | date : "dd MMM yyyy" || "-"
-              }}
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="bottom">
-        <div class="bottom-title">More Details</div>
-        <!-- Event Type -->
-        <div class="event-type detail">
-          <span>Event Type:</span> {{ eventDetails[0].eventType || "-" }}
-        </div>
-        <!-- Organisation -->
-        <div class="event-organization detail">
-          <span>Organization Name:</span>
-          {{ eventDetails[0].organisation || "-" }}
-        </div>
-        <!-- Website -->
-        <div class="event-url detail">
-          <span>Website:</span>
-          <a [href]="eventDetails[0].websiteURL || '#'" target="_blank">
-            {{ eventDetails[0].websiteURL || "-" }}
-          </a>
-        </div>
-        <!-- Collaborators -->
-        <div class="event-collaborators-title">Collaborators:</div>
-        <div class="event-collaborators">
-          <div
-            class="event-collaborator"
-            *ngFor="let collaborator of eventDetails[0].eventCollaboratorList"
-          >
-            {{ collaborator.userId || "-" }}
-          </div>
-        </div>
+  <div class="all-details-content" *ngIf="!isLoading">
+    <div class="banner-image">
+      <img
+        [src]="
+          eventDetails[0].eventBannerURL || 'https://via.placeholder.com/150'
+        "
+        alt="Event Logo"
+      />
+    </div>
+    <div class="details-content">
+      <div class="left-content">
+        <div class="top-container">
+          <div class="top">
+            <!-- Event Logo -->
+            <div class="event-image">
+              <img
+                [src]="
+                  eventDetails[0].eventLogoURL ||
+                  'https://via.placeholder.com/150'
+                "
+                alt="Event Logo"
+              />
+            </div>
+            <!-- Event Title -->
+            <div class="event-title">{{ eventDetails[0].title || "-" }}</div>
+            <!-- Event Mode -->
+            <div class="event-mode">
+              <span class="material-symbols-outlined icon"> location_on </span>
+              <span class="mode">{{ eventDetails[0].eventMode || "-" }}</span>
+            </div>
 
-        <!-- Description -->
-        <div class="event-description">
-          <div class="description-title">Description *</div>
-          <!-- <div class="description">
+            <div class="event-mode">
+              <span class="material-symbols-outlined icon"> workspaces </span>
+              <span class="mode">
+                {{ eventDetails[0].eventType || "-" }}
+              </span>
+            </div>
+            <div class="event-mode">
+              <span class="material-symbols-outlined icon">
+                corporate_fare
+              </span>
+              <span class="mode">
+                {{ eventDetails[0].organisation || "-" }}
+              </span>
+            </div>
+            <div class="event-mode">
+              <span class="material-symbols-outlined icon"> language </span>
+              <div class="mode">
+                <a [href]="eventDetails[0].websiteURL || '#'" target="_blank">
+                  {{ eventDetails[0].websiteURL || "-" }}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bottom">
+          <div class="bottom-title">More Details</div>
+
+          <!-- Collaborators -->
+          <!-- <div class="event-collaborators-title">Collaborators:</div>
+          <div class="event-collaborators">
+            <div
+              class="event-collaborator"
+              *ngFor="let collaborator of eventDetails[0].eventCollaboratorList"
+            >
+              {{ collaborator.userId || "-" }}
+            </div>
+          </div> -->
+
+          <div class="event-description-details details team-details">
+            <div class="deadline-details">
+              <div class="register-detail">
+                <span class="material-symbols-outlined team-icon">
+                  calendar_month
+                </span>
+                <div class="register-detail-content">
+                  <div class="register-title">Registration start Date</div>
+                  <span class="register-count">{{
+                    eventDetails[0].eventRegistrationList[0]
+                      .registartionStartDateTime | date : "MMM d, y, h:mm a"
+                  }}</span>
+                </div>
+              </div>
+              <div class="register-detail">
+                <span class="material-symbols-outlined team-icon">
+                  calendar_month
+                </span>
+                <div class="register-detail-content">
+                  <div class="register-title">Registration Deadline</div>
+                  <span class="register-count">{{
+                    eventDetails[0].eventRegistrationList[0]
+                      .registartionEndDateTime | date : "MMM d, y, h:mm a"
+                  }}</span>
+                </div>
+              </div>
+              <div class="register-detail">
+                <span class="material-symbols-outlined team-icon">
+                  person
+                </span>
+                <div class="register-detail-content">
+                  <div class="register-title">Team Size</div>
+                  <span class="register-count">{{
+                    eventDetails[0].eventRegistrationList[0]
+                      .registrationCountLimit
+                  }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="event-description">
+            <div class="description-title">Description *</div>
+            <!-- <div class="description">
             {{ eventDetails[0].description || "-" }}
           </div> -->
-          <div class="description" [innerHTML]="descriptionHtml"></div>
-        </div>
-        <div class="event-organizer-details">
-          <div class="organizer-title">Event Organizer</div>
+            <div class="description" [innerHTML]="descriptionHtml"></div>
+          </div>
+          <!-- <div class="event-organizer-details">
+            <div class="organizer-title">Event Organizer</div>
+            <div class="organizer-details">
+              <div>
+                <strong>Name: </strong
+                >{{ eventDetails[0].eventContactList[0].name }}
+              </div>
+              <div>
+                <strong>Email: </strong
+                >{{ eventDetails[0].eventContactList[0].email }}
+              </div>
+              <div>
+                <strong>Contact No: </strong
+                >{{ eventDetails[0].eventContactList[0].contactNo }}
+              </div>
+            </div>
+          </div> -->
           <div class="organizer-details">
-            <div>
-              <strong>Name: </strong
-              >{{ eventDetails[0].eventContactList[0].name }}
+            <div class="organizer-container">
+              <div class="organizer-container-title">Contact the Organizer</div>
             </div>
-            <div>
-              <strong>Email: </strong
-              >{{ eventDetails[0].eventContactList[0].email }}
+
+            <div class="organizers">
+              <div
+                class="organizer"
+                *ngFor="let contact of eventDetails[0].eventContactList"
+              >
+                <div class="organizer-profile">
+                  {{ contact.name | slice : 0 : 2 }}
+                </div>
+                <div class="organizer-names">
+                  <div class="organizer-name">
+                    {{ contact.name }}
+                  </div>
+                  <div class="organizer-name">
+                    {{ contact.email }}
+                  </div>
+                </div>
+              </div>
             </div>
-            <div>
-              <strong>Contact No: </strong
-              >{{ eventDetails[0].eventContactList[0].contactNo }}
+          </div>
+          <div class="details prize-details">
+            <div class="prize-container">
+              <div class="prize-container-title">
+                What's at Stake - Rewards and Prizes
+              </div>
+            </div>
+
+            <div class="prizes">
+              <!-- Loop over eventPrizeList -->
+              <div
+                class="prize"
+                *ngFor="let prize of eventDetails[0].eventPrizeList"
+              >
+                <div class="prize-title">
+                  {{ prize.title }}
+                </div>
+                <div class="prize-cert-txt">
+                  Will Certificate Provided-
+                  {{ prize.isParticipationCertificateProvided ? "Yes" : "No" }}
+                </div>
+
+                <!-- Check if prizeList exists and loop through it -->
+                <div
+                  class="prize-list"
+                  *ngIf="prize.prizeList && prize.prizeList.length > 0"
+                >
+                  <div
+                    class="prize-item"
+                    *ngFor="let prizeItem of prize.prizeList"
+                  >
+                    <div>Rank: {{ prizeItem.rank }}</div>
+                    <div>Cash: {{ prizeItem.cash }}</div>
+                    <div>Perks: {{ prizeItem.perks }}</div>
+                    <div>Other Details: {{ prizeItem.otherDetails }}</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="right-content">
-      <div class="detail-box">
-        <div class="box-top">
-          <div class="box-title">Free</div>
-          <div class="share-details">
-            <span class="material-symbols-outlined share-icon"> favorite </span>
-            <span class="material-symbols-outlined share-icon"> share </span>
-          </div>
-        </div>
-        <a
-          target="_blank"
-          [routerLink]="['/event/register-event', eventDetails[0].eventId]"
-        >
-          <div class="register-btn">Register</div>
-        </a>
-        <div class="event-register-details">
-          <div class="register-detail">
-            <span class="material-symbols-outlined icon"> groups </span>
-            <div class="register-detail-content">
-              <div class="register-title">Registered</div>
-              <span class="register-count">10</span>
+      <div class="right-content">
+        <div class="detail-box">
+          <div class="box-top">
+            <div class="box-title">Free</div>
+            <div class="share-details">
+              <span class="material-symbols-outlined share-icon">
+                favorite
+              </span>
+              <span class="material-symbols-outlined share-icon"> share </span>
             </div>
           </div>
-          <div class="register-detail">
-            <span class="material-symbols-outlined icon"> person </span>
-            <div class="register-detail-content">
-              <div class="register-title">Team Size</div>
-              <span class="register-count">10</span>
+          <a
+            target="_blank"
+            [routerLink]="['/event/register-event', eventDetails[0].eventId]"
+          >
+            <div class="register-btn">Register</div>
+          </a>
+          <div class="event-register-details">
+            <div class="register-detail">
+              <span class="material-symbols-outlined icon"> groups </span>
+              <div class="register-detail-content">
+                <div class="register-title">Registered</div>
+                <span class="register-count">10</span>
+              </div>
             </div>
-          </div>
-          <div class="register-detail">
-            <span class="material-symbols-outlined icon"> flash_on </span>
-            <div class="register-detail-content">
-              <div class="register-title">Impressions</div>
-              <span class="register-count">10</span>
+            <div class="register-detail">
+              <span class="material-symbols-outlined icon"> person </span>
+              <div class="register-detail-content">
+                <div class="register-title">Team Size</div>
+                <span class="register-count">10</span>
+              </div>
+            </div>
+            <div class="register-detail">
+              <span class="material-symbols-outlined icon"> flash_on </span>
+              <div class="register-detail-content">
+                <div class="register-title">Impressions</div>
+                <span class="register-count">10</span>
+              </div>
             </div>
           </div>
         </div>

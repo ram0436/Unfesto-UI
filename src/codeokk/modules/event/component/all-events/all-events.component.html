@@ -40,6 +40,16 @@
 
     <!-- Event Details -->
     <div class="event-details" *ngIf="eventDetails">
+      <div class="event-banner-details">
+        <div class="banner-image">
+          <img
+            [src]="
+              eventDetails.eventBannerURL || 'https://via.placeholder.com/150'
+            "
+            alt="Event Logo"
+          />
+        </div>
+      </div>
       <div class="event-main-details">
         <div class="main-top">
           <div class="event-logo">
@@ -95,13 +105,39 @@
           </a>
         </div>
       </div>
+      <div class="event-description-details details team-details">
+        <div class="deadline-details">
+          <div class="register-detail">
+            <span class="material-symbols-outlined team-icon">
+              calendar_month
+            </span>
+            <div class="register-detail-content">
+              <div class="register-title">Registration Deadline</div>
+              <span class="register-count">{{
+                eventDetails.eventRegistrationList[0].registartionEndDateTime
+                  | date : "MMM d, y, h:mm a"
+              }}</span>
+            </div>
+          </div>
+          <div class="register-detail">
+            <span class="material-symbols-outlined team-icon"> person </span>
+            <div class="register-detail-content">
+              <div class="register-title">Team Size</div>
+              <span class="register-count">{{
+                eventDetails.eventRegistrationList[0].registrationCountLimit
+              }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="event-description-details">
         <div class="description-title">Description</div>
         <div class="description">
           <span [innerHTML]="eventDetails.description"></span>
         </div>
       </div>
-      <div class="event-description-details">
+      <!-- <div class="event-description-details">
         <div class="description-title">Event Organizer</div>
         <div class="organizer-details">
           <div>
@@ -114,6 +150,64 @@
           <div>
             <strong>Contact No: </strong
             >{{ eventDetails.eventContactList[0]?.contactNo }}
+          </div>
+        </div>
+      </div> -->
+      <div class="event-description-details details organizer-details">
+        <div class="organizer-container">
+          <div class="organizer-container-title">Contact the Organizer</div>
+        </div>
+
+        <div class="organizers">
+          <div
+            class="organizer"
+            *ngFor="let contact of eventDetails.eventContactList"
+          >
+            <div class="organizer-profile">
+              {{ contact.name | slice : 0 : 2 }}
+            </div>
+            <div class="organizer-names">
+              <div class="organizer-name">
+                {{ contact.name }}
+              </div>
+              <div class="organizer-name">
+                {{ contact.email }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-description-details details prize-details">
+        <div class="prize-container">
+          <div class="prize-container-title">
+            What's at Stake - Rewards and Prizes
+          </div>
+        </div>
+
+        <div class="prizes">
+          <!-- Loop over eventPrizeList -->
+          <div class="prize" *ngFor="let prize of eventDetails.eventPrizeList">
+            <div class="prize-title">
+              {{ prize.title }}
+            </div>
+            <div class="prize-cert-txt">
+              Will Certificate Provided-
+              {{ prize.isParticipationCertificateProvided ? "Yes" : "No" }}
+            </div>
+
+            <!-- Check if prizeList exists and loop through it -->
+            <div
+              class="prize-list"
+              *ngIf="prize.prizeList && prize.prizeList.length > 0"
+            >
+              <div class="prize-item" *ngFor="let prizeItem of prize.prizeList">
+                <div>Rank: {{ prizeItem.rank }}</div>
+                <div>Cash: {{ prizeItem.cash }}</div>
+                <div>Perks: {{ prizeItem.perks }}</div>
+                <div>Other Details: {{ prizeItem.otherDetails }}</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

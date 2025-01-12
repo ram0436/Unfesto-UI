@@ -1,5 +1,5 @@
 .details-container {
-  padding: 40px 0px;
+  padding: 10px 0px;
   background-color: #f6f6f6;
   min-height: calc(100vh - 75px);
 }
@@ -9,7 +9,22 @@
   gap: 20px;
   width: 100%;
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1250px;
+}
+
+.banner-image {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1400px;
+  height: 300px;
+  margin-bottom: 10px;
+}
+
+.banner-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  border-radius: 20px;
 }
 
 .left-content {
@@ -130,7 +145,7 @@
 }
 
 .event-organizer-details {
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .organizer-title {
@@ -138,18 +153,25 @@
 }
 
 .organizer-details {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.round-container-title,
+.organizer-container-title,
+.prize-container-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
 }
 
 .description {
-  font-size: 15px;
+  margin-top: 10px;
+  font-size: 14px;
   width: 100%;
-  padding: 15px;
+  padding: 10px;
   border-radius: 5px;
   border: 1px solid #ddd;
-  min-height: 200px;
+  min-height: 150px;
   word-wrap: break-word;
   white-space: normal;
 }
@@ -248,4 +270,104 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.organizer-details .organizers {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.organizers .organizer {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.organizer .organizer-profile {
+  font-size: 13px;
+  background-color: #f6f6f6;
+  color: #000;
+  border-radius: 5px;
+  border: 1px solid #000;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* width: 40px; */
+}
+
+.organizer-names {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.organizer-names .organizer-name {
+  font-size: 14px;
+  color: #000;
+}
+
+.prize-details {
+  margin-top: 30px;
+}
+
+.prizes {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.prize {
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+.prize .prize-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.prize .prize-cert-txt {
+  font-size: 14px;
+}
+
+.deadline-details {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  margin: 20px 0;
+}
+
+.deadline-details .register-detail {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.register-detail .team-icon {
+  font-size: 20px;
+  background-color: #f6f6f6;
+  color: #000;
+  border-radius: 5px;
+  border: 1px solid #000;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-detail-content .register-title {
+  font-size: 13px;
+  color: #0a0a0a;
+  margin-bottom: 2px;
+}
+
+.register-detail-content .register-count {
+  font-size: 14px;
+  color: #000;
+  font-weight: 500;
 }

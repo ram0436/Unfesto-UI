@@ -36,7 +36,7 @@ export class AllEventsComponent {
 
   getAllEvents() {
     this.eventService.getAllEvent().subscribe((data: any) => {
-      this.events = data;
+      this.events = data.reverse();
       if (this.events.length > 0) {
         this.selectEvent(this.events[0].tabRefGuid); // Select the first event by default
       }

@@ -42,7 +42,7 @@ export class ManageListingsComponent {
 
   getEventsByUserId(userId: any) {
     this.eventService.getEventByUserId(userId).subscribe((data: any) => {
-      this.events = data;
+      this.events = data.reverse();
       this.isLoading = false;
     });
   }
