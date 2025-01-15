@@ -296,7 +296,7 @@
             matInput
             [matDatepicker]="startDatePicker"
             [(ngModel)]="registerationStartDate"
-            (ngModelChange)="onRegisterationStartDateChange()"
+            (ngModelChange)="updateStartDateTime()"
             name="startDate"
           />
           <mat-datepicker-toggle
@@ -308,6 +308,20 @@
       </div>
 
       <div class="form-field">
+        <label class="section-label">Registeration Start Time *</label>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Registeration Start Time</mat-label>
+          <input
+            matInput
+            type="time"
+            [(ngModel)]="registerationStartTime"
+            (ngModelChange)="updateStartDateTime()"
+            name="startTime"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="form-field">
         <label class="section-label">Registeration End Date *</label>
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Registeration End Date</mat-label>
@@ -315,7 +329,7 @@
             matInput
             [matDatepicker]="endDatePicker"
             [(ngModel)]="registerationEndDate"
-            (ngModelChange)="onRegisterationEndDateChange()"
+            (ngModelChange)="updateEndDateTime()"
             name="endDate"
           />
           <mat-datepicker-toggle
@@ -323,6 +337,19 @@
             [for]="endDatePicker"
           ></mat-datepicker-toggle>
           <mat-datepicker #endDatePicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="form-field">
+        <label class="section-label">Registeration End Time *</label>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Registeration End Time</mat-label>
+          <input
+            matInput
+            type="time"
+            [(ngModel)]="registerationEndTime"
+            (ngModelChange)="updateEndDateTime()"
+            name="endTime"
+          />
         </mat-form-field>
       </div>
 
@@ -404,7 +431,7 @@
             matInput
             [matDatepicker]="roundStartDatePicker"
             [(ngModel)]="roundStartDate"
-            (ngModelChange)="onRoundStartDateChange()"
+            (ngModelChange)="updateRoundStartDateTime()"
             name="roundStartDate"
           />
           <mat-datepicker-toggle
@@ -416,6 +443,20 @@
       </div>
 
       <div class="form-field">
+        <label class="section-label">Start Time *</label>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Start Time</mat-label>
+          <input
+            matInput
+            type="time"
+            [(ngModel)]="roundStartTime"
+            (ngModelChange)="updateRoundStartDateTime()"
+            name="startTime"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="form-field">
         <label class="section-label">End Date *</label>
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>End Date</mat-label>
@@ -423,7 +464,7 @@
             matInput
             [matDatepicker]="roundEndDatePicker"
             [(ngModel)]="roundEndDate"
-            (ngModelChange)="onRoundEndDateChange()"
+            (ngModelChange)="updateRoundEndDateTime()"
             name="roundEndDate"
           />
           <mat-datepicker-toggle
@@ -431,6 +472,20 @@
             [for]="roundEndDatePicker"
           ></mat-datepicker-toggle>
           <mat-datepicker #roundEndDatePicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="form-field">
+        <label class="section-label">End Time *</label>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>End Time</mat-label>
+          <input
+            matInput
+            type="time"
+            [(ngModel)]="roundEndTime"
+            (ngModelChange)="updateRoundEndDateTime()"
+            name="endTime"
+          />
         </mat-form-field>
       </div>
 

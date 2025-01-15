@@ -76,7 +76,7 @@ export class HeaderComponent implements OnInit {
     // Navigate to the home page
     this.router.navigate(["/"]).then(() => {
       window.location.reload();
-      console.log("Window reloaded");
+      // console.log("Window reloaded");
     });
   }
 

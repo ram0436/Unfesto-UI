@@ -38,7 +38,14 @@ export class EditEventComponent {
   activeEditSidebar: string | null = null;
 
   registerationStartDate: Date | null = null;
+  registerationStartTime: string = "";
   registerationEndDate: Date | null = null;
+  registerationEndTime: string = "";
+
+  roundStartDate: Date[] = [];
+  roundStartTime: string[] = [];
+  roundEndDate: Date[] = [];
+  roundEndTime: string[] = [];
 
   bannerImage: any[] = [""];
   galleryImage: any[] = [""];
@@ -185,6 +192,38 @@ export class EditEventComponent {
   }
 
   ngOnInit() {
+    forkJoin([
+      this.getAllCategories(),
+      this.getAllSkills(),
+      this.getAllEventModes(),
+      this.getAllEventTypes(),
+      this.getAllOrganisations(),
+      this.getAllParticipationTypes(),
+      this.getAllVisibilities(),
+      this.getAllUsers(),
+    ]).subscribe(
+      ([
+        categories,
+        skills,
+        eventModes,
+        eventTypes,
+        organisations,
+        participationTypes,
+        visibilities,
+        users,
+      ]: any) => {
+        // Assign received data to respective properties
+        this.categories = categories;
+        this.skills = skills;
+        this.eventModes = eventModes;
+        this.eventTypes = eventTypes;
+        this.organisations = organisations;
+        this.participationTypes = participationTypes;
+        this.visibilities = visibilities;
+        this.users = users;
+      },
+      (error: any) => {}
+    );
     this.subscriptions.add(
       this.route.paramMap.subscribe((params) => {
         const eventId = params.get("id");
@@ -195,38 +234,52 @@ export class EditEventComponent {
         }
       })
     );
-    forkJoin([
-      this.getAllCategories(),
-      this.getAllEventModes(),
-      this.getAllEventTypes(),
-      this.getAllOrganisations(),
-      this.getAllParticipationTypes(),
-      this.getAllSkills(),
-      this.getAllVisibilities(),
-      this.getAllUsers(),
-    ]).subscribe(
-      ([
-        categories,
-        eventModes,
-        eventTypes,
-        organisations,
-        participationTypes,
-        skills,
-        visibilities,
-        users,
-      ]: any) => {
-        // Assign received data to respective properties
-        this.categories = categories;
-        this.eventModes = eventModes;
-        this.eventTypes = eventTypes;
-        this.organisations = organisations;
-        this.participationTypes = participationTypes;
-        this.skills = skills;
-        this.visibilities = visibilities;
-        this.users = users;
-      },
-      (error: any) => {}
-    );
+  }
+
+  updateStartDateTime() {
+    if (this.registerationStartDate && this.registerationStartTime) {
+      this.eventPayload.eventRegistrationList[0].registartionStartDateTime =
+        this.combineDateAndTime(
+          this.registerationStartDate,
+          this.registerationStartTime
+        );
+    }
+  }
+
+  updateEndDateTime() {
+    if (this.registerationEndDate && this.registerationEndTime) {
+      this.eventPayload.eventRegistrationList[0].registartionEndDateTime =
+        this.combineDateAndTime(
+          this.registerationEndDate,
+          this.registerationEndTime
+        );
+    }
+  }
+
+  updateRoundStartDateTime(index: number) {
+    if (this.roundStartDate[index] && this.roundStartTime[index]) {
+      this.eventPayload.eventRoundList[index].startDate =
+        this.combineDateAndTime(
+          this.roundStartDate[index],
+          this.roundStartTime[index]
+        );
+    }
+  }
+
+  updateRoundEndDateTime(index: number) {
+    if (this.roundEndDate[index] && this.roundEndTime[index]) {
+      this.eventPayload.eventRoundList[index].endDate = this.combineDateAndTime(
+        this.roundEndDate[index],
+        this.roundEndTime[index]
+      );
+    }
+  }
+
+  private combineDateAndTime(date: Date, time: string): string {
+    const [hours, minutes] = time.split(":").map(Number);
+    const combinedDate = new Date(date);
+    combinedDate.setHours(hours, minutes);
+    return combinedDate.toISOString();
   }
 
   getEventDetailById(eventId: any) {
@@ -272,11 +325,139 @@ export class EditEventComponent {
       eventGalleryList: eventDetails.eventGalleryList || [],
     };
 
+    this.selectedCategories = eventDetails.eventCategoryList.map(
+      (category: any) => category
+    );
+
+    if (eventDetails.eventBannerURL) {
+      this.bannerImage = [eventDetails.eventBannerURL];
+    }
+
+    if (eventDetails.eventLogoURL) {
+      this.eventImage = [eventDetails.eventLogoURL];
+    }
+
+    if (eventDetails.eventGalleryList) {
+      this.galleryImage = eventDetails.eventGalleryList.map(
+        (item: any) => item.imageURL
+      );
+    } else {
+      this.galleryImage = [];
+    }
+
+    if (eventDetails.eventCollaboratorList) {
+      this.selectedCollaborators = this.users.filter((user: any) =>
+        eventDetails.eventCollaboratorList.some(
+          (collaborator: any) => collaborator.userId === user.userId
+        )
+      );
+    }
+
+    if (eventDetails.eventCategoryList) {
+      this.selectedCategories = this.categories.filter((category: any) =>
+        eventDetails.eventCategoryList.some(
+          (eventCategory: any) => eventCategory.name === category.name
+        )
+      );
+    }
+
+    if (eventDetails.eventSkillList) {
+      this.selectedSkills = this.skills.filter((skill: any) =>
+        eventDetails.eventSkillList.some(
+          (eventSkill: any) => eventSkill.name === skill.name
+        )
+      );
+    }
+
+    // console.log(eventDetails.eventRegistrationList);
+    if (eventDetails.eventRegistrationList) {
+      this.setRegisterationEventDates(eventDetails.eventRegistrationList);
+    }
+
+    if (eventDetails.eventRoundList) {
+      this.setRoundEventDates(eventDetails.eventRoundList);
+    }
     // Sanitize description for display
     this.descriptionHtml = this.sanitizer.bypassSecurityTrustHtml(
       this.eventPayload.description
     );
     this.isLoading = false;
+  }
+
+  setRoundEventDates(eventRoundList: any[]): void {
+    this.roundStartDate = [];
+    this.roundEndDate = [];
+    this.roundStartTime = [];
+    this.roundEndTime = [];
+
+    eventRoundList.forEach((round, index) => {
+      // Parse the start and end date-times
+      const startDateTime = new Date(round.startDate);
+      const endDateTime = new Date(round.endDate);
+
+      // Adjust the times (e.g., add 5 hours)
+      startDateTime.setHours(startDateTime.getHours() + 5);
+      endDateTime.setHours(endDateTime.getHours() + 5);
+
+      // Store the adjusted date objects
+      this.roundStartDate[index] = startDateTime;
+      this.roundEndDate[index] = endDateTime;
+
+      // Extract and store the time portion from the adjusted Date objects
+      this.roundStartTime[index] = this.formatTime(startDateTime);
+      this.roundEndTime[index] = this.formatTime(endDateTime);
+    });
+  }
+
+  setRegisterationEventDates(registerationDetails: any) {
+    // Parse the start and end dates and times
+    this.registerationStartDate = new Date(
+      registerationDetails[0].registartionStartDateTime
+    );
+    this.registerationEndDate = new Date(
+      registerationDetails[0].registartionEndDateTime
+    );
+
+    // Adjust the times by adding 5 hours
+    this.registerationStartDate.setHours(
+      this.registerationStartDate.getHours() + 5
+    );
+    this.registerationEndDate.setHours(
+      this.registerationEndDate.getHours() + 5
+    );
+
+    // Extract the time portion from the adjusted date strings (assuming ISO format)
+    this.registerationStartTime = this.formatTime(this.registerationStartDate);
+    this.registerationEndTime = this.formatTime(this.registerationEndDate);
+  }
+
+  formatTime(date: Date): string {
+    const hours = date.getHours().toString().padStart(2, "0");
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+    return `${hours}:${minutes}`;
+  }
+
+  getFormattedStartDate(index: number): string {
+    const date = this.roundStartDate[index];
+    if (date) {
+      const year = date.getFullYear();
+      const month = (date.getMonth() + 1).toString().padStart(2, "0");
+      const day = date.getDate().toString().padStart(2, "0");
+
+      return `${year}-${month}-${day}`;
+    }
+    return "";
+  }
+
+  getFormattedEndDate(index: number): string {
+    const date = this.roundEndDate[index];
+    if (date) {
+      const year = date.getFullYear();
+      const month = (date.getMonth() + 1).toString().padStart(2, "0");
+      const day = date.getDate().toString().padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+    return "";
   }
 
   getIdFromName(name: string, list: any[]): number | null {

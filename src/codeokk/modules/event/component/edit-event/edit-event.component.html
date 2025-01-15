@@ -389,7 +389,7 @@
           </div>
 
           <!-- Visibility -->
-          <div class="visibility-container">
+          <!-- <div class="visibility-container">
             <label class="section-label">Visibility *</label>
             <mat-radio-group
               [(ngModel)]="eventPayload.visibilityId"
@@ -408,7 +408,7 @@
                 </div>
               </mat-radio-button>
             </mat-radio-group>
-          </div>
+          </div> -->
 
           <!-- Opportunity Title -->
           <div class="form-field">
@@ -596,7 +596,7 @@
                 matInput
                 [matDatepicker]="startDatePicker"
                 [(ngModel)]="registerationStartDate"
-                (ngModelChange)="onRegisterationStartDateChange()"
+                (ngModelChange)="updateStartDateTime()"
                 name="startDate"
               />
               <mat-datepicker-toggle
@@ -608,6 +608,20 @@
           </div>
 
           <div class="form-field">
+            <label class="section-label">Registeration Start Time *</label>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Registeration Start Time</mat-label>
+              <input
+                matInput
+                type="time"
+                [(ngModel)]="registerationStartTime"
+                (ngModelChange)="updateStartDateTime()"
+                name="startTime"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="form-field">
             <label class="section-label">Registeration End Date *</label>
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>Registeration End Date</mat-label>
@@ -615,7 +629,7 @@
                 matInput
                 [matDatepicker]="endDatePicker"
                 [(ngModel)]="registerationEndDate"
-                (ngModelChange)="onRegisterationEndDateChange()"
+                (ngModelChange)="updateEndDateTime()"
                 name="endDate"
               />
               <mat-datepicker-toggle
@@ -623,6 +637,19 @@
                 [for]="endDatePicker"
               ></mat-datepicker-toggle>
               <mat-datepicker #endDatePicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="form-field">
+            <label class="section-label">Registeration End Time *</label>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Registeration End Time</mat-label>
+              <input
+                matInput
+                type="time"
+                [(ngModel)]="registerationEndTime"
+                (ngModelChange)="updateEndDateTime()"
+                name="endTime"
+              />
             </mat-form-field>
           </div>
         </div>
@@ -683,8 +710,25 @@
                 <input
                   matInput
                   type="date"
-                  [(ngModel)]="eventPayload.eventRoundList[i].startDate"
+                  [(ngModel)]="roundStartDate[i]"
+                  [ngModel]="getFormattedStartDate(i)"
+                  (ngModelChange)="updateRoundStartDateTime(i)"
                   name="roundStartDate{{ i }}"
+                />
+              </mat-form-field>
+            </div>
+
+            <!-- Start Time -->
+            <div class="form-field">
+              <label class="section-label">Start Time *</label>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Start Time</mat-label>
+                <input
+                  matInput
+                  type="time"
+                  [(ngModel)]="roundStartTime[i]"
+                  (ngModelChange)="updateRoundStartDateTime(i)"
+                  name="roundStartTime{{ i }}"
                 />
               </mat-form-field>
             </div>
@@ -697,11 +741,42 @@
                 <input
                   matInput
                   type="date"
-                  [(ngModel)]="eventPayload.eventRoundList[i].endDate"
+                  [(ngModel)]="roundEndDate[i]"
+                  [ngModel]="getFormattedEndDate(i)"
+                  (ngModelChange)="updateRoundEndDateTime(i)"
                   name="roundEndDate{{ i }}"
                 />
               </mat-form-field>
             </div>
+
+            <!-- End Time -->
+            <div class="form-field">
+              <label class="section-label">End Time *</label>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>End Time</mat-label>
+                <input
+                  matInput
+                  type="time"
+                  [(ngModel)]="roundEndTime[i]"
+                  (ngModelChange)="updateRoundEndDateTime(i)"
+                  name="roundEndTime{{ i }}"
+                />
+              </mat-form-field>
+            </div>
+
+            <!-- End Date -->
+            <!-- <div class="form-field">
+              <label class="section-label">End Date *</label>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>End Date</mat-label>
+                <input
+                  matInput
+                  type="date"
+                  [(ngModel)]="eventPayload.eventRoundList[i].endDate"
+                  name="roundEndDate{{ i }}"
+                />
+              </mat-form-field>
+            </div> -->
           </div>
 
           <!-- Add More Round Button -->

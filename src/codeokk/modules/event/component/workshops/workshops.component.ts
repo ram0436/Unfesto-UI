@@ -50,10 +50,14 @@ export class WorkshopsComponent implements OnInit {
   selectedCollaborators: any[] = [];
 
   registerationStartDate: Date | null = null;
+  registerationStartTime: string = "";
   registerationEndDate: Date | null = null;
+  registerationEndTime: string = "";
 
   roundStartDate: Date | null = null;
   roundEndDate: Date | null = null;
+  roundStartTime: string = "";
+  roundEndTime: string = "";
 
   skillControl = new FormControl();
   filteredSkills!: Observable<any[]>;
@@ -152,6 +156,51 @@ export class WorkshopsComponent implements OnInit {
     this.subscriptions.unsubscribe();
   }
 
+  updateStartDateTime() {
+    if (this.registerationStartDate && this.registerationStartTime) {
+      this.eventPayload.eventRegistrationList[0].registartionStartDateTime =
+        this.combineDateAndTime(
+          this.registerationStartDate,
+          this.registerationStartTime
+        );
+    }
+  }
+
+  updateEndDateTime() {
+    if (this.registerationEndDate && this.registerationEndTime) {
+      this.eventPayload.eventRegistrationList[0].registartionEndDateTime =
+        this.combineDateAndTime(
+          this.registerationEndDate,
+          this.registerationEndTime
+        );
+    }
+  }
+
+  updateRoundStartDateTime() {
+    if (this.roundStartDate && this.roundStartTime) {
+      this.eventPayload.eventRoundList[0].startDate = this.combineDateAndTime(
+        this.roundStartDate,
+        this.roundStartTime
+      );
+    }
+  }
+
+  updateRoundEndDateTime() {
+    if (this.roundEndDate && this.roundEndTime) {
+      this.eventPayload.eventRoundList[0].endDate = this.combineDateAndTime(
+        this.roundEndDate,
+        this.roundEndTime
+      );
+    }
+  }
+
+  private combineDateAndTime(date: Date, time: string): string {
+    const [hours, minutes] = time.split(":").map(Number);
+    const combinedDate = new Date(date);
+    combinedDate.setHours(hours, minutes);
+    return combinedDate.toISOString();
+  }
+
   deletePrize(index: number) {
     this.eventPayload.eventPrizeList[0].prizeList.splice(index, 1);
   }
@@ -164,34 +213,6 @@ export class WorkshopsComponent implements OnInit {
       otherDetails: "",
     };
     this.eventPayload.eventPrizeList[0].prizeList.push(newPrize);
-  }
-
-  onRegisterationStartDateChange() {
-    if (this.registerationStartDate) {
-      this.eventPayload.eventRegistrationList[0].registartionStartDateTime =
-        this.registerationStartDate.toISOString();
-    }
-  }
-
-  onRegisterationEndDateChange() {
-    if (this.registerationEndDate) {
-      this.eventPayload.eventRegistrationList[0].registartionEndDateTime =
-        this.registerationEndDate.toISOString();
-    }
-  }
-
-  onRoundStartDateChange() {
-    if (this.roundStartDate) {
-      this.eventPayload.eventRoundList[0].startDate =
-        this.roundStartDate.toISOString();
-    }
-  }
-
-  onRoundEndDateChange() {
-    if (this.roundEndDate) {
-      this.eventPayload.eventRoundList[0].endDate =
-        this.roundEndDate.toISOString();
-    }
   }
 
   getAllCategories() {
@@ -434,9 +455,9 @@ export class WorkshopsComponent implements OnInit {
   }
 
   goToStep(step: number) {
-    if (this.currentStep === 1 && step === 2 && !this.validateBasicDetails()) {
-      return;
-    }
+    // if (this.currentStep === 1 && step === 2 && !this.validateBasicDetails()) {
+    //   return;
+    // }
     this.currentStep = step;
   }
 
@@ -509,6 +530,8 @@ export class WorkshopsComponent implements OnInit {
     this.eventPayload.modifiedBy = userId;
     this.eventPayload.createdOn = new Date().toISOString();
     this.eventPayload.modifiedOn = new Date().toISOString();
+
+    // console.log(JSON.stringify(this.eventPayload, null, 2));
 
     this.eventService.addEvent(this.eventPayload).subscribe((response) => {
       this.showNotification("Event Added Successfully");
