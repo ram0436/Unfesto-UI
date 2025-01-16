@@ -178,35 +178,73 @@
         </div>
       </div>
 
-      <div class="event-description-details details prize-details">
-        <div class="prize-container">
-          <div class="prize-container-title">
-            What's at Stake - Rewards and Prizes
+      <div class="event-description-details round-details-box">
+        <div class="organizer-container-title">Rounds & Deadlines</div>
+        <div class="rounds">
+          <div
+            class="round"
+            *ngFor="let round of eventDetails.eventRoundList; let i = index"
+          >
+            <div class="round-title">{{ round.title }}</div>
+            <div class="round-timings">
+              <div class="start-timing">
+                <span class="material-symbols-outlined calender-icon">
+                  calendar_month
+                </span>
+                <div class="round-timing-content">
+                  <div class="round-date-title">Round Start Date</div>
+                  <span class="round-date">
+                    {{ round.startDate | date : "MMM d, y, h:mm a" }}
+                  </span>
+                </div>
+              </div>
+              <div class="end-timing">
+                <span class="material-symbols-outlined calender-icon">
+                  calendar_month
+                </span>
+                <div class="round-timing-content">
+                  <div class="round-date-title">Round End Date</div>
+                  <span class="round-date">
+                    {{ round.endDate | date : "MMM d, y, h:mm a" }}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="round-description">{{ round.description }}</div>
           </div>
+        </div>
+      </div>
+
+      <div
+        class="event-description-details details"
+        *ngIf="eventDetails.eventPrizeList.length"
+        #section3
+      >
+        <div class="organizer-container-title">Prizes</div>
+        <div
+          *ngIf="
+            eventDetails.eventPrizeList[0].isParticipationCertificateProvided
+          "
+          class="certificate"
+        >
+          {{ eventDetails.eventPrizeList[0].title }} - Participation Certificate
+          Provided
         </div>
 
         <div class="prizes">
-          <!-- Loop over eventPrizeList -->
-          <div class="prize" *ngFor="let prize of eventDetails.eventPrizeList">
-            <div class="prize-title">
-              {{ prize.title }}
+          <div
+            class="prize"
+            *ngFor="let prize of eventDetails.eventPrizeList[0].prizeList"
+          >
+            <div class="prize-rank">
+              <span class="prize-head">Rank: </span> {{ prize.rank }}
             </div>
-            <div class="prize-cert-txt">
-              Will Certificate Provided-
-              {{ prize.isParticipationCertificateProvided ? "Yes" : "No" }}
+            <div class="prize-cash">
+              <span class="prize-head">Cash Reward: </span>
+              {{ prize.cash | currency : "INR" }}
             </div>
-
-            <!-- Check if prizeList exists and loop through it -->
-            <div
-              class="prize-list"
-              *ngIf="prize.prizeList && prize.prizeList.length > 0"
-            >
-              <div class="prize-item" *ngFor="let prizeItem of prize.prizeList">
-                <div>Rank: {{ prizeItem.rank }}</div>
-                <div>Cash: {{ prizeItem.cash }}</div>
-                <div>Perks: {{ prizeItem.perks }}</div>
-                <div>Other Details: {{ prizeItem.otherDetails }}</div>
-              </div>
+            <div class="prize-perks">
+              <span class="prize-head">Perks:</span> {{ prize.perks }}
             </div>
           </div>
         </div>

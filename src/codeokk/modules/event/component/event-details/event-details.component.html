@@ -56,93 +56,153 @@
                 </a>
               </div>
             </div>
+            <div class="event-total-price">
+              <span class="material-symbols-outlined icon"> trophy </span>
+              <span class="price-txt">Total Prize of 1000INR</span>
+            </div>
+            <div class="event-categories-list">
+              <div
+                class="event-category"
+                *ngFor="let category of eventDetails[0].eventCategoryList"
+              >
+                {{ category.name }}
+              </div>
+            </div>
           </div>
         </div>
-        <div class="bottom">
-          <div class="bottom-title">More Details</div>
-
-          <!-- Collaborators -->
-          <!-- <div class="event-collaborators-title">Collaborators:</div>
-          <div class="event-collaborators">
+        <div class="details-box">
+          <div class="details-sections">
             <div
-              class="event-collaborator"
-              *ngFor="let collaborator of eventDetails[0].eventCollaboratorList"
+              class="section"
+              *ngFor="let section of sections; let i = index"
+              (click)="scrollToSection(i)"
+              [class.active]="activeSection === i"
             >
-              {{ collaborator.userId || "-" }}
+              {{ section }}
             </div>
-          </div> -->
+          </div>
+        </div>
+        <div class="details-box round-details-box" #section0>
+          <div class="details-box-title">Rounds & Deadlines</div>
+          <div class="rounds">
+            <div
+              class="round"
+              *ngFor="
+                let round of eventDetails[0].eventRoundList;
+                let i = index
+              "
+            >
+              <div class="round-title">{{ round.title }}</div>
+              <div class="round-timings">
+                <div class="start-timing">
+                  <span class="material-symbols-outlined calender-icon">
+                    calendar_month
+                  </span>
+                  <div class="round-timing-content">
+                    <div class="round-date-title">Round Start Date</div>
+                    <span class="round-date">
+                      {{ round.startDate | date : "MMM d, y, h:mm a" }}
+                    </span>
+                  </div>
+                </div>
+                <div class="end-timing">
+                  <span class="material-symbols-outlined calender-icon">
+                    calendar_month
+                  </span>
+                  <div class="round-timing-content">
+                    <div class="round-date-title">Round End Date</div>
+                    <span class="round-date">
+                      {{ round.endDate | date : "MMM d, y, h:mm a" }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="round-description">{{ round.description }}</div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="details-box prizes-detail-box"
+          *ngIf="eventDetails[0].eventPrizeList.length"
+          #section3
+        >
+          <div class="details-box-title">Prizes</div>
+          <div
+            *ngIf="
+              eventDetails[0].eventPrizeList[0]
+                .isParticipationCertificateProvided
+            "
+            class="certificate"
+          >
+            {{ eventDetails[0].eventPrizeList[0].title }} - Participation
+            Certificate Provided
+          </div>
 
-          <div class="event-description-details details team-details">
-            <div class="deadline-details">
-              <div class="register-detail">
-                <span class="material-symbols-outlined team-icon">
-                  calendar_month
-                </span>
-                <div class="register-detail-content">
-                  <div class="register-title">Registration start Date</div>
-                  <span class="register-count">{{
-                    eventDetails[0].eventRegistrationList[0]
-                      .registartionStartDateTime | date : "MMM d, y, h:mm a"
-                  }}</span>
-                </div>
+          <div class="prizes">
+            <div
+              class="prize"
+              *ngFor="let prize of eventDetails[0].eventPrizeList[0].prizeList"
+            >
+              <div class="prize-rank">
+                <span class="prize-head">Rank: </span> {{ prize.rank }}
               </div>
-              <div class="register-detail">
-                <span class="material-symbols-outlined team-icon">
-                  calendar_month
-                </span>
-                <div class="register-detail-content">
-                  <div class="register-title">Registration Deadline</div>
-                  <span class="register-count">{{
-                    eventDetails[0].eventRegistrationList[0]
-                      .registartionEndDateTime | date : "MMM d, y, h:mm a"
-                  }}</span>
-                </div>
+              <div class="prize-cash">
+                <span class="prize-head">Cash Reward: </span>
+                {{ prize.cash | currency : "INR" }}
               </div>
-              <div class="register-detail">
-                <span class="material-symbols-outlined team-icon">
-                  person
-                </span>
-                <div class="register-detail-content">
-                  <div class="register-title">Team Size</div>
-                  <span class="register-count">{{
-                    eventDetails[0].eventRegistrationList[0]
-                      .registrationCountLimit
-                  }}</span>
-                </div>
+              <div class="prize-perks">
+                <span class="prize-head">Perks:</span> {{ prize.perks }}
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- Description -->
-          <div class="event-description">
-            <div class="description-title">Description *</div>
-            <!-- <div class="description">
-            {{ eventDetails[0].description || "-" }}
-          </div> -->
-            <div class="description" [innerHTML]="descriptionHtml"></div>
-          </div>
-          <!-- <div class="event-organizer-details">
-            <div class="organizer-title">Event Organizer</div>
-            <div class="organizer-details">
-              <div>
-                <strong>Name: </strong
-                >{{ eventDetails[0].eventContactList[0].name }}
-              </div>
-              <div>
-                <strong>Email: </strong
-                >{{ eventDetails[0].eventContactList[0].email }}
-              </div>
-              <div>
-                <strong>Contact No: </strong
-                >{{ eventDetails[0].eventContactList[0].contactNo }}
+        <div class="details-box dates-deadlines-box" #section2>
+          <div class="details-box-title">Dates & Deadlines</div>
+          <div class="deadline-details">
+            <div class="register-detail">
+              <span class="material-symbols-outlined team-icon">
+                calendar_month
+              </span>
+              <div class="register-detail-content">
+                <div class="register-title">Registration start Date</div>
+                <span class="register-count">{{
+                  eventDetails[0].eventRegistrationList[0]
+                    .registartionStartDateTime | date : "MMM d, y, h:mm a"
+                }}</span>
               </div>
             </div>
-          </div> -->
+            <div class="register-detail">
+              <span class="material-symbols-outlined team-icon">
+                calendar_month
+              </span>
+              <div class="register-detail-content">
+                <div class="register-title">Registration Deadline</div>
+                <span class="register-count">{{
+                  eventDetails[0].eventRegistrationList[0]
+                    .registartionEndDateTime | date : "MMM d, y, h:mm a"
+                }}</span>
+              </div>
+            </div>
+            <div class="register-detail">
+              <span class="material-symbols-outlined team-icon"> person </span>
+              <div class="register-detail-content">
+                <div class="register-title">Team Size</div>
+                <span class="register-count">{{
+                  eventDetails[0].eventRegistrationList[0]
+                    .registrationCountLimit
+                }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="details-box description-details" #section1>
+          <div class="details-box-title">Event Description</div>
+          <div class="description" [innerHTML]="descriptionHtml"></div>
+        </div>
+        <div class="details-box">
+          <div class="details-box-title">Contact the Organizer</div>
           <div class="organizer-details">
-            <div class="organizer-container">
-              <div class="organizer-container-title">Contact the Organizer</div>
-            </div>
-
             <div class="organizers">
               <div
                 class="organizer"
@@ -157,45 +217,6 @@
                   </div>
                   <div class="organizer-name">
                     {{ contact.email }}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="details prize-details">
-            <div class="prize-container">
-              <div class="prize-container-title">
-                What's at Stake - Rewards and Prizes
-              </div>
-            </div>
-
-            <div class="prizes">
-              <!-- Loop over eventPrizeList -->
-              <div
-                class="prize"
-                *ngFor="let prize of eventDetails[0].eventPrizeList"
-              >
-                <div class="prize-title">
-                  {{ prize.title }}
-                </div>
-                <div class="prize-cert-txt">
-                  Will Certificate Provided-
-                  {{ prize.isParticipationCertificateProvided ? "Yes" : "No" }}
-                </div>
-
-                <!-- Check if prizeList exists and loop through it -->
-                <div
-                  class="prize-list"
-                  *ngIf="prize.prizeList && prize.prizeList.length > 0"
-                >
-                  <div
-                    class="prize-item"
-                    *ngFor="let prizeItem of prize.prizeList"
-                  >
-                    <div>Rank: {{ prizeItem.rank }}</div>
-                    <div>Cash: {{ prizeItem.cash }}</div>
-                    <div>Perks: {{ prizeItem.perks }}</div>
-                    <div>Other Details: {{ prizeItem.otherDetails }}</div>
                   </div>
                 </div>
               </div>

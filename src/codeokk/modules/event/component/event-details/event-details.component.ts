@@ -1,4 +1,11 @@
-import { Component, HostListener, Inject } from "@angular/core";
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  Inject,
+  QueryList,
+  ViewChildren,
+} from "@angular/core";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -25,6 +32,45 @@ export class EventDetailsComponent {
 
   descriptionHtml: SafeHtml = "";
 
+  prizeDetails = {
+    eventPrizeList: [
+      {
+        id: 0,
+        title: "Grand Prizes",
+        isParticipationCertificateProvided: true,
+        prizeList: [
+          {
+            id: 0,
+            rank: "1st",
+            cash: 5000,
+            perks: "Trophy and Gift Card",
+            otherDetails: "",
+          },
+          {
+            id: 1,
+            rank: "2nd",
+            cash: 3000,
+            perks: "Gift Card",
+            otherDetails: "",
+          },
+          {
+            id: 2,
+            rank: "3rd",
+            cash: 2000,
+            perks: "Certificate",
+            otherDetails: "",
+          },
+        ],
+      },
+    ],
+  };
+
+  sections = ["Rounds & Deadlines", "Details", "Dates & Deadlines", "Prizes"];
+  activeSection = 0;
+
+  @ViewChildren("section0,section1,section2,section3")
+  sectionRefs!: QueryList<ElementRef>;
+
   private subscriptions = new Subscription();
 
   constructor(
@@ -49,6 +95,17 @@ export class EventDetailsComponent {
         }
       })
     );
+  }
+
+  scrollToSection(index: number): void {
+    const section = this.sectionRefs.toArray()[index];
+    if (section) {
+      section.nativeElement.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+      this.activeSection = index; // Update the active section
+    }
   }
 
   getEventDetails(guid: any) {
