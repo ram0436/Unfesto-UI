@@ -29,7 +29,7 @@ export class WorkshopsComponent implements OnInit {
   isLoading: boolean = true;
 
   eventImage: any[] = [""];
-  galleryImage: any[] = [""];
+  galleryImage: any[] = new Array(10);
   bannerImage: any[] = [""];
 
   categories: any[] = [];
@@ -58,6 +58,10 @@ export class WorkshopsComponent implements OnInit {
   roundEndDate: Date | null = null;
   roundStartTime: string = "";
   roundEndTime: string = "";
+
+  roundTimes: { startTime: string; endTime: string }[] = [
+    { startTime: "", endTime: "" },
+  ];
 
   skillControl = new FormControl();
   filteredSkills!: Observable<any[]>;
@@ -104,6 +108,9 @@ export class WorkshopsComponent implements OnInit {
   }
 
   ngOnInit() {
+    for (var i = 0; i < this.galleryImage.length; i++) {
+      this.galleryImage[i] = "";
+    }
     this.eventPayload.description = `
         <p>Enter details about the opportunity here...</p>
     
@@ -152,6 +159,12 @@ export class WorkshopsComponent implements OnInit {
     );
   }
 
+  onRegistrationCountChange(value: any): void {
+    // Ensure the value is an integer
+    this.eventPayload.eventRegistrationList[0].registrationCountLimit =
+      parseInt(value, 10) || 0;
+  }
+
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
   }
@@ -176,20 +189,20 @@ export class WorkshopsComponent implements OnInit {
     }
   }
 
-  updateRoundStartDateTime() {
-    if (this.roundStartDate && this.roundStartTime) {
-      this.eventPayload.eventRoundList[0].startDate = this.combineDateAndTime(
-        this.roundStartDate,
-        this.roundStartTime
+  updateRoundStartDateTime(round: any, index: number) {
+    if (round.startDate && this.roundTimes[index].startTime) {
+      round.startDate = this.combineDateAndTime(
+        round.startDate,
+        this.roundTimes[index].startTime
       );
     }
   }
 
-  updateRoundEndDateTime() {
-    if (this.roundEndDate && this.roundEndTime) {
-      this.eventPayload.eventRoundList[0].endDate = this.combineDateAndTime(
-        this.roundEndDate,
-        this.roundEndTime
+  updateRoundEndDateTime(round: any, index: number) {
+    if (round.endDate && this.roundTimes[index].endTime) {
+      round.endDate = this.combineDateAndTime(
+        round.endDate,
+        this.roundTimes[index].endTime
       );
     }
   }
@@ -207,12 +220,44 @@ export class WorkshopsComponent implements OnInit {
 
   addPrize() {
     const newPrize = {
+      id: 0,
       rank: "",
       cash: 0,
       perks: "",
       otherDetails: "",
     };
     this.eventPayload.eventPrizeList[0].prizeList.push(newPrize);
+  }
+
+  deleteContact(index: number) {
+    this.eventPayload.eventContactList.splice(index, 1);
+  }
+
+  addContact() {
+    const newContact = {
+      id: 0,
+      name: "",
+      email: "",
+      contactNo: "",
+    };
+    this.eventPayload.eventContactList.push(newContact);
+  }
+
+  deleteRound(index: number) {
+    this.roundTimes.splice(index, 1);
+    this.eventPayload.eventRoundList.splice(index, 1);
+  }
+
+  addRound() {
+    const newRound = {
+      id: 0,
+      title: "",
+      description: "",
+      startDate: "",
+      endDate: "",
+    };
+    this.eventPayload.eventRoundList.push(newRound);
+    this.roundTimes.push({ startTime: "", endTime: "" });
   }
 
   getAllCategories() {
@@ -341,36 +386,45 @@ export class WorkshopsComponent implements OnInit {
     this.eventImage[this.eventImage.length - 1] = "";
   }
 
-  selectGalleryFile() {
-    if (this.document) {
-      const uploadElement = this.document.getElementById("galleryFileUpload");
-      if (uploadElement) {
-        uploadElement.click();
-      }
+  deleteGallery(index: number) {
+    this.eventPayload.eventGalleryList.splice(index, 1);
+  }
+
+  addGallery() {
+    const newGallery = {
+      id: 0,
+      imageURL: "",
+      description: "",
+    };
+    this.eventPayload.eventGalleryList.push(newGallery);
+    this.galleryImage.push("");
+  }
+
+  deleteGalleryImage(index: number): void {
+    this.eventPayload.eventGalleryList.splice(index, 1);
+    this.galleryImage.splice(index, 1);
+  }
+
+  selectGalleryFile(index: number) {
+    const uploadElement = document.getElementById("galleryFileUpload" + index);
+    if (uploadElement) {
+      uploadElement.click();
     }
   }
 
-  selectGalleryImage(event: any): void {
-    var files = event.target.files;
+  selectGalleryImage(event: any, index: number): void {
+    const files = event.target.files;
+    if (!files || files.length === 0) return;
+
     const formData = new FormData();
     for (let i = 0; i < files.length; i++) {
       formData.append("files", files[i]);
     }
-    this.userService.uploadImages(formData).subscribe((data: any) => {
-      let imagesLength = data.length;
-      let dataIndex = 0;
 
-      for (
-        let j = 0;
-        j < this.galleryImage.length && dataIndex < data.length;
-        j++
-      ) {
-        this.eventPayload.eventGalleryList[0].imageURL = data[0];
-        if (this.galleryImage[j] === "") {
-          this.galleryImage[j] = data[dataIndex];
-          dataIndex++;
-          imagesLength--;
-        }
+    this.userService.uploadImages(formData).subscribe((data: any) => {
+      if (data && data.length > 0) {
+        this.eventPayload.eventGalleryList[index].imageURL = data[0];
+        this.galleryImage[index] = data[0];
       }
     });
   }
@@ -380,13 +434,6 @@ export class WorkshopsComponent implements OnInit {
       this.bannerImage[i] = this.bannerImage[i + 1];
     }
     this.bannerImage[this.bannerImage.length - 1] = "";
-  }
-
-  deleteGalleryImage(index: any): void {
-    for (let i = index; i < this.galleryImage.length - 1; i++) {
-      this.galleryImage[i] = this.galleryImage[i + 1];
-    }
-    this.galleryImage[this.galleryImage.length - 1] = "";
   }
 
   selectBannerFile() {

@@ -103,6 +103,7 @@ export class EventPayload {
     title: string;
     isParticipationCertificateProvided: boolean;
     prizeList: {
+      id: number;
       rank: string;
       cash: number;
       perks: string;
@@ -115,6 +116,7 @@ export class EventPayload {
       isParticipationCertificateProvided: true,
       prizeList: [
         {
+          id: 0,
           rank: "",
           cash: 0,
           perks: "",

@@ -35,7 +35,7 @@
 }
 
 .left-content .top-container,
-.left-content .bottom {
+.details-box {
   padding: 20px;
   background-color: #fff;
   border-radius: 10px;
@@ -98,18 +98,18 @@
   font-size: 15px;
 }
 
-.left-content .bottom .bottom-title {
+.left-content .details-box .details-box-title {
   font-size: 20px;
   font-weight: 600;
   margin-bottom: 20px;
 }
 
-.left-content .bottom .detail {
+.left-content .details-box .detail {
   font-size: 16px;
   margin-bottom: 10px;
 }
 
-.left-content .bottom .detail span {
+.left-content .details-box .detail span {
   font-weight: 600;
 }
 
@@ -339,7 +339,7 @@
   display: flex;
   align-items: center;
   gap: 50px;
-  margin: 20px 0;
+  /* margin: 20px 0; */
 }
 
 .deadline-details .register-detail {
@@ -370,4 +370,160 @@
   font-size: 14px;
   color: #000;
   font-weight: 500;
+}
+
+.event-total-price {
+  padding: 10px;
+  background-color: rgb(233, 179, 78);
+  color: #000;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+}
+
+.event-total-price .icon {
+  font-size: 24px;
+}
+
+.event-total-price .price-txt {
+  font-size: 15px;
+  font-weight: normal;
+}
+
+.event-categories-list {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.event-categories-list .event-category {
+  font-size: 13px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px 13px;
+}
+
+.details-sections {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.details-sections .section {
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.details-sections .section.active {
+  border: 1px solid #009afe;
+}
+
+.round-details-box .rounds {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.round-details-box .rounds .round .round-title {
+  background-color: #f1f1f1;
+  color: #000;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  width: fit-content;
+  margin-bottom: 15px;
+}
+
+.round .round-timings {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.start-timing,
+.end-timing {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.calender-icon {
+  font-size: 20px;
+  padding: 6px;
+  background-color: #009afe;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.round-timing-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.round-date-title {
+  font-size: 12px;
+}
+
+.round-date {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.round-description {
+  font-size: 14px;
+  font-weight: normal;
+  margin-top: 15px;
+}
+
+.prizes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+  gap: 1rem;
+}
+
+.prize {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  background-color: #ffff;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.last-prize {
+  grid-column: span 2;
+  text-align: left;
+}
+
+.certificate {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.prize-head {
+  font-weight: 600;
+}
+
+.section {
+  cursor: pointer;
+}
+
+.section.active {
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
 }

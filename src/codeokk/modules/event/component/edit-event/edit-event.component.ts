@@ -164,6 +164,7 @@ export class EditEventComponent {
     }
 
     this.eventPayload.eventPrizeList[0].prizeList.push({
+      id: 0,
       rank: "",
       cash: 0,
       perks: "",
@@ -628,45 +629,43 @@ export class EditEventComponent {
     });
   }
 
-  selectGalleryFile() {
-    if (this.document) {
-      const uploadElement = this.document.getElementById("galleryFileUpload");
-      if (uploadElement) {
-        uploadElement.click();
-      }
+  addGallery() {
+    const newGallery = {
+      id: this.eventPayload.eventGalleryList.length,
+      imageURL: "",
+      description: "",
+    };
+    this.eventPayload.eventGalleryList.push(newGallery);
+    this.galleryImage.push(""); // Add a placeholder for new image
+  }
+
+  deleteGalleryImage(index: number): void {
+    this.eventPayload.eventGalleryList.splice(index, 1);
+    this.galleryImage.splice(index, 1);
+  }
+
+  selectGalleryFile(index: number) {
+    const uploadElement = document.getElementById("galleryFileUpload" + index);
+    if (uploadElement) {
+      uploadElement.click();
     }
   }
 
-  selectGalleryImage(event: any): void {
-    var files = event.target.files;
+  selectGalleryImage(event: any, index: number): void {
+    const files = event.target.files;
+    if (!files || files.length === 0) return;
+
     const formData = new FormData();
     for (let i = 0; i < files.length; i++) {
       formData.append("files", files[i]);
     }
-    this.userService.uploadImages(formData).subscribe((data: any) => {
-      let imagesLength = data.length;
-      let dataIndex = 0;
 
-      for (
-        let j = 0;
-        j < this.galleryImage.length && dataIndex < data.length;
-        j++
-      ) {
-        this.eventPayload.eventGalleryList[0].imageURL = data[0];
-        if (this.galleryImage[j] === "") {
-          this.galleryImage[j] = data[dataIndex];
-          dataIndex++;
-          imagesLength--;
-        }
+    this.userService.uploadImages(formData).subscribe((data: any) => {
+      if (data && data.length > 0) {
+        this.eventPayload.eventGalleryList[index].imageURL = data[0];
+        this.galleryImage[index] = data[0];
       }
     });
-  }
-
-  deleteGalleryImage(index: any): void {
-    for (let i = index; i < this.galleryImage.length - 1; i++) {
-      this.galleryImage[i] = this.galleryImage[i + 1];
-    }
-    this.galleryImage[this.galleryImage.length - 1] = "";
   }
 
   selectFile() {

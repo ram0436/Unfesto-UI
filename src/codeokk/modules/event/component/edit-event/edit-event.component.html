@@ -206,28 +206,30 @@
           </div>
         </div>
 
-        <div class="prizes">
-          <!-- Loop over eventPrizeList -->
-          <div class="prize" *ngFor="let prize of eventPayload.eventPrizeList">
-            <div class="prize-title">
-              {{ prize.title }}
-            </div>
-            <div class="prize-cert-txt">
-              Will Certificate Provided-
-              {{ prize.isParticipationCertificateProvided ? "Yes" : "No" }}
-            </div>
+        <div
+          *ngIf="
+            eventPayload.eventPrizeList[0].isParticipationCertificateProvided
+          "
+          class="certificate"
+        >
+          {{ eventPayload.eventPrizeList[0].title }} - Participation Certificate
+          Provided
+        </div>
 
-            <!-- Check if prizeList exists and loop through it -->
-            <div
-              class="prize-list"
-              *ngIf="prize.prizeList && prize.prizeList.length > 0"
-            >
-              <div class="prize-item" *ngFor="let prizeItem of prize.prizeList">
-                <div>Rank: {{ prizeItem.rank }}</div>
-                <div>Cash: {{ prizeItem.cash }}</div>
-                <div>Perks: {{ prizeItem.perks }}</div>
-                <div>Other Details: {{ prizeItem.otherDetails }}</div>
-              </div>
+        <div class="prizes">
+          <div
+            class="prize"
+            *ngFor="let prize of eventPayload.eventPrizeList[0].prizeList"
+          >
+            <div class="prize-rank">
+              <span class="prize-head">Rank: </span> {{ prize.rank }}
+            </div>
+            <div class="prize-cash">
+              <span class="prize-head">Cash Reward: </span>
+              {{ prize.cash | currency : "INR" }}
+            </div>
+            <div class="prize-perks">
+              <span class="prize-head">Perks:</span> {{ prize.perks }}
             </div>
           </div>
         </div>
@@ -1029,30 +1031,32 @@
           </div>
           <div class="opportunity-logo">
             <ul class="logo-upload">
-              <div class="upload-title">Gallery Image</div>
+              <div class="upload-title">Gallery Images</div>
               <div
-                class="upload-card"
-                *ngFor="let item of galleryImage; let i = index"
+                class="upload-card gallery-upload-card"
+                *ngFor="
+                  let item of eventPayload.eventGalleryList;
+                  let i = index
+                "
               >
                 <div
                   class="upload-card-brd"
-                  (click)="selectGalleryFile()"
+                  (click)="selectGalleryFile(i)"
                   id="{{ i }}"
-                  *ngIf="item == ''"
+                  *ngIf="!item.imageURL"
                 >
                   <input
                     type="file"
-                    id="galleryFileUpload"
+                    [id]="'galleryFileUpload' + i"
                     name="galleryFileUpload"
-                    (change)="selectGalleryImage($event)"
+                    (change)="selectGalleryImage($event, i)"
                     style="display: none"
-                    multiple
                   />
                   <div>
                     <button
                       mat-raised-button
                       color="primary"
-                      class="upload-btn"
+                      class="upload-btn gallery-upload-btn"
                     >
                       <span class="material-symbols-outlined"
                         >cloud_upload</span
@@ -1061,18 +1065,45 @@
                     </button>
                   </div>
                 </div>
-                <div class="upload-card-brd" *ngIf="item != ''">
-                  <div class="preview">
+                <div class="upload-card-brd" *ngIf="item.imageURL">
+                  <div class="preview gallery-preview">
                     <button
                       class="delete-button"
                       (click)="deleteGalleryImage(i)"
                     >
                       <span class="delete-icon">&#10006;</span>
                     </button>
-                    <img [src]="item" height="200px" width="200px" alt="" />
+                    <img
+                      [src]="item.imageURL"
+                      height="200px"
+                      width="200px"
+                      alt=""
+                    />
                   </div>
                 </div>
+                <div class="form-field gallery-description-field">
+                  <label class="section-label">Description *</label>
+                  <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Description</mat-label>
+                    <textarea
+                      matInput
+                      maxlength="190"
+                      placeholder="Enter Description"
+                      [(ngModel)]="item.description"
+                      name="galleryDescription{{ i }}"
+                    ></textarea>
+                    <mat-hint align="end">Max 190 characters</mat-hint>
+                  </mat-form-field>
+                </div>
               </div>
+              <button
+                mat-raised-button
+                color="primary"
+                class="add-gallery-btn"
+                (click)="addGallery()"
+              >
+                Add More
+              </button>
             </ul>
           </div>
 

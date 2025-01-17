@@ -78,7 +78,7 @@
 }
 
 .event-list-detail .event-title {
-  font-size: 18px;
+  font-size: 16px;
   color: #009afe;
   font-weight: 600;
 }
@@ -248,7 +248,13 @@ a {
 }
 
 .event-description-details .description {
-  font-size: 15px;
+  margin-top: 10px;
+  font-size: 14px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  min-height: 150px;
   word-wrap: break-word;
   white-space: normal;
 }
@@ -373,4 +379,99 @@ a {
   font-size: 14px;
   color: #000;
   font-weight: 500;
+}
+
+.round-details-box .rounds {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.round-details-box .rounds .round .round-title {
+  background-color: #f1f1f1;
+  color: #000;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  width: fit-content;
+  margin-bottom: 15px;
+}
+
+.round .round-timings {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.start-timing,
+.end-timing {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.calender-icon {
+  font-size: 20px;
+  padding: 6px;
+  background-color: #009afe;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.round-timing-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.round-date-title {
+  font-size: 12px;
+}
+
+.round-date {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.round-description {
+  font-size: 14px;
+  font-weight: normal;
+  margin-top: 15px;
+}
+
+.prizes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+  gap: 1rem;
+}
+
+.prize {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  background-color: #ffff;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.last-prize {
+  grid-column: span 2;
+  text-align: left;
+}
+
+.certificate {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.prize-head {
+  font-weight: 600;
 }

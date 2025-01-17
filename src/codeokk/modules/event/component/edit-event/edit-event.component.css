@@ -514,8 +514,9 @@ a {
 }
 
 .logo-upload {
-  display: inline-block;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 30px 40px;
   border: 1px solid #ddd;
   border-radius: 12px;
@@ -792,4 +793,52 @@ mat-radio-button.mat-radio-checked .material-symbols-outlined {
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 20px;
+}
+
+.prizes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+  gap: 1rem;
+}
+
+.prize {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  background-color: #ffff;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.last-prize {
+  grid-column: span 2;
+  text-align: left;
+}
+
+.certificate {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.prize-head {
+  font-weight: 600;
+}
+
+.gallery-description-field {
+  margin: 20px 0;
+}
+
+.gallery-upload-card {
+  width: 60%;
+}
+
+.gallery-preview {
+  margin: 10px 0 !important;
+}
+
+.gallery-upload-btn {
+  margin-top: 30px;
 }
