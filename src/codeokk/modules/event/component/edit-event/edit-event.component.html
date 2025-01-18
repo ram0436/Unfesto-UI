@@ -118,15 +118,73 @@
           <div class="register-detail">
             <span class="material-symbols-outlined team-icon"> person </span>
             <div class="register-detail-content">
-              <div class="register-title">Team Size</div>
+              <div class="register-title">Registeration Count Limit</div>
               <span class="register-count">{{
                 eventPayload.eventRegistrationList[0].registrationCountLimit
               }}</span>
             </div>
           </div>
+          <div
+            class="register-detail"
+            *ngIf="
+              eventPayload.eventRegistrationList[0].participationTypeId === 2
+            "
+          >
+            <span class="material-symbols-outlined team-icon"> groups </span>
+            <div class="register-detail-content">
+              <div class="register-title">Team Size</div>
+              <span class="register-count"
+                >Min:
+                {{ eventPayload.eventRegistrationList[0].minTeamMember }} - Max:
+                {{ eventPayload.eventRegistrationList[0].maxTeamMember }}</span
+              >
+            </div>
+          </div>
         </div>
       </div>
-      <div class="details round-details">
+      <div class="details round-details round-details-box">
+        <div class="organizer-container-title">Rounds & Deadlines</div>
+        <div class="rounds">
+          <div
+            class="round"
+            *ngFor="let round of eventDetails.eventRoundList; let i = index"
+          >
+            <div class="round-no-container">
+              <div class="round-number line">{{ i + 1 }}</div>
+            </div>
+            <div class="round-details">
+              <div class="round-title">{{ round.title }}</div>
+              <div class="round-timings">
+                <div class="start-timing">
+                  <span class="material-symbols-outlined calender-icon">
+                    calendar_month
+                  </span>
+                  <div class="round-timing-content">
+                    <div class="round-date-title">Round Start Date</div>
+                    <span class="round-date">
+                      {{ round.startDate | date : "MMM d, y, h:mm a" }}
+                    </span>
+                  </div>
+                </div>
+                <div class="end-timing">
+                  <span class="material-symbols-outlined calender-icon">
+                    calendar_month
+                  </span>
+                  <div class="round-timing-content">
+                    <div class="round-date-title">Round End Date</div>
+                    <span class="round-date">
+                      {{ round.endDate | date : "MMM d, y, h:mm a" }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="round-description">{{ round.description }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="details round-details">
         <div class="round-container">
           <div class="round-container-title">What's the Schedule?</div>
           <div class="rounds">
@@ -166,7 +224,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="details description-details">
         <div class="event-description">
           <div class="description-title">Description *</div>
@@ -235,11 +293,11 @@
         </div>
       </div>
 
-      <div class="publish-button-container">
+      <!-- <div class="publish-button-container">
         <button class="publish-button" (click)="updateEvent()">
           Publish Now
         </button>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
@@ -310,9 +368,14 @@
           </div>
 
           <div class="form-field">
-            <!-- <button mat-raised-button color="primary" class="add-btn">
-              Add Banner
-            </button> -->
+            <button
+              mat-raised-button
+              color="primary"
+              class="add-btn"
+              (click)="updateEvent()"
+            >
+              Save Banner
+            </button>
           </div>
         </div>
       </div>
@@ -572,6 +635,40 @@
             </mat-radio-group>
           </div>
 
+          <div
+            *ngIf="
+              eventPayload.eventRegistrationList[0].participationTypeId === 2
+            "
+          >
+            <div class="form-field">
+              <label class="section-label">Min Team Members *</label>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Min Team Members</mat-label>
+                <input
+                  matInput
+                  [(ngModel)]="
+                    eventPayload.eventRegistrationList[0].minTeamMember
+                  "
+                  name="minTeamMember"
+                />
+              </mat-form-field>
+            </div>
+
+            <div class="form-field">
+              <label class="section-label">Max Team Members *</label>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Max Team Members</mat-label>
+                <input
+                  matInput
+                  [(ngModel)]="
+                    eventPayload.eventRegistrationList[0].maxTeamMember
+                  "
+                  name="maxTeamMember"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+
           <!-- Opportunity Title -->
           <div class="form-field">
             <label class="section-label">No. of Registerations Allowed *</label>
@@ -653,6 +750,16 @@
                 name="endTime"
               />
             </mat-form-field>
+          </div>
+          <div class="form-field">
+            <button
+              mat-raised-button
+              color="primary"
+              class="add-btn"
+              (click)="updateEvent()"
+            >
+              Save Details
+            </button>
           </div>
         </div>
       </div>
@@ -765,20 +872,6 @@
                 />
               </mat-form-field>
             </div>
-
-            <!-- End Date -->
-            <!-- <div class="form-field">
-              <label class="section-label">End Date *</label>
-              <mat-form-field appearance="outline" class="full-width">
-                <mat-label>End Date</mat-label>
-                <input
-                  matInput
-                  type="date"
-                  [(ngModel)]="eventPayload.eventRoundList[i].endDate"
-                  name="roundEndDate{{ i }}"
-                />
-              </mat-form-field>
-            </div> -->
           </div>
 
           <!-- Add More Round Button -->
@@ -790,6 +883,16 @@
               (click)="addNewRound()"
             >
               Add More Round
+            </button>
+          </div>
+          <div class="form-field">
+            <button
+              mat-raised-button
+              color="primary"
+              class="add-btn"
+              (click)="updateEvent()"
+            >
+              Save Rounds
             </button>
           </div>
         </div>
@@ -811,6 +914,16 @@
               (ngModelChange)="onContentChange($event)"
               class="quill-editor"
             ></quill-editor>
+          </div>
+          <div class="form-field">
+            <button
+              mat-raised-button
+              color="primary"
+              class="add-btn"
+              (click)="updateEvent()"
+            >
+              Save Description
+            </button>
           </div>
         </div>
       </div>
@@ -940,6 +1053,16 @@
               </button>
             </div>
           </div>
+          <div class="form-field">
+            <button
+              mat-raised-button
+              color="primary"
+              class="add-btn"
+              (click)="updateEvent()"
+            >
+              Save Prizes
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -1016,6 +1139,16 @@
               (click)="addNewContact()"
             >
               Add More Contact
+            </button>
+          </div>
+          <div class="form-field">
+            <button
+              mat-raised-button
+              color="primary"
+              class="add-btn"
+              (click)="updateEvent()"
+            >
+              Save Contact
             </button>
           </div>
         </div>
@@ -1108,8 +1241,13 @@
           </div>
 
           <div class="form-field">
-            <button mat-raised-button color="primary" class="add-btn">
-              Add Gallery
+            <button
+              mat-raised-button
+              color="primary"
+              class="add-btn"
+              (click)="updateEvent()"
+            >
+              Save Gallery
             </button>
           </div>
         </div>

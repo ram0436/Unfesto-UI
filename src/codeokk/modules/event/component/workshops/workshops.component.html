@@ -270,6 +270,34 @@
         </mat-radio-group>
       </div>
 
+      <div
+        *ngIf="eventPayload.eventRegistrationList[0].participationTypeId === 2"
+      >
+        <div class="form-field">
+          <label class="section-label">Min Team Members *</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Min Team Members</mat-label>
+            <input
+              matInput
+              [(ngModel)]="eventPayload.eventRegistrationList[0].minTeamMember"
+              name="minTeamMember"
+            />
+          </mat-form-field>
+        </div>
+
+        <div class="form-field">
+          <label class="section-label">Max Team Members *</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Max Team Members</mat-label>
+            <input
+              matInput
+              [(ngModel)]="eventPayload.eventRegistrationList[0].maxTeamMember"
+              name="maxTeamMember"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+
       <!-- Opportunity Title -->
       <div class="form-field">
         <label class="section-label">No. of Registerations Allowed *</label>

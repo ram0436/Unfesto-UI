@@ -25,6 +25,8 @@ export class EventPayload {
     modifiedOn: string;
     id: number;
     participationTypeId: number;
+    minTeamMember: number;
+    maxTeamMember: number;
     registartionStartDateTime: string;
     registartionEndDateTime: string;
     registrationCountLimit: number;
@@ -36,6 +38,8 @@ export class EventPayload {
       modifiedOn: new Date().toISOString(),
       id: 0,
       participationTypeId: 0,
+      minTeamMember: 0,
+      maxTeamMember: 0,
       registartionStartDateTime: new Date().toISOString(),
       registartionEndDateTime: new Date().toISOString(),
       registrationCountLimit: 0,

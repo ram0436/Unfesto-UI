@@ -338,7 +338,7 @@ a {
   margin-bottom: 20px;
 }
 
-.round-details .rounds {
+/* .round-details .rounds {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -393,7 +393,7 @@ a {
 
 .round-dates .date .date-txt span {
   font-size: 13px;
-}
+} */
 
 .description {
   padding: 10px;
@@ -817,7 +817,7 @@ mat-radio-button.mat-radio-checked .material-symbols-outlined {
 }
 
 .certificate {
-  margin-top: 1rem;
+  margin: 1rem 0;
   font-size: 1rem;
   color: #4caf50;
   font-weight: bold;
@@ -841,4 +841,103 @@ mat-radio-button.mat-radio-checked .material-symbols-outlined {
 
 .gallery-upload-btn {
   margin-top: 30px;
+}
+
+.round-details-box .rounds {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.round-details-box .rounds .round {
+  display: flex;
+  gap: 10px;
+}
+
+.round .round-no-container {
+  /* height: 100%; */
+  /* position: relative; */
+}
+
+.round .round-number {
+  background-color: #009afe;
+  color: #fff;
+  padding: 7px 14px;
+  margin-top: 5px;
+  font-weight: 600;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+  border-radius: 50%;
+  position: relative;
+}
+
+.round .round-number.line::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: calc(100% + 90px);
+  background-color: #009afe;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.round-details-box .rounds .round .round-title {
+  background-color: #f1f1f1;
+  color: #000;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  width: fit-content;
+  margin-bottom: 15px;
+}
+
+.round .round-timings {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.start-timing,
+.end-timing {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.calender-icon {
+  font-size: 20px;
+  padding: 6px;
+  background-color: #009afe;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.round-timing-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.round-date-title {
+  font-size: 12px;
+}
+
+.round-date {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.round-description {
+  font-size: 14px;
+  font-weight: normal;
+  margin-top: 15px;
 }
