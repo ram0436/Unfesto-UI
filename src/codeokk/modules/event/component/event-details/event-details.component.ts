@@ -4,6 +4,7 @@ import {
   HostListener,
   Inject,
   QueryList,
+  ViewChild,
   ViewChildren,
 } from "@angular/core";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
@@ -23,6 +24,11 @@ import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 })
 export class EventDetailsComponent {
   dialogRef: MatDialogRef<any> | null = null;
+
+  @ViewChild("roundsSection") roundsSection!: ElementRef;
+  @ViewChild("descriptionSection") descriptionSection!: ElementRef;
+  @ViewChild("datesSection") datesSection!: ElementRef;
+  @ViewChild("prizesSection") prizesSection!: ElementRef;
 
   eventDetails: any[] = [];
   userRole: String | null = null;
@@ -68,9 +74,6 @@ export class EventDetailsComponent {
   sections = ["Rounds & Deadlines", "Details", "Dates & Deadlines", "Prizes"];
   activeSection = 0;
 
-  @ViewChildren("section0,section1,section2,section3")
-  sectionRefs!: QueryList<ElementRef>;
-
   private subscriptions = new Subscription();
 
   constructor(
@@ -98,14 +101,48 @@ export class EventDetailsComponent {
   }
 
   scrollToSection(index: number): void {
-    const section = this.sectionRefs.toArray()[index];
-    if (section) {
-      section.nativeElement.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-      this.activeSection = index; // Update the active section
+    this.activeSection = index;
+    let targetElement: HTMLElement | null = null;
+
+    // Determine which element to scroll to
+    switch (index) {
+      case 0:
+        targetElement = this.roundsSection.nativeElement;
+        break;
+      case 1:
+        targetElement = this.descriptionSection.nativeElement;
+        break;
+      case 2:
+        targetElement = this.datesSection.nativeElement;
+        break;
+      case 3:
+        targetElement = this.prizesSection.nativeElement;
+        break;
     }
+
+    // If the target element is found, scroll to it
+    if (targetElement) {
+      window.scrollTo({
+        top: targetElement.offsetTop - 100, // Adjust the offset to place the section slightly below the top if needed
+        behavior: "smooth",
+      });
+    }
+  }
+
+  calculateTotalPrize(): number {
+    if (this.eventDetails[0]?.eventPrizeList?.length > 0) {
+      return this.eventDetails[0].eventPrizeList.reduce(
+        (total: number, prizeCategory: any) => {
+          const categoryTotal = prizeCategory.prizeList.reduce(
+            (sum: number, prize: any) => sum + prize.cash,
+            0
+          );
+          return total + categoryTotal;
+        },
+        0
+      );
+    }
+    return 0;
   }
 
   getEventDetails(guid: any) {

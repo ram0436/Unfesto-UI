@@ -161,6 +161,7 @@ a {
   word-wrap: break-word;
   white-space: normal;
   margin-bottom: 15px;
+  line-height: 36px;
 }
 
 .event-title:hover {
@@ -283,7 +284,7 @@ a {
 
 .organizers .organizer {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: row;
   gap: 10px;
 }
@@ -387,6 +388,42 @@ a {
   gap: 20px;
 }
 
+.round-details-box .rounds .round {
+  display: flex;
+  gap: 10px;
+}
+
+.round .round-no-container {
+  /* height: 100%; */
+  /* position: relative; */
+}
+
+.round .round-number {
+  background-color: #009afe;
+  color: #fff;
+  padding: 7px 14px;
+  margin-top: 5px;
+  font-weight: 600;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+  border-radius: 50%;
+  position: relative;
+}
+
+.round .round-number.line::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: calc(100% + 90px);
+  background-color: #009afe;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .round-details-box .rounds .round .round-title {
   background-color: #f1f1f1;
   color: #000;
@@ -466,7 +503,7 @@ a {
 }
 
 .certificate {
-  margin-top: 1rem;
+  margin: 1rem 0;
   font-size: 1rem;
   color: #4caf50;
   font-weight: bold;

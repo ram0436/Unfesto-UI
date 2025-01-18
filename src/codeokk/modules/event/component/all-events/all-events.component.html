@@ -122,10 +122,26 @@
           <div class="register-detail">
             <span class="material-symbols-outlined team-icon"> person </span>
             <div class="register-detail-content">
-              <div class="register-title">Team Size</div>
+              <div class="register-title">Registeration Count Limit</div>
               <span class="register-count">{{
                 eventDetails.eventRegistrationList[0].registrationCountLimit
               }}</span>
+            </div>
+          </div>
+          <div
+            class="register-detail"
+            *ngIf="
+              eventDetails.eventRegistrationList[0].participationTypeId === 2
+            "
+          >
+            <span class="material-symbols-outlined team-icon"> groups </span>
+            <div class="register-detail-content">
+              <div class="register-title">Team Size</div>
+              <span class="register-count"
+                >Min:
+                {{ eventDetails.eventRegistrationList[0].minTeamMember }} - Max:
+                {{ eventDetails.eventRegistrationList[0].maxTeamMember }}</span
+              >
             </div>
           </div>
         </div>
@@ -153,30 +169,6 @@
           </div>
         </div>
       </div> -->
-      <div class="event-description-details details organizer-details">
-        <div class="organizer-container">
-          <div class="organizer-container-title">Contact the Organizer</div>
-        </div>
-
-        <div class="organizers">
-          <div
-            class="organizer"
-            *ngFor="let contact of eventDetails.eventContactList"
-          >
-            <div class="organizer-profile">
-              {{ contact.name | slice : 0 : 2 }}
-            </div>
-            <div class="organizer-names">
-              <div class="organizer-name">
-                {{ contact.name }}
-              </div>
-              <div class="organizer-name">
-                {{ contact.email }}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <div class="event-description-details round-details-box">
         <div class="organizer-container-title">Rounds & Deadlines</div>
@@ -185,32 +177,37 @@
             class="round"
             *ngFor="let round of eventDetails.eventRoundList; let i = index"
           >
-            <div class="round-title">{{ round.title }}</div>
-            <div class="round-timings">
-              <div class="start-timing">
-                <span class="material-symbols-outlined calender-icon">
-                  calendar_month
-                </span>
-                <div class="round-timing-content">
-                  <div class="round-date-title">Round Start Date</div>
-                  <span class="round-date">
-                    {{ round.startDate | date : "MMM d, y, h:mm a" }}
-                  </span>
-                </div>
-              </div>
-              <div class="end-timing">
-                <span class="material-symbols-outlined calender-icon">
-                  calendar_month
-                </span>
-                <div class="round-timing-content">
-                  <div class="round-date-title">Round End Date</div>
-                  <span class="round-date">
-                    {{ round.endDate | date : "MMM d, y, h:mm a" }}
-                  </span>
-                </div>
-              </div>
+            <div class="round-no-container">
+              <div class="round-number line">{{ i + 1 }}</div>
             </div>
-            <div class="round-description">{{ round.description }}</div>
+            <div class="round-details">
+              <div class="round-title">{{ round.title }}</div>
+              <div class="round-timings">
+                <div class="start-timing">
+                  <span class="material-symbols-outlined calender-icon">
+                    calendar_month
+                  </span>
+                  <div class="round-timing-content">
+                    <div class="round-date-title">Round Start Date</div>
+                    <span class="round-date">
+                      {{ round.startDate | date : "MMM d, y, h:mm a" }}
+                    </span>
+                  </div>
+                </div>
+                <div class="end-timing">
+                  <span class="material-symbols-outlined calender-icon">
+                    calendar_month
+                  </span>
+                  <div class="round-timing-content">
+                    <div class="round-date-title">Round End Date</div>
+                    <span class="round-date">
+                      {{ round.endDate | date : "MMM d, y, h:mm a" }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="round-description">{{ round.description }}</div>
+            </div>
           </div>
         </div>
       </div>
@@ -245,6 +242,31 @@
             </div>
             <div class="prize-perks">
               <span class="prize-head">Perks:</span> {{ prize.perks }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-description-details details organizer-details">
+        <div class="organizer-container">
+          <div class="organizer-container-title">Contact the Organizer</div>
+        </div>
+
+        <div class="organizers">
+          <div
+            class="organizer"
+            *ngFor="let contact of eventDetails.eventContactList"
+          >
+            <div class="organizer-profile">
+              {{ contact.name | slice : 0 : 2 }}
+            </div>
+            <div class="organizer-names">
+              <div class="organizer-name">
+                {{ contact.name }}
+              </div>
+              <div class="organizer-name">
+                {{ contact.email }}
+              </div>
+              <div class="organizer-name">+91 {{ contact.contactNo }}</div>
             </div>
           </div>
         </div>

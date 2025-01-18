@@ -58,7 +58,9 @@
             </div>
             <div class="event-total-price">
               <span class="material-symbols-outlined icon"> trophy </span>
-              <span class="price-txt">Total Prize of 1000INR</span>
+              <span class="price-txt"
+                >Total Prize of {{ calculateTotalPrize() }} INR</span
+              >
             </div>
             <div class="event-categories-list">
               <div
@@ -75,14 +77,15 @@
             <div
               class="section"
               *ngFor="let section of sections; let i = index"
-              (click)="scrollToSection(i)"
               [class.active]="activeSection === i"
+              (click)="scrollToSection(i)"
+              #sectionDiv
             >
               {{ section }}
             </div>
           </div>
         </div>
-        <div class="details-box round-details-box" #section0>
+        <div class="details-box round-details-box" #roundsSection>
           <div class="details-box-title">Rounds & Deadlines</div>
           <div class="rounds">
             <div
@@ -92,39 +95,77 @@
                 let i = index
               "
             >
-              <div class="round-title">{{ round.title }}</div>
-              <div class="round-timings">
-                <div class="start-timing">
-                  <span class="material-symbols-outlined calender-icon">
-                    calendar_month
-                  </span>
-                  <div class="round-timing-content">
-                    <div class="round-date-title">Round Start Date</div>
-                    <span class="round-date">
-                      {{ round.startDate | date : "MMM d, y, h:mm a" }}
-                    </span>
-                  </div>
-                </div>
-                <div class="end-timing">
-                  <span class="material-symbols-outlined calender-icon">
-                    calendar_month
-                  </span>
-                  <div class="round-timing-content">
-                    <div class="round-date-title">Round End Date</div>
-                    <span class="round-date">
-                      {{ round.endDate | date : "MMM d, y, h:mm a" }}
-                    </span>
-                  </div>
-                </div>
+              <div class="round-no-container">
+                <div class="round-number line">{{ i + 1 }}</div>
               </div>
-              <div class="round-description">{{ round.description }}</div>
+              <div class="round-details">
+                <div class="round-title">{{ round.title }}</div>
+                <div class="round-timings">
+                  <div class="start-timing">
+                    <span class="material-symbols-outlined calender-icon">
+                      calendar_month
+                    </span>
+                    <div class="round-timing-content">
+                      <div class="round-date-title">Round Start Date</div>
+                      <span class="round-date">
+                        {{ round.startDate | date : "MMM d, y, h:mm a" }}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="end-timing">
+                    <span class="material-symbols-outlined calender-icon">
+                      calendar_month
+                    </span>
+                    <div class="round-timing-content">
+                      <div class="round-date-title">Round End Date</div>
+                      <span class="round-date">
+                        {{ round.endDate | date : "MMM d, y, h:mm a" }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="round-description">{{ round.description }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="details-box description-details" #descriptionSection>
+          <div class="details-box-title">Event Description</div>
+          <div class="description" [innerHTML]="descriptionHtml"></div>
+        </div>
+        <div class="details-box dates-deadlines-box" #datesSection>
+          <div class="details-box-title">Dates & Deadlines</div>
+          <div class="deadline-details">
+            <div class="register-detail">
+              <span class="material-symbols-outlined team-icon">
+                calendar_month
+              </span>
+              <div class="register-detail-content">
+                <div class="register-title">Registration start Date</div>
+                <span class="register-count">{{
+                  eventDetails[0].eventRegistrationList[0]
+                    .registartionStartDateTime | date : "MMM d, y, h:mm a"
+                }}</span>
+              </div>
+            </div>
+            <div class="register-detail">
+              <span class="material-symbols-outlined team-icon">
+                calendar_month
+              </span>
+              <div class="register-detail-content">
+                <div class="register-title">Registration Deadline</div>
+                <span class="register-count">{{
+                  eventDetails[0].eventRegistrationList[0]
+                    .registartionEndDateTime | date : "MMM d, y, h:mm a"
+                }}</span>
+              </div>
             </div>
           </div>
         </div>
         <div
           class="details-box prizes-detail-box"
           *ngIf="eventDetails[0].eventPrizeList.length"
-          #section3
+          #prizesSection
         >
           <div class="details-box-title">Prizes</div>
           <div
@@ -157,49 +198,6 @@
           </div>
         </div>
 
-        <div class="details-box dates-deadlines-box" #section2>
-          <div class="details-box-title">Dates & Deadlines</div>
-          <div class="deadline-details">
-            <div class="register-detail">
-              <span class="material-symbols-outlined team-icon">
-                calendar_month
-              </span>
-              <div class="register-detail-content">
-                <div class="register-title">Registration start Date</div>
-                <span class="register-count">{{
-                  eventDetails[0].eventRegistrationList[0]
-                    .registartionStartDateTime | date : "MMM d, y, h:mm a"
-                }}</span>
-              </div>
-            </div>
-            <div class="register-detail">
-              <span class="material-symbols-outlined team-icon">
-                calendar_month
-              </span>
-              <div class="register-detail-content">
-                <div class="register-title">Registration Deadline</div>
-                <span class="register-count">{{
-                  eventDetails[0].eventRegistrationList[0]
-                    .registartionEndDateTime | date : "MMM d, y, h:mm a"
-                }}</span>
-              </div>
-            </div>
-            <div class="register-detail">
-              <span class="material-symbols-outlined team-icon"> person </span>
-              <div class="register-detail-content">
-                <div class="register-title">Team Size</div>
-                <span class="register-count">{{
-                  eventDetails[0].eventRegistrationList[0]
-                    .registrationCountLimit
-                }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="details-box description-details" #section1>
-          <div class="details-box-title">Event Description</div>
-          <div class="description" [innerHTML]="descriptionHtml"></div>
-        </div>
         <div class="details-box">
           <div class="details-box-title">Contact the Organizer</div>
           <div class="organizer-details">
@@ -217,6 +215,9 @@
                   </div>
                   <div class="organizer-name">
                     {{ contact.email }}
+                  </div>
+                  <div class="organizer-name">
+                    {{ contact.contactNo }}
                   </div>
                 </div>
               </div>
@@ -242,27 +243,50 @@
             <div class="register-btn">Register</div>
           </a>
           <div class="event-register-details">
-            <div class="register-detail">
+            <!-- <div class="register-detail">
               <span class="material-symbols-outlined icon"> groups </span>
               <div class="register-detail-content">
                 <div class="register-title">Registered</div>
                 <span class="register-count">10</span>
               </div>
-            </div>
+            </div> -->
             <div class="register-detail">
               <span class="material-symbols-outlined icon"> person </span>
               <div class="register-detail-content">
-                <div class="register-title">Team Size</div>
-                <span class="register-count">10</span>
+                <div class="register-title">Registeration Count Limit</div>
+                <span class="register-count">{{
+                  eventDetails[0].eventRegistrationList[0]
+                    .registrationCountLimit
+                }}</span>
               </div>
             </div>
-            <div class="register-detail">
+            <div
+              class="register-detail"
+              *ngIf="
+                eventDetails[0].eventRegistrationList[0].participationTypeId ===
+                2
+              "
+            >
+              <span class="material-symbols-outlined icon"> groups </span>
+              <div class="register-detail-content">
+                <div class="register-title">Team Size</div>
+                <span class="register-count"
+                  >Min:
+                  {{ eventDetails[0].eventRegistrationList[0].minTeamMember }} -
+                  Max:
+                  {{
+                    eventDetails[0].eventRegistrationList[0].maxTeamMember
+                  }}</span
+                >
+              </div>
+            </div>
+            <!-- <div class="register-detail">
               <span class="material-symbols-outlined icon"> flash_on </span>
               <div class="register-detail-content">
                 <div class="register-title">Impressions</div>
                 <span class="register-count">10</span>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
