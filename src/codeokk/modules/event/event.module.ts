@@ -26,6 +26,12 @@ import { CompeteComponent } from "./component/compete/compete.component";
 import { HostPageComponent } from "./component/host-page/host-page.component";
 import { EditEventComponent } from "./component/edit-event/edit-event.component";
 import { RegisterEventComponent } from "./component/register-event/register-event.component";
+import {
+  NgxMatDatetimePickerModule,
+  NgxMatNativeDateModule,
+  NgxMatTimepickerModule,
+} from "@angular-material-components/datetime-picker";
+import { MatNativeDateModule } from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -68,6 +74,16 @@ import { RegisterEventComponent } from "./component/register-event/register-even
     MatRadioModule,
     MatDatepickerModule,
     MatAutocompleteModule,
+    HttpClientModule,
+    MatDatepickerModule,
+    MatInputModule,
+    NgxMatTimepickerModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    NgxMatDatetimePickerModule,
+    NgxMatNativeDateModule,
+    NgxMatTimepickerModule,
     QuillModule.forRoot(),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

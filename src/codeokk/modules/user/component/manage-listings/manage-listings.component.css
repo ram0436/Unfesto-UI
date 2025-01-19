@@ -37,6 +37,10 @@
   display: flex;
   align-items: center;
   gap: 30px;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  white-space: nowrap; /* Prevent wrapping of child elements */
+  scrollbar-width: none; /* For modern browsers */
+  scrollbar-color: #ccc transparent;
 }
 
 .listing-sections .listings .listing-link {
