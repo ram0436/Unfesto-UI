@@ -32,6 +32,7 @@ import { LoginComponent } from "./modules/login/login.component";
 import { SignupComponent } from "./modules/signup/signup.component";
 import { MatRadioButton, MatRadioModule } from "@angular/material/radio";
 import { QuillModule } from "ngx-quill";
+import { NgxMatNativeDateModule } from "@angular-material-components/datetime-picker";
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, LoginComponent, SignupComponent],
@@ -67,6 +68,7 @@ import { QuillModule } from "ngx-quill";
     MatRadioModule,
     MatRadioButton,
     MatAutocompleteModule,
+    NgxMatNativeDateModule,
     QuillModule.forRoot(),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

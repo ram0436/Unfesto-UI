@@ -317,6 +317,45 @@
         </mat-form-field>
       </div>
 
+      <!-- <div class="form-field">
+        <label class="section-label">Registration End Date & Time *</label>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Registration End Date & Time</mat-label>
+          <input
+            matInput
+            [ngxMatDatetimePicker]="endDateTimePicker"
+            [(ngModel)]="registerationEndDateTime"
+            (ngModelChange)="updateEndDateTime()"
+            name="endDateTime"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="endDateTimePicker"
+          ></mat-datepicker-toggle>
+          <ngx-mat-datetime-picker #endDateTimePicker></ngx-mat-datetime-picker>
+        </mat-form-field>
+      </div>
+      <div class="form-field">
+        <label class="section-label">Registration Start Date & Time *</label>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Registration Start Date & Time</mat-label>
+          <input
+            matInput
+            [ngxMatDatetimePicker]="startDateTimePicker"
+            [(ngModel)]="registerationStartDateTime"
+            (ngModelChange)="updateStartDateTime()"
+            name="startDateTime"
+          />
+          <mat-datepicker-toggle
+            [for]="startDateTimePicker"
+            matSuffix
+          ></mat-datepicker-toggle>
+          <ngx-mat-datetime-picker
+            #startDateTimePicker
+          ></ngx-mat-datetime-picker>
+        </mat-form-field>
+      </div> -->
+
       <div class="form-field">
         <label class="section-label">Registeration Start Date *</label>
         <mat-form-field appearance="outline" class="full-width">

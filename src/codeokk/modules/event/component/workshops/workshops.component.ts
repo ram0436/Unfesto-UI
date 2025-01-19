@@ -169,6 +169,23 @@ export class WorkshopsComponent implements OnInit {
     this.subscriptions.unsubscribe();
   }
 
+  registerationStartDateTime: Date | null = null;
+  registerationEndDateTime: Date | null = null;
+
+  // updateStartDateTime() {
+  //   if (this.registerationStartDateTime) {
+  //     this.eventPayload.eventRegistrationList[0].registartionStartDateTime =
+  //       this.registerationStartDateTime.toISOString();
+  //   }
+  // }
+
+  // updateEndDateTime() {
+  //   if (this.registerationEndDateTime) {
+  //     this.eventPayload.eventRegistrationList[0].registartionEndDateTime =
+  //       this.registerationEndDateTime.toISOString();
+  //   }
+  // }
+
   updateStartDateTime() {
     if (this.registerationStartDate && this.registerationStartTime) {
       this.eventPayload.eventRegistrationList[0].registartionStartDateTime =

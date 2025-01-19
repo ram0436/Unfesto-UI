@@ -56,6 +56,10 @@ export class EventService {
     return this.http.put(`${this.baseUrl}Event/` + eventId, payLoad);
   }
 
+  deleteEvent(eventId: any) {
+    return this.http.delete(`${this.baseUrl}Event/` + eventId);
+  }
+
   addEventUserRegisteration(payload: any): Observable<any> {
     return this.http.post(
       `${this.baseUrl}Event/AddEventUserRegistration`,

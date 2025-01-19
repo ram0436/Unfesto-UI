@@ -134,9 +134,11 @@
             <div class="register-detail-content">
               <div class="register-title">Team Size</div>
               <span class="register-count"
-                >Min:
-                {{ eventPayload.eventRegistrationList[0].minTeamMember }} - Max:
-                {{ eventPayload.eventRegistrationList[0].maxTeamMember }}</span
+                >{{ eventPayload.eventRegistrationList[0].minTeamMember }} -
+                {{
+                  eventPayload.eventRegistrationList[0].maxTeamMember
+                }}
+                Members</span
               >
             </div>
           </div>

@@ -8,9 +8,26 @@
     <div class="listing-head">Listing</div>
     <div class="listing-sections">
       <div class="listings">
-        <div class="listing-link active">All</div>
-        <div class="listing-link">Workshops</div>
+        <!-- 'All' option -->
+        <div
+          class="listing-link"
+          [class.active]="selectedEventType === null"
+          (click)="filterEventsByType(null)"
+        >
+          All
+        </div>
+
+        <!-- Dynamic options from eventTypes -->
+        <div
+          *ngFor="let eventType of eventTypes"
+          class="listing-link"
+          [class.active]="selectedEventType === eventType.name"
+          (click)="filterEventsByType(eventType.name)"
+        >
+          {{ eventType.name }}
+        </div>
       </div>
+
       <div class="listing-stats">
         <div class="stats-heading">All Competition Stats</div>
         <div class="stat-boxes">
@@ -42,10 +59,10 @@
         </div>
       </div>
       <div class="listings-table">
-        <div *ngIf="events.length === 0" class="no-events">
+        <div *ngIf="filteredEvents.length === 0" class="no-events">
           No events found.
         </div>
-        <div *ngFor="let event of events">
+        <div *ngFor="let event of filteredEvents">
           <a class="listing">
             <div class="left-content">
               <div class="listing-image">
@@ -99,7 +116,10 @@
               <a target="_blank" [routerLink]="['/event/edit', event.eventId]">
                 <span class="material-symbols-outlined edit-icon"> edit </span>
               </a>
-              <span class="material-symbols-outlined delete-icon">
+              <span
+                class="material-symbols-outlined delete-icon"
+                (click)="deleteEventById(event.eventId)"
+              >
                 delete
               </span>
             </div>
