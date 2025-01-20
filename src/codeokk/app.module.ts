@@ -68,7 +68,6 @@ import { NgxMatNativeDateModule } from "@angular-material-components/datetime-pi
     MatRadioModule,
     MatRadioButton,
     MatAutocompleteModule,
-    NgxMatNativeDateModule,
     QuillModule.forRoot(),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
