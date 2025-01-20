@@ -31,6 +31,7 @@ export class WorkshopsComponent implements OnInit {
   eventImage: any[] = [""];
   galleryImage: any[] = new Array(10);
   bannerImage: any[] = [""];
+  thumbnailImage: any[] = [""];
 
   categories: any[] = [];
   eventModes: any[] = [];
@@ -442,6 +443,47 @@ export class WorkshopsComponent implements OnInit {
       if (data && data.length > 0) {
         this.eventPayload.eventGalleryList[index].imageURL = data[0];
         this.galleryImage[index] = data[0];
+      }
+    });
+  }
+
+  deleteThumbnailImage(index: any): void {
+    for (let i = index; i < this.thumbnailImage.length - 1; i++) {
+      this.thumbnailImage[i] = this.thumbnailImage[i + 1];
+    }
+    this.thumbnailImage[this.thumbnailImage.length - 1] = "";
+  }
+
+  selectThumbnailFile() {
+    if (this.document) {
+      const uploadElement = this.document.getElementById("thumbnailFileUpload");
+      if (uploadElement) {
+        uploadElement.click();
+      }
+    }
+  }
+
+  selectThumbnailImage(event: any): void {
+    var files = event.target.files;
+    const formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      formData.append("files", files[i]);
+    }
+    this.userService.uploadImages(formData).subscribe((data: any) => {
+      let imagesLength = data.length;
+      let dataIndex = 0;
+
+      for (
+        let j = 0;
+        j < this.thumbnailImage.length && dataIndex < data.length;
+        j++
+      ) {
+        this.eventPayload.thumbnailURL = data[0];
+        if (this.thumbnailImage[j] === "") {
+          this.thumbnailImage[j] = data[dataIndex];
+          dataIndex++;
+          imagesLength--;
+        }
       }
     });
   }

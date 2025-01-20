@@ -32,6 +32,7 @@ import { LoginComponent } from "./modules/login/login.component";
 import { SignupComponent } from "./modules/signup/signup.component";
 import { MatRadioButton, MatRadioModule } from "@angular/material/radio";
 import { QuillModule } from "ngx-quill";
+import { SlickCarouselModule } from "ngx-slick-carousel";
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, LoginComponent, SignupComponent],
@@ -68,6 +69,7 @@ import { QuillModule } from "ngx-quill";
     MatRadioButton,
     MatAutocompleteModule,
     QuillModule.forRoot(),
+    SlickCarouselModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
