@@ -48,6 +48,7 @@ export class EditEventComponent {
   roundEndTime: string[] = [];
 
   bannerImage: any[] = [""];
+  thumbnailImage: any[] = [""];
   galleryImage: any[] = [""];
   eventImage: any[] = [""];
 
@@ -334,6 +335,10 @@ export class EditEventComponent {
       this.bannerImage = [eventDetails.eventBannerURL];
     }
 
+    if (eventDetails.thumbnailURL) {
+      this.thumbnailImage = [eventDetails.thumbnailURL];
+    }
+
     if (eventDetails.eventLogoURL) {
       this.eventImage = [eventDetails.eventLogoURL];
     }
@@ -587,6 +592,47 @@ export class EditEventComponent {
   }
 
   onVisibilityChane() {}
+
+  deleteThumbnailImage(index: any): void {
+    for (let i = index; i < this.thumbnailImage.length - 1; i++) {
+      this.thumbnailImage[i] = this.thumbnailImage[i + 1];
+    }
+    this.thumbnailImage[this.thumbnailImage.length - 1] = "";
+  }
+
+  selectThumbnailFile() {
+    if (this.document) {
+      const uploadElement = this.document.getElementById("thumbnailFileUpload");
+      if (uploadElement) {
+        uploadElement.click();
+      }
+    }
+  }
+
+  selectThumbnailImage(event: any): void {
+    var files = event.target.files;
+    const formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      formData.append("files", files[i]);
+    }
+    this.userService.uploadImages(formData).subscribe((data: any) => {
+      let imagesLength = data.length;
+      let dataIndex = 0;
+
+      for (
+        let j = 0;
+        j < this.thumbnailImage.length && dataIndex < data.length;
+        j++
+      ) {
+        this.eventPayload.thumbnailURL = data[0];
+        if (this.thumbnailImage[j] === "") {
+          this.thumbnailImage[j] = data[dataIndex];
+          dataIndex++;
+          imagesLength--;
+        }
+      }
+    });
+  }
 
   deleteBannerImage(index: any): void {
     for (let i = index; i < this.bannerImage.length - 1; i++) {

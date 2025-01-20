@@ -1,5 +1,5 @@
 .home-container {
-  margin: 120px 0px;
+  margin: 80px 0px;
 }
 
 .host-container {
@@ -12,6 +12,8 @@
 .events-container {
   padding: 50px 100px;
   min-height: 50vh;
+  max-width: 1560px;
+  margin: 0 auto;
 }
 
 .container-title {
@@ -19,7 +21,7 @@
   font-size: 48px;
   font-weight: 600;
   line-height: 56px;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   margin-top: 50px;
 }
 
@@ -55,4 +57,163 @@
   text-align: center;
   font-size: 16px;
   margin-bottom: 20px;
+}
+
+.opportunities-container {
+  margin-top: 100px;
+}
+
+.opportunity-type-title {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.opportunity-type-description {
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.opportunity {
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  margin-right: 20px;
+}
+
+::ng-deep .slick-prev,
+::ng-deep .slick-next {
+  top: -15%;
+  display: block;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  /* -webkit-transform: translate(0, -50%); */
+  -ms-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  cursor: pointer;
+  color: white;
+  border: none;
+  outline: none;
+  background: #009afe !important;
+  padding: 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50% !important;
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+  background-color: #aaa;
+  color: #fff;
+}
+
+.slick-prev::before,
+.slick-next::before {
+  font-size: 20px;
+  color: inherit;
+}
+
+::ng-deep .slick-next {
+  right: 30px !important;
+}
+
+::ng-deep .slick-prev {
+  left: auto !important;
+  right: 80px !important;
+}
+
+::ng-deep .slick-prev:before,
+::ng-deep .slick-next:before {
+  font-family: "slick";
+  font-size: 20px;
+  line-height: 1;
+  opacity: 1;
+  color: white;
+  margin-top: 3px;
+}
+
+.opportunity .thumbnail-image {
+  width: 100%;
+  height: 170px;
+  margin-bottom: 0px;
+}
+
+.thumbnail-image img {
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.opportunity-details {
+  padding: 10px;
+}
+
+.opportunity-info {
+  font-size: 13px;
+  font-weight: 400;
+  color: #5b5b5b;
+}
+
+.opportunity-title {
+  font-size: 15px;
+  font-weight: 500;
+  margin: 8px 0;
+  color: #000;
+}
+
+.opportunity-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.opportunity-organization {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.opportunity-organization .organization-icon {
+  background-color: #009afe;
+  color: #fff;
+  padding: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  border-radius: 50%;
+}
+
+.opportunity-organization .organization-name {
+  font-size: 14px;
+  color: #000;
+}
+
+.opportunity-links .details-icon {
+  background-color: #009afe;
+  color: #fff;
+  padding: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+::ng-deep .slick-track {
+  position: relative;
+  top: 0;
+  left: 0;
+  display: block;
+  margin-left: 0; /* Remove centering */
+  margin-right: 0; /* Remove centering */
+}
+
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

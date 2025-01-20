@@ -458,7 +458,7 @@
   content: "";
   position: absolute;
   width: 2px;
-  height: calc(100% + 65px); /* Adjust based on spacing between rounds */
+  height: calc(100% + 50px); /* Adjust based on spacing between rounds */
   background-color: #009afe;
   top: 100%;
   left: 50%;

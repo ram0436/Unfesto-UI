@@ -28,6 +28,12 @@
             </div>
             <!-- Event Title -->
             <div class="event-title">{{ eventDetails[0].title || "-" }}</div>
+            <div class="event-mode" *ngIf="eventDetails[0].parentTitle">
+              <span class="material-symbols-outlined icon"> wine_bar </span>
+              <span class="mode">
+                {{ eventDetails[0].parentTitle || "-" }}</span
+              >
+            </div>
             <!-- Event Mode -->
             <div class="event-mode">
               <span class="material-symbols-outlined icon"> location_on </span>
@@ -236,12 +242,34 @@
               <span class="material-symbols-outlined share-icon"> share </span>
             </div>
           </div>
-          <a
+          <!-- <a
             target="_blank"
             [routerLink]="['/event/register-event', eventDetails[0].eventId]"
           >
             <div class="register-btn">Register</div>
+          </a> -->
+          <a
+            *ngIf="!isRegistrationClosed()"
+            target="_blank"
+            [routerLink]="['/event/register-event', eventDetails[0].eventId]"
+          >
+            <div class="register-btn">
+              {{ isRegistrationClosed() ? "Registration Closed" : "Register" }}
+            </div>
           </a>
+
+          <div
+            *ngIf="isRegistrationClosed()"
+            class="register-btn"
+            style="
+              background-color: rgb(233, 179, 78);
+              cursor: not-allowed;
+              color: #000;
+            "
+          >
+            Registration Closed
+          </div>
+
           <div class="event-register-details">
             <!-- <div class="register-detail">
               <span class="material-symbols-outlined icon"> groups </span>
@@ -273,9 +301,7 @@
                 <span class="register-count">
                   {{ eventDetails[0].eventRegistrationList[0].minTeamMember }} -
 
-                  {{
-                    eventDetails[0].eventRegistrationList[0].maxTeamMember
-                  }}
+                  {{ eventDetails[0].eventRegistrationList[0].maxTeamMember }}
                   Members</span
                 >
               </div>

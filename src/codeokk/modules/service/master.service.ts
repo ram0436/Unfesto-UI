@@ -44,6 +44,10 @@ export class MasterService {
     return this.http.post(`${this.baseUrl}Master/AddSkill`, payload);
   }
 
+  getDashboard() {
+    return this.http.get(`${this.baseUrl}Dashboard/GetDashboard`);
+  }
+
   // getSectionByClassId(classId: number) {
   //   return this.http.get(
   //     `${this.baseUrl}Master/GetSectionByClassId?classId=${classId}`

@@ -67,14 +67,15 @@
           </div>
         </div>
         <div class="main-bottom">
-          <div class="main-detail">
-            <span class="material-symbols-outlined detail-icon">language</span>
-            <span class="detail-name">
-              <a [href]="eventDetails.websiteURL" target="_blank">{{
-                eventDetails.websiteURL
-              }}</a>
+          <div class="main-detail" *ngIf="eventDetails.parentTitle">
+            <span class="material-symbols-outlined detail-icon">
+              wine_bar
             </span>
+            <span class="detail-name">
+              {{ eventDetails.parentTitle || "-" }}</span
+            >
           </div>
+
           <div class="main-detail">
             <span class="material-symbols-outlined detail-icon"
               >emoji_events</span
@@ -84,6 +85,14 @@
           <div class="main-detail">
             <span class="material-symbols-outlined detail-icon">asterisk</span>
             <span class="detail-name">{{ eventDetails.eventMode }}</span>
+          </div>
+          <div class="main-detail">
+            <span class="material-symbols-outlined detail-icon">language</span>
+            <span class="detail-name">
+              <a [href]="eventDetails.websiteURL" target="_blank">{{
+                eventDetails.websiteURL
+              }}</a>
+            </span>
           </div>
         </div>
       </div>
@@ -139,9 +148,7 @@
               <div class="register-title">Team Size</div>
               <span class="register-count">
                 {{ eventDetails.eventRegistrationList[0].minTeamMember }} -
-                {{
-                  eventDetails.eventRegistrationList[0].maxTeamMember
-                }}
+                {{ eventDetails.eventRegistrationList[0].maxTeamMember }}
                 Members</span
               >
             </div>
