@@ -123,10 +123,20 @@ export class EventDetailsComponent {
     // If the target element is found, scroll to it
     if (targetElement) {
       window.scrollTo({
-        top: targetElement.offsetTop - 100, // Adjust the offset to place the section slightly below the top if needed
+        top: targetElement.offsetTop - 100,
         behavior: "smooth",
       });
     }
+  }
+
+  isRegistrationClosed(): boolean {
+    const registrationEndDate = new Date(
+      this.eventDetails[0]?.registrationEndDateTime
+    );
+    const currentDate = new Date();
+
+    // Compare current date with registration end date
+    return currentDate > registrationEndDate;
   }
 
   calculateTotalPrize(): number {

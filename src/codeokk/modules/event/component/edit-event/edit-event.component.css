@@ -878,7 +878,7 @@ mat-radio-button.mat-radio-checked .material-symbols-outlined {
   content: "";
   position: absolute;
   width: 2px;
-  height: calc(100% + 90px);
+  height: calc(100% + 50px);
   background-color: #009afe;
   top: 100%;
   left: 50%;

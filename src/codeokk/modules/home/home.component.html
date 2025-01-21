@@ -1,14 +1,71 @@
 <div class="home-container">
-  <div class="events-container">
-    <div class="container-title">
-      Host Your <br />
-      Own Opportunity
-    </div>
+  <div *ngIf="isLoading" class="loading-spinner">
+    <!-- Loading Spinner or Text -->
+    <mat-spinner></mat-spinner>
+  </div>
+  <div class="events-container" *ngIf="!isLoading">
+    <div class="container-title">Featured Opportunities</div>
     <div class="container-description">
-      Engage with a diverse talent pool or hire the best minds from 19Mn+ users.
+      Explore the Competitions that are creating a buzz among your peers!
     </div>
-    <button class="see-events-btn" [routerLink]="'/event/host'">
-      Host Now
-    </button>
+
+    <!-- Iterate over event types -->
+    <div class="opportunities-container" *ngFor="let eventType of eventTypes">
+      <div
+        *ngIf="
+          categorizedItems[eventType.id] &&
+          categorizedItems[eventType.id].length > 0
+        "
+        class="content"
+      >
+        <div class="opportunity-type-title">{{ eventType.name }}</div>
+        <div class="opportunity-type-description">
+          Explore opportunities under {{ eventType.name }}!
+        </div>
+        <div class="slider-container">
+          <ngx-slick-carousel
+            #slickModal="slick-carousel"
+            [config]="sliderConfig"
+            class="slider"
+          >
+            <!-- Display items for the current event type -->
+            <div
+              ngxSlickItem
+              *ngFor="let item of categorizedItems[eventType.id]"
+              class="opportunity"
+            >
+              <div class="thumbnail-image">
+                <img
+                  [src]="item.thumbnailURL || '../../../assets/no-image.jpg'"
+                  alt=""
+                  class="img"
+                />
+              </div>
+              <div class="opportunity-details">
+                <div class="opportunity-info">Offline | Free</div>
+                <div class="opportunity-title">{{ item.title }}</div>
+                <div class="opportunity-bottom">
+                  <div class="opportunity-organization">
+                    <span class="material-symbols-outlined organization-icon">
+                      corporate_fare
+                    </span>
+                    <div class="organization-name">
+                      {{ getOrganizationName(item.organisationId) }}
+                    </div>
+                  </div>
+                  <div class="opportunity-links">
+                    <span
+                      class="material-symbols-outlined details-icon"
+                      [routerLink]="['/event/all-events']"
+                      >north_east</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ngx-slick-carousel>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
