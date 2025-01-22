@@ -305,6 +305,7 @@ export class EditEventComponent {
       eventLogoURL: eventDetails.eventLogoURL,
       eventBannerURL: eventDetails.eventBannerURL,
       title: eventDetails.title,
+      parentTitle: eventDetails.parentTitle,
       description: eventDetails.description,
       createdBy: eventDetails.createdBy || userId,
       createdOn: eventDetails.createdOn || new Date().toISOString(),
