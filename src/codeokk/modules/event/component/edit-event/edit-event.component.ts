@@ -102,6 +102,7 @@ export class EditEventComponent {
   categories: any[] = [];
   eventModes: any[] = [];
   eventTypes: any[] = [];
+  eventSubTypes: any[] = [];
   users: any[] = [];
   organisations: any[] = [];
   participationTypes: any[] = [];
@@ -332,6 +333,14 @@ export class EditEventComponent {
       (category: any) => category
     );
 
+    const eventTypeId =
+      this.getIdFromName(eventDetails.eventType, this.eventTypes) ?? 0;
+    this.eventPayload.eventTypeId = eventTypeId;
+
+    if (eventTypeId) {
+      this.fetchSubTypes(eventTypeId);
+    }
+
     if (eventDetails.eventBannerURL) {
       this.bannerImage = [eventDetails.eventBannerURL];
     }
@@ -389,6 +398,43 @@ export class EditEventComponent {
       this.eventPayload.description
     );
     this.isLoading = false;
+  }
+
+  fetchSubTypes(eventTypeId: number): void {
+    this.eventService
+      .getEventSubTypeByEventType(eventTypeId)
+      .subscribe((subTypes: any) => {
+        this.eventSubTypes = subTypes;
+        const matchingSubType = subTypes.find(
+          (subType: any) => subType.name === this.eventDetails.eventSubType
+        );
+        // console.log(matchingSubType);
+        if (matchingSubType) {
+          this.eventPayload.eventSubTypeId = matchingSubType.id;
+        }
+      });
+  }
+
+  onEventTypeChange(eventTypeId: any): void {
+    if (eventTypeId) {
+      this.getEventSubType(eventTypeId);
+    } else {
+      this.eventSubTypes = [];
+    }
+  }
+
+  getAllEventTypes() {
+    this.eventService.getEventType().subscribe((data: any) => {
+      this.eventTypes = data;
+    });
+  }
+
+  getEventSubType(eventId: any) {
+    this.eventService
+      .getEventSubTypeByEventType(eventId)
+      .subscribe((data: any) => {
+        this.eventSubTypes = data;
+      });
   }
 
   setRoundEventDates(eventRoundList: any[]): void {
@@ -518,12 +564,6 @@ export class EditEventComponent {
   getAllEventModes() {
     this.eventService.getEventMode().subscribe((data: any) => {
       this.eventModes = data;
-    });
-  }
-
-  getAllEventTypes() {
-    this.eventService.getEventType().subscribe((data: any) => {
-      this.eventTypes = data;
     });
   }
 

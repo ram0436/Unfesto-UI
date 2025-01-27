@@ -24,6 +24,11 @@
 
 .logoContainer img {
   height: 40px;
+  cursor: pointer;
+}
+
+.menu-bar {
+  position: relative;
 }
 
 .menu-bar .menu-list {
@@ -34,6 +39,10 @@
   padding: 0;
 }
 
+.menu-item {
+  position: relative;
+}
+
 .menu-item a {
   text-decoration: none;
   color: black;
@@ -42,7 +51,80 @@
   padding: 5px 8px;
 }
 
+.menu-item a:hover {
+  color: #009afe !important;
+}
+
+.submenu {
+  position: absolute;
+  top: 100%;
+  padding-top: 30px;
+  left: -15px;
+  display: none;
+  width: 600px;
+  max-height: 900px;
+}
+
+.submenu-content {
+  background-color: #fff;
+  border: 1px solid #f0f0f0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  width: 600px;
+  max-height: 900px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.08);
+}
+
+.submenu::-webkit-scrollbar {
+  display: none;
+}
+
+.submenu-item {
+  padding: 10px;
+}
+
+.subsubmenu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: block;
+}
+
+.event-type-name {
+  color: #009afe !important;
+}
+
+.subsubmenu-item {
+  padding: 10px;
+}
+
+.subsubmenu-item a {
+  padding: 0px;
+}
+
+.menu-item:hover .submenu,
+.submenu-item:hover .subsubmenu {
+  display: block;
+}
+
+/* This is to toggle submenu visibility */
+.menu-item:hover .submenu {
+  display: block;
+}
+
 .menu-item.active a {
+  border-radius: 12px;
+  border: 1px solid #009afe;
+  color: #009afe;
+}
+
+.menu-item.active-events .all-events-head {
   border-radius: 12px;
   border: 1px solid #009afe;
   color: #009afe;

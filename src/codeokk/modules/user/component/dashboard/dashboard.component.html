@@ -47,14 +47,14 @@
           <span class="material-symbols-outlined link-icon">domain_add</span>
           Add Organization
         </li>
-        <li
+        <!-- <li
           [routerLink]="'/user/dashboard/settings'"
           [ngClass]="{ active: activeMenuItem === 'settings' }"
           (click)="setActiveMenuItem('settings')"
         >
           <span class="material-symbols-outlined link-icon">settings</span>
           Settings
-        </li>
+        </li> -->
       </ul>
     </div>
     <div *ngIf="userRole === 'Participant'">
@@ -84,14 +84,14 @@
           <span class="material-symbols-outlined link-icon">favorite</span>
           Wishlist
         </li>
-        <li
+        <!-- <li
           [routerLink]="'/user/dashboard/settings'"
           (click)="setActiveMenuItem('settings')"
           [ngClass]="{ active: activeMenuItem === 'settings' }"
         >
           <span class="material-symbols-outlined link-icon">settings</span>
           Settings
-        </li>
+        </li> -->
       </ul>
     </div>
     <div *ngIf="userRole === 'Organizer'">
@@ -105,6 +105,32 @@
           <span class="material-symbols-outlined link-icon">home_work</span>
           Manage Listings
         </li>
+        <!-- <li
+          [routerLink]="'/user/dashboard/settings'"
+          (click)="setActiveMenuItem('settings')"
+          [ngClass]="{ active: activeMenuItem === 'settings' }"
+        >
+          <span class="material-symbols-outlined">settings</span>
+          Settings
+        </li> -->
+      </ul>
+    </div>
+    <div *ngIf="isCollaborator">
+      <div class="menu-heading">For Collaborator</div>
+      <ul class="menu">
+        <li
+          [routerLink]="'/user/dashboard/manage-listings'"
+          [queryParams]="{ isCollaborator: 'true' }"
+          (click)="setActiveMenuItem('collaborator-listings')"
+          [ngClass]="{ active: activeMenuItem === 'collaborator-listings' }"
+        >
+          <span class="material-symbols-outlined link-icon">home_work</span>
+          Collaborator Listings
+        </li>
+      </ul>
+    </div>
+    <div class="common-menus">
+      <ul class="menu">
         <li
           [routerLink]="'/user/dashboard/settings'"
           (click)="setActiveMenuItem('settings')"

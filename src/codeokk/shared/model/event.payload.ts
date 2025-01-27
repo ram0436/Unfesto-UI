@@ -12,6 +12,7 @@ export class EventPayload {
   eventBannerURL: string = "";
   thumbnailURL: string = "";
   eventTypeId: number = 0;
+  eventSubTypeId: number = 0;
   visibilityId: number = 0;
   title: string = "";
   parentTitle: string = "";

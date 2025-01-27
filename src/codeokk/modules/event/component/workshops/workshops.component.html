@@ -71,12 +71,31 @@
         <label class="section-label">Opportunity Type *</label>
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Opportunity Type</mat-label>
-          <mat-select [(ngModel)]="eventPayload.eventTypeId">
+          <mat-select
+            [(ngModel)]="eventPayload.eventTypeId"
+            (selectionChange)="onEventTypeChange($event.value)"
+          >
             <mat-option
               *ngFor="let eventType of eventTypes"
               [value]="eventType.id"
             >
               {{ eventType.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- Opportunity Sub Type -->
+      <div class="form-field">
+        <label class="section-label">Opportunity Sub Type *</label>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Opportunity Type</mat-label>
+          <mat-select [(ngModel)]="eventPayload.eventSubTypeId">
+            <mat-option
+              *ngFor="let eventSubType of eventSubTypes"
+              [value]="eventSubType.id"
+            >
+              {{ eventSubType.name }}
             </mat-option>
           </mat-select>
         </mat-form-field>

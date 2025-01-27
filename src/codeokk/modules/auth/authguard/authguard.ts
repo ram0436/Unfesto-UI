@@ -30,6 +30,7 @@ export class AuthGuard implements CanActivate {
       "/user/dashboard/my-registerations",
       "/user/dashboard/certificates",
       "/user/dashboard/wishlist",
+      "/user/dashboard/manage-listings",
     ];
     const allowedOrganizerRoutes = [
       "/user/dashboard/manage-listings",
@@ -58,7 +59,7 @@ export class AuthGuard implements CanActivate {
 
     const registerEventRoute = [/^\/event\/register-event\/[a-f0-9-]+$/i];
 
-    const requestedRoute = state.url;
+    const requestedRoute = state.url.split("?")[0];
 
     if (authToken) {
       // Common routes accessible to all roles
