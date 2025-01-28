@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { MasterService } from "../service/master.service";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { EventService } from "../event/service/event.service";
@@ -15,8 +15,9 @@ export class HomeComponent {
   eventTypes: any[] = [];
   dashboardItems: any[] = [];
   categorizedItems: { [key: number]: any[] } = {};
+  eventSubTypes: any[] = [];
   organizations: any[] = [];
-  isLoading: boolean = true; // Set isLoading to true initially
+  isLoading: boolean = true;
   sliderConfig = {
     slidesToShow: 4,
     slidesToScroll: 1,
@@ -27,8 +28,13 @@ export class HomeComponent {
     infinite: true,
   };
 
+  containerTitle: string = "Featured Opportunities";
+  containerDescription: string =
+    "Explore the Competitions that are creating a buzz among your peers!";
+
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private dialog: MatDialog,
     private masterService: MasterService,
     private eventService: EventService,
@@ -36,36 +42,70 @@ export class HomeComponent {
   ) {}
 
   ngOnInit() {
-    this.isLoading = true; // Set isLoading to true before fetching data
-    this.loadData(); // Call method to fetch data using forkJoin
+    this.isLoading = true;
+    this.route.queryParams.subscribe((params) => {
+      const isFrom = params["isfrom"];
+      const id = params["id"];
+      if (isFrom && id) {
+        this.loadEventDataByParams(isFrom, +id);
+      } else {
+        this.loadData(); // Default data loading logic
+      }
+    });
   }
 
   loadData() {
-    // Using forkJoin to make all the API calls in parallel
     forkJoin({
       eventTypes: this.eventService.getEventType(),
       dashboardItems: this.masterService.getDashboard(),
       organizations: this.eventService.getOrganisation(),
     }).subscribe(
       (response: any) => {
-        // Assign the data to respective variables
         this.eventTypes = response.eventTypes;
         this.dashboardItems = response.dashboardItems;
         this.organizations = response.organizations;
 
-        this.categorizeItems(); // Call method to categorize items
+        this.categorizeItems();
 
-        this.isLoading = false; // Set isLoading to false after all API calls are completed
+        this.isLoading = false;
       },
       (error) => {
-        // Handle any errors if needed
-        this.isLoading = false; // Make sure loading is set to false in case of an error
-        console.error("Error loading data", error);
+        this.isLoading = false;
         this.snackBar.open("Error loading data", "Close", {
           duration: 3000,
         });
       }
     );
+  }
+
+  loadEventDataByParams(isFrom: string, id: number) {
+    this.eventService.getEventSubTypeByEventType(id).subscribe(
+      (subTypes: any) => {
+        this.eventSubTypes = subTypes;
+        this.categorizeDashboardItemsBySubType();
+      },
+      (error) => {
+        this.isLoading = false;
+        this.snackBar.open("Error loading event subtypes", "Close", {
+          duration: 3000,
+        });
+      }
+    );
+  }
+
+  categorizeDashboardItemsBySubType() {
+    this.masterService.getDashboard().subscribe((items: any) => {
+      this.dashboardItems = items;
+      this.categorizedItems = {};
+
+      this.eventSubTypes.forEach((subType) => {
+        this.categorizedItems[subType.id] = this.dashboardItems.filter(
+          (item: any) => item.eventSubTypeId === subType.id
+        );
+      });
+
+      this.isLoading = false;
+    });
   }
 
   getOrganizationName(organisationId: number): string {

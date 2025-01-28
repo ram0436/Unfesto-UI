@@ -36,6 +36,7 @@ export class WorkshopsComponent implements OnInit {
   categories: any[] = [];
   eventModes: any[] = [];
   eventTypes: any[] = [];
+  eventSubTypes: any[] = [];
   users: any[] = [];
   organisations: any[] = [];
   participationTypes: any[] = [];
@@ -294,6 +295,22 @@ export class WorkshopsComponent implements OnInit {
     this.eventService.getEventType().subscribe((data: any) => {
       this.eventTypes = data;
     });
+  }
+
+  onEventTypeChange(eventTypeId: any): void {
+    if (eventTypeId) {
+      this.getEventSubType(eventTypeId);
+    } else {
+      this.eventSubTypes = [];
+    }
+  }
+
+  getEventSubType(eventId: any) {
+    this.eventService
+      .getEventSubTypeByEventType(eventId)
+      .subscribe((data: any) => {
+        this.eventSubTypes = data;
+      });
   }
 
   getAllOrganisations() {

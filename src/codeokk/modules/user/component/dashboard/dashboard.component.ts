@@ -1,7 +1,7 @@
 import { Component, HostListener, Inject } from "@angular/core";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { NavigationEnd, Router } from "@angular/router";
+import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { MasterService } from "../../../service/master.service";
 import { UserService } from "../../service/user.service";
 import { UserPayload } from "../../../../shared/model/user.payload";
@@ -24,11 +24,14 @@ export class DashboardComponent {
 
   activeMenuItem: string = "";
 
+  isCollaborator: boolean = false;
+
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private router: Router,
     private dialog: MatDialog,
     private masterService: MasterService,
+    private route: ActivatedRoute,
     private userService: UserService,
     private snackBar: MatSnackBar
   ) {}
@@ -37,6 +40,17 @@ export class DashboardComponent {
     this.userRole = localStorage.getItem("role");
     this.firstName = localStorage.getItem("firstName") || "User";
     this.email = localStorage.getItem("email") || "Email";
+
+    // Fetch isCollaborator and convert it to a boolean
+    const isCollaboratorValue = localStorage.getItem("isCollaborator");
+    this.isCollaborator = isCollaboratorValue === "true";
+    // this.isCollaborator = true;
+
+    this.route.queryParams.subscribe((params) => {
+      if (params["isCollaborator"] === "true") {
+        this.activeMenuItem = "collaborator-listings";
+      }
+    });
 
     // Subscribe to router events
     this.router.events.subscribe((event) => {

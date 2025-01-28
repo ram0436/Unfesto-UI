@@ -117,6 +117,7 @@
                 <span class="material-symbols-outlined edit-icon"> edit </span>
               </a>
               <span
+                *ngIf="!isCollaborator"
                 class="material-symbols-outlined delete-icon"
                 (click)="deleteEventById(event.eventId)"
               >

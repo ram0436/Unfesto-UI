@@ -28,6 +28,12 @@ export class EventService {
     return this.http.get(`${this.baseUrl}Event/GetEventType`);
   }
 
+  getEventSubTypeByEventType(eventId: number) {
+    return this.http.get(
+      `${this.baseUrl}Event/GetEventSubTypeByEventTypeId?eventTypeId=${eventId}`
+    );
+  }
+
   getOrganisation() {
     return this.http.get(`${this.baseUrl}Event/GetOrganisation`);
   }
@@ -76,6 +82,12 @@ export class EventService {
   getEventByUserId(userId: number) {
     return this.http.get(
       `${this.baseUrl}Event/GetEventByUserId?userId=${userId}`
+    );
+  }
+
+  getEventByCollaboratorId(collaboratorId: any) {
+    return this.http.get(
+      `${this.baseUrl}Event/GetEventByCollaboratorId?userId=${collaboratorId}`
     );
   }
 

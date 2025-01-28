@@ -1,7 +1,7 @@
 import { Component, HostListener, Inject } from "@angular/core";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { MasterService } from "../../../service/master.service";
 import { UserService } from "../../service/user.service";
 import { UserPayload } from "../../../../shared/model/user.payload";
@@ -25,6 +25,8 @@ export class ManageListingsComponent {
   userRole: String | null = null;
   isLoading: boolean = true;
   userId: number | null = null;
+  isCollaborator: boolean = false;
+  userString: String | null = "";
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -33,15 +35,25 @@ export class ManageListingsComponent {
     private masterService: MasterService,
     private eventService: EventService,
     private userService: UserService,
+    private route: ActivatedRoute,
     private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
-    const userId = localStorage.getItem("user_Id");
+    this.route.queryParams.subscribe((params) => {
+      this.isCollaborator = params["isCollaborator"] === "true";
+    });
+
+    this.userString = localStorage.getItem("userId");
+    const user_Id = localStorage.getItem("user_Id");
+
     this.getAllEventTypes();
-    if (userId) {
-      this.userId = Number(userId);
-      this.getEventsByUserId(userId);
+
+    if (this.isCollaborator && this.userString) {
+      this.getEventsByCollaboratorId(this.userString);
+    } else if (user_Id) {
+      this.userId = Number(user_Id);
+      this.getEventsByUserId(this.userId);
     }
   }
 
@@ -49,6 +61,42 @@ export class ManageListingsComponent {
     this.eventService.getEventType().subscribe((data: any) => {
       this.eventTypes = data;
     });
+  }
+
+  getEventsByCollaboratorId(userId: any) {
+    this.eventService
+      .getEventByCollaboratorId(userId)
+      .subscribe((data: any) => {
+        const events = data.reverse();
+
+        if (events.length > 0) {
+          const detailRequests = events.map((event: any) =>
+            this.eventService.getEventDetailById(event.eventId).pipe(
+              map((details: any) => ({
+                ...event,
+                eventType: details.eventType,
+              }))
+            )
+          );
+
+          // Use forkJoin to execute all detail requests in parallel
+          forkJoin(detailRequests).subscribe(
+            (detailedEvents: any) => {
+              this.events = detailedEvents;
+              this.filteredEvents = [...this.events];
+              this.isLoading = false;
+            },
+            (error) => {
+              this.isLoading = false;
+            }
+          );
+        } else {
+          // If no events, just reset the lists
+          this.events = [];
+          this.filteredEvents = [];
+          this.isLoading = false;
+        }
+      });
   }
 
   getEventsByUserId(userId: any) {

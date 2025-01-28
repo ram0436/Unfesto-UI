@@ -3,6 +3,7 @@
     <!-- Logo Section -->
     <div class="logoContainer">
       <img
+        (click)="setActiveItem('')"
         src="https://cfdblob.blob.core.windows.net/logo/CDK_Logo.png"
         alt="Click Source Logo"
         class="logo"
@@ -16,50 +17,61 @@
     </div>
 
     <!-- Navigation Menu -->
-    <!-- Navigation Menu -->
     <nav class="menu-bar">
       <ul class="menu-list">
         <li
           class="menu-item"
-          [class.active]="currentActiveItem === 'Internships'"
-          (click)="setActiveItem('Internships')"
+          [class.active-events]="currentActiveItem === 'all-events'"
+          (click)="setActiveItem('all-events')"
         >
-          <a>Internships</a>
+          <a [routerLink]="['/']" class="all-events-head">All Events</a>
+
+          <!-- Submenu for Event Types and Subtypes -->
+          <ul *ngIf="eventTypes.length > 0" class="submenu">
+            <div class="submenu-content">
+              <li *ngFor="let eventType of eventTypes" class="submenu-item">
+                <a
+                  [routerLink]="['/']"
+                  [queryParams]="{ isfrom: eventType.name, id: eventType.id }"
+                  class="event-type-name"
+                >
+                  {{ eventType.name }}
+                </a>
+
+                <!-- Submenu for Event Subtypes -->
+                <ul
+                  *ngIf="
+                    eventSubTypesByType[eventType.id] &&
+                    eventSubTypesByType[eventType.id].length > 0
+                  "
+                  class="subsubmenu"
+                >
+                  <li
+                    *ngFor="let subType of eventSubTypesByType[eventType.id]"
+                    class="subsubmenu-item"
+                  >
+                    <a [routerLink]="['/event/all-events']">
+                      {{ subType.name }}
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </div>
+          </ul>
         </li>
+
         <li
+          *ngFor="let eventType of eventTypes"
           class="menu-item"
-          [class.active]="currentActiveItem === 'Jobs'"
-          (click)="setActiveItem('Jobs')"
+          [class.active]="currentActiveItem === eventType.name"
+          (click)="setActiveItem(eventType.name)"
         >
-          <a>Jobs</a>
-        </li>
-        <li
-          class="menu-item"
-          [class.active]="currentActiveItem === 'Compete'"
-          (click)="setActiveItem('Compete')"
-        >
-          <a [routerLink]="'/event/compete'">Compete</a>
-        </li>
-        <li
-          class="menu-item"
-          [class.active]="currentActiveItem === 'Mentorship'"
-          (click)="setActiveItem('Mentorship')"
-        >
-          <a>Mentorship</a>
-        </li>
-        <li
-          class="menu-item"
-          [class.active]="currentActiveItem === 'Courses'"
-          (click)="setActiveItem('Courses')"
-        >
-          <a>Courses</a>
-        </li>
-        <li
-          class="menu-item"
-          [class.active]="currentActiveItem === 'Practice'"
-          (click)="setActiveItem('Practice')"
-        >
-          <a>Practice</a>
+          <a
+            [routerLink]="['/']"
+            [queryParams]="{ isfrom: eventType.name, id: eventType.id }"
+          >
+            {{ eventType.name }}
+          </a>
         </li>
       </ul>
     </nav>
@@ -115,6 +127,16 @@
       <li [routerLink]="'/user/dashboard/settings'">
         <span class="material-symbols-outlined link-icon">settings</span>
         Settings
+      </li>
+    </ul>
+  </div>
+
+  <div class="sidebar-section" *ngIf="isCollaborator">
+    <h5>For Collaborator</h5>
+    <ul>
+      <li (click)="navigateToCollaboratorListing()">
+        <span class="material-symbols-outlined link-icon">home_work</span>
+        Manage Listings
       </li>
     </ul>
   </div>

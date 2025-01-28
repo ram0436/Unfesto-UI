@@ -47,6 +47,8 @@ export class LoginComponent {
         localStorage.setItem("firstName", data.firstName);
         localStorage.setItem("mobileNo", data.mobileNo);
         localStorage.setItem("email", data.email);
+        localStorage.setItem("isCollaborator", data.isCollaborator);
+        localStorage.setItem("userId", data.userId);
         // this.userService.setData("login");
         this.router.navigate([""]);
         this.showNotification("Logged in successfully");
