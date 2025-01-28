@@ -42,10 +42,12 @@ export class HomeComponent {
   ) {}
 
   ngOnInit() {
-    this.isLoading = true;
     this.route.queryParams.subscribe((params) => {
+      this.isLoading = true;
       const isFrom = params["isfrom"];
       const id = params["id"];
+      this.dashboardItems = [];
+      this.eventSubTypes = [];
       if (isFrom && id) {
         this.loadEventDataByParams(isFrom, +id);
       } else {
@@ -71,9 +73,9 @@ export class HomeComponent {
       },
       (error) => {
         this.isLoading = false;
-        this.snackBar.open("Error loading data", "Close", {
-          duration: 3000,
-        });
+        // this.snackBar.open("Error loading data", "Close", {
+        //   duration: 3000,
+        // });
       }
     );
   }
@@ -86,9 +88,9 @@ export class HomeComponent {
       },
       (error) => {
         this.isLoading = false;
-        this.snackBar.open("Error loading event subtypes", "Close", {
-          duration: 3000,
-        });
+        // this.snackBar.open("Error loading event subtypes", "Close", {
+        //   duration: 3000,
+        // });
       }
     );
   }
@@ -117,6 +119,7 @@ export class HomeComponent {
 
   categorizeItems() {
     this.categorizedItems = {};
+
     this.dashboardItems.forEach((item) => {
       const eventTypeId = item.eventTypeId;
       if (!this.categorizedItems[eventTypeId]) {

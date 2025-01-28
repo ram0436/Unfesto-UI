@@ -19,6 +19,7 @@ export class AuthGuard implements CanActivate {
     const role = localStorage.getItem("role");
 
     const allowedAdminRoutes = [
+      "/user/dashboard/manage-listings",
       "/user/dashboard/add-skill",
       "/user/dashboard/admin-panel",
       "/user/dashboard/add-category",
@@ -77,6 +78,20 @@ export class AuthGuard implements CanActivate {
       // Check if role is Organizer and route matches /event/edit/:id
       if (
         role === "Organizer" &&
+        editEventRoute.some((pattern) => pattern.test(requestedRoute))
+      ) {
+        return true;
+      }
+
+      if (
+        role === "Participant" &&
+        editEventRoute.some((pattern) => pattern.test(requestedRoute))
+      ) {
+        return true;
+      }
+
+      if (
+        role === "SuperAdmin" &&
         editEventRoute.some((pattern) => pattern.test(requestedRoute))
       ) {
         return true;
