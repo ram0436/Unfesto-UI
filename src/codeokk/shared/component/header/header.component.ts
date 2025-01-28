@@ -61,7 +61,6 @@ export class HeaderComponent implements OnInit {
       .subscribe((data: any) => {
         this.eventSubTypesByType[eventId] = data;
       });
-    console.log(this.eventSubTypesByType);
   }
   checkAuthToken() {
     this.isLoggedIn = !!localStorage.getItem("authToken");

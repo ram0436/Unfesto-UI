@@ -16,6 +16,14 @@
       <div class="menu-heading">For Admin</div>
       <ul class="menu">
         <li
+          [routerLink]="'/user/dashboard/manage-listings'"
+          (click)="setActiveMenuItem('manage-listings')"
+          [ngClass]="{ active: activeMenuItem === 'manage-listings' }"
+        >
+          <span class="material-symbols-outlined link-icon">home_work</span>
+          Manage Listings
+        </li>
+        <li
           [routerLink]="'/user/dashboard/admin-panel'"
           [ngClass]="{ active: activeMenuItem === 'admin-panel' }"
           (click)="setActiveMenuItem('admin-panel')"

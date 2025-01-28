@@ -59,7 +59,8 @@
   margin-bottom: 20px;
 }
 
-.opportunities-container {
+.opportunities-container,
+.sub-opportunities-container {
   margin-top: 100px;
 }
 
