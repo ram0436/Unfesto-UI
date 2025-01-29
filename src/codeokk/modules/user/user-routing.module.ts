@@ -9,6 +9,7 @@ import { AddCategoryComponent } from "./component/add-category/add-category.comp
 import { AddOrganizationComponent } from "./component/add-organization/add-organization.component";
 import { AdminDashboardComponent } from "./component/admin-dashboard/admin-dashboard.component";
 import { MyRegisterationsComponent } from "./component/my-registerations/my-registerations.component";
+import { AddSponsorComponent } from "./component/add-sponsor/add-sponsor.component";
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
       { path: "add-organization", component: AddOrganizationComponent },
       { path: "admin-panel", component: AdminDashboardComponent },
       { path: "my-registerations", component: MyRegisterationsComponent },
+      { path: "add-sponsor", component: AddSponsorComponent },
       { path: "", redirectTo: "my-profile", pathMatch: "full" },
     ],
   },

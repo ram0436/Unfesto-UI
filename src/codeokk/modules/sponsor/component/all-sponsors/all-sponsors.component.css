@@ -1,0 +1,116 @@
+.home-container {
+  margin: 80px 0px;
+}
+
+.host-container {
+  margin: 0px 50px;
+  padding: 50px 100px;
+  background-color: #fdf9f5;
+  border-radius: 20px;
+}
+
+.sponsors-container {
+  padding: 50px 100px;
+  min-height: 50vh;
+  max-width: 1560px;
+  margin: 0 auto;
+}
+
+.container-title {
+  color: #009afe;
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 56px;
+  margin-bottom: 20px;
+  margin-top: 50px;
+}
+
+.container-description {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.no-sponsors {
+  margin-top: 20px;
+}
+
+.sponsors {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 50px;
+}
+
+.sponsor {
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  margin-right: 20px;
+}
+
+.sponsor .logo-image {
+  width: 100%;
+  height: 170px;
+  margin-bottom: 0px;
+}
+
+.logo-image img {
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.sponsor-details {
+  padding: 10px;
+}
+
+.sponsor-info {
+  font-size: 13px;
+  font-weight: 400;
+  color: #5b5b5b;
+}
+
+.sponsor-title {
+  font-size: 15px;
+  font-weight: 500;
+  margin: 8px 0;
+  color: #000;
+}
+
+.sponsor-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+
+.sponsor-contact {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 10px 0;
+}
+
+.sponsor-contact .icon {
+  background-color: #009afe;
+  color: #fff;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  border-radius: 50%;
+}
+
+.sponsor-contact .name {
+  font-size: 14px;
+  color: #000;
+}

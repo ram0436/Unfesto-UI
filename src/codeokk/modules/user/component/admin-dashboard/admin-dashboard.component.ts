@@ -58,6 +58,18 @@ export class AdminDashboardComponent {
     });
   }
 
+  deleteEventById(eventId: any): void {
+    if (confirm("Are you sure you want to delete this event?")) {
+      this.eventService.deleteEvent(eventId).subscribe(
+        () => {
+          this.showNotification("Event deleted successfully!");
+          window.location.reload();
+        },
+        (error) => {}
+      );
+    }
+  }
+
   getAllUsers() {
     this.userService.getAllUser().subscribe((data: any) => {
       this.users = data;

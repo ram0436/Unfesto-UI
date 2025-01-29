@@ -24,6 +24,14 @@
           Manage Listings
         </li>
         <li
+          [routerLink]="'/user/dashboard/add-sponsor'"
+          (click)="setActiveMenuItem('add-sponsor')"
+          [ngClass]="{ active: activeMenuItem === 'add-sponsor' }"
+        >
+          <span class="material-symbols-outlined link-icon">crowdsource</span>
+          Add Sponsor
+        </li>
+        <li
           [routerLink]="'/user/dashboard/admin-panel'"
           [ngClass]="{ active: activeMenuItem === 'admin-panel' }"
           (click)="setActiveMenuItem('admin-panel')"

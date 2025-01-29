@@ -8,43 +8,25 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
-import { AccountComponent } from "./component/account/account.component";
-import { UserRoutingModule } from "./user-routing.module";
 import { MatOptionModule } from "@angular/material/core";
 import { MatChipsModule } from "@angular/material/chips";
 import { MatSelectModule } from "@angular/material/select";
 import { SharedModule } from "../../shared/shared.module";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-import { UserProfileComponent } from "./component/user-profile/user-profile.component";
 import {
   MatRadioButton,
   MatRadioChange,
   MatRadioGroup,
   MatRadioModule,
 } from "@angular/material/radio";
-import { DashboardComponent } from "./component/dashboard/dashboard.component";
-import { ManageListingsComponent } from "./component/manage-listings/manage-listings.component";
-import { AddCategoryComponent } from "./component/add-category/add-category.component";
-import { AddSkillComponent } from "./component/add-skill/add-skill.component";
-import { AddOrganizationComponent } from "./component/add-organization/add-organization.component";
-import { AdminDashboardComponent } from "./component/admin-dashboard/admin-dashboard.component";
 import { MatTableModule } from "@angular/material/table";
-import { MyRegisterationsComponent } from "./component/my-registerations/my-registerations.component";
-import { AddSponsorComponent } from "./component/add-sponsor/add-sponsor.component";
+import { AllSponsorsComponent } from "./component/all-sponsors/all-sponsors.component";
+import { SendProposalComponent } from "./component/send-proposal/send-proposal.component";
+import { SponsorRoutingModule } from "./sponsor-routing.module";
+import { MatDatepickerModule } from "@angular/material/datepicker";
 
 @NgModule({
-  declarations: [
-    AccountComponent,
-    UserProfileComponent,
-    DashboardComponent,
-    ManageListingsComponent,
-    AddCategoryComponent,
-    AddSkillComponent,
-    AddOrganizationComponent,
-    AdminDashboardComponent,
-    MyRegisterationsComponent,
-    AddSponsorComponent,
-  ],
+  declarations: [AllSponsorsComponent, SendProposalComponent],
   imports: [
     SharedModule,
     CommonModule,
@@ -56,7 +38,7 @@ import { AddSponsorComponent } from "./component/add-sponsor/add-sponsor.compone
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    UserRoutingModule,
+    SponsorRoutingModule,
     MatOptionModule,
     MatChipsModule,
     CommonModule,
@@ -76,7 +58,8 @@ import { AddSponsorComponent } from "./component/add-sponsor/add-sponsor.compone
     MatRadioButton,
     MatRadioGroup,
     MatTableModule,
+    MatDatepickerModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class UserModule {}
+export class SponsorModule {}

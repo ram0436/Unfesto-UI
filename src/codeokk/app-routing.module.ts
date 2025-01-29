@@ -32,6 +32,12 @@ const routes: Routes = [
       import("./modules/event/event.module").then((m) => m.EventModule),
     canActivate: [AuthGuard],
   },
+  {
+    path: "sponsor",
+    loadChildren: () =>
+      import("./modules/sponsor/sponsor.module").then((m) => m.SponsorModule),
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

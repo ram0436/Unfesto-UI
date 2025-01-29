@@ -1,0 +1,193 @@
+<div class="proposal-container">
+  <div class="proposal-title">Send Proposal to Sponsor</div>
+  <div class="proposal-description">
+    Enter following details and click send to send proposal to sponsor.
+  </div>
+  <div class="proposal-details">
+    <div class="opportunity-logo">
+      <ul class="logo-upload">
+        <div class="upload-title">PDF Brochure</div>
+        <div
+          class="upload-card"
+          *ngFor="let item of pdfBrochure; let i = index"
+        >
+          <div
+            class="upload-card-brd"
+            (click)="selectFile()"
+            id="{{ i }}"
+            *ngIf="item == ''"
+          >
+            <input
+              type="file"
+              id="sponsorFileUpload"
+              name="sponsorFileUpload"
+              (change)="selectImage($event)"
+              style="display: none"
+              multiple
+            />
+            <div>
+              <button mat-raised-button color="primary" class="upload-btn">
+                <span class="material-symbols-outlined">cloud_upload</span>
+                <span>Click here to upload</span>
+              </button>
+            </div>
+          </div>
+          <div class="upload-card-brd" *ngIf="item != ''">
+            <div class="preview">
+              <button class="delete-button" (click)="deleteBackgroundImage(i)">
+                <span class="delete-icon">&#10006;</span>
+              </button>
+              <img [src]="item" height="120px" width="120px" alt="" />
+            </div>
+          </div>
+        </div>
+        <p>Max size of image cannot exceed 1 MB!</p>
+      </ul>
+    </div>
+    <mat-form-field
+      appearance="outline"
+      style="display: block; margin-bottom: 20px"
+    >
+      <mat-label>Main Event Name</mat-label>
+      <input
+        matInput
+        [(ngModel)]="proposalPayload.mainEventName"
+        placeholder="Enter Main Event Name"
+      />
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="outline"
+      style="display: block; margin-bottom: 20px"
+    >
+      <mat-label>Sub Event Name</mat-label>
+      <input
+        matInput
+        [(ngModel)]="proposalPayload.subEventName"
+        placeholder="Enter Sub Event Name"
+      />
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="outline"
+      style="display: block; margin-bottom: 20px"
+    >
+      <mat-label>College</mat-label>
+      <mat-select [(ngModel)]="proposalPayload.collegeId">
+        <mat-option *ngFor="let college of colleges" [value]="college.id">
+          {{ college.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="outline"
+      style="display: block; margin-bottom: 20px"
+    >
+      <mat-label>Club Name</mat-label>
+      <input
+        matInput
+        [(ngModel)]="proposalPayload.clubName"
+        placeholder="Enter Club Name"
+      />
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="outline"
+      style="display: block; margin-bottom: 20px"
+    >
+      <mat-label>Club Email</mat-label>
+      <input
+        matInput
+        type="email"
+        [(ngModel)]="proposalPayload.clubEmail"
+        placeholder="Enter Club Email"
+      />
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="outline"
+      style="display: block; margin-bottom: 20px"
+    >
+      <mat-label>Contact Person</mat-label>
+      <input
+        matInput
+        [(ngModel)]="proposalPayload.contactPerson"
+        placeholder="Enter Contact Person"
+      />
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="outline"
+      style="display: block; margin-bottom: 20px"
+    >
+      <mat-label>Primary Mobile</mat-label>
+      <input
+        matInput
+        [(ngModel)]="proposalPayload.primaryMobile"
+        placeholder="Enter Primary Mobile"
+      />
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="outline"
+      style="display: block; margin-bottom: 20px"
+    >
+      <mat-label>Secondary Mobile</mat-label>
+      <input
+        matInput
+        [(ngModel)]="proposalPayload.secondaryMobile"
+        placeholder="Enter Secondary Mobile"
+      />
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="outline"
+      style="display: block; margin-bottom: 20px"
+    >
+      <mat-label>Secondary Email</mat-label>
+      <input
+        matInput
+        type="email"
+        [(ngModel)]="proposalPayload.secondaryEmail"
+        placeholder="Enter Secondary Email"
+      />
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="outline"
+      class="full-width"
+      style="display: block; margin-bottom: 20px"
+    >
+      <mat-label>Event Date</mat-label>
+      <input
+        matInput
+        [matDatepicker]="startDatePicker"
+        [(ngModel)]="registerationStartDate"
+        (ngModelChange)="updateStartDateTime()"
+        name="startDate"
+      />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="startDatePicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #startDatePicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="outline"
+      style="display: block; margin-bottom: 20px"
+    >
+      <mat-label>Event Details</mat-label>
+      <textarea
+        matInput
+        [(ngModel)]="proposalPayload.eventDetails"
+        placeholder="Enter Event Details"
+      ></textarea>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="submitProposal()">
+      Send Proposal
+    </button>
+  </div>
+</div>
