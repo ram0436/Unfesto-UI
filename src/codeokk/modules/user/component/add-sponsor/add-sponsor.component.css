@@ -1,0 +1,244 @@
+/* Main content area */
+.main-container {
+  width: 100%;
+  padding: 10px;
+  background-color: #fafafa;
+}
+
+.full-content {
+  margin-left: 0% !important;
+  width: 100%;
+  padding: 0px !important;
+}
+
+/* Main container */
+.sponsors-container {
+  /* padding: 20px; */
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.sponsors-heading {
+  margin-bottom: 10px;
+}
+
+.sponsors-head {
+  padding: 15px 20px;
+  border-bottom: 1px solid #ddd;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sponsors-sections {
+  padding: 20px;
+}
+
+.add-description {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 0px;
+}
+
+.add-sponsors-btn {
+  width: 30%;
+}
+
+.opportunity-logo {
+  text-align: center;
+  margin-bottom: 20px;
+  width: 30%;
+  margin-top: 20px;
+}
+
+.logo-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 40px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+::ng-deep .upload-btn .mdc-button__label {
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.upload-title {
+  margin-bottom: 15px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.upload-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.upload-btn .material-symbols-outlined {
+  font-size: 24px;
+}
+
+.gallery-description-field {
+  margin: 20px 0;
+}
+
+.gallery-upload-card {
+  width: 60%;
+}
+
+.gallery-preview {
+  margin: 10px 0 !important;
+}
+
+.gallery-upload-btn {
+  margin-top: 30px;
+}
+
+.logo-upload p {
+  font-size: 12px;
+  margin-top: 8px;
+  color: gray;
+}
+
+.form-field {
+  margin-bottom: 20px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* Hover effect */
+.option-card:hover {
+  border-color: #007bff;
+}
+
+.upload-card-brd {
+  /* border: 1px solid; */
+  cursor: pointer;
+  cursor: pointer;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.upload-card {
+  border: 2px solid var(--blackOpaque);
+  box-sizing: border-box;
+  display: inline-block;
+  /* height: 104px; */
+  vertical-align: top;
+  /* margin: 0 6px 6px 0; */
+  /* width: 104px; */
+}
+
+/* .camera {
+    margin: 20px;
+    margin-left: 35px;
+    border: none;
+    background-color: #ffff;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 0;
+    width: 30px;
+  } */
+
+.camera {
+  padding: 7px 14px;
+  background-color: var(--primary-app-color);
+  color: #fff;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+.add-photo {
+  text-align: center;
+  width: 100% !important;
+  display: block;
+}
+
+.preview {
+  position: relative;
+  margin-top: -10px;
+}
+
+.preview.guardian {
+  margin-top: 0px !important;
+}
+
+.delete-btn {
+  width: 40px;
+  height: 37px;
+  padding: 8px;
+  margin: 0;
+}
+
+.delete-button {
+  top: 0px;
+  right: 0px;
+  background: red;
+  border: red;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  float: right;
+  position: absolute;
+  margin: 4px;
+}
+
+.delete-icon {
+  color: white;
+  font-size: 12px;
+}
+
+.first-image {
+  position: relative;
+}
+
+.cover-tag {
+  position: absolute;
+  top: 78px;
+  width: 89%;
+  background-color: #009afe;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 6px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.d-flex {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}

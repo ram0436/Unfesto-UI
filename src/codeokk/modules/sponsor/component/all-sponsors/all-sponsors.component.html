@@ -1,0 +1,50 @@
+<div class="home-container">
+  <div *ngIf="isLoading" class="loading-spinner">
+    <!-- Loading Spinner or Text -->
+    <mat-spinner></mat-spinner>
+  </div>
+  <div class="sponsors-container" *ngIf="!isLoading">
+    <div class="container-title">Sponsors</div>
+    <div class="container-description">
+      See all the available sponsors and send them a proposal
+    </div>
+    <div class="sponsors">
+      <div class="sponsor" *ngFor="let sponsor of sponsors">
+        <div class="logo-image">
+          <img
+            [src]="sponsor.logoUrl || '../../../../assets/no-image.jpg'"
+            alt=""
+            class="img"
+          />
+        </div>
+        <div class="sponsor-details">
+          <div class="sponsor-title">{{ sponsor.companyName }}</div>
+          <div class="sponsor-contact">
+            <span class="material-symbols-outlined icon">person</span>
+            <div class="name">
+              {{ sponsor.contactPerson }}
+            </div>
+          </div>
+          <div class="sponsor-contact">
+            <span class="material-symbols-outlined icon"> call </span>
+            <div class="name">+91 {{ sponsor.primaryMobile }}</div>
+          </div>
+          <div class="sponsor-bottom">
+            <button
+              mat-raised-button
+              color="primary"
+              class="apply-btn"
+              (click)="openApplyModal(sponsor)"
+            >
+              Apply for Sponsor
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Fallback if no items -->
+    <div *ngIf="!sponsors.length" class="no-sponsors">
+      <p>No sponsors available at the moment. Please check back later!</p>
+    </div>
+  </div>
+</div>

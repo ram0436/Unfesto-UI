@@ -73,6 +73,14 @@
             {{ eventType.name }}
           </a>
         </li>
+
+        <li
+          class="menu-item"
+          [class.active]="currentActiveItem === 'sponsors'"
+          (click)="setActiveItem('sponsors')"
+        >
+          <a [routerLink]="['/sponsor/all-sponsors']"> Sponsors </a>
+        </li>
       </ul>
     </nav>
 
@@ -136,7 +144,7 @@
     <ul>
       <li (click)="navigateToCollaboratorListing()">
         <span class="material-symbols-outlined link-icon">home_work</span>
-        Manage Listings
+        Collaborator Listings
       </li>
     </ul>
   </div>
@@ -168,6 +176,10 @@
       <li [routerLink]="'/user/dashboard/manage-listings'">
         <span class="material-symbols-outlined link-icon">home_work</span>
         Manage Listings
+      </li>
+      <li [routerLink]="'/user/dashboard/add-sponsor'">
+        <span class="material-symbols-outlined link-icon">crowdsource</span>
+        Add Sponsor
       </li>
       <li [routerLink]="'/user/dashboard/admin-panel'">
         <span class="material-symbols-outlined link-icon">shield_person</span>

@@ -1,0 +1,156 @@
+<div class="main-container">
+  <div *ngIf="isLoading" class="loading-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <!-- Skills Section -->
+  <div class="sponsors-container" *ngIf="!isLoading">
+    <div class="sponsors-head">Add Sponsor</div>
+    <div class="sponsors-sections">
+      <div class="add-description">Enter sponsor details below to add it</div>
+      <div class="opportunity-logo">
+        <ul class="logo-upload">
+          <div class="upload-title">Oportunity Logo</div>
+          <div
+            class="upload-card"
+            *ngFor="let item of sponsorLogo; let i = index"
+          >
+            <div
+              class="upload-card-brd"
+              (click)="selectFile()"
+              id="{{ i }}"
+              *ngIf="item == ''"
+            >
+              <input
+                type="file"
+                id="sponsorFileUpload"
+                name="sponsorFileUpload"
+                (change)="selectImage($event)"
+                style="display: none"
+                multiple
+              />
+              <div>
+                <button mat-raised-button color="primary" class="upload-btn">
+                  <span class="material-symbols-outlined">cloud_upload</span>
+                  <span>Click here to upload</span>
+                </button>
+              </div>
+            </div>
+            <div class="upload-card-brd" *ngIf="item != ''">
+              <div class="preview">
+                <button
+                  class="delete-button"
+                  (click)="deleteBackgroundImage(i)"
+                >
+                  <span class="delete-icon">&#10006;</span>
+                </button>
+                <img [src]="item" height="120px" width="120px" alt="" />
+              </div>
+            </div>
+          </div>
+          <p>Max size of image cannot exceed 1 MB!</p>
+        </ul>
+      </div>
+
+      <div class="d-flex">
+        <mat-form-field
+          appearance="outline"
+          style="width: 30%; display: block; margin-bottom: 20px"
+        >
+          <mat-label>Company Name</mat-label>
+          <input
+            matInput
+            [(ngModel)]="sponsorPayload.companyName"
+            placeholder="Enter Company Name"
+          />
+        </mat-form-field>
+
+        <mat-form-field
+          appearance="outline"
+          style="width: 30%; display: block; margin-bottom: 20px"
+        >
+          <mat-label>Contact Person</mat-label>
+          <input
+            matInput
+            [(ngModel)]="sponsorPayload.contactPerson"
+            placeholder="Enter Contact Person Name"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="d-flex">
+        <mat-form-field
+          appearance="outline"
+          style="width: 30%; display: block; margin-bottom: 20px"
+        >
+          <mat-label>Primary Mobile</mat-label>
+          <input
+            matInput
+            [(ngModel)]="sponsorPayload.primaryMobile"
+            placeholder="Enter Primary Mobile No."
+          />
+        </mat-form-field>
+
+        <mat-form-field
+          appearance="outline"
+          style="width: 30%; display: block; margin-bottom: 20px"
+        >
+          <mat-label>Secondary Mobile</mat-label>
+          <input
+            matInput
+            [(ngModel)]="sponsorPayload.secondaryMobile"
+            placeholder="Enter Secondary Mobile No."
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="d-flex">
+        <mat-form-field
+          appearance="outline"
+          style="width: 30%; display: block; margin-bottom: 20px"
+        >
+          <mat-label>Primary Email</mat-label>
+          <input
+            matInput
+            [(ngModel)]="sponsorPayload.primaryEmai"
+            placeholder="Enter Primary Email"
+          />
+        </mat-form-field>
+
+        <mat-form-field
+          appearance="outline"
+          style="width: 30%; display: block; margin-bottom: 20px"
+        >
+          <mat-label>Secondary Email</mat-label>
+          <input
+            matInput
+            [(ngModel)]="sponsorPayload.secondaryEmail"
+            placeholder="Enter Secondary Email"
+          />
+        </mat-form-field>
+      </div>
+
+      <mat-form-field
+        appearance="outline"
+        style="width: 30%; display: block; margin-bottom: 20px"
+      >
+        <mat-label>Other Details</mat-label>
+        <textarea
+          matInput
+          [(ngModel)]="sponsorPayload.otherDetail"
+          placeholder="Enter Other Details"
+          rows="3"
+        ></textarea>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        class="add-sponsors-btn"
+        (click)="addSponsor()"
+      >
+        Add Sponsor
+      </button>
+    </div>
+  </div>
+</div>

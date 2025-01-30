@@ -399,6 +399,15 @@ a {
   padding: 10px;
   border-radius: 10px;
   border: 1px solid #ddd;
+  margin-top: 10px;
+  font-size: 14px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  min-height: 150px;
+  word-wrap: break-word;
+  white-space: normal;
 }
 
 .organizer-details .organizers {
