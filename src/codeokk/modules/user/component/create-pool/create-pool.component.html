@@ -1,0 +1,400 @@
+<div class="main-container">
+  <div *ngIf="isLoading" class="loading-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div class="pool-container" *ngIf="!isLoading">
+    <div class="pool-head">Create Pool</div>
+    <div class="nav-container">
+      <div
+        class="section-btn nav-btn"
+        *ngFor="let tab of tabs"
+        [class.active]="currentStep === tab.id"
+        (click)="goToStep(tab.id)"
+      >
+        <span class="count">{{ tab.id }}</span>
+        <span class="btn-txt">{{ tab.title }}</span>
+      </div>
+    </div>
+    <div class="basic-details-container" *ngIf="currentStep === 1">
+      <div class="details-title">Event Pool</div>
+      <!-- About Opportunity -->
+      <div class="form-field">
+        <label class="section-label">Event *</label>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Event</mat-label>
+          <mat-select
+            [(ngModel)]="poolPayload.eventId"
+            (selectionChange)="onEventChange($event.value)"
+          >
+            <mat-option *ngFor="let event of events" [value]="event.id">
+              {{ event.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="form-field">
+        <label class="section-label">Club Name *</label>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Club Name</mat-label>
+          <input matInput [(ngModel)]="poolPayload.clubName" name="clubName" />
+        </mat-form-field>
+      </div>
+      <div class="form-field">
+        <label class="section-label">Club Mail *</label>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Club Mail</mat-label>
+          <input
+            matInput
+            [(ngModel)]="poolPayload.clubEmailId"
+            name="clubMail"
+          />
+        </mat-form-field>
+      </div>
+      <div class="form-field">
+        <button
+          mat-raised-button
+          color="primary"
+          class="add-event-btn"
+          (click)="nextStep()"
+        >
+          Next
+        </button>
+      </div>
+    </div>
+    <div class="basic-details-container" *ngIf="currentStep === 2">
+      <div class="details-title">Event Content</div>
+      <!-- Event Mailer, Event Whatsapp, Event Links, Event Post, Event Poster -->
+      <div class="lists-container">
+        <div
+          *ngFor="let mailer of poolPayload.eventMailerList; let i = index"
+          class="list-group"
+        >
+          <div class="list-top">
+            <div class="list-title">Mailer</div>
+            <span
+              *ngIf="poolPayload.eventMailerList.length > 1"
+              class="remove-prize-icon material-symbols-outlined"
+              (click)="deleteMailer(i)"
+              >delete</span
+            >
+          </div>
+
+          <!-- Description -->
+          <div class="form-field">
+            <label class="section-label">Detail *</label>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Mailer Detail</mat-label>
+              <textarea
+                matInput
+                placeholder="Enter Mailer Detail"
+                [(ngModel)]="mailer.detail"
+                name="detail-{{ i }}"
+              ></textarea>
+            </mat-form-field>
+          </div>
+
+          <!-- Add Round Button -->
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="addMailer()"
+            class="add-list-btn"
+          >
+            Add More Mailer
+          </button>
+        </div>
+      </div>
+      <div class="lists-container">
+        <div
+          *ngFor="let whatsapp of poolPayload.eventWatsAppList; let i = index"
+          class="list-group"
+        >
+          <div class="list-top">
+            <div class="list-title">WhatsApp</div>
+            <span
+              *ngIf="poolPayload.eventWatsAppList.length > 1"
+              class="remove-prize-icon material-symbols-outlined"
+              (click)="deleteWhatsApp(i)"
+              >delete</span
+            >
+          </div>
+
+          <!-- Description -->
+          <div class="form-field">
+            <label class="section-label">Detail *</label>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>WhatsApp Detail</mat-label>
+              <textarea
+                matInput
+                placeholder="Enter WhatsApp Detail"
+                [(ngModel)]="whatsapp.detail"
+                name="detail-{{ i }}"
+              ></textarea>
+            </mat-form-field>
+          </div>
+
+          <!-- Add Round Button -->
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="addWhatsApp()"
+            class="add-list-btn"
+          >
+            Add More WhatsApp
+          </button>
+        </div>
+      </div>
+
+      <div class="lists-container">
+        <div
+          *ngFor="let link of poolPayload.eventLinkList; let i = index"
+          class="list-group"
+        >
+          <div class="list-top">
+            <div class="list-title">Link</div>
+            <span
+              *ngIf="poolPayload.eventLinkList.length > 1"
+              class="remove-prize-icon material-symbols-outlined"
+              (click)="deleteLink(i)"
+              >delete</span
+            >
+          </div>
+
+          <!-- Description -->
+          <div class="form-field">
+            <label class="section-label">Detail *</label>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Link Detail</mat-label>
+              <textarea
+                matInput
+                placeholder="Enter Link Detail"
+                [(ngModel)]="link.detail"
+                name="detail-{{ i }}"
+              ></textarea>
+            </mat-form-field>
+          </div>
+
+          <!-- Add Round Button -->
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="addLink()"
+            class="add-list-btn"
+          >
+            Add More Link
+          </button>
+        </div>
+      </div>
+
+      <div class="opportunity-logo">
+        <ul class="logo-upload">
+          <div class="upload-title">Event Post Images</div>
+          <div
+            class="upload-card gallery-upload-card"
+            *ngFor="let item of poolPayload.eventPostList; let i = index"
+          >
+            <div
+              class="upload-card-brd"
+              (click)="selectEventPostFile(i)"
+              id="{{ i }}"
+              *ngIf="!item.imageURL"
+            >
+              <input
+                type="file"
+                [id]="'eventPostFileUpload' + i"
+                name="eventPostFileUpload"
+                (change)="selectEventPostImage($event, i)"
+                style="display: none"
+              />
+              <div>
+                <button
+                  mat-raised-button
+                  color="primary"
+                  class="upload-btn gallery-upload-btn"
+                >
+                  <span class="material-symbols-outlined">cloud_upload</span>
+                  <span>Click here to upload</span>
+                </button>
+              </div>
+            </div>
+            <div class="upload-card-brd" *ngIf="item.imageURL">
+              <div class="preview gallery-preview">
+                <button class="delete-button" (click)="deleteEventPostImage(i)">
+                  <span class="delete-icon">&#10006;</span>
+                </button>
+                <img
+                  [src]="item.imageURL"
+                  height="200px"
+                  width="200px"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+          <button
+            mat-raised-button
+            color="primary"
+            class="add-gallery-btn"
+            (click)="addEventPost()"
+          >
+            Add More
+          </button>
+        </ul>
+      </div>
+
+      <div class="opportunity-logo">
+        <ul class="logo-upload">
+          <div class="upload-title">Event Poster Images</div>
+          <div
+            class="upload-card gallery-upload-card"
+            *ngFor="let item of poolPayload.eventPosterList; let i = index"
+          >
+            <div
+              class="upload-card-brd"
+              (click)="selectEventPosterFile(i)"
+              id="{{ i }}"
+              *ngIf="!item.imageURL"
+            >
+              <input
+                type="file"
+                [id]="'eventPosterFileUpload' + i"
+                name="eventPosterFileUpload"
+                (change)="selectEventPosterImage($event, i)"
+                style="display: none"
+              />
+              <div>
+                <button
+                  mat-raised-button
+                  color="primary"
+                  class="upload-btn gallery-upload-btn"
+                >
+                  <span class="material-symbols-outlined">cloud_upload</span>
+                  <span>Click here to upload</span>
+                </button>
+              </div>
+            </div>
+            <div class="upload-card-brd" *ngIf="item.imageURL">
+              <div class="preview gallery-preview">
+                <button
+                  class="delete-button"
+                  (click)="deleteEventPosterImage(i)"
+                >
+                  <span class="delete-icon">&#10006;</span>
+                </button>
+                <img
+                  [src]="item.imageURL"
+                  height="200px"
+                  width="200px"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+          <button
+            mat-raised-button
+            color="primary"
+            class="add-gallery-btn"
+            (click)="addEventPoster()"
+          >
+            Add More
+          </button>
+        </ul>
+      </div>
+
+      <div class="form-field">
+        <button
+          mat-raised-button
+          color="primary"
+          class="add-event-btn"
+          (click)="nextStep()"
+        >
+          Next
+        </button>
+      </div>
+    </div>
+    <div class="basic-details-container" *ngIf="currentStep === 3">
+      <div class="details-title">Organizer Content</div>
+      <!-- Name Email Mobile No -->
+      <div class="lists-container">
+        <div
+          *ngFor="
+            let contact of poolPayload.eventOrganisorContactList;
+            let i = index
+          "
+          class="list-group"
+        >
+          <div class="list-top">
+            <div class="list-title">Contact</div>
+            <span
+              *ngIf="poolPayload.eventOrganisorContactList.length > 1"
+              class="remove-prize-icon material-symbols-outlined"
+              (click)="deleteContact(i)"
+              >delete</span
+            >
+          </div>
+
+          <!-- Description -->
+          <div class="form-field">
+            <label class="section-label">Name *</label>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Name</mat-label>
+              <input
+                matInput
+                placeholder="Enter Name"
+                [(ngModel)]="contact.name"
+                name="name-{{ i }}"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="form-field">
+            <label class="section-label">Email *</label>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Email</mat-label>
+              <input
+                matInput
+                placeholder="Enter Email"
+                [(ngModel)]="contact.emailId"
+                name="email-{{ i }}"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="form-field">
+            <label class="section-label">Mobile No. *</label>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Mobile No.</mat-label>
+              <input
+                matInput
+                placeholder="Enter Mobile No."
+                [(ngModel)]="contact.mobileNo"
+                name="mobileNo-{{ i }}"
+              />
+            </mat-form-field>
+          </div>
+
+          <!-- Add Round Button -->
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="addContact()"
+            class="add-list-btn"
+          >
+            Add More Contact
+          </button>
+        </div>
+      </div>
+      <div class="form-field">
+        <button
+          mat-raised-button
+          color="primary"
+          class="add-event-btn"
+          (click)="createPool()"
+        >
+          Create Pool
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

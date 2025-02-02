@@ -10,6 +10,10 @@ import { AddOrganizationComponent } from "./component/add-organization/add-organ
 import { AdminDashboardComponent } from "./component/admin-dashboard/admin-dashboard.component";
 import { MyRegisterationsComponent } from "./component/my-registerations/my-registerations.component";
 import { AddSponsorComponent } from "./component/add-sponsor/add-sponsor.component";
+import { CreatePoolComponent } from "./component/create-pool/create-pool.component";
+import { PoolDetailsComponent } from "./component/pool-details/pool-details.component";
+import { ViewPerformanceComponent } from "./component/view-performance/view-performance.component";
+import { AddPerformanceComponent } from "./component/add-performance/add-performance.component";
 
 const routes: Routes = [
   {
@@ -25,6 +29,10 @@ const routes: Routes = [
       { path: "admin-panel", component: AdminDashboardComponent },
       { path: "my-registerations", component: MyRegisterationsComponent },
       { path: "add-sponsor", component: AddSponsorComponent },
+      { path: "create-pool", component: CreatePoolComponent },
+      { path: "pool-details", component: PoolDetailsComponent },
+      { path: "view-performance", component: ViewPerformanceComponent },
+      { path: "add-performance", component: AddPerformanceComponent },
       { path: "", redirectTo: "my-profile", pathMatch: "full" },
     ],
   },

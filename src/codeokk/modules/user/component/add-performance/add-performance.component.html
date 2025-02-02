@@ -1,0 +1,204 @@
+<div class="main-container">
+  <div *ngIf="isLoading" class="loading-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div class="pool-container" *ngIf="!isLoading">
+    <div class="pool-head">Create Pool</div>
+    <div class="nav-container">
+      <div
+        class="section-btn nav-btn"
+        *ngFor="let tab of tabs"
+        [class.active]="currentStep === tab.id"
+        (click)="goToStep(tab.id)"
+      >
+        <span class="count">{{ tab.id }}</span>
+        <span class="btn-txt">{{ tab.title }}</span>
+      </div>
+    </div>
+    <div class="basic-details-container" *ngIf="currentStep === 1">
+      <div class="details-title">Event Detail</div>
+      <!-- About Opportunity -->
+      <div class="form-field">
+        <label class="section-label">College *</label>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>College</mat-label>
+          <mat-select [(ngModel)]="performancePayload.collegeId">
+            <mat-option *ngFor="let college of colleges" [value]="college.id">
+              {{ college.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="form-field">
+        <label class="section-label">Club Name *</label>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Club Name</mat-label>
+          <input
+            matInput
+            [(ngModel)]="performancePayload.clubName"
+            name="clubName"
+          />
+        </mat-form-field>
+      </div>
+      <div class="form-field">
+        <label class="section-label">Club Mail *</label>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Club Mail</mat-label>
+          <input
+            matInput
+            [(ngModel)]="performancePayload.clubMail"
+            name="clubMail"
+          />
+        </mat-form-field>
+      </div>
+      <div class="form-field">
+        <label class="section-label">Main Event Name *</label>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Main Event Name</mat-label>
+          <input
+            matInput
+            [(ngModel)]="performancePayload.mainEventName"
+            name="mainEventName"
+          />
+        </mat-form-field>
+      </div>
+      <div class="form-field">
+        <label class="section-label">Sub Event Name *</label>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Sub Event Name</mat-label>
+          <input
+            matInput
+            [(ngModel)]="performancePayload.subEventName"
+            name="subEventName"
+          />
+        </mat-form-field>
+      </div>
+      <div class="form-field">
+        <label class="section-label">Other Details *</label>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Other Details</mat-label>
+          <textarea
+            matInput
+            [(ngModel)]="performancePayload.otherdetail"
+            name="otherDetails"
+          ></textarea>
+        </mat-form-field>
+      </div>
+      <div class="opportunity-logo">
+        <ul class="logo-upload">
+          <div class="upload-title">Gallery Images</div>
+          <div
+            class="upload-card gallery-upload-card"
+            *ngFor="
+              let item of performancePayload.imageGalleryList;
+              let i = index
+            "
+          >
+            <div
+              class="upload-card-brd"
+              (click)="selectGalleryImageFile(i)"
+              id="{{ i }}"
+              *ngIf="!item.imageURL"
+            >
+              <input
+                type="file"
+                [id]="'galleryFileUpload' + i"
+                name="galleryFileUpload"
+                (change)="selectGalleryImage($event, i)"
+                style="display: none"
+              />
+              <div>
+                <button
+                  mat-raised-button
+                  color="primary"
+                  class="upload-btn gallery-upload-btn"
+                >
+                  <span class="material-symbols-outlined">cloud_upload</span>
+                  <span>Click here to upload</span>
+                </button>
+              </div>
+            </div>
+            <div class="upload-card-brd" *ngIf="item.imageURL">
+              <div class="preview gallery-preview">
+                <button class="delete-button" (click)="deleteGalleryImage(i)">
+                  <span class="delete-icon">&#10006;</span>
+                </button>
+                <img
+                  [src]="item.imageURL"
+                  height="200px"
+                  width="200px"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+          <button
+            mat-raised-button
+            color="primary"
+            class="add-gallery-btn"
+            (click)="addGallery()"
+          >
+            Add More
+          </button>
+        </ul>
+      </div>
+      <div class="form-field">
+        <button
+          mat-raised-button
+          color="primary"
+          class="add-event-btn"
+          (click)="nextStep()"
+        >
+          Next
+        </button>
+      </div>
+    </div>
+    <div class="basic-details-container" *ngIf="currentStep === 2">
+      <div class="details-title">Promoter Detail</div>
+      <div class="form-field">
+        <label class="section-label">College *</label>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>College</mat-label>
+          <mat-select [(ngModel)]="performancePayload.promotorCollegeId">
+            <mat-option *ngFor="let college of colleges" [value]="college.id">
+              {{ college.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="form-field">
+        <label class="section-label">Promoter Club Name *</label>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Promoter Club Name</mat-label>
+          <input
+            matInput
+            [(ngModel)]="performancePayload.promotorClubName"
+            name="promoterClubName"
+          />
+        </mat-form-field>
+      </div>
+      <div class="form-field">
+        <label class="section-label">Promoter Club Mail *</label>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Promoter Club Mail</mat-label>
+          <input
+            matInput
+            [(ngModel)]="performancePayload.promotorClubMail"
+            name="promoterClubMail"
+          />
+        </mat-form-field>
+      </div>
+      <div class="form-field">
+        <button
+          mat-raised-button
+          color="primary"
+          class="add-event-btn"
+          (click)="addPerformance()"
+        >
+          Add Performance
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
