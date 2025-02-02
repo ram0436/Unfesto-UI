@@ -85,6 +85,12 @@ export class EventService {
     );
   }
 
+  getEventByHostId(hostId: number) {
+    return this.http.get(
+      `${this.baseUrl}Event/GetEventByHostId?loggedInUserId=${hostId}`
+    );
+  }
+
   getEventByCollaboratorId(collaboratorId: any) {
     return this.http.get(
       `${this.baseUrl}Event/GetEventByCollaboratorId?userId=${collaboratorId}`
@@ -100,6 +106,26 @@ export class EventService {
   getEventDetailById(eventId: String) {
     return this.http.get(
       `${this.baseUrl}Event/GetEventDetailById?eventId=${eventId}`
+    );
+  }
+
+  createPool(payload: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}Event/CreatePool`, payload);
+  }
+
+  fillPerformance(payload: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}Event/FillPerformance`, payload);
+  }
+
+  getEventPoolDetail(clubEmailId: any) {
+    return this.http.get(
+      `${this.baseUrl}Event/GetEventPoolDetail?clubEmailId=${clubEmailId}`
+    );
+  }
+
+  getEventPerformance(clubEmailId: any) {
+    return this.http.get(
+      `${this.baseUrl}Event/GetEventPerformance?clubEmailId=${clubEmailId}`
     );
   }
 }

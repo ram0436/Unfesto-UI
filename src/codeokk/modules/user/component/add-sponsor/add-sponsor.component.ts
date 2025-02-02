@@ -49,7 +49,6 @@ export class AddSponsorComponent {
     // Fetch user ID from localStorage
     const userId = localStorage.getItem("user_Id");
     if (!userId) {
-      this.snackBar.open("User not logged in!", "Close", { duration: 3000 });
       return;
     }
 

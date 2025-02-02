@@ -31,6 +31,10 @@ import { AdminDashboardComponent } from "./component/admin-dashboard/admin-dashb
 import { MatTableModule } from "@angular/material/table";
 import { MyRegisterationsComponent } from "./component/my-registerations/my-registerations.component";
 import { AddSponsorComponent } from "./component/add-sponsor/add-sponsor.component";
+import { AddPerformanceComponent } from "./component/add-performance/add-performance.component";
+import { ViewPerformanceComponent } from "./component/view-performance/view-performance.component";
+import { PoolDetailsComponent } from "./component/pool-details/pool-details.component";
+import { CreatePoolComponent } from "./component/create-pool/create-pool.component";
 
 @NgModule({
   declarations: [
@@ -44,6 +48,10 @@ import { AddSponsorComponent } from "./component/add-sponsor/add-sponsor.compone
     AdminDashboardComponent,
     MyRegisterationsComponent,
     AddSponsorComponent,
+    AddPerformanceComponent,
+    ViewPerformanceComponent,
+    PoolDetailsComponent,
+    CreatePoolComponent,
   ],
   imports: [
     SharedModule,

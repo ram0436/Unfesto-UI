@@ -556,18 +556,6 @@ export class WorkshopsComponent implements OnInit {
     // Add validation logic for each step
     let isValid = true;
 
-    switch (currentTab.id) {
-      // case 1:
-      //   isValid = this.validateBasicDetails();
-      //   break;
-      // case 2:
-      //   isValid = this.validateRegistrationDetails();
-      //   break;
-      default:
-        isValid = true; // If no validation is needed for a step
-        break;
-    }
-
     if (isValid) {
       const nextTabIndex =
         this.tabs.findIndex((tab) => tab.id === this.currentStep) + 1;

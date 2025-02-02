@@ -25,6 +25,10 @@ export class AuthGuard implements CanActivate {
       "/user/dashboard/add-category",
       "/user/dashboard/add-sponsor",
       "/user/dashboard/add-organization",
+      "/user/dashboard/create-pool",
+      "/user/dashboard/pool-details",
+      "/user/dashboard/add-performance",
+      "/user/dashboard/view-performance",
       "/event/add-workshops",
       "/event/host",
     ];
@@ -36,6 +40,10 @@ export class AuthGuard implements CanActivate {
     ];
     const allowedOrganizerRoutes = [
       "/user/dashboard/manage-listings",
+      "/user/dashboard/create-pool",
+      "/user/dashboard/pool-details",
+      "/user/dashboard/add-performance",
+      "/user/dashboard/view-performance",
       "/event/host",
       "/event/add-workshops",
       "/event/edit",

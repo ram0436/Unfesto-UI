@@ -1,0 +1,155 @@
+/* Main content area */
+.main-container {
+  width: 100%;
+  padding: 10px;
+  background-color: #fafafa;
+}
+
+.full-content {
+  margin-left: 0% !important;
+  width: 100%;
+  padding: 0px !important;
+}
+
+/* Main container */
+.pool-container {
+  /* padding: 20px; */
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pool-head {
+  padding: 15px 20px;
+  border-bottom: 1px solid #ddd;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.pool {
+  padding: 15px 20px;
+  font-size: 16px;
+}
+
+/* Individual Pool Box */
+.pool {
+  background: #fff;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+/* Club Details Section */
+.club-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.club-detail {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.club-detail .material-symbols-outlined {
+  color: #28a745;
+  font-size: 20px;
+}
+
+.club-detail .name {
+  font-weight: 500;
+  color: #333;
+}
+
+/* List Sections */
+.list-details-container {
+  margin-top: 20px;
+  background: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.list-details-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  color: #495057;
+  padding-bottom: 5px;
+}
+
+.list-details-title .material-symbols-outlined {
+  font-size: 22px;
+  color: #007bff;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+}
+
+.list-details {
+  padding: 8px;
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+}
+
+/* Event Posts & Posters */
+.event-posts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+}
+
+.event-post img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #dee2e6;
+  transition: transform 0.3s;
+}
+
+.event-post img:hover {
+  transform: scale(1.1);
+}
+
+/* Organizer Contact */
+.contact-details {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 10px;
+}
+
+.contact-detail {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-icon {
+  color: #28a745;
+  font-size: 20px;
+}
+
+.contact {
+  font-weight: 500;
+  color: #343a40;
+}

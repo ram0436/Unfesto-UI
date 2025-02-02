@@ -178,6 +178,8 @@
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
   transition: right 0.3s ease;
   z-index: 1000;
+  overflow-y: auto;
+  scrollbar-width: none;
 }
 
 .sidebar-content {

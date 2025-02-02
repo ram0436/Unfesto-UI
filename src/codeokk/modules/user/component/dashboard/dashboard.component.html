@@ -24,6 +24,38 @@
           Manage Listings
         </li>
         <li
+          [routerLink]="'/user/dashboard/create-pool'"
+          (click)="setActiveMenuItem('create-pool')"
+          [ngClass]="{ active: activeMenuItem === 'create-pool' }"
+        >
+          <span class="material-symbols-outlined link-icon">new_window</span>
+          Create Pool
+        </li>
+        <li
+          [routerLink]="'/user/dashboard/pool-details'"
+          (click)="setActiveMenuItem('pool-details')"
+          [ngClass]="{ active: activeMenuItem === 'pool-details' }"
+        >
+          <span class="material-symbols-outlined link-icon">page_info</span>
+          Pool Details
+        </li>
+        <li
+          [routerLink]="'/user/dashboard/add-performance'"
+          (click)="setActiveMenuItem('add-performance')"
+          [ngClass]="{ active: activeMenuItem === 'add-performance' }"
+        >
+          <span class="material-symbols-outlined link-icon">automation</span>
+          Add Performance
+        </li>
+        <li
+          [routerLink]="'/user/dashboard/view-performance'"
+          (click)="setActiveMenuItem('view-performance')"
+          [ngClass]="{ active: activeMenuItem === 'view-performance' }"
+        >
+          <span class="material-symbols-outlined link-icon">analytics</span>
+          View Performance
+        </li>
+        <li
           [routerLink]="'/user/dashboard/add-sponsor'"
           (click)="setActiveMenuItem('add-sponsor')"
           [ngClass]="{ active: activeMenuItem === 'add-sponsor' }"
@@ -121,14 +153,38 @@
           <span class="material-symbols-outlined link-icon">home_work</span>
           Manage Listings
         </li>
-        <!-- <li
-          [routerLink]="'/user/dashboard/settings'"
-          (click)="setActiveMenuItem('settings')"
-          [ngClass]="{ active: activeMenuItem === 'settings' }"
+        <li
+          [routerLink]="'/user/dashboard/create-pool'"
+          (click)="setActiveMenuItem('create-pool')"
+          [ngClass]="{ active: activeMenuItem === 'create-pool' }"
         >
-          <span class="material-symbols-outlined">settings</span>
-          Settings
-        </li> -->
+          <span class="material-symbols-outlined link-icon">new_window</span>
+          Create Pool
+        </li>
+        <li
+          [routerLink]="'/user/dashboard/pool-details'"
+          (click)="setActiveMenuItem('pool-details')"
+          [ngClass]="{ active: activeMenuItem === 'pool-details' }"
+        >
+          <span class="material-symbols-outlined link-icon">page_info</span>
+          Pool Details
+        </li>
+        <li
+          [routerLink]="'/user/dashboard/add-performance'"
+          (click)="setActiveMenuItem('add-performance')"
+          [ngClass]="{ active: activeMenuItem === 'add-performance' }"
+        >
+          <span class="material-symbols-outlined link-icon">automation</span>
+          Add Performance
+        </li>
+        <li
+          [routerLink]="'/user/dashboard/view-performance'"
+          (click)="setActiveMenuItem('view-performance')"
+          [ngClass]="{ active: activeMenuItem === 'view-performance' }"
+        >
+          <span class="material-symbols-outlined link-icon">analytics</span>
+          View Performance
+        </li>
       </ul>
     </div>
     <div *ngIf="isCollaborator">
