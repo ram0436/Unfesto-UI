@@ -1,123 +1,67 @@
 <div class="main-container">
   <div *ngIf="isLoading" class="loading-spinner">
+    <!-- Loading Spinner or Text -->
     <mat-spinner></mat-spinner>
   </div>
-
-  <div class="pool-container" *ngIf="!isLoading">
-    <div class="pool-head">Pool Details</div>
-    <div class="pool" *ngFor="let pool of poolDetails">
-      <div class="pool-details">
-        <div class="club-details">
-          <div class="list-details-title">
-            <span class="material-symbols-outlined"> expand_circle_down </span>
-            <span class="title">Club Details</span>
-          </div>
-          <div class="club-detail">
-            <span class="material-symbols-outlined"> groups_3 </span>
-            <span class="name">{{ pool.clubName }}</span>
-          </div>
-          <div class="club-detail">
-            <span class="material-symbols-outlined"> mail </span>
-            <span class="name">{{ pool.clubEmailId }}</span>
-          </div>
+  <!-- Profile Header -->
+  <div class="listing-container" *ngIf="!isLoading">
+    <div class="listing-head">Pool Details</div>
+    <div class="listing-sections">
+      <div class="listing-filters">
+        <div class="search-listing">
+          <span class="material-symbols-outlined search-icon"> search </span>
+          <input type="text" placeholder="Search your pools" />
         </div>
-
-        <div class="list-details-container">
-          <div class="list-details-title">
-            <span class="material-symbols-outlined"> expand_circle_down </span>
-            <span class="title">Mailer Details</span>
-          </div>
-          <div class="list">
-            <div
-              class="list-details"
-              *ngFor="let mailer of pool.eventMailerList"
-            >
-              {{ mailer.detail }}
-            </div>
-          </div>
-        </div>
-
-        <div class="list-details-container">
-          <div class="list-details-title">
-            <span class="material-symbols-outlined"> expand_circle_down </span>
-            <span class="title">WhatsApp List</span>
-          </div>
-          <div class="list">
-            <div
-              class="list-details"
-              *ngFor="let whatsapp of pool.eventWatsAppList"
-            >
-              {{ whatsapp.detail }}
-            </div>
-          </div>
-        </div>
-
-        <div class="list-details-container">
-          <div class="list-details-title">
-            <span class="material-symbols-outlined"> expand_circle_down </span>
-            <span class="title">Link List</span>
-          </div>
-          <div class="list">
-            <div class="list-details" *ngFor="let link of pool.eventLinkList">
-              {{ link.detail }}
-            </div>
-          </div>
-        </div>
-
-        <div class="list-details-container">
-          <div class="list-details-title">
-            <span class="material-symbols-outlined"> expand_circle_down </span>
-            <span class="title">Event Posts</span>
-          </div>
-          <div class="event-posts">
-            <div class="event-post" *ngFor="let post of pool.eventPostList">
-              <img [src]="post.imageURL" alt="Event Post" />
-            </div>
-          </div>
-        </div>
-
-        <div class="list-details-container">
-          <div class="list-details-title">
-            <span class="material-symbols-outlined"> expand_circle_down </span>
-            <span class="title">Event Posters</span>
-          </div>
-          <div class="event-posts">
-            <div class="event-post" *ngFor="let poster of pool.eventPosterList">
-              <img [src]="poster.imageURL" alt="Event Poster" />
-            </div>
-          </div>
-        </div>
-
-        <div class="list-details-container">
-          <div class="list-details-title">
-            <span class="material-symbols-outlined"> expand_circle_down </span>
-            <span class="title">Organizer Contact</span>
-          </div>
-          <div class="list">
-            <div
-              class="list-details contact-details"
-              *ngFor="let contact of pool.eventOrganisorContactList"
-            >
-              <div class="contact-detail">
-                <span class="material-symbols-outlined contact-icon">
-                  person
-                </span>
-                <span class="contact">{{ contact.name }}</span>
+      </div>
+      <div class="listings-table">
+        <div *ngIf="pools.length === 0" class="no-events">No pools found.</div>
+        <div *ngFor="let pool of pools">
+          <a class="listing">
+            <div class="left-content">
+              <div class="listing-image">
+                <img
+                  [src]="pool.eventLogoURL || 'https://via.placeholder.com/60'"
+                  alt="Event Logo"
+                />
               </div>
-              <div class="contact-detail">
-                <span class="material-symbols-outlined contact-icon">
-                  mail
-                </span>
-                <span class="contact">{{ contact.emailId }}</span>
+              <div class="listing-info">
+                <div class="listing-title">
+                  <a class="listing-title">
+                    {{ pool.clubName || "-" }}
+                  </a>
+                </div>
+                <div class="listing-count">
+                  Pool Club Email -
+                  {{ pool.clubEmailId || "-" }}
+                </div>
               </div>
-              <div class="contact-detail">
-                <span class="material-symbols-outlined contact-icon">
-                  call
-                </span>
-                <span class="contact">+91 {{ contact.mobileNo }}</span>
+              <div class="listing-collaborators">
+                <div class="collaborator-heading">Organizer:</div>
+                <div
+                  *ngFor="let organizer of pool.eventOrganisorContactList"
+                  class="collaborator"
+                >
+                  {{ organizer.name || "-" }}
+                </div>
+                <div
+                  *ngIf="
+                    !pool.eventOrganisorContactList ||
+                    pool.eventOrganisorContactList.length === 0
+                  "
+                >
+                  -
+                </div>
               </div>
             </div>
-          </div>
+            <div class="right-content">
+              <a>
+                <span class="material-symbols-outlined edit-icon"> edit </span>
+              </a>
+              <span class="material-symbols-outlined delete-icon">
+                delete
+              </span>
+            </div>
+          </a>
         </div>
       </div>
     </div>

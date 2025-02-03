@@ -18,6 +18,7 @@ export class AllEventsComponent {
   eventDetails: any | null = null;
   selectedEventGuid: string | null = null;
   isLoading: boolean = true;
+  wishlistItems: Set<number> = new Set();
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -41,6 +42,32 @@ export class AllEventsComponent {
         this.selectEvent(this.events[0].tabRefGuid); // Select the first event by default
       }
     });
+  }
+
+  addToWishlist(eventId: number) {
+    const userId = localStorage.getItem("user_Id");
+    const timestamp = new Date().toISOString();
+
+    const wishlistPayload = {
+      createdBy: userId ? parseInt(userId) : 0,
+      createdOn: timestamp,
+      modifiedBy: userId ? parseInt(userId) : 0,
+      modifiedOn: timestamp,
+      id: 0, // If API requires an ID, it should be provided accordingly
+      eventId: eventId,
+    };
+
+    this.eventService.addToWishlist(wishlistPayload).subscribe(
+      (data: any) => {
+        this.showNotification("Event Added to Wishlist");
+        if (this.wishlistItems.has(eventId)) {
+          this.wishlistItems.delete(eventId);
+        } else {
+          this.wishlistItems.add(eventId);
+        }
+      },
+      (error: any) => {}
+    );
   }
 
   selectEvent(tabRefGuid: string) {

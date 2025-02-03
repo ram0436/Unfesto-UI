@@ -62,6 +62,7 @@ export class AuthGuard implements CanActivate {
       "/dashboard",
       "/user/dashboard/settings",
       "/user/dashboard/my-profile",
+      "/user/dashboard/my-wishlist",
     ];
 
     // Add dynamic routes using regex

@@ -188,6 +188,15 @@ a {
   align-items: center;
   justify-content: center;
   font-size: 16px;
+  cursor: pointer;
+}
+
+.wishlist-active {
+  color: #009afe;
+}
+
+.detail-icon {
+  cursor: pointer;
 }
 
 .main-detail .detail-name {

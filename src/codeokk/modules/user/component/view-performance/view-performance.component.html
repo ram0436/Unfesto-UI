@@ -1,97 +1,72 @@
 <div class="main-container">
   <div *ngIf="isLoading" class="loading-spinner">
+    <!-- Loading Spinner or Text -->
     <mat-spinner></mat-spinner>
   </div>
-
-  <div class="pool-container" *ngIf="!isLoading">
-    <div class="pool-head">Performance Details</div>
-    <div class="pool" *ngFor="let performance of performanceDetails">
-      <div class="pool-details">
-        <div class="club-details">
-          <div class="list-details-title">
-            <span class="material-symbols-outlined"> expand_circle_down </span>
-            <span class="title">Promoted Event Details</span>
-          </div>
-          <div class="club-detail">
-            <span class="material-symbols-outlined"> school </span>
-            <span class="name">{{ performance.collegeName }}</span>
-          </div>
-          <div class="club-detail">
-            <span class="material-symbols-outlined"> groups </span>
-            <span class="name">{{ performance.clubName }}</span>
-          </div>
-          <div class="club-detail">
-            <span class="material-symbols-outlined"> mail </span>
-            <span class="name">{{ performance.clubMail }}</span>
-          </div>
-          <div class="club-detail">
-            <span class="material-symbols-outlined"> hub </span>
-            <span class="name">{{ performance.mainEventName }}</span>
-          </div>
-          <div class="club-detail">
-            <span class="material-symbols-outlined"> trophy </span>
-            <span class="name">{{ performance.subEventName }}</span>
-          </div>
+  <!-- Profile Header -->
+  <div class="listing-container" *ngIf="!isLoading">
+    <div class="listing-head">Performance Details</div>
+    <div class="listing-sections">
+      <div class="listing-filters">
+        <div class="search-listing">
+          <span class="material-symbols-outlined search-icon"> search </span>
+          <input type="text" placeholder="Search your performances" />
         </div>
-
-        <div class="list-details-container">
-          <div class="list-details-title">
-            <span class="material-symbols-outlined"> expand_circle_down </span>
-            <span class="title">Other Details</span>
-          </div>
-          <div class="list">
-            <div class="list-details">
-              {{ performance.otherdetail }}
-            </div>
-          </div>
+      </div>
+      <div class="listings-table">
+        <div *ngIf="performances.length === 0" class="no-events">
+          No performances found.
         </div>
-
-        <div class="list-details-container">
-          <div class="list-details-title">
-            <span class="material-symbols-outlined"> expand_circle_down </span>
-            <span class="title">Gallery Images</span>
-          </div>
-          <div class="event-posts">
-            <div
-              class="event-post"
-              *ngFor="let image of performance.imageGalleryList"
-            >
-              <img [src]="image.imageURL" alt="Event Poster" />
-            </div>
-          </div>
-        </div>
-
-        <div class="list-details-container">
-          <div class="list-details-title">
-            <span class="material-symbols-outlined"> expand_circle_down </span>
-            <span class="title">Promoter Details</span>
-          </div>
-          <div class="list">
-            <div class="list-details contact-details">
-              <div class="contact-detail">
-                <span class="material-symbols-outlined contact-icon">
-                  school
-                </span>
-                <span class="contact">{{
-                  performance.promotorCollegeName
-                }}</span>
+        <div *ngFor="let performance of performances">
+          <a class="listing">
+            <div class="left-content">
+              <!-- <div class="listing-image">
+                <img
+                  [src]="pool.eventLogoURL || 'https://via.placeholder.com/60'"
+                  alt="Event Logo"
+                />
+              </div> -->
+              <div class="listing-info">
+                <div class="listing-title">
+                  <a class="listing-title">
+                    {{ performance.mainEventName || "-" }}
+                  </a>
+                </div>
+                <div class="listing-count">
+                  Performance Club -
+                  {{ performance.clubName || "-" }}
+                </div>
+                <div class="listing-count">
+                  Club Mail -
+                  {{ performance.clubMail || "-" }}
+                </div>
+                <div class="listing-count">
+                  College -
+                  {{ performance.collegeName || "-" }}
+                </div>
               </div>
-              <div class="contact-detail">
-                <span class="material-symbols-outlined contact-icon">
-                  groups
-                </span>
-                <span class="contact">{{ performance.promotorClubName }}</span>
-              </div>
-              <div class="contact-detail">
-                <span class="material-symbols-outlined contact-icon">
-                  mail
-                </span>
-                <span class="contact"
-                  >+91 {{ performance.promotorClubMail }}</span
-                >
+              <div class="listing-collaborators">
+                <div class="collaborator-heading">Promotor Details:</div>
+                <div class="collaborator">
+                  {{ performance.promotorClubName || "-" }}
+                </div>
+                <div class="collaborator">
+                  {{ performance.promotorCollegeName || "-" }}
+                </div>
+                <div class="collaborator">
+                  {{ performance.promotorClubMail || "-" }}
+                </div>
               </div>
             </div>
-          </div>
+            <div class="right-content">
+              <a>
+                <span class="material-symbols-outlined edit-icon"> edit </span>
+              </a>
+              <span class="material-symbols-outlined delete-icon">
+                delete
+              </span>
+            </div>
+          </a>
         </div>
       </div>
     </div>

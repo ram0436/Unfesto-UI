@@ -117,9 +117,19 @@ export class EventService {
     return this.http.post(`${this.baseUrl}Event/FillPerformance`, payload);
   }
 
+  addToWishlist(payload: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}Event/AddRemoveWishlist`, payload);
+  }
+
+  getMyWishlist(userId: any) {
+    return this.http.get(
+      `${this.baseUrl}Event/GetMyWishlist?loggedInUserId=${userId}`
+    );
+  }
+
   getEventPoolDetail(clubEmailId: any) {
     return this.http.get(
-      `${this.baseUrl}Event/GetEventPoolDetail?clubEmailId=${clubEmailId}`
+      `${this.baseUrl}Event/GetEventPool?clubEmailId=${clubEmailId}`
     );
   }
 
