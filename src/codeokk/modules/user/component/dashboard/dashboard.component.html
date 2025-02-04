@@ -24,6 +24,16 @@
           Manage Listings
         </li>
         <li
+          [routerLink]="'/user/dashboard/my-wishlist'"
+          (click)="setActiveMenuItem('my-wishlist')"
+          [ngClass]="{ active: activeMenuItem === 'my-wishlist' }"
+        >
+          <span class="material-symbols-outlined link-icon"
+            >bookmark_heart</span
+          >
+          My Wishlist
+        </li>
+        <li
           [routerLink]="'/user/dashboard/create-pool'"
           (click)="setActiveMenuItem('create-pool')"
           [ngClass]="{ active: activeMenuItem === 'create-pool' }"
@@ -117,6 +127,16 @@
           My Registrations
         </li>
         <li
+          [routerLink]="'/user/dashboard/my-wishlist'"
+          (click)="setActiveMenuItem('my-wishlist')"
+          [ngClass]="{ active: activeMenuItem === 'my-wishlist' }"
+        >
+          <span class="material-symbols-outlined link-icon"
+            >bookmark_heart</span
+          >
+          My Wishlist
+        </li>
+        <li
           [routerLink]="'/user/dashboard/certificates'"
           (click)="setActiveMenuItem('certificates')"
           [ngClass]="{ active: activeMenuItem === 'certificates' }"
@@ -152,6 +172,16 @@
         >
           <span class="material-symbols-outlined link-icon">home_work</span>
           Manage Listings
+        </li>
+        <li
+          [routerLink]="'/user/dashboard/my-wishlist'"
+          (click)="setActiveMenuItem('my-wishlist')"
+          [ngClass]="{ active: activeMenuItem === 'my-wishlist' }"
+        >
+          <span class="material-symbols-outlined link-icon"
+            >bookmark_heart</span
+          >
+          My Wishlist
         </li>
         <li
           [routerLink]="'/user/dashboard/create-pool'"

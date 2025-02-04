@@ -16,7 +16,7 @@ import { SponsorService } from "../../../sponsor/service/sponsor.service";
 export class ViewPerformanceComponent {
   isLoading: boolean = true;
 
-  performanceDetails: any[] = [];
+  performances: any[] = [];
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -38,7 +38,7 @@ export class ViewPerformanceComponent {
 
   getEventPerformanceDetails(clubEmail: any) {
     this.eventService.getEventPerformance(clubEmail).subscribe((data: any) => {
-      this.performanceDetails = data.reverse();
+      this.performances = data.reverse();
       this.isLoading = false;
     });
   }

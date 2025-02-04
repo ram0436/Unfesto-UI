@@ -35,6 +35,7 @@ import { AddPerformanceComponent } from "./component/add-performance/add-perform
 import { ViewPerformanceComponent } from "./component/view-performance/view-performance.component";
 import { PoolDetailsComponent } from "./component/pool-details/pool-details.component";
 import { CreatePoolComponent } from "./component/create-pool/create-pool.component";
+import { MyWishlistComponent } from "./component/my-wishlist/my-wishlist.component";
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { CreatePoolComponent } from "./component/create-pool/create-pool.compone
     ViewPerformanceComponent,
     PoolDetailsComponent,
     CreatePoolComponent,
+    MyWishlistComponent,
   ],
   imports: [
     SharedModule,

@@ -236,7 +236,13 @@
           <div class="box-top">
             <div class="box-title">Free</div>
             <div class="share-details">
-              <span class="material-symbols-outlined share-icon">
+              <span
+                class="material-symbols-outlined share-icon"
+                (click)="addToWishlist(eventDetails[0].eventId)"
+                [ngClass]="{
+                  'wishlist-active': wishlistItems.has(eventDetails[0].eventId)
+                }"
+              >
                 favorite
               </span>
               <span class="material-symbols-outlined share-icon"> share </span>

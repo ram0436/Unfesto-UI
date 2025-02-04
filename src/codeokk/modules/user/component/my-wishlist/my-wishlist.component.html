@@ -1,0 +1,86 @@
+<div class="main-container">
+  <div *ngIf="isLoading" class="loading-spinner">
+    <!-- Loading Spinner or Text -->
+    <mat-spinner></mat-spinner>
+  </div>
+  <!-- Profile Header -->
+  <div class="listing-container" *ngIf="!isLoading">
+    <div class="listing-head">My Wishlist</div>
+    <div class="listing-sections">
+      <div class="listing-filters">
+        <div class="search-listing">
+          <span class="material-symbols-outlined search-icon"> search </span>
+          <input type="text" placeholder="Search your wishlist" />
+        </div>
+      </div>
+      <div class="listings-table">
+        <div *ngIf="events.length === 0" class="no-events">
+          No events found.
+        </div>
+        <div *ngFor="let event of events">
+          <a class="listing">
+            <div class="left-content">
+              <div class="listing-image">
+                <img
+                  [src]="event.eventLogoURL || 'https://via.placeholder.com/60'"
+                  alt="Event Logo"
+                />
+              </div>
+              <div class="listing-info">
+                <div class="listing-title">
+                  <a
+                    target="_blank"
+                    [routerLink]="['/event/details', event.tabRefGuid]"
+                    class="listing-title"
+                  >
+                    {{ event.title || "-" }}
+                  </a>
+                </div>
+                <div class="listing-count">
+                  Participant Count -
+                  {{ event.eventRegistrationList?.[0]?.registrationCountLimit || '-' }}
+                </div>
+                <div class="listing-date">
+                  <span class="material-symbols-outlined date-icon"
+                    >calendar_month</span
+                  >
+                  <span class="date-txt">
+                    {{ event.eventRegistrationList?.[0]?.registartionStartDateTime | date: 'dd MMM yyyy' || '-' }}
+                  </span>
+                </div>
+              </div>
+              <div class="listing-collaborators">
+                <div class="collaborator-heading">Collaborators:</div>
+                <div
+                  *ngFor="let collaborator of event.eventCollaboratorList"
+                  class="collaborator"
+                >
+                  {{ collaborator.userId || "-" }}
+                </div>
+                <div
+                  *ngIf="
+                    !event.eventCollaboratorList ||
+                    event.eventCollaboratorList.length === 0
+                  "
+                >
+                  -
+                </div>
+              </div>
+            </div>
+            <div class="right-content">
+              <span
+                class="material-symbols-outlined edit-icon"
+                (click)="addToWishlist(event.eventId)"
+                [ngClass]="{
+                  'wishlist-active': wishlistItems.has(event.eventId)
+                }"
+              >
+                favorite
+              </span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

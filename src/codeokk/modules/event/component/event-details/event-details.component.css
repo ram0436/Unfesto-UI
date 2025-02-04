@@ -176,6 +176,15 @@
   white-space: normal;
 }
 
+.wishlist-active {
+  color: #009afe !important;
+}
+
+.detail-icon,
+.share-icon {
+  cursor: pointer;
+}
+
 .right-content {
   width: 30%;
 }

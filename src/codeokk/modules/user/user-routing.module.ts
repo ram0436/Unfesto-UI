@@ -14,6 +14,7 @@ import { CreatePoolComponent } from "./component/create-pool/create-pool.compone
 import { PoolDetailsComponent } from "./component/pool-details/pool-details.component";
 import { ViewPerformanceComponent } from "./component/view-performance/view-performance.component";
 import { AddPerformanceComponent } from "./component/add-performance/add-performance.component";
+import { MyWishlistComponent } from "./component/my-wishlist/my-wishlist.component";
 
 const routes: Routes = [
   {
@@ -33,6 +34,7 @@ const routes: Routes = [
       { path: "pool-details", component: PoolDetailsComponent },
       { path: "view-performance", component: ViewPerformanceComponent },
       { path: "add-performance", component: AddPerformanceComponent },
+      { path: "my-wishlist", component: MyWishlistComponent },
       { path: "", redirectTo: "my-profile", pathMatch: "full" },
     ],
   },

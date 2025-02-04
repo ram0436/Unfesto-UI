@@ -98,10 +98,15 @@
       </div>
       <div class="event-register-details">
         <div class="other-details">
-          <span class="material-symbols-outlined detail-icon">
-            calendar_month
+          <span
+            class="material-symbols-outlined detail-icon"
+            (click)="addToWishlist(eventDetails.eventId)"
+            [ngClass]="{
+              'wishlist-active': wishlistItems.has(eventDetails.eventId)
+            }"
+          >
+            favorite
           </span>
-          <span class="material-symbols-outlined detail-icon"> favorite </span>
         </div>
         <div class="register-btn">
           <a

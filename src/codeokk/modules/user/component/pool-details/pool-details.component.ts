@@ -16,7 +16,7 @@ import { SponsorService } from "../../../sponsor/service/sponsor.service";
 export class PoolDetailsComponent {
   isLoading: boolean = true;
 
-  poolDetails: any[] = [];
+  pools: any[] = [];
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -38,7 +38,7 @@ export class PoolDetailsComponent {
 
   getEventPoolDetails(clubEmail: any) {
     this.eventService.getEventPoolDetail(clubEmail).subscribe((data: any) => {
-      this.poolDetails = data.reverse();
+      this.pools = data.reverse();
       this.isLoading = false;
     });
   }
