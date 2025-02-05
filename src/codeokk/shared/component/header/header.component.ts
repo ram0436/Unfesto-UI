@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { EventService } from "../../../modules/event/service/event.service";
 import { data } from "jquery";
+import { LoginComponent } from "../../../modules/login/login.component";
 
 @Component({
   selector: "app-header",
@@ -70,7 +71,7 @@ export class HeaderComponent implements OnInit {
     if (this.isLoggedIn) {
       this.logout();
     } else {
-      this.login();
+      this.openLoginModal();
     }
   }
 
@@ -100,6 +101,18 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(["/user/dashboard/manage-listings"], {
       queryParams: { isCollaborator: "true" },
     });
+  }
+
+  openLoginModal() {
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
+
+    this.dialogRef = this.dialog.open(LoginComponent, {
+      width: "500px",
+    });
+
+    this.dialogRef.afterClosed().subscribe((result) => {});
   }
 
   logout() {

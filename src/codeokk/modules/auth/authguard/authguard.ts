@@ -29,7 +29,7 @@ export class AuthGuard implements CanActivate {
       "/user/dashboard/pool-details",
       "/user/dashboard/add-performance",
       "/user/dashboard/view-performance",
-      "/event/add-workshops",
+      "/event/add-event",
       "/event/host",
     ];
     const allowedParticipantRoutes = [
@@ -45,7 +45,7 @@ export class AuthGuard implements CanActivate {
       "/user/dashboard/add-performance",
       "/user/dashboard/view-performance",
       "/event/host",
-      "/event/add-workshops",
+      "/event/add-event",
       "/event/edit",
       "/event/edit/:id",
     ];

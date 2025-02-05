@@ -14,6 +14,11 @@
   justify-content: center;
 }
 
+.error-message {
+  color: red;
+  margin: 10px 0 0 0;
+}
+
 .login-page::before {
   content: "";
   position: absolute;
@@ -29,7 +34,6 @@
 .login-container {
   background: #ffffff;
   padding: 10px 20px;
-  width: 35%;
   border-radius: 8px;
   /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
   position: relative;
@@ -39,7 +43,7 @@
 
 .login-content {
   width: 100%;
-  overflow-y: auto;
+  overflow-y: auto !important;
 }
 
 /* Hide scrollbar for Chrome, Safari, and newer versions of Edge */
@@ -55,9 +59,9 @@
 .login-section-title {
   font-size: 17px;
   font-weight: 500;
-  padding: 20px 0px;
+  padding: 0px 0px;
   /* border-bottom: 1px solid #ddd; */
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 ul.nav-items li {
@@ -233,7 +237,7 @@ li.active {
 }
 
 .form-field {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   width: 100%;
 }
 
@@ -303,7 +307,7 @@ mat-radio-button p {
 
 .section-label {
   font-size: 14px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   display: block;
 }
 
