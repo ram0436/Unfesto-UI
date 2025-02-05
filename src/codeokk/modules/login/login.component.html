@@ -1,51 +1,175 @@
 <div class="login-page">
   <div class="login-container">
     <div class="login-content">
-      <div class="login-section-title">Welcome Back!</div>
-      <div class="content top-content">
-        <div class="content fields-content">
-          <div class="form-field">
-            <mat-form-field appearance="outline" class="full-width">
-              <mat-label>User Name</mat-label>
-              <input
-                matInput
-                maxlength="190"
-                placeholder="Enter User Name"
-                [(ngModel)]="username"
-                name="userName"
-              />
-            </mat-form-field>
-          </div>
-          <div class="form-field">
-            <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Password</mat-label>
-              <input
-                matInput
-                maxlength="190"
-                placeholder="Enter Password"
-                [(ngModel)]="password"
-                name="password"
-              />
-            </mat-form-field>
-          </div>
-          <div class="form-field">
-            <button
-              mat-raised-button
-              color="primary"
-              class="add-user-btn"
-              (click)="login()"
-            >
-              Login
-            </button>
-          </div>
-          <div class="nav-link">
-            Don't have an account?
-            <span class="login-link" [routerLink]="'/signup'"
-              >Register Now</span
-            >
+      <div *ngIf="isLogin; else signupTemplate">
+        <div class="login-section-title">Welcome Back!</div>
+        <div class="content top-content">
+          <div class="content fields-content">
+            <div class="form-field">
+              <label class="section-label">User Name *</label>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>User Name</mat-label>
+                <input
+                  matInput
+                  maxlength="190"
+                  placeholder="Enter User Name"
+                  [(ngModel)]="username"
+                  name="userName"
+                />
+              </mat-form-field>
+            </div>
+            <div class="form-field">
+              <label class="section-label">Password *</label>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Password</mat-label>
+                <input
+                  matInput
+                  maxlength="190"
+                  placeholder="Enter Password"
+                  [(ngModel)]="password"
+                  name="password"
+                />
+              </mat-form-field>
+            </div>
+            <div class="form-field">
+              <button
+                mat-raised-button
+                color="primary"
+                class="add-user-btn"
+                (click)="login()"
+              >
+                Login
+              </button>
+            </div>
+            <div class="nav-link">
+              Don't have an account?
+              <span class="login-link" (click)="isLogin = false"
+                >Register Now</span
+              >
+            </div>
           </div>
         </div>
       </div>
+
+      <ng-template #signupTemplate>
+        <div class="login-section-title">
+          Enter your details to register yourself
+        </div>
+        <div class="content top-content">
+          <div class="content fields-content">
+            <div class="name-fields">
+              <div class="form-field">
+                <label class="section-label">First Name *</label>
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>First Name</mat-label>
+                  <input
+                    matInput
+                    maxlength="190"
+                    placeholder="Enter First Name"
+                    [(ngModel)]="userPayload.firstName"
+                    name="firstName"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="form-field">
+                <label class="section-label">Last Name *</label>
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Last Name</mat-label>
+                  <input
+                    matInput
+                    maxlength="190"
+                    placeholder="Enter Last Name"
+                    [(ngModel)]="userPayload.lastName"
+                    name="lastName"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="form-field">
+              <label class="section-label">Username *</label>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>User Name</mat-label>
+                <input
+                  matInput
+                  maxlength="190"
+                  placeholder="Enter User Name"
+                  [(ngModel)]="userPayload.userId"
+                  name="userName"
+                />
+              </mat-form-field>
+            </div>
+            <div class="form-field">
+              <label class="section-label">Email *</label>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Email</mat-label>
+                <input
+                  matInput
+                  maxlength="190"
+                  placeholder="Enter Email"
+                  [(ngModel)]="userPayload.email"
+                  name="email"
+                />
+              </mat-form-field>
+            </div>
+            <div class="form-field">
+              <label class="section-label">Password *</label>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Password</mat-label>
+                <input
+                  matInput
+                  maxlength="190"
+                  placeholder="Enter Password"
+                  [(ngModel)]="userPayload.password"
+                  name="password"
+                />
+              </mat-form-field>
+            </div>
+            <div class="form-field">
+              <label class="section-label">Confirm Password *</label>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Confirm Password</mat-label>
+                <input
+                  matInput
+                  type="password"
+                  maxlength="190"
+                  placeholder="Re-enter Password"
+                  [(ngModel)]="confirmPassword"
+                  name="confirmPassword"
+                  required
+                />
+              </mat-form-field>
+              <div *ngIf="passwordMismatch" class="error-message">
+                Passwords do not match.
+              </div>
+            </div>
+            <div class="form-field">
+              <label class="section-label">User Type *</label>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>User Type</mat-label>
+                <mat-select [(ngModel)]="userPayload.userTypeId">
+                  <mat-option *ngFor="let type of userTypes" [value]="type.id">
+                    {{ type.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="form-field">
+              <button
+                mat-raised-button
+                color="primary"
+                class="add-user-btn"
+                (click)="addUser()"
+              >
+                Register Now
+              </button>
+            </div>
+            <div class="nav-link">
+              Already have an account?
+              <span class="login-link" (click)="isLogin = true">Login Now</span>
+            </div>
+          </div>
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>

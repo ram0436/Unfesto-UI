@@ -10,7 +10,7 @@ import { EditEventComponent } from "./component/edit-event/edit-event.component"
 import { RegisterEventComponent } from "./component/register-event/register-event.component";
 
 const routes: Routes = [
-  { path: "add-workshops", component: WorkshopsComponent },
+  { path: "add-event", component: WorkshopsComponent },
   { path: "quizzes", component: QuizzesComponent },
   { path: "details/:id", component: EventDetailsComponent },
   { path: "all-events", component: AllEventsComponent },

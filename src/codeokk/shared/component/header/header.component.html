@@ -88,7 +88,7 @@
     <div class="action">
       <button
         class="btn btn-host"
-        [routerLink]="'/event/host'"
+        [routerLink]="'/event/add-event'"
         (click)="setActiveItem('')"
       >
         + Host
@@ -125,110 +125,51 @@
     </div>
   </div>
 
-  <div class="sidebar-section" *ngIf="userRole === 'Organizer'">
-    <h5>For Organizers</h5>
-    <ul>
-      <li [routerLink]="'/user/dashboard/manage-listings'">
-        <span class="material-symbols-outlined link-icon">home_work</span>
-        Manage Listings
-      </li>
-      <li [routerLink]="'/user/dashboard/my-wishlist'">
-        <span class="material-symbols-outlined link-icon">bookmark_heart</span>
-        My Wishlist
-      </li>
-      <li [routerLink]="'/user/dashboard/create-pool'">
-        <span class="material-symbols-outlined link-icon">new_window</span>
-        Create Pool
-      </li>
-      <li [routerLink]="'/user/dashboard/pool-details'">
-        <span class="material-symbols-outlined link-icon">page_info</span>
-        Pool Details
-      </li>
-      <li [routerLink]="'/user/dashboard/add-performance'">
-        <span class="material-symbols-outlined link-icon">automation</span>
-        Add Performance
-      </li>
-      <li [routerLink]="'/user/dashboard/view-performance'">
-        <span class="material-symbols-outlined link-icon">analytics</span>
-        View Performance
-      </li>
-      <li [routerLink]="'/user/dashboard/settings'">
-        <span class="material-symbols-outlined link-icon">settings</span>
-        Settings
-      </li>
-    </ul>
-  </div>
-
-  <div class="sidebar-section" *ngIf="isCollaborator">
-    <h5>For Collaborator</h5>
-    <ul>
-      <li (click)="navigateToCollaboratorListing()">
-        <span class="material-symbols-outlined link-icon">home_work</span>
-        Collaborator Listings
-      </li>
-    </ul>
-  </div>
-
-  <div class="sidebar-section" *ngIf="userRole === 'Participant'">
-    <h5>For Participants</h5>
-    <ul>
-      <li [routerLink]="'/user/dashboard/my-registerations'">
-        <span class="material-symbols-outlined link-icon">assignment</span>
-        My Registrations
-      </li>
-      <li [routerLink]="'/user/dashboard/my-wishlist'">
-        <span class="material-symbols-outlined link-icon">bookmark_heart</span>
-        My Wishlist
-      </li>
-      <li [routerLink]="'/user/dashboard/certificates'">
-        <span class="material-symbols-outlined link-icon">verified</span>
-        Certificates
-      </li>
-      <li [routerLink]="'/user/dashboard/wishlist'">
-        <span class="material-symbols-outlined link-icon">favorite</span>
-        Wishlist
-      </li>
-      <li [routerLink]="'/user/dashboard/settings'">
-        <span class="material-symbols-outlined link-icon">settings</span>
-        Settings
-      </li>
-    </ul>
-  </div>
   <div class="sidebar-section" *ngIf="userRole === 'SuperAdmin'">
     <h5>For Admin</h5>
+    <hr class="line" />
     <ul>
+      <li [routerLink]="'/event/add-event'">
+        <span class="material-symbols-outlined link-icon">linked_services</span>
+        Host Event
+      </li>
       <li [routerLink]="'/user/dashboard/manage-listings'">
         <span class="material-symbols-outlined link-icon">home_work</span>
-        Manage Listings
+        View My Event List
+      </li>
+      <li [routerLink]="'/user/dashboard/admin-panel'">
+        <span class="material-symbols-outlined link-icon">shield_person</span>
+        All Event List
+      </li>
+      <li>
+        <span class="material-symbols-outlined link-icon">wysiwyg</span>
+        View Event Registerations
+      </li>
+      <li [routerLink]="'/user/dashboard/create-pool'">
+        <span class="material-symbols-outlined link-icon">new_window</span>
+        Create Event Pool
+      </li>
+      <li [routerLink]="'/user/dashboard/pool-details'">
+        <span class="material-symbols-outlined link-icon">page_info</span>
+        View Event Pool List
+      </li>
+      <li [routerLink]="'/user/dashboard/add-performance'">
+        <span class="material-symbols-outlined link-icon">playlist_add</span>
+        Add Event Performance
+      </li>
+      <li [routerLink]="'/user/dashboard/view-performance'">
+        <span class="material-symbols-outlined link-icon">analytics</span>
+        View Event Performance List
       </li>
       <li [routerLink]="'/user/dashboard/my-wishlist'">
         <span class="material-symbols-outlined link-icon">bookmark_heart</span>
         My Wishlist
-      </li>
-      <li [routerLink]="'/user/dashboard/create-pool'">
-        <span class="material-symbols-outlined link-icon">new_window</span>
-        Create Pool
-      </li>
-      <li [routerLink]="'/user/dashboard/pool-details'">
-        <span class="material-symbols-outlined link-icon">page_info</span>
-        Pool Details
-      </li>
-      <li [routerLink]="'/user/dashboard/add-performance'">
-        <span class="material-symbols-outlined link-icon">automation</span>
-        Add Performance
-      </li>
-      <li [routerLink]="'/user/dashboard/view-performance'">
-        <span class="material-symbols-outlined link-icon">analytics</span>
-        View Performance
       </li>
       <li [routerLink]="'/user/dashboard/add-sponsor'">
         <span class="material-symbols-outlined link-icon">crowdsource</span>
         Add Sponsor
       </li>
-      <li [routerLink]="'/user/dashboard/admin-panel'">
-        <span class="material-symbols-outlined link-icon">shield_person</span>
-        Admin Panel
-      </li>
+
       <li [routerLink]="'/user/dashboard/add-skill'">
         <span class="material-symbols-outlined link-icon">workspaces</span>
         Add Skill
@@ -241,9 +182,132 @@
         <span class="material-symbols-outlined link-icon">domain_add</span>
         Add Organization
       </li>
-      <li [routerLink]="'/user/dashboard/settings'">
-        <span class="material-symbols-outlined link-icon">settings</span>
-        Settings
+    </ul>
+  </div>
+
+  <div class="sidebar-section" *ngIf="userRole === 'Organizer'">
+    <h5>For Organizers</h5>
+    <hr class="line" />
+    <ul>
+      <li [routerLink]="'/event/add-event'">
+        <span class="material-symbols-outlined link-icon">linked_services</span>
+        Host Event
+      </li>
+      <li [routerLink]="'/user/dashboard/manage-listings'">
+        <span class="material-symbols-outlined link-icon">home_work</span>
+        View Event List
+      </li>
+      <li>
+        <span class="material-symbols-outlined link-icon">wysiwyg</span>
+        View Event Registerations
+      </li>
+      <li [routerLink]="'/user/dashboard/create-pool'">
+        <span class="material-symbols-outlined link-icon">new_window</span>
+        Create Event Pool
+      </li>
+      <li [routerLink]="'/user/dashboard/pool-details'">
+        <span class="material-symbols-outlined link-icon">page_info</span>
+        View Event Pool List
+      </li>
+      <li [routerLink]="'/user/dashboard/add-performance'">
+        <span class="material-symbols-outlined link-icon">automation</span>
+        Add Event Performance
+      </li>
+      <li>
+        <span class="material-symbols-outlined link-icon">list_alt</span>
+        View Event Performance List
+      </li>
+      <li [routerLink]="'/user/dashboard/view-performance'">
+        <span class="material-symbols-outlined link-icon">analytics</span>
+        View Event Performance
+      </li>
+      <li [routerLink]="'/user/dashboard/my-wishlist'">
+        <span class="material-symbols-outlined link-icon">bookmark_heart</span>
+        My Wishlist
+      </li>
+    </ul>
+  </div>
+
+  <div class="sidebar-section" *ngIf="isCollaborator">
+    <h5>For Collaborator</h5>
+    <hr class="line" />
+    <ul>
+      <li (click)="navigateToCollaboratorListing()">
+        <span class="material-symbols-outlined link-icon">home_work</span>
+        Manage Listings
+      </li>
+    </ul>
+  </div>
+
+  <div class="sidebar-section" *ngIf="userRole === 'Participant'">
+    <h5>For Participants</h5>
+    <hr class="line" />
+    <ul>
+      <li [routerLink]="'/user/dashboard/my-registerations'">
+        <span class="material-symbols-outlined link-icon"
+          >app_registration</span
+        >
+        My Registrations
+      </li>
+      <li [routerLink]="'/user/dashboard/my-wishlist'">
+        <span class="material-symbols-outlined link-icon">bookmark_heart</span>
+        My Wishlist
+      </li>
+      <li>
+        <span class="material-symbols-outlined link-icon">developer_guide</span>
+        My Certificates
+      </li>
+    </ul>
+  </div>
+  <div class="sidebar-section" *ngIf="isLoggedIn">
+    <h5>For Campus Ambassador</h5>
+    <hr class="line" />
+    <ul>
+      <li [routerLink]="'/user/dashboard/view-application'">
+        <span class="material-symbols-outlined link-icon">diversity_1</span>
+        View Application
+      </li>
+      <li>
+        <span class="material-symbols-outlined link-icon">demography</span>
+        Our Ambassador
+      </li>
+    </ul>
+  </div>
+  <div class="sidebar-section" *ngIf="isLoggedIn">
+    <h5>Sponsorship</h5>
+    <hr class="line" />
+    <ul>
+      <li>
+        <span class="material-symbols-outlined link-icon">inventory</span>
+        View Applied Sponsors
+      </li>
+    </ul>
+  </div>
+  <div class="sidebar-section" *ngIf="isLoggedIn">
+    <h5>Help & Support</h5>
+    <hr class="line" />
+    <ul>
+      <li>
+        <span class="material-symbols-outlined link-icon">help</span>
+        Create Ticket
+      </li>
+      <li>
+        <span class="material-symbols-outlined link-icon">support_agent</span>
+        Contact Us
+      </li>
+    </ul>
+  </div>
+  <div class="sidebar-section" *ngIf="isLoggedIn">
+    <h5>Settings</h5>
+    <hr class="line" />
+    <ul>
+      <li>
+        <span class="material-symbols-outlined link-icon">vpn_key</span>
+        Password Management
+      </li>
+      <li>
+        <span class="material-symbols-outlined link-icon">notifications</span>
+        Notification Permission
       </li>
     </ul>
   </div>

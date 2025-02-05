@@ -14,14 +14,72 @@
     </div>
     <div *ngIf="userRole === 'SuperAdmin'">
       <div class="menu-heading">For Admin</div>
+      <hr class="line" />
       <ul class="menu">
+        <li
+          [routerLink]="'/event/add-event'"
+          (click)="setActiveMenuItem('host-event')"
+          [ngClass]="{ active: activeMenuItem === 'host-event' }"
+        >
+          <span class="material-symbols-outlined link-icon"
+            >linked_services</span
+          >
+          Host Event
+        </li>
         <li
           [routerLink]="'/user/dashboard/manage-listings'"
           (click)="setActiveMenuItem('manage-listings')"
           [ngClass]="{ active: activeMenuItem === 'manage-listings' }"
         >
           <span class="material-symbols-outlined link-icon">home_work</span>
-          Manage Listings
+          View My Event List
+        </li>
+        <li
+          [routerLink]="'/user/dashboard/admin-panel'"
+          [ngClass]="{ active: activeMenuItem === 'admin-panel' }"
+          (click)="setActiveMenuItem('admin-panel')"
+        >
+          <span class="material-symbols-outlined link-icon">shield_person</span>
+          All Event List
+        </li>
+        <li
+          (click)="setActiveMenuItem('event-registerations')"
+          [ngClass]="{ active: activeMenuItem === 'event-registerations' }"
+        >
+          <span class="material-symbols-outlined link-icon">wysiwyg</span>
+          View Event Registerations
+        </li>
+        <li
+          [routerLink]="'/user/dashboard/create-pool'"
+          (click)="setActiveMenuItem('create-pool')"
+          [ngClass]="{ active: activeMenuItem === 'create-pool' }"
+        >
+          <span class="material-symbols-outlined link-icon">new_window</span>
+          Create Event Pool
+        </li>
+        <li
+          [routerLink]="'/user/dashboard/pool-details'"
+          (click)="setActiveMenuItem('pool-details')"
+          [ngClass]="{ active: activeMenuItem === 'pool-details' }"
+        >
+          <span class="material-symbols-outlined link-icon">page_info</span>
+          View Event Pool List
+        </li>
+        <li
+          [routerLink]="'/user/dashboard/add-performance'"
+          (click)="setActiveMenuItem('add-performance')"
+          [ngClass]="{ active: activeMenuItem === 'add-performance' }"
+        >
+          <span class="material-symbols-outlined link-icon">playlist_add</span>
+          Add Event Performance
+        </li>
+        <li
+          [routerLink]="'/user/dashboard/view-performance'"
+          (click)="setActiveMenuItem('view-performance')"
+          [ngClass]="{ active: activeMenuItem === 'view-performance' }"
+        >
+          <span class="material-symbols-outlined link-icon">analytics</span>
+          View Event Performance List
         </li>
         <li
           [routerLink]="'/user/dashboard/my-wishlist'"
@@ -34,38 +92,6 @@
           My Wishlist
         </li>
         <li
-          [routerLink]="'/user/dashboard/create-pool'"
-          (click)="setActiveMenuItem('create-pool')"
-          [ngClass]="{ active: activeMenuItem === 'create-pool' }"
-        >
-          <span class="material-symbols-outlined link-icon">new_window</span>
-          Create Pool
-        </li>
-        <li
-          [routerLink]="'/user/dashboard/pool-details'"
-          (click)="setActiveMenuItem('pool-details')"
-          [ngClass]="{ active: activeMenuItem === 'pool-details' }"
-        >
-          <span class="material-symbols-outlined link-icon">page_info</span>
-          Pool Details
-        </li>
-        <li
-          [routerLink]="'/user/dashboard/add-performance'"
-          (click)="setActiveMenuItem('add-performance')"
-          [ngClass]="{ active: activeMenuItem === 'add-performance' }"
-        >
-          <span class="material-symbols-outlined link-icon">automation</span>
-          Add Performance
-        </li>
-        <li
-          [routerLink]="'/user/dashboard/view-performance'"
-          (click)="setActiveMenuItem('view-performance')"
-          [ngClass]="{ active: activeMenuItem === 'view-performance' }"
-        >
-          <span class="material-symbols-outlined link-icon">analytics</span>
-          View Performance
-        </li>
-        <li
           [routerLink]="'/user/dashboard/add-sponsor'"
           (click)="setActiveMenuItem('add-sponsor')"
           [ngClass]="{ active: activeMenuItem === 'add-sponsor' }"
@@ -73,14 +99,7 @@
           <span class="material-symbols-outlined link-icon">crowdsource</span>
           Add Sponsor
         </li>
-        <li
-          [routerLink]="'/user/dashboard/admin-panel'"
-          [ngClass]="{ active: activeMenuItem === 'admin-panel' }"
-          (click)="setActiveMenuItem('admin-panel')"
-        >
-          <span class="material-symbols-outlined link-icon">shield_person</span>
-          Admin Panel
-        </li>
+
         <li
           [routerLink]="'/user/dashboard/add-skill'"
           [ngClass]="{ active: activeMenuItem === 'add-skill' }"
@@ -105,25 +124,20 @@
           <span class="material-symbols-outlined link-icon">domain_add</span>
           Add Organization
         </li>
-        <!-- <li
-          [routerLink]="'/user/dashboard/settings'"
-          [ngClass]="{ active: activeMenuItem === 'settings' }"
-          (click)="setActiveMenuItem('settings')"
-        >
-          <span class="material-symbols-outlined link-icon">settings</span>
-          Settings
-        </li> -->
       </ul>
     </div>
     <div *ngIf="userRole === 'Participant'">
       <div class="menu-heading">For Participants</div>
+      <hr class="line" />
       <ul class="menu">
         <li
           [routerLink]="'/user/dashboard/my-registerations'"
           (click)="setActiveMenuItem('my-registeraions')"
           [ngClass]="{ active: activeMenuItem === 'my-registerations' }"
         >
-          <span class="material-symbols-outlined link-icon">assignment</span>
+          <span class="material-symbols-outlined link-icon"
+            >app_registration</span
+          >
           My Registrations
         </li>
         <li
@@ -137,41 +151,83 @@
           My Wishlist
         </li>
         <li
-          [routerLink]="'/user/dashboard/certificates'"
           (click)="setActiveMenuItem('certificates')"
           [ngClass]="{ active: activeMenuItem === 'certificates' }"
         >
-          <span class="material-symbols-outlined link-icon">verified</span>
-          Certificates
+          <span class="material-symbols-outlined link-icon"
+            >developer_guide</span
+          >
+          My Certificates
         </li>
-        <li
-          [routerLink]="'/user/dashboard/wishlist'"
-          (click)="setActiveMenuItem('wishlist')"
-          [ngClass]="{ active: activeMenuItem === 'wishlist' }"
-        >
-          <span class="material-symbols-outlined link-icon">favorite</span>
-          Wishlist
-        </li>
-        <!-- <li
-          [routerLink]="'/user/dashboard/settings'"
-          (click)="setActiveMenuItem('settings')"
-          [ngClass]="{ active: activeMenuItem === 'settings' }"
-        >
-          <span class="material-symbols-outlined link-icon">settings</span>
-          Settings
-        </li> -->
       </ul>
     </div>
     <div *ngIf="userRole === 'Organizer'">
       <div class="menu-heading">For Organizers</div>
+      <hr class="line" />
       <ul class="menu">
+        <li
+          [routerLink]="'/event/add-event'"
+          (click)="setActiveMenuItem('host-event')"
+          [ngClass]="{ active: activeMenuItem === 'host-event' }"
+        >
+          <span class="material-symbols-outlined link-icon"
+            >linked_services</span
+          >
+          Host Event
+        </li>
         <li
           [routerLink]="'/user/dashboard/manage-listings'"
           (click)="setActiveMenuItem('manage-listings')"
           [ngClass]="{ active: activeMenuItem === 'manage-listings' }"
         >
           <span class="material-symbols-outlined link-icon">home_work</span>
-          Manage Listings
+          View Event List
+        </li>
+        <li
+          (click)="setActiveMenuItem('event-registerations')"
+          [ngClass]="{ active: activeMenuItem === 'event-registerations' }"
+        >
+          <span class="material-symbols-outlined link-icon">wysiwyg</span>
+          View Event Registerations
+        </li>
+        <li
+          [routerLink]="'/user/dashboard/create-pool'"
+          (click)="setActiveMenuItem('create-pool')"
+          [ngClass]="{ active: activeMenuItem === 'create-pool' }"
+        >
+          <span class="material-symbols-outlined link-icon">new_window</span>
+          Create Event Pool
+        </li>
+        <li
+          [routerLink]="'/user/dashboard/pool-details'"
+          (click)="setActiveMenuItem('pool-details')"
+          [ngClass]="{ active: activeMenuItem === 'pool-details' }"
+        >
+          <span class="material-symbols-outlined link-icon">page_info</span>
+          View Event Pool List
+        </li>
+        <li
+          [routerLink]="'/user/dashboard/add-performance'"
+          (click)="setActiveMenuItem('add-performance')"
+          [ngClass]="{ active: activeMenuItem === 'add-performance' }"
+        >
+          <span class="material-symbols-outlined link-icon">automation</span>
+          Add Event Performance
+        </li>
+        <li
+          (click)="setActiveMenuItem('performance-list')"
+          [ngClass]="{ active: activeMenuItem === 'performance-list' }"
+        >
+          <span class="material-symbols-outlined link-icon">list_alt</span>
+          View Event Performance List
+        </li>
+        <li
+          [routerLink]="'/user/dashboard/view-performance'"
+          (click)="setActiveMenuItem('view-performance')"
+          [ngClass]="{ active: activeMenuItem === 'view-performance' }"
+        >
+          <span class="material-symbols-outlined link-icon">analytics</span>
+          View Event Performance
         </li>
         <li
           [routerLink]="'/user/dashboard/my-wishlist'"
@@ -183,42 +239,11 @@
           >
           My Wishlist
         </li>
-        <li
-          [routerLink]="'/user/dashboard/create-pool'"
-          (click)="setActiveMenuItem('create-pool')"
-          [ngClass]="{ active: activeMenuItem === 'create-pool' }"
-        >
-          <span class="material-symbols-outlined link-icon">new_window</span>
-          Create Pool
-        </li>
-        <li
-          [routerLink]="'/user/dashboard/pool-details'"
-          (click)="setActiveMenuItem('pool-details')"
-          [ngClass]="{ active: activeMenuItem === 'pool-details' }"
-        >
-          <span class="material-symbols-outlined link-icon">page_info</span>
-          Pool Details
-        </li>
-        <li
-          [routerLink]="'/user/dashboard/add-performance'"
-          (click)="setActiveMenuItem('add-performance')"
-          [ngClass]="{ active: activeMenuItem === 'add-performance' }"
-        >
-          <span class="material-symbols-outlined link-icon">automation</span>
-          Add Performance
-        </li>
-        <li
-          [routerLink]="'/user/dashboard/view-performance'"
-          (click)="setActiveMenuItem('view-performance')"
-          [ngClass]="{ active: activeMenuItem === 'view-performance' }"
-        >
-          <span class="material-symbols-outlined link-icon">analytics</span>
-          View Performance
-        </li>
       </ul>
     </div>
     <div *ngIf="isCollaborator">
       <div class="menu-heading">For Collaborator</div>
+      <hr class="line" />
       <ul class="menu">
         <li
           [routerLink]="'/user/dashboard/manage-listings'"
@@ -227,19 +252,81 @@
           [ngClass]="{ active: activeMenuItem === 'collaborator-listings' }"
         >
           <span class="material-symbols-outlined link-icon">home_work</span>
-          Collaborator Listings
+          Manage Listings
+        </li>
+      </ul>
+    </div>
+    <div>
+      <div class="menu-heading">For Campus Ambassador</div>
+      <hr class="line" />
+      <ul class="menu">
+        <li
+          [routerLink]="'/user/dashboard/view-application'"
+          (click)="setActiveMenuItem('view-application')"
+          [ngClass]="{ active: activeMenuItem === 'view-application' }"
+        >
+          <span class="material-symbols-outlined link-icon">diversity_1</span>
+          View Application
+        </li>
+        <li
+          (click)="setActiveMenuItem('our-ambassador')"
+          [ngClass]="{ active: activeMenuItem === 'our-ambassador' }"
+        >
+          <span class="material-symbols-outlined link-icon">demography</span>
+          Our Ambassador
+        </li>
+      </ul>
+    </div>
+    <div>
+      <div class="menu-heading">Sponsorship</div>
+      <hr class="line" />
+      <ul class="menu">
+        <li
+          (click)="setActiveMenuItem('applied-sponsors')"
+          [ngClass]="{ active: activeMenuItem === 'applied-sponsors' }"
+        >
+          <span class="material-symbols-outlined link-icon">inventory</span>
+          View Applied Sponsors
+        </li>
+      </ul>
+    </div>
+    <div>
+      <div class="menu-heading">Help & Support</div>
+      <hr class="line" />
+      <ul class="menu">
+        <li
+          (click)="setActiveMenuItem('create-ticket')"
+          [ngClass]="{ active: activeMenuItem === 'create-ticket' }"
+        >
+          <span class="material-symbols-outlined link-icon">help</span>
+          Create Ticket
+        </li>
+        <li
+          (click)="setActiveMenuItem('contact-us')"
+          [ngClass]="{ active: activeMenuItem === 'contact-us' }"
+        >
+          <span class="material-symbols-outlined link-icon">support_agent</span>
+          Contact Us
         </li>
       </ul>
     </div>
     <div class="common-menus">
+      <div class="menu-heading">Settings</div>
+      <hr class="line" />
       <ul class="menu">
         <li
-          [routerLink]="'/user/dashboard/settings'"
-          (click)="setActiveMenuItem('settings')"
-          [ngClass]="{ active: activeMenuItem === 'settings' }"
+          (click)="setActiveMenuItem('password-management')"
+          [ngClass]="{ active: activeMenuItem === 'password-management' }"
         >
-          <span class="material-symbols-outlined">settings</span>
-          Settings
+          <span class="material-symbols-outlined link-icon">vpn_key</span>
+          Password Management
+        </li>
+        <li
+          (click)="setActiveMenuItem('notification-permission')"
+          [ngClass]="{ active: activeMenuItem === 'notification-permission' }"
+        >
+          <span class="material-symbols-outlined link-icon">notifications</span>
+          Notification Permission
         </li>
       </ul>
     </div>

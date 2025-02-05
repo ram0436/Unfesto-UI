@@ -8,6 +8,7 @@ import { UserPayload } from "../../shared/model/user.payload";
 import { DOCUMENT } from "@angular/common";
 import { map, Observable, startWith } from "rxjs";
 import { FormControl } from "@angular/forms";
+import { LoginComponent } from "../login/login.component";
 
 @Component({
   selector: "app-signup",
@@ -34,6 +35,8 @@ export class SignupComponent {
 
   collegeControl = new FormControl();
   filteredColleges!: Observable<{ id: number; name: string }[]>;
+
+  confirmPassword: string = "";
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -173,8 +176,24 @@ export class SignupComponent {
     this.userImage[this.userImage.length - 1] = "";
   }
 
+  openLoginModal() {
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
+
+    this.dialogRef = this.dialog.open(LoginComponent, {
+      width: "500px",
+    });
+
+    this.dialogRef.afterClosed().subscribe((result) => {});
+  }
+
   addUser(): void {
     if (this.isFormValid()) {
+      if (this.userPayload.password !== this.confirmPassword) {
+        this.showNotification("Passwords do not match");
+        return;
+      }
       this.userService.addUser(this.userPayload).subscribe(
         (response) => {
           this.showNotification("User Added Successfully");
@@ -186,6 +205,13 @@ export class SignupComponent {
     } else {
       this.showNotification("Please fill all required fields");
     }
+  }
+
+  get passwordMismatch(): boolean {
+    return (
+      this.userPayload.password !== this.confirmPassword &&
+      this.confirmPassword !== ""
+    );
   }
 
   isFormValid(): boolean {

@@ -31,6 +31,11 @@
   scrollbar-width: none; /* Firefox */
 }
 
+.line {
+  color: #ccc !important;
+  height: 0.5px;
+}
+
 /* Main content area */
 .main-content {
   margin-left: 15%;
@@ -139,7 +144,7 @@ ul {
 
 .menu-heading {
   margin-bottom: 10px;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .common-menus {
