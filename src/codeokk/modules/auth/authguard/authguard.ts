@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import {
   ActivatedRouteSnapshot,
   CanActivate,
@@ -6,10 +7,12 @@ import {
   UrlTree,
   Router,
 } from "@angular/router";
+import { LoginComponent } from "../../login/login.component";
 
 @Injectable({ providedIn: "root" })
 export class AuthGuard implements CanActivate {
-  constructor(private router: Router) {}
+  dialogRef: MatDialogRef<any> | null = null;
+  constructor(private router: Router, private dialog: MatDialog) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -137,7 +140,15 @@ export class AuthGuard implements CanActivate {
       return false;
     } else {
       // Redirect to login if no auth token
-      this.router.navigate(["/login"]);
+      if (this.dialogRef) {
+        this.dialogRef.close();
+      }
+
+      this.dialogRef = this.dialog.open(LoginComponent, {
+        width: "500px",
+      });
+
+      this.dialogRef.afterClosed().subscribe((result) => {});
       return false;
     }
   }
