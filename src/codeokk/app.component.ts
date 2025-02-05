@@ -12,6 +12,7 @@ import { filter } from "rxjs/operators";
 export class AppComponent {
   showSidebar = true;
   showHeader: boolean = true;
+  showFooter: boolean = true;
   title = "UnStop-UI";
   constructor(
     private matIconReg: MatIconRegistry,
@@ -29,6 +30,7 @@ export class AppComponent {
         const url = event.urlAfterRedirects;
         // Hide header for specific routes
         this.showHeader = !(url.includes("/login") || url.includes("/signup"));
+        this.showFooter = !url.startsWith("/user/dashboard");
       });
   }
 

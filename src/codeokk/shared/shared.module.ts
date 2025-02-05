@@ -21,9 +21,10 @@ import {
 } from "@angular/material/autocomplete";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { SidebarComponent } from "./component/sidebar/sidebar.component";
+import { FooterComponent } from "./component/footer/footer.component";
 
 @NgModule({
-  declarations: [HeaderComponent, SidebarComponent],
+  declarations: [HeaderComponent, SidebarComponent, FooterComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -51,7 +52,7 @@ import { SidebarComponent } from "./component/sidebar/sidebar.component";
     MatCheckboxModule,
     MatProgressSpinnerModule,
   ],
-  exports: [HeaderComponent, SidebarComponent],
+  exports: [HeaderComponent, SidebarComponent, FooterComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SharedModule {}

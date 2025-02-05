@@ -1,0 +1,276 @@
+.footer {
+  padding: 70px 0 20px;
+  position: relative;
+  background-color: #3c3c3c;
+  align-self: flex-end;
+}
+
+/* .footer .footer-container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 0;
+  } */
+
+.footer ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+ul li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer .container .link-list {
+  margin-bottom: 5rem;
+  position: relative;
+}
+
+.link-list .list {
+  width: 90%;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 45px;
+  flex-wrap: wrap !important;
+  padding: 0 30px;
+}
+
+.link-list .list .list-item {
+  /* width: auto;
+      flex: 1; */
+  /* width: 270px; */
+  width: 220px;
+}
+
+.link-list .list .last-list-item {
+  /* width: 240px; */
+  width: 290px;
+  margin-top: -5px;
+}
+
+.link-list .list .list-item .link-title {
+  margin-bottom: 1rem;
+  font-size: 18px;
+  line-height: 20px;
+  color: #fff;
+  position: relative;
+  transform: all ease 0.3s;
+  font-weight: 600;
+}
+
+.link-list .list .nav-link {
+  font-size: 16px;
+  line-height: 36px;
+  color: #a6a6a6;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.link-list .list .nav-link:hover {
+  color: #fff;
+}
+
+.link-list .last-link-title {
+  color: #fff;
+  margin-bottom: 16px;
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 600;
+}
+
+.link-list .list-item .last-link-desc {
+  font-size: 16px;
+  color: #fff;
+  line-height: 22px;
+}
+
+.signup-form {
+  margin-top: 24px;
+}
+
+.form-list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.input-wrap {
+  margin-bottom: 2rem;
+}
+
+.inputDefault {
+  width: 100%;
+  background: 0 0;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #979797;
+  padding: 8px 0;
+  color: #fff;
+  font-size: 16px;
+}
+
+.error-wrap {
+  text-align: left;
+  margin-top: 8px;
+  font-size: 16px;
+  line-height: 18px;
+  color: #a80000;
+  padding: 8px 16px;
+  background: #9f9f9f;
+  border-radius: 15px;
+  font-style: italic;
+  display: none;
+  position: absolute;
+  left: 0;
+  bottom: -30px;
+}
+
+.signup-form .act-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn.btn-outline {
+  background: 0 0;
+  color: #fff;
+  opacity: 1;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  padding: 10px 15px;
+}
+
+.btn.btn-outline:hover {
+  background-color: #fff;
+  border: none;
+}
+
+.privacyLink {
+  color: #fff !important;
+  font-size: 16px;
+  text-decoration: underline;
+  position: relative;
+  top: 6px;
+}
+
+.bottom-part {
+  border-top: 1px solid #979797;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1rem;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 40px;
+}
+
+.footer-logo {
+  /* font-size: 40px; */
+  width: 10rem;
+  height: 8rem;
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-logo img {
+  width: 100%;
+  height: 100%;
+}
+
+.socialLinkSec {
+  margin-left: -12px;
+}
+
+.socialIconList {
+  display: flex;
+  text-align: right;
+  padding-left: 6rem;
+  padding-bottom: 2rem;
+}
+
+.socialIconList .socialLink {
+  color: #fff !important;
+  font-size: 16px;
+}
+
+.b-text {
+  margin-top: 7px;
+  font-size: 16px;
+  color: #fff;
+}
+
+.follow-us-section {
+  margin-top: 15px;
+  margin-right: -40px;
+}
+
+.follow-us-section .follow-text {
+  /* margin-right: 10px; */
+  font-size: 16px;
+  color: #fff;
+}
+
+.follow-us-section a img {
+  width: 24px;
+  height: 24px;
+  margin-left: 12px;
+  margin-top: -5px;
+}
+
+/* @media (max-width: 768px) {
+    .container {
+      width: 110rem !important;
+    }
+  } */
+
+/* @media (min-width: 768px) {
+    .container {
+      width: 95rem !important;
+    }
+  } */
+
+@media (max-width: 1272px) {
+  .link-list .list {
+    justify-content: start;
+  }
+}
+
+@media (max-width: 899px) {
+  .link-list .list {
+    justify-content: center;
+  }
+
+  .link-list .list .list-item {
+    width: 290px;
+  }
+}
+
+@media (max-width: 760px) {
+  .link-list .list {
+    justify-content: start;
+  }
+
+  .link-list .list .last-list-item {
+    width: 100%;
+  }
+}
+
+@media (max-width: 683px) {
+  .link-list .list .list-item {
+    width: 100%;
+  }
+}
+
+@media (max-width: 460px) {
+  .link-list .list {
+    padding: 0 15px;
+  }
+}
