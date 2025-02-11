@@ -226,11 +226,7 @@ export class LoginComponent {
       this.userPayload.userId,
       this.userPayload.password,
       this.userPayload.email,
-      this.userPayload.mobileNo,
-      this.userPayload.gender,
       this.userPayload.userTypeId,
-      this.userPayload.courseId,
-      this.userPayload.collegeId,
     ];
 
     // Return false if any field is empty or null
